@@ -2,6 +2,7 @@
 // The game mode only calls the static hooks below; each rule package lives in its own section/file.
 //  - P2-E per-kill war funds: kills counted per killer team and victim type -> BattleResult "teamKills";
 //    the web (web/killfunds.go) converts them into faction war funds for the killer team's commander.
+//  - P2-F field maintenance load: F44_Maintenance.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -18,15 +19,96 @@ class F44_Rules
 	protected static ref map<string, ref F44_VictimKills> s_mTeamKills = new map<string, ref F44_VictimKills>();
 
 	//------------------------------------------------------------------------------------------------
+	//! battle JSON keys of the rule packages (called from F44_BattleConfig.FromJson)
+	static void ReadConfig(LoadContext root)
+	{
+		F44_Maintenance.s_Cfg = new F44_MaintenanceConfig();
+		F44_Maintenance.s_Cfg.Read(root);
+	}
+
+	//------------------------------------------------------------------------------------------------
 	static void Init(F44_BattleConfig cfg)
 	{
 		s_mTeamKills.Clear();
+		F44_Maintenance.Reset();
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! deploy gate (PreparePlayerEntity_S, class and team already validated). false = refused, player notified.
+	static bool CanDeploy(int pid, string classKey, string teamId, int points)
+	{
+		string why = F44_Maintenance.CheckDeploy(pid, classKey, points);
+		if (!why.IsEmpty())
+		{
+			Notify(pid, why);
+			PrintFormat("[F44] Spawn refused: player %1 %2", pid, why, level: LogLevel.WARNING);
+			return false;
+		}
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void OnDeployed(int pid, string classKey, string teamId, int points, IEntity character)
+	{
+		F44_Maintenance.OnDeployed(pid, classKey, points);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! any player death (killerId <= 0 = bot / world / unknown)
 	static void OnPlayerKilled(int victimId, string victimTeam, int killerId)
 	{
+		F44_Maintenance.OnKilled(victimId);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void Tick(float dt)
+	{
+		F44_Maintenance.Tick(dt);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! each tick for every live pool vehicle
+	static void WatchVehicle(IEntity veh, string key, int side, string teamId)
+	{
+		F44_Maintenance.WatchVehicle(veh, F44_Catalog.Get().GetVehicleCost(key));
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void OnVehicleDestroyed(IEntity veh, string key)
+	{
+		F44_Maintenance.OnVehicleDestroyed(veh, F44_Catalog.Get().GetVehicleCost(key));
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! fragment appended to each BattleResult player object
+	static string PlayerJson(int pid)
+	{
+		return F44_Maintenance.PlayerJson(pid);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! on-screen hint for one player (server side)
+	static void Notify(int pid, string text)
+	{
+		SCR_PlayerController pc = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(pid));
+		if (pc)
+			pc.F44_SendRuleHint(text);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! force a player out of his vehicle seat
+	static void Eject(int pid, string text)
+	{
+		IEntity ch = GetGame().GetPlayerManager().GetPlayerControlledEntity(pid);
+		if (!ch)
+			return;
+		CompartmentAccessComponent ca = CompartmentAccessComponent.Cast(ch.FindComponent(CompartmentAccessComponent));
+		if (ca && ca.IsInCompartment())
+		{
+			ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
+			Notify(pid, text);
+			PrintFormat("[F44] EJECT player=%1 %2", pid, text);
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -77,5 +159,25 @@ class F44_Rules
 			s += "}}";
 		}
 		return s + "}";
+	}
+}
+
+//------------------------------------------------------------------------------------------------
+//! owner-only hint RPC for the rule messages (deploy refused, ejected...)
+modded class SCR_PlayerController
+{
+	void F44_SendRuleHint(string text)
+	{
+		Rpc(RpcDo_F44RuleHint, text);
+		if (GetPlayerId() == SCR_PlayerController.GetLocalPlayerId())
+			RpcDo_F44RuleHint(text);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_F44RuleHint(string text)
+	{
+		if (System.IsConsoleApp())
+			return;
+		SCR_HintManagerComponent.ShowCustomHint(text, "Arma & Heroes", 8);
 	}
 }

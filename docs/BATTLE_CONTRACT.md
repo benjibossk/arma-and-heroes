@@ -87,3 +87,13 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
   player 10, bot 5, vehicle by role (tank 80, light_armored(_aa) 40, light_armed 20, truck 15, light_utility 10, other 15), capped at 1500 per faction per battle.
 - Server log: `[F44] KILLFUND team= victim= key`.
 
+### P2-F Field maintenance load — battle JSON `maintenance` (optional, on by default)
+`{ "enabled": true, "maxSec": 240, "perPointSec": 1.5, "vehicleSecPerTicket": 6, "baseSec": { "INF": 2, "PARA": 7, "RECON": 15, "CREW": 25, "PILOT": 25 } }`
+- Two timers per player (equipment, vehicle), 0..`maxSec`, reset each battle, counting down while the player is alive.
+- Death: equipment timer += class base (family from the class key) + loadout `points` × `perPointSec`.
+- Losing a pool vehicle you were the last driver of: vehicle timer += catalog cost × `vehicleSecPerTicket`.
+- Deploy is refused (hint on screen) when timer + that soldier's load > `maxSec`; taking the driver seat of a pool vehicle under the same rule ejects you.
+- Off-squad-type extra load (H&G) is not applied (no squad type yet). The deploy menu does not show the timers yet (hint only).
+- BattleResult players gain `"maintenance": {"equipSec", "vehicleSec"}` (display only). Log: `[F44] MAINT`, `[F44] EJECT`.
+
+

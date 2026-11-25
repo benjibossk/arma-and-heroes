@@ -648,6 +648,12 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			F44_LoadoutService.Apply(entity, lo);
 		}
 
+		int loPoints;
+		if (lo)
+			loPoints = lo.m_iPoints;
+		if (!F44_Rules.CanDeploy(playerId, classKey, team.m_sTeamId, loPoints))
+			return false;	// GAP_PLAN rules: field maintenance... (F44_Rules.c)
+		F44_Rules.OnDeployed(playerId, classKey, team.m_sTeamId, loPoints, entity);
 		st.m_sSide = cfgSide.m_sSideKey;
 		st.m_sTeamId = team.m_sTeamId;
 		m_MobileSpawns.SetPlayerTeam(playerId, team.m_sTeamId);
@@ -937,6 +943,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		m_MobileSpawns.Tick(m_fTickInterval, m_aSectorOwners, m_aSectorProgress);
 
 		UpdateVehicles();
+		F44_Rules.Tick(m_fTickInterval);
 		m_FieldSupply.Tick(m_fTickInterval);
 		m_CivVehicles.Tick(m_fTickInterval);
 		m_FieldSupply.SelfTest(m_fTickInterval, botsAtt, botsDef, m_CivVehicles);
@@ -1025,6 +1032,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			DamageManagerComponent dmg = DamageManagerComponent.Cast(tv.m_Entity.FindComponent(DamageManagerComponent));
 			if (dmg && dmg.GetState() == EDamageState.DESTROYED)
 			{
+				F44_Rules.OnVehicleDestroyed(tv.m_Entity, tv.m_sKey);
 				F44_TeamLosses l;
 				if (m_mLosses.Find(tv.m_sTeamId, l))
 				{
@@ -1039,7 +1047,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				F44_Rules.OnKill("_side_" + enemyKey, "veh", tv.m_sKey);	// killer team unknown: credited to the enemy side
 				PrintFormat("[F44] Vehicle %1 of %2 destroyed", tv.m_sKey, tv.m_sTeamId);
 				m_aVehicles.Remove(i);
+				continue;
 			}
+			F44_Rules.WatchVehicle(tv.m_Entity, tv.m_sKey, tv.m_iSide, tv.m_sTeamId);
 		}
 
 		// fit pending supply crates (web team config) once FieldSupply is up
@@ -1242,7 +1252,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				json += q + Esc(ck) + q + ":" + cv.ToString();
 			}
 			json += "}";
-			json += F44_Medical.ResultJson(pid);	// healGiven, revives, stats (F44_Medical.c)
+			json += F44_Medical.ResultJson(pid);
+			json += F44_Rules.PlayerJson(pid);	// healGiven, revives, stats (F44_Medical.c)
 			json += "," + q + "xp" + q + ":" + xp.ToString() + "}";
 		}
 		json += "]}";
