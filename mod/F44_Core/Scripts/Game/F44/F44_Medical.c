@@ -316,8 +316,8 @@ modded class SCR_ConsumableEffectHealthItems
 	{
 		float f = super.GetUsageSpeedFactor(character);
 		if (F44_Medical.IsActive() && F44_Medical.IsMedic(character))
-			return Math.Max(f, F44_Medical.Cfg().m_fMedicSpeed);
-		return f;
+			f = Math.Max(f, F44_Medical.Cfg().m_fMedicSpeed);
+		return f * F44_Badges.UseSpeedFactor(character);	// P2-G Combat Medic badge
 	}
 }
 

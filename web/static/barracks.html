@@ -60,4 +60,4 @@ async function showRibbons() {
 }
 async function act() { await api(`/soldiers/${cur.id}/activate`, { method: 'POST' }); await load(); }
 initPage(location.hash === '#depot' ? 'quartermaster' : 'barracks.html').then(me => { if (!me) { document.querySelector('main').innerHTML = `<div class="panel"><p>Log in to manage your soldiers.</p><a href="/login.html?next=/barracks.html"><button class="btn-big">Log in with Discord</button></a></div>`; return; } load(); });
-</script></body></html>
+</script><script src="/badges.js"></script></body></html>

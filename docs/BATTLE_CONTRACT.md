@@ -96,4 +96,10 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - Off-squad-type extra load (H&G) is not applied (no squad type yet). The deploy menu does not show the timers yet (hint only).
 - BattleResult players gain `"maintenance": {"equipSec", "vehicleSec"}` (display only). Log: `[F44] MAINT`, `[F44] EJECT`.
 
+### P2-G Combat badges — `playerLoadouts[id].badge` / `badgeLevel`
+- Web (`web/badges.go`): one badge slot per soldier, chosen in the barracks (`GET /api/soldiers/:id/badges`, `PUT /api/soldiers/:id/badge {badge}`).
+  A badge unlocks with its ribbon; level 1..3 = highest awarded tier of that ribbon (capped at 3). Table `soldier_badges` (auto-migrated on first use).
+- Mod (`F44_Badges.c`): `FIRST_AID` (ribbon heal) +level field dressings per deploy; `COMBAT_MEDIC` (ribbon revive) medical items used 15 %/level faster;
+  `HEAVY_SET` (ribbon rifle) 5 %/level less damage taken. Log: `[F44] BADGE`.
+
 

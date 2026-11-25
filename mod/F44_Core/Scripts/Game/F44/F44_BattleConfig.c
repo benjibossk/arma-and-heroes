@@ -143,6 +143,8 @@ class F44_PlayerLoadout
 	int m_iPoints;
 	string m_sRank;
 	ref array<string> m_aItems = {};
+	string m_sBadge;	// P2-G combat badge (web/badges.go), "" = none
+	int m_iBadgeLevel;
 
 	void FromJson(LoadContext n)
 	{
@@ -151,6 +153,8 @@ class F44_PlayerLoadout
 		n.ReadValue("points", m_iPoints);
 		n.ReadValue("rank", m_sRank);
 		n.ReadValue("items", m_aItems);
+		n.ReadValue("badge", m_sBadge);
+		n.ReadValue("badgeLevel", m_iBadgeLevel);
 	}
 
 	static F44_PlayerLoadout FromString(string identityId, string json)

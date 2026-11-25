@@ -11,3 +11,6 @@ inventory/extract/
 PROMPT_CLOUDFLARE.md
 __pycache__/
 orchestrator/orchestrator.pid
+
+# Workbench resource cache (generated; never commit or copy from the repo)
+**/resourceDatabase.rdb

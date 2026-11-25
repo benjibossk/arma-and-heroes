@@ -451,11 +451,13 @@ func buyItem(c *gin.Context) {
 // ---------- battle integration ----------
 
 type PlayerLoadout struct {
-	SoldierID uint     `json:"soldierId"`
-	Class     string   `json:"class"`
-	Rank      string   `json:"rank"`
-	Items     []string `json:"items"`
-	Points    int      `json:"points"`
+	SoldierID  uint     `json:"soldierId"`
+	Class      string   `json:"class"`
+	Rank       string   `json:"rank"`
+	Items      []string `json:"items"`
+	Points     int      `json:"points"`
+	Badge      string   `json:"badge,omitempty"` // P2-G (badges.go)
+	BadgeLevel int      `json:"badgeLevel,omitempty"`
 }
 
 // activeSoldierFor : the player's active soldier if in one of the sides, else their first soldier of a battle side
@@ -476,7 +478,9 @@ func playerLoadout(p *Player, sides []string) *PlayerLoadout {
 		return nil
 	}
 	l := s.GetLoadout()
-	return &PlayerLoadout{SoldierID: s.ID, Class: s.Class, Rank: rankFor(s.XP), Items: l.Keys(), Points: loadoutPoints(l)}
+	pl := &PlayerLoadout{SoldierID: s.ID, Class: s.Class, Rank: rankFor(s.XP), Items: l.Keys(), Points: loadoutPoints(l)}
+	pl.Badge, pl.BadgeLevel = soldierBadge(s.ID)
+	return pl
 }
 
 func battleLoadouts(b *Battle) map[string]PlayerLoadout {

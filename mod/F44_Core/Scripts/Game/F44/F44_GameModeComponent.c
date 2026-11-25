@@ -653,7 +653,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			loPoints = lo.m_iPoints;
 		if (!F44_Rules.CanDeploy(playerId, classKey, team.m_sTeamId, loPoints))
 			return false;	// GAP_PLAN rules: field maintenance... (F44_Rules.c)
-		F44_Rules.OnDeployed(playerId, classKey, team.m_sTeamId, loPoints, entity);
+		F44_Rules.OnDeployed(playerId, classKey, team.m_sTeamId, loPoints, entity, lo);
 		st.m_sSide = cfgSide.m_sSideKey;
 		st.m_sTeamId = team.m_sTeamId;
 		m_MobileSpawns.SetPlayerTeam(playerId, team.m_sTeamId);

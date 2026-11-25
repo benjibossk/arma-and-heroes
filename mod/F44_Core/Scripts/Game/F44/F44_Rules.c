@@ -3,6 +3,7 @@
 //  - P2-E per-kill war funds: kills counted per killer team and victim type -> BattleResult "teamKills";
 //    the web (web/killfunds.go) converts them into faction war funds for the killer team's commander.
 //  - P2-F field maintenance load: F44_Maintenance.c
+//  - P2-G combat badges: F44_Badges.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -31,6 +32,7 @@ class F44_Rules
 	{
 		s_mTeamKills.Clear();
 		F44_Maintenance.Reset();
+		F44_Badges.Reset();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -48,9 +50,10 @@ class F44_Rules
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static void OnDeployed(int pid, string classKey, string teamId, int points, IEntity character)
+	static void OnDeployed(int pid, string classKey, string teamId, int points, IEntity character, F44_PlayerLoadout lo)
 	{
 		F44_Maintenance.OnDeployed(pid, classKey, points);
+		F44_Badges.OnDeployed(pid, character, lo);
 	}
 
 	//------------------------------------------------------------------------------------------------
