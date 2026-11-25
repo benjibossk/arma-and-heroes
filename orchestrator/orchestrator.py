@@ -15,6 +15,45 @@ def setup_log():
     log.addHandler(h); log.addHandler(s); log.setLevel(logging.INFO)
 
 
+LOCK = os.path.join(HERE, "orchestrator.pid")
+
+
+def acquire_lock():
+    """Une seule boucle a la fois : orchestrator.pid contient le PID du processus vivant."""
+    if os.path.exists(LOCK):
+        try:
+            old = int(open(LOCK).read().strip())
+            cl = cmdline(old).lower()
+            if "orchestrator.py" in cl:
+                log.error("orchestrateur deja actif (PID %s) : abandon", old); return False
+        except (ValueError, OSError):
+            pass
+    with open(LOCK, "w") as f:
+        f.write(str(os.getpid()))
+    return True
+
+
+def release_lock():
+    try:
+        if os.path.exists(LOCK) and open(LOCK).read().strip() == str(os.getpid()):
+            os.remove(LOCK)
+    except OSError:
+        pass
+
+
+def prune_server_logs(cfg, keep=20):
+    """Rotation des logs serveur : garde les `keep` dossiers logs_* les plus recents par instance."""
+    import shutil
+    for inst in cfg["instances"]:
+        d = os.path.join(inst["dir"], "profile", "logs")
+        if not os.path.isdir(d):
+            continue
+        dirs = sorted((x for x in os.listdir(d) if x.startswith("logs_")), reverse=True)
+        for old in dirs[keep:]:
+            shutil.rmtree(os.path.join(d, old), ignore_errors=True)
+            log.info("log serveur purge : %s", os.path.join(d, old))
+
+
 def load_json(p, default=None):
     try:
         with open(p, encoding="utf-8-sig") as f:
@@ -102,6 +141,8 @@ def build_config(cfg, inst, battle, api_url, key):
     mh = {"m_sBattleId": battle["battleId"], "m_sApiUrl": api_url, "m_sToken": key}
     if cfg.get("timeLimitOverrideMin"):
         mh["m_iTimeLimitOverrideMin"] = int(cfg["timeLimitOverrideMin"])
+    if cfg.get("testVehicles"):
+        mh["m_sTestVehicles"] = ",".join(cfg["testVehicles"])
     g.setdefault("gameProperties", {})["missionHeader"] = mh
     return c
 
@@ -224,7 +265,8 @@ class Orchestrator:
         if cli:  # pas de gameProperties en mode CLI : le mod lit $profile:F44/server.json
             mh = conf["game"]["gameProperties"]["missionHeader"]
             save_json(os.path.join(f44, "server.json"), {"battleId": mh["m_sBattleId"], "apiUrl": mh["m_sApiUrl"],
-                      "token": mh["m_sToken"], "timeLimitOverrideMin": mh.get("m_iTimeLimitOverrideMin", 0)})
+                      "token": mh["m_sToken"], "timeLimitOverrideMin": mh.get("m_iTimeLimitOverrideMin", 0),
+                      "testVehicles": mh.get("m_sTestVehicles", "")})
         p = subprocess.Popen(args, cwd=os.path.dirname(exe), creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS)
         self.state[inst["name"]] = {"battleId": bid, "pid": p.pid, "started": time.time(), "deadline": deadline}
         self.save()
@@ -245,6 +287,7 @@ def main():
     ap.add_argument("--once", action="store_true", help="un seul cycle")
     ap.add_argument("--dry-run", action="store_true", help="aucun claim, aucun serveur lance, aucun fichier d'instance modifie")
     ap.add_argument("--api", help="surcharge apiUrl")
+    ap.add_argument("--relaunch", metavar="BATTLE_ID", help="dev: arrete l'instance de cette bataille (PID verifie) et la relance (mod modifie)")
     ap.add_argument("--config", default=os.path.join(HERE, "orchestrator.json"))
     a = ap.parse_args()
     setup_log()
@@ -257,11 +300,39 @@ def main():
     log.info("demarrage api=%s dry=%s once=%s", api.base, a.dry_run, a.once)
     ensure_instance_dirs(cfg, a.dry_run)
     o = Orchestrator(cfg, api, a.dry_run)
-    while True:
-        o.tick()
-        if a.once:
-            break
-        time.sleep(cfg.get("pollSec", 15))
+    loop = not a.once and not a.relaunch and not a.dry_run
+    if loop and not acquire_lock():
+        sys.exit(1)
+    if a.relaunch:
+        insts = {i["name"]: i for i in cfg["instances"]}
+        for name, run in list(o.state.items()):
+            if run["battleId"] == a.relaunch:
+                if run.get("pid") and o.alive(run["pid"]):
+                    stop_pid(run["pid"], insts[name])
+                o.release(name, "relance")
+                o.launch(insts[name], api.req("GET", f"/battles/{a.relaunch}"))
+                return
+        log.error("bataille %s absente de l'etat local", a.relaunch); return
+    if loop:
+        log.info("boucle continue (PID %s, poll %ss)", os.getpid(), cfg.get("pollSec", 15))
+    last_prune = 0
+    try:
+        while True:
+            o.tick()
+            if a.once:
+                break
+            if time.time() - last_prune > 3600:
+                last_prune = time.time()
+                try:
+                    prune_server_logs(cfg, cfg.get("keepServerLogs", 20))
+                except Exception:
+                    log.exception("purge des logs")
+            time.sleep(cfg.get("pollSec", 15))
+    except KeyboardInterrupt:
+        log.info("arret demande (Ctrl+C)")
+    finally:
+        if loop:
+            release_lock()
 
 
 if __name__ == "__main__":

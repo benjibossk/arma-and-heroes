@@ -10,3 +10,4 @@ inventory/extract/
 # private notes
 PROMPT_CLOUDFLARE.md
 __pycache__/
+orchestrator/orchestrator.pid

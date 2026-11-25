@@ -58,6 +58,14 @@ Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods
 
 **Web** — `cd web && cp .env.example .env` (set keys), `docker compose up --build -d`, reverse-proxy port 8080.
 **Orchestrator** — edit `orchestrator/orchestrator.json` (API URL, server exe, instance pool), then `python orchestrator.py --dry-run --once` to test, `start-orchestrator.bat` to run.
+
+**Orchestrator as a service** — `start-orchestrator.bat` runs the long-lived loop (poll every `pollSec`) and restarts it 30 s after a crash. Safety: one loop at a time (`orchestrator.pid`, a second start exits with code 1), it only stops server PIDs whose command line points at its own instance profile, `orchestrator.log` rotates (2 MB x 5) and old server `logs_*` folders are pruned hourly (`keepServerLogs`, default 20 per instance). Dev: `python orchestrator.py --relaunch <battleId>` restarts a running battle after a mod change.
+Start at boot with the Task Scheduler (no window, survives logoff):
+```
+schtasks /Create /TN "ArmaHeroes Orchestrator" /SC ONSTART /DELAY 0002:00 /RU %USERNAME% /RL LIMITED ^
+  /TR "cmd /c D:\Serveur\ww2-heroes\orchestrator\start-orchestrator.bat"
+```
+(or a shortcut to the .bat in `shell:startup`). Stop it: end the `python orchestrator.py` process listed in `orchestrator.pid`, then its parent `cmd` (check the command line first: other Arma servers run on this machine).
 **Mod** — open `mod/F44_Core/addon.gproj` in Arma Reforger Tools, play `F44_Test` with `samples/battle.json` copied to `$profile:F44/battle.json`.
 
 ## Roadmap
@@ -70,15 +78,23 @@ Done:
 - [x] Live battle view (mod posts snapshots every 5 s, `/battle` page)
 - [x] WW2 server with 22 mods incl. armor (Tiger I, Panzer IV / Sturmtiger, SdKfz 251, M3A1, Overlord US vehicles)
 - [x] Content inventory vs Heroes & Generals (`inventory/HG_CONTENT.md`, `ARMOR_MODS.md`)
+- [x] Real WW2 vehicles in the pools: Willys, WC-63, M3A1, SdKfz 251, Panzer IV G, Tiger I, Sherman (old web keys kept as catalog aliases)
+- [x] AI in vehicles: armor teams crew tanks, other bots ride transports to the sector and unload (logged)
+- [x] Player loadouts: FH classes in the spawn menu, 30/34 catalog items resolved, loadout logged at spawn
+- [x] In-game HUD Style B + scoreboard (names, ticket bars, timer, sectors, AI/players, ammo)
+- [x] Live map: real terrain extent measured by the mod (Arland 0..4096 m) and sent in the live snapshot
+- [x] Orchestrator as a long-lived service (lock, restart, log rotation, Task Scheduler)
 
 In progress:
 - [ ] End-to-end result posting, proof of AI sector captures
 - [ ] Live view terrain background + zoom
 
 To do:
-- [ ] AI in vehicles
+- [ ] Deploy web changes (team vehicle keys, live bounds) to the VM
+- [ ] AI vehicle driving is slow/hesitant (M3A1 ~1 m/s, defender tanks hold): tune waypoints, more vehicle slots per side
+- [ ] Missing items: Thompson, M3 Grease, G43, FJ outfit (no prefab installed)
+- [ ] HUD verified by compile + replicated state only: check it in a client session
 - [ ] QR code drawn in-game
-- [ ] Full "Veteran" in-game HUD / scoreboard
 - [ ] Missing Finest Hour US classes (MG, medic, AT, engineer, crew, paratrooper)
 - [ ] Soviet faction
 - [ ] City scenarios on Arland
