@@ -15,6 +15,28 @@ Tunables: `web/teams.json` (embedded; a `./teams.json` next to the binary overri
 raised (`newTeam`), merged (`mergeTeam`), resupplied, and again in `BattleConfig.sides[*].teams[*].vehicles`
 sent to the mod, so the mod only ever receives an allowed pool.
 
+## Per-vehicle fit-out (supply crate, armed variant)
+
+The general configures each vehicle of an idle team on the map page (team panel → *Vehicle fit-out*):
+`POST /api/teams/:id/vehicle {key, slot, crate: "" | "AMMO" | "MED" | "AT", armed: bool}`; prices from
+`GET /api/teams/options` (= `teams.json` `crates` / `variants`). A new crate or the armed upgrade is paid once in
+war funds (friendly city not under attack); removing it is not refunded. Stored in `AssaultTeam.VehicleCfg`
+(`[]VehicleOpt{key, slot, crate, armed}`); slots beyond the current vehicle count (losses) are dropped, last slot first.
+
+Each `vehicles[]` entry of a team in the BattleConfig now groups vehicles of the same key **and** config:
+
+```json
+{ "key": "US_JEEP", "count": 1, "crate": "AMMO", "armed": true, "prefab": "{10448D0351BF0979}Prefabs/Vehicles/ww2 jeep/Willys Jeep_MG.et" }
+```
+
+- `crate` (optional): the mod fits that crate on the vehicle each time it spawns from the pool (respawn included),
+  via `F44_FieldSupply.AttachToVehicle`, once FieldSupply is up (~8 s after start). The crate is a normal
+  AMMO/MED box or AT crate (same charges / stock / regen), dies with the vehicle and is not respawned on the ground.
+  Manual in-game "load box on vehicle" is kept.
+- `prefab` (optional): overrides the catalog prefab of `key` — `variants[key].base`, or `variants[key].armed` when
+  `armed` is true. Absent = catalog prefab. Key, tickets and losses still use `key`.
+- old mods ignore the new fields (they read `key`/`count` only).
+
 ## Vehicle losses → tickets (mod side, already implemented)
 
 F44_Core already does both, no new field needed:

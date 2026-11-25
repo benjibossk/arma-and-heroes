@@ -61,6 +61,7 @@ type AssaultTeam struct {
 	Manpower    int        `json:"manpower"`
 	EquipLevel  int        `json:"equipLevel"`
 	Vehicles    string     `gorm:"type:text" json:"-"`
+	VehicleCfg  string     `gorm:"type:text" json:"-"` // []VehicleOpt : per-vehicle crate / armed variant (teams.go)
 	CityID      string     `gorm:"size:64" json:"cityId"`
 	DestCityID  string     `gorm:"size:64" json:"destCityId"`
 	DepartAt    *time.Time `json:"departAt"`

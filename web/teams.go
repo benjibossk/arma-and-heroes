@@ -22,6 +22,22 @@ type TeamRules struct {
 	AllowedRoles   map[string][]string `json:"allowedRoles"`
 	VehicleShare   map[string]float64  `json:"vehicleShare"`
 	VehicleRoles   map[string]string   `json:"vehicleRoles"`
+	Crates         map[string]CrateRule   `json:"crates"`
+	Variants       map[string]VariantRule `json:"variants"`
+}
+
+// CrateRule : supply crate a general can fit on a team vehicle (mod F44_FieldSupply.AttachToVehicle)
+type CrateRule struct {
+	Label string `json:"label"`
+	Cost  int    `json:"cost"`
+}
+
+// VariantRule : unarmed / armed prefab pair of the same model (inventory/VEHICLE_VARIANTS.md)
+type VariantRule struct {
+	Base       string `json:"base"`
+	Armed      string `json:"armed"`
+	ArmedLabel string `json:"armedLabel"`
+	ArmedCost  int    `json:"armedCost"`
 }
 
 var teamRules TeamRules
@@ -154,4 +170,166 @@ func resupplyTeam(c *gin.Context) {
 	db.Model(&t).Updates(map[string]interface{}{"manpower": t.Manpower, "vehicles": t.Vehicles})
 	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s resupplies %s (-%d resources)", u.Name, t.Label(), st.ResupplyCost))
 	c.JSON(200, gin.H{"ok": true, "cost": st.ResupplyCost})
+}
+
+// ---------- per-vehicle configuration (supply crate, armed variant) ----------
+
+// VehicleOpt : configuration of the Slot-th vehicle of Key in the team
+type VehicleOpt struct {
+	Key   string `json:"key"`
+	Slot  int    `json:"slot"`
+	Crate string `json:"crate,omitempty"` // "" | AMMO | MED | AT
+	Armed bool   `json:"armed,omitempty"`
+}
+
+// GetVehicleOpts : stored options, trimmed to the vehicles the team still has (losses remove the last slots)
+func (t *AssaultTeam) GetVehicleOpts() []VehicleOpt {
+	var in []VehicleOpt
+	_ = json.Unmarshal([]byte(t.VehicleCfg), &in)
+	have := map[string]int{}
+	for _, v := range t.GetVehicles() {
+		have[v.Key] += v.Count
+	}
+	out := []VehicleOpt{}
+	for _, o := range in {
+		if o.Slot >= 0 && o.Slot < have[o.Key] && (o.Crate != "" || o.Armed) {
+			out = append(out, o)
+		}
+	}
+	return out
+}
+
+func (t *AssaultTeam) SetVehicleOpts(v []VehicleOpt) {
+	b, _ := json.Marshal(v)
+	t.VehicleCfg = string(b)
+}
+
+// BCVehicle : battle payload vehicle entry (docs/BATTLE_CONTRACT.md); count vehicles of the same key and config
+type BCVehicle struct {
+	Key    string `json:"key"`
+	Count  int    `json:"count"`
+	Crate  string `json:"crate,omitempty"`
+	Armed  bool   `json:"armed,omitempty"`
+	Prefab string `json:"prefab,omitempty"`
+}
+
+// battleVehicles : allowed vehicles expanded with their per-vehicle config, identical ones grouped
+func battleVehicles(t *AssaultTeam) []BCVehicle {
+	opts := map[string]VehicleOpt{}
+	for _, o := range t.GetVehicleOpts() {
+		opts[o.Key+"#"+itoa(o.Slot)] = o
+	}
+	out := []BCVehicle{}
+	for _, v := range filterVehicles(t.Type, t.GetVehicles()) {
+		idx := map[string]int{}
+		for i := 0; i < v.Count; i++ {
+			o := opts[v.Key+"#"+itoa(i)]
+			e := BCVehicle{Key: v.Key, Count: 1, Crate: o.Crate}
+			if vr, ok := teamRules.Variants[v.Key]; ok {
+				e.Prefab = vr.Base
+				if o.Armed && vr.Armed != "" {
+					e.Armed, e.Prefab = true, vr.Armed
+				}
+			}
+			sig := e.Crate + "|" + e.Prefab
+			if j, ok := idx[sig]; ok {
+				out[j].Count++
+				continue
+			}
+			idx[sig] = len(out)
+			out = append(out, e)
+		}
+	}
+	return out
+}
+
+// vehicleOptions : GET /api/teams/options — crate and armed-variant prices
+func vehicleOptions(c *gin.Context) {
+	c.JSON(200, gin.H{"crates": teamRules.Crates, "variants": teamRules.Variants})
+}
+
+// configureVehicle : POST /api/teams/:id/vehicle {key, slot, crate, armed} — new options are paid (war funds), removal is not refunded
+func configureVehicle(c *gin.Context) {
+	var in VehicleOpt
+	if c.ShouldBindJSON(&in) != nil {
+		errJ(c, 400, "bad request")
+		return
+	}
+	u := user(c)
+	gameMu.Lock()
+	defer gameMu.Unlock()
+	w := currentWar()
+	var t AssaultTeam
+	if w == nil || db.Where("war_id = ?", w.ID).First(&t, c.Param("id")).Error != nil {
+		errJ(c, 404, "assault team not found")
+		return
+	}
+	if !ownsTeam(u, &t) {
+		errJ(c, 403, "this assault team is not yours")
+		return
+	}
+	if t.Status != "idle" {
+		errJ(c, 400, "only an idle assault team can be refitted")
+		return
+	}
+	n := 0
+	for _, v := range filterVehicles(t.Type, t.GetVehicles()) {
+		if v.Key == in.Key {
+			n += v.Count
+		}
+	}
+	if in.Slot < 0 || in.Slot >= n {
+		errJ(c, 400, "no such vehicle in this team")
+		return
+	}
+	cr, crateOK := teamRules.Crates[in.Crate]
+	if in.Crate != "" && !crateOK {
+		errJ(c, 400, "unknown crate")
+		return
+	}
+	vr, hasVar := teamRules.Variants[in.Key]
+	if in.Armed && (!hasVar || vr.Armed == "") {
+		errJ(c, 400, "no armed variant for this vehicle")
+		return
+	}
+	opts := t.GetVehicleOpts()
+	cur, at := VehicleOpt{}, -1
+	for i, o := range opts {
+		if o.Key == in.Key && o.Slot == in.Slot {
+			cur, at = o, i
+		}
+	}
+	cost := 0
+	if in.Crate != "" && in.Crate != cur.Crate {
+		cost += cr.Cost
+	}
+	if in.Armed && !cur.Armed {
+		cost += vr.ArmedCost
+	}
+	if cost > 0 {
+		city := getCity(w.ID, t.CityID)
+		if city == nil || city.Owner != t.Faction || activeBattleAt(w.ID, city.ID) != nil {
+			errJ(c, 400, "refitting needs a friendly city that is not under attack")
+			return
+		}
+		var f Faction
+		if db.Where("war_id = ? AND code = ?", w.ID, t.Faction).First(&f).Error != nil || f.Resources < cost {
+			errJ(c, 400, "not enough resources")
+			return
+		}
+		db.Model(&f).Update("resources", f.Resources-cost)
+	}
+	no := VehicleOpt{Key: in.Key, Slot: in.Slot, Crate: in.Crate, Armed: in.Armed}
+	if at >= 0 {
+		opts[at] = no
+	} else {
+		opts = append(opts, no)
+	}
+	t.SetVehicleOpts(opts)
+	t.SetVehicleOpts(t.GetVehicleOpts()) // drop empty entries
+	db.Model(&t).Update("vehicle_cfg", t.VehicleCfg)
+	if cost > 0 {
+		logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s refits %s %s #%d (-%d resources)", u.Name, t.Label(), in.Key, in.Slot+1, cost))
+	}
+	c.JSON(200, gin.H{"ok": true, "cost": cost})
 }

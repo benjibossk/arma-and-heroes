@@ -200,7 +200,7 @@ type BCTeam struct {
 	Manpower    int            `json:"manpower"`
 	EquipLevel  int            `json:"equipLevel"`
 	Classes     []string       `json:"classes"`
-	Vehicles    []VehicleCount `json:"vehicles"`
+	Vehicles    []BCVehicle    `json:"vehicles"`
 }
 
 type BCSide struct {
@@ -258,14 +258,14 @@ func buildConfig(b *Battle) BattleConfig {
 				continue
 			}
 			s.Teams = append(s.Teams, BCTeam{TeamID: id, DisplayName: t.DisplayName, Type: t.Type, Manpower: t.Manpower, EquipLevel: t.EquipLevel,
-				Classes: atSpecs[t.Type].Classes, Vehicles: filterVehicles(t.Type, t.GetVehicles())})
+				Classes: atSpecs[t.Type].Classes, Vehicles: battleVehicles(t)})
 		}
 		out.Sides[side] = s
 	}
 	if b.GarrisonMP > 0 {
 		s := out.Sides[b.Defender]
 		s.Teams = append(s.Teams, BCTeam{TeamID: "garrison_" + b.CityID, DisplayName: garrisonName(b), Type: "INF", Manpower: b.GarrisonMP, EquipLevel: 1,
-			Classes: []string{"RIFLEMAN", "MG"}, Vehicles: []VehicleCount{}})
+			Classes: []string{"RIFLEMAN", "MG"}, Vehicles: []BCVehicle{}})
 		out.Sides[b.Defender] = s
 	}
 	ai := loadAI()

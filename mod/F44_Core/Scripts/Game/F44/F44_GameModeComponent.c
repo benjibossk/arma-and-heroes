@@ -31,6 +31,8 @@ class F44_PoolEntry
 	string m_sTeamId;
 	string m_sKey;
 	int m_iRemaining;
+	string m_sCrate;	// web team config, fitted again on every respawn
+	ResourceName m_sPrefab;	// "" = catalog prefab
 }
 
 //------------------------------------------------------------------------------------------------
@@ -42,6 +44,7 @@ class F44_TrackedVehicle
 	int m_iSide;
 	float m_fSpawnTime;	// world time (s)
 	SCR_AIGroup m_AIGroup;	// AI group that took it (null = free for players / AI)
+	string m_sCrate;	// crate still to fit (FieldSupply starts ~8 s after the pools); "" = none / done
 }
 
 //------------------------------------------------------------------------------------------------
@@ -489,6 +492,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			e.m_sTeamId = t.m_sTeamId;
 			e.m_sKey = v.m_sKey;
 			e.m_iRemaining = v.m_iCount;
+			e.m_sCrate = v.m_sCrate;
+			e.m_sPrefab = v.m_sPrefab;
 			pool.Insert(e);
 		}
 	}
@@ -956,6 +961,18 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 
+		// fit pending supply crates (web team config) once FieldSupply is up
+		if (m_FieldSupply.IsReady())
+		{
+			foreach (F44_TrackedVehicle tc : m_aVehicles)
+			{
+				if (tc.m_sCrate.IsEmpty() || !tc.m_Entity)
+					continue;
+				m_FieldSupply.AttachToVehicle(tc.m_Entity, tc.m_sCrate, SideKey(tc.m_iSide));
+				tc.m_sCrate = string.Empty;
+			}
+		}
+
 		// refill free slots from the pools
 		float now = GetGame().GetWorld().GetWorldTime() * 0.001;
 		foreach (F44_VehicleSpawnPointComponent sp : F44_VehicleSpawnPointComponent.GetAll())
@@ -976,7 +993,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			{
 				if (e.m_iRemaining <= 0 || !sp.AcceptsKey(e.m_sKey))
 					continue;
-				ResourceName prefab = F44_Catalog.Get().GetVehiclePrefab(e.m_sKey);
+				ResourceName prefab = e.m_sPrefab;
+				if (prefab.IsEmpty())
+					prefab = F44_Catalog.Get().GetVehiclePrefab(e.m_sKey);
 				if (prefab.IsEmpty())
 					continue;
 				IEntity veh = sp.SpawnVehicle(prefab);
@@ -991,6 +1010,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				tv2.m_sTeamId = e.m_sTeamId;
 				tv2.m_iSide = sp.m_eSide;
 				tv2.m_fSpawnTime = now;
+				tv2.m_sCrate = e.m_sCrate;
 				m_aVehicles.Insert(tv2);
 				PrintFormat("[F44] Spawned %1 for %2 (%3 left)", e.m_sKey, e.m_sTeamId, e.m_iRemaining);
 				break;

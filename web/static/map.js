@@ -94,6 +94,7 @@ function showSel() {
     d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — <span class="${t.faction}">${icoHtml(teamIconFile(t))}</span> ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${vehChips(t.vehicles, t.faction)}<br>
       Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
       ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
+      ${vehFitHtml(t)}
       ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}
       ${t.strengthPct != null ? `<br>Readiness: <b style="color:${t.canAttack ? '#7BC67B' : '#E05A4F'}">${t.strengthPct}%</b>${t.canAttack ? '' : ' <span class="muted">(too weak to attack)</span>'}
       ${canOrder(t) && t.status === 'idle' && t.resupplyCost > 0 ? `<br><button onclick="resupply('${t.teamId}', ${t.resupplyCost})">Resupply to 100% — ${t.resupplyCost} war funds</button>` : ''}` : ''}`;
@@ -106,6 +107,26 @@ function showSel() {
   } else d.innerHTML = 'Tap a city or a team.';
 }
 
+// per-vehicle fit-out (supply crate, armed variant) — prices from /api/teams/options (teams.json)
+let VOPT = null, fitOpen = false;
+api('/teams/options').then(o => { VOPT = o; if (selTeam) showSel(); }).catch(() => {});
+function vehFitHtml(t) {
+  if (!VOPT || !(t.vehicles || []).length) return '';
+  const edit = canOrder(t) && t.status === 'idle', opts = t.vehicleOpts || [], rows = [];
+  const cr = VOPT.crates || {}, vr = VOPT.variants || {};
+  for (const v of t.vehicles) for (let i = 0; i < v.count; i++) {
+    const o = opts.find(x => x.key === v.key && x.slot === i) || {}, va = vr[v.key];
+    const crateSel = edit ? `<select onchange="fitVeh('${t.teamId}','${v.key}',${i},this.value,${!!o.armed})"><option value="">no crate</option>${Object.entries(cr).map(([k, c]) => `<option value="${k}" ${o.crate === k ? 'selected' : ''}>${esc(c.label)} (${c.cost})</option>`).join('')}</select>`
+      : esc(o.crate ? (cr[o.crate]?.label || o.crate) : 'no crate');
+    const armed = va && va.armed ? (edit ? `<label><input type="checkbox" ${o.armed ? 'checked' : ''} onchange="fitVeh('${t.teamId}','${v.key}',${i},'${o.crate || ''}',this.checked)"> armed: ${esc(va.armedLabel)} (${va.armedCost})</label>` : (o.armed ? 'armed: ' + esc(va.armedLabel) : 'unarmed')) : '';
+    rows.push(`<div class="vfit">${esc(v.key)} #${i + 1} · ${crateSel} ${armed}</div>`);
+  }
+  return `<details style="margin:.4em 0" ${fitOpen ? 'open' : ''} ontoggle="fitOpen=this.open"><summary>Vehicle fit-out</summary>${rows.join('')}<p class="muted">Paid once in war funds, not refunded. A crate is lost with its vehicle in battle but refitted when the vehicle respawns.</p></details>`;
+}
+async function fitVeh(id, key, slot, crate, armed) {
+  try { await api('/teams/' + id.slice(3) + '/vehicle', { method: 'POST', body: { key, slot, crate, armed } }); await load(); }
+  catch (e) { alert(e.message); await load(); }
+}
 async function resupply(id, cost) { if (!confirm('Resupply ' + id + ' for ' + cost + ' war funds ?')) return; try { await api('/teams/' + id.slice(3) + '/resupply', { method: 'POST' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
 async function dissolve(id) { if (!confirm('Disband ' + id + ' ?')) return; try { await api('/teams/' + id.slice(3), { method: 'DELETE' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
 
@@ -144,5 +165,5 @@ async function load() {
   renderPanels(); draw(); showSel(); loadEvents();
 }
 
-initPage('index.html').then(() => { load(); setInterval(load, 15000); setInterval(() => { if (M) { draw(); if (selTeam) showSel(); } }, 2000); });
+initPage('index.html').then(() => { load(); setInterval(load, 15000); setInterval(() => { if (M) { draw(); if (selTeam && !document.activeElement?.closest?.('#sel select')) showSel(); } }, 2000); });
 document.getElementById('map').addEventListener('click', e => { if (e.target.tagName === 'rect' && e.target.getAttribute('width') === '1000') { selTeam = null; selCity = null; showSel(); draw(); } });

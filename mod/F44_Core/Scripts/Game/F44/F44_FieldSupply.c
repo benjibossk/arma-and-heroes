@@ -149,6 +149,7 @@ class F44_SupplyBox
 	int m_iMaxCharges;
 	float m_fRegenAccu;
 	int m_iOwnerId;	// player who loaded it on a vehicle (credited); 0 = none
+	bool m_bVehicleCrate;	// fitted on a pool vehicle by the web team config: dies with it, never respawned on the ground
 }
 
 //------------------------------------------------------------------------------------------------
@@ -193,6 +194,43 @@ class F44_FieldSupply
 		return m_Cfg;
 	}
 
+	bool IsReady()
+	{
+		return m_Cfg != null;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Web team config: fit a crate (AMMO | MED | AT) on a freshly spawned pool vehicle (logistics point). Server only.
+	//! side = faction key of the vehicle's team (AT crate launcher side).
+	bool AttachToVehicle(IEntity veh, string crate, string side)
+	{
+		if (!veh || !m_Cfg)
+			return false;
+		F44_ESupplyBoxType type;
+		if (crate == "AMMO")
+			type = F44_ESupplyBoxType.AMMO;
+		else if (crate == "MED")
+			type = F44_ESupplyBoxType.MED;
+		else if (crate == "AT")
+			type = F44_ESupplyBoxType.AT;
+		else
+			return false;
+		F44_SupplyBox b = SpawnBox(type, veh.GetOrigin() + Vector(0, 3, 0), 0, side);
+		if (!b)
+			return false;
+		b.m_bVehicleCrate = true;
+		vector mins, maxs;
+		veh.GetBounds(mins, maxs);
+		vector local[4];
+		Math3D.MatrixIdentity4(local);
+		local[3] = Vector(0, maxs[1] * 0.5, mins[2] * 0.6);
+		veh.AddChild(b.m_Ent, -1, EAddChildFlags.AUTO_TRANSFORM);
+		b.m_Ent.SetLocalTransform(local);
+		PrintFormat("[F44] FieldSupply: %1 crate fitted on %2 (team config)", crate, PrefabOf(veh).GetPath());
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
 	float GetTime()
 	{
 		return m_fTime;
@@ -669,6 +707,12 @@ class F44_FieldSupply
 		for (int i = m_aBoxes.Count() - 1; i >= 0; i--)
 		{
 			F44_SupplyBox b = m_aBoxes[i];
+			if (!b.m_Ent && b.m_bVehicleCrate)
+			{
+				// lost with its vehicle: the respawned vehicle gets a new one
+				m_aBoxes.Remove(i);
+				continue;
+			}
 			if (!b.m_Ent)
 			{
 				// destroyed: respawn at its original place on next refill

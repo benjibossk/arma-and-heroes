@@ -1,19 +1,88 @@
 {
-  "note": "Assault-team tuning. allowedRoles: vehicle roles a team type may field (anything else is stripped from the pool and the battle payload). vehicleRoles: vehicle key -> role. vehicleShare: part of the team cost that pays for its vehicles (rest = manpower). resupplyFactor: resupply price = factor x pro-rata cost of what is missing. minAttackPct: a team below this strength cannot attack an enemy city.",
+  "note": "Assault-team tuning. allowedRoles: vehicle roles a team type may field (anything else is stripped from the pool and the battle payload). vehicleRoles: vehicle key -> role. vehicleShare: part of the team cost that pays for its vehicles (rest = manpower). resupplyFactor: resupply price = factor x pro-rata cost of what is missing. minAttackPct: a team below this strength cannot attack an enemy city. crates: supply crate a general can fit on each team vehicle (cost in war funds, paid once, not refunded; lost with the vehicle in battle, refitted on respawn). variants: same-model unarmed/armed prefab pair (inventory/VEHICLE_VARIANTS.md); base is sent as the vehicle prefab, armed replaces it when the general paid armedCost for that vehicle.",
   "resupplyFactor": 0.3,
   "minAttackPct": 50,
   "allowedRoles": {
     "INF": [],
     "PARA": [],
-    "ARM": ["tank", "light_armored", "light_armored_aa"],
-    "REC": ["light_utility", "light_armed", "light_armored"],
-    "MOT": ["truck", "light_utility", "light_armed", "light_armored"]
+    "ARM": [
+      "tank",
+      "light_armored",
+      "light_armored_aa"
+    ],
+    "REC": [
+      "light_utility",
+      "light_armed",
+      "light_armored"
+    ],
+    "MOT": [
+      "truck",
+      "light_utility",
+      "light_armed",
+      "light_armored"
+    ]
   },
-  "vehicleShare": { "ARM": 0.7, "REC": 0.3, "MOT": 0.4 },
+  "vehicleShare": {
+    "ARM": 0.7,
+    "REC": 0.3,
+    "MOT": 0.4
+  },
   "vehicleRoles": {
-    "US_JEEP": "light_utility", "GER_KFZ": "light_utility",
-    "US_TRUCK": "truck", "GER_TRUCK": "truck",
-    "US_M3A1": "light_armored", "GER_SDKFZ251": "light_armored", "GER_SDKFZ222": "light_armored",
-    "US_SHERMAN": "tank", "GER_PZ4": "tank", "GER_TIGER1": "tank"
+    "US_JEEP": "light_utility",
+    "GER_KFZ": "light_utility",
+    "US_TRUCK": "truck",
+    "GER_TRUCK": "truck",
+    "US_M3A1": "light_armored",
+    "GER_SDKFZ251": "light_armored",
+    "GER_SDKFZ222": "light_armored",
+    "US_SHERMAN": "tank",
+    "GER_PZ4": "tank",
+    "GER_TIGER1": "tank"
+  },
+  "crates": {
+    "AMMO": {
+      "label": "Ammunition crate",
+      "cost": 25
+    },
+    "MED": {
+      "label": "Medical crate",
+      "cost": 25
+    },
+    "AT": {
+      "label": "Anti-tank crate",
+      "cost": 40
+    }
+  },
+  "variants": {
+    "GER_KFZ": {
+      "base": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
+      "armed": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
+      "armedLabel": "MG34 mount",
+      "armedCost": 40
+    },
+    "US_JEEP": {
+      "base": "{0CFB9416659192D2}Prefabs/Vehicles/ww2 jeep/Willys Jeep_uncovered.et",
+      "armed": "{10448D0351BF0979}Prefabs/Vehicles/ww2 jeep/Willys Jeep_MG.et",
+      "armedLabel": "M1919 / M2 mount",
+      "armedCost": 40
+    },
+    "US_TRUCK": {
+      "base": "{773E8E154D18321C}Prefabs/Vehicles/Wheeled/WC63/WC63_transport.et",
+      "armed": "{B12E900E074349E4}Prefabs/Vehicles/Wheeled/WC63/WC63_covered_mg.et",
+      "armedLabel": "ring-mounted MG",
+      "armedCost": 60
+    },
+    "GER_SDKFZ251": {
+      "base": "{D253646DF96D27EA}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport.et",
+      "armed": "{561C8A71E69790A1}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_MG.et",
+      "armedLabel": "MG34 shield mount",
+      "armedCost": 60
+    },
+    "US_M3A1": {
+      "base": "{EC62ED156FC6F05C}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_Transport.et",
+      "armed": "{80C7FDE83DE6D000}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_MG.et",
+      "armedLabel": "M2 .50 ring mount",
+      "armedCost": 60
+    }
   }
 }

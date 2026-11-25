@@ -46,6 +46,7 @@ func setupRouter() *gin.Engine {
 	a.GET("/soldiers/:id/loadout", requireUser, getLoadout)
 	a.PUT("/soldiers/:id/loadout", requireUser, putLoadout)
 	a.POST("/soldiers/:id/buy", requireUser, buyItem)
+	a.GET("/weapons/stats", getWeaponStats)
 	a.GET("/unlocks", getUnlocks)
 	a.POST("/unlocks/:key/buy", requireUser, buyUnlock)
 	a.GET("/battles/:id/loadout/:identityId", requireServer, getBattleLoadout)
@@ -55,7 +56,9 @@ func setupRouter() *gin.Engine {
 	a.GET("/link/qr", linkQR)
 	a.GET("/players/by-identity/:identityId", requireServer, playerByIdentity)
 	// général
+	a.GET("/teams/options", vehicleOptions)
 	g := a.Group("/teams", requireGeneral)
+	g.POST("/:id/vehicle", configureVehicle)
 	g.POST("", createTeam)
 	g.POST("/:id/move", moveTeam)
 	g.DELETE("/:id", dissolveTeam)
@@ -110,13 +113,14 @@ type TeamView struct {
 	AssaultTeam
 	TeamID    string         `json:"teamId"`
 	VehList   []VehicleCount `json:"vehicles"`
+	VehOpts   []VehicleOpt   `json:"vehicleOpts"`
 	OwnerName string         `json:"ownerName"`
 	BattleRef string         `json:"battleId"`
 	*TeamStrength
 }
 
 func teamView(t *AssaultTeam, names map[uint]string, hideDest bool) TeamView {
-	v := TeamView{AssaultTeam: *t, TeamID: t.TeamID(), VehList: t.GetVehicles(), OwnerName: names[t.OwnerID]}
+	v := TeamView{AssaultTeam: *t, TeamID: t.TeamID(), VehList: t.GetVehicles(), VehOpts: t.GetVehicleOpts(), OwnerName: names[t.OwnerID]}
 	if t.BattleID > 0 {
 		v.BattleRef = "b_" + pad6(int(t.BattleID))
 	}

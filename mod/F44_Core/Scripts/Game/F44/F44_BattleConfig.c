@@ -7,11 +7,17 @@ class F44_VehicleEntry
 {
 	string m_sKey;
 	int m_iCount;
+	string m_sCrate;	// "" | AMMO | MED | AT : supply crate fitted on each spawn (web team config)
+	string m_sPrefab;	// optional prefab override (armed variant / prefab not in catalog); "" = catalog prefab
+	bool m_bArmed;
 
 	void FromJson(LoadContext n)
 	{
 		n.ReadValue("key", m_sKey);
 		n.ReadValue("count", m_iCount);
+		n.ReadValue("crate", m_sCrate);
+		n.ReadValue("prefab", m_sPrefab);
+		n.ReadValue("armed", m_bArmed);
 	}
 }
 
