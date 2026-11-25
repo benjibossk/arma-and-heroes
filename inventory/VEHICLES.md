@@ -145,3 +145,10 @@ Remaining gaps, by priority: (1) Soviet vehicles (T-34, GAZ-67, trucks) - nothin
 ## 6. Catalog follow-up (do not edit here: another agent owns catalog.json)
 
 Candidate new `catalog.json` prefabs: `GER_TIGER1` -> `{67750217922403FC}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_Grey.et`; `GER_PZ4` -> `{E44C69F0A2538279}...Panzer_IV_Ausf_H_Base.et`; `GER_SDKFZ251` -> `{561C8A71E69790A1}...Sd.kfz_251_MG.et`; `US_HALFTRACK` -> `{80C7FDE83DE6D000}...M3A1 HalfTrack_MG.et`; `US_JEEP` -> `{0CFB9416659192D2}...Willys Jeep_uncovered.et`; `US_TRUCK` -> `{1DF2AB34BE13692A}...WC63.et`. Full list with GUIDs: `vehicles.json`.
+
+## Free light vehicles (field supply, mod 1.1.0)
+
+Spawned by `F44_CivVehicleSpawner.c`, free for both sides (not in team pools):
+- **WW2 bicycle** - Workshop `WW2_Bicycle` 62B4A8E40D31F94B by Modest23, v1.0.21, license APL, dependency Modest VehicleCore 6A7D4E7B69969355 (both added to `D:\Serveur\arma-reforger-ww2\config.json` 2026-11-25, backup `config.json.bak_bike_20261125`). Prefab `{3FDBFE7F1A1EB8F2}Prefabs/Vehicles/Wheeled/WW2_Bike/WW2_Bike_base.et` (no inventory storage). Spawn/respawn verified on a bots-only battle.
+- Civilian cars/vans (vanilla Arland): `{23B8C20ACAEC164B}S1203_transport_white`, `{321016E0F9361A22}S105_lightgreen`, `{1D96D899FA313A08}UAZ452_cargo_CIV_blue`.
+- No WW2 motorcycle in the current mod set.

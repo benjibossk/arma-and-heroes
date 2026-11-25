@@ -13,6 +13,8 @@ class F44_PlayerStats
 	int m_iKills;
 	int m_iDeaths;
 	int m_iCaptures;
+	int m_iResupplyGiven;	// field supply: magazines given from a box this player loaded on a vehicle
+	int m_iHealGiven;
 	ref map<string, int> m_mKillsByCategory = new map<string, int>();
 }
 
@@ -101,6 +103,72 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected int m_iPlayersAtt;
 	[RplProp()]
 	protected int m_iPlayersDef;
+	[RplProp(onRplName: "OnLayoutRpl")]
+	protected string m_sLayoutSectors;	// city layout sectors "name~x~z~r|..." (empty = world sectors)
+	protected string m_sLayoutApplied;
+
+	//------------------------------------------------------------------------------------------------
+	protected void OnLayoutRpl()
+	{
+		if (IsServer() || m_sLayoutSectors == m_sLayoutApplied)
+			return;
+		m_sLayoutApplied = m_sLayoutSectors;
+		F44_CityLayout.ApplySectors(m_sLayoutSectors);
+		PrintFormat("[F44] Client: city layout applied (%1 sectors)", F44_SectorManager.Count());
+	}
+
+	protected ref F44_CityLayout m_Layout;
+	protected ref array<vector> m_aSlotAnchorsAtt = {};
+	protected ref array<vector> m_aSlotAnchorsDef = {};
+	protected int m_iSlotTries;
+
+	//------------------------------------------------------------------------------------------------
+	//! vehicle slots: layout road anchors (or the world slots as anchors), several per side from the pool size
+	protected void CollectSlotAnchors()
+	{
+		if (m_Layout)
+		{
+			foreach (F44_LayoutPoint p : m_Layout.m_aVehAtt)
+				m_aSlotAnchorsAtt.Insert(p.Pos());
+			foreach (F44_LayoutPoint p2 : m_Layout.m_aVehDef)
+				m_aSlotAnchorsDef.Insert(p2.Pos());
+		}
+		bool attFromWorld = m_aSlotAnchorsAtt.IsEmpty();
+		bool defFromWorld = m_aSlotAnchorsDef.IsEmpty();
+		array<F44_VehicleSpawnPointComponent> world = {};
+		world.Copy(F44_VehicleSpawnPointComponent.GetAll());
+		foreach (F44_VehicleSpawnPointComponent w : world)
+		{
+			if (w.m_eSide == F44_ESectorOwner.ATTACKER && attFromWorld)
+				m_aSlotAnchorsAtt.Insert(w.GetOwner().GetOrigin());
+			else if (w.m_eSide == F44_ESectorOwner.DEFENDER && defFromWorld)
+				m_aSlotAnchorsDef.Insert(w.GetOwner().GetOrigin());
+			SCR_EntityHelper.DeleteEntityAndChildren(w.GetOwner());
+		}
+	}
+
+	protected void SetupVehicleSlots()
+	{
+		if (!F44_Roads.Get() && m_iSlotTries < 15)
+		{
+			m_iSlotTries++;
+			GetGame().GetCallqueue().CallLater(SetupVehicleSlots, 2000, false);
+			return;
+		}
+		vector facing = "2000 0 2000";
+		if (F44_SectorManager.Count() > 0)
+			facing = F44_SectorManager.GetSector(0).GetOwner().GetOrigin();
+		F44_CityLayout.BuildVehicleSlots(m_aSlotAnchorsAtt, F44_ESectorOwner.ATTACKER, SlotCount(m_aPoolAtt), facing);
+		F44_CityLayout.BuildVehicleSlots(m_aSlotAnchorsDef, F44_ESectorOwner.DEFENDER, SlotCount(m_aPoolDef), facing);
+	}
+
+	protected static int SlotCount(array<ref F44_PoolEntry> pool)
+	{
+		int n;
+		foreach (F44_PoolEntry e : pool)
+			n += e.m_iRemaining;
+		return Math.ClampInt(n, 2, 6);
+	}
 
 	// ---- server state ----
 	protected ref F44_BattleLoader m_Loader;
@@ -122,6 +190,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected ref F44_AccountLinkManager m_Link = new F44_AccountLinkManager();
 	protected ref F44_AIDirector m_AI = new F44_AIDirector();
 	protected ref F44_LoadoutService m_Loadouts = new F44_LoadoutService();
+	protected ref F44_FieldSupply m_FieldSupply = new F44_FieldSupply();	// F44_FieldSupply.c
+	protected ref F44_CivVehicleSpawner m_CivVehicles = new F44_CivVehicleSpawner();	// F44_CivVehicleSpawner.c
 	protected int m_iBotKills;
 	protected ref map<string, int> m_mAIDeaths = new map<string, int>();	// side key -> bots lost
 	protected ref map<string, int> m_mAIKills = new map<string, int>();	// side key -> kills made by bots
@@ -222,6 +292,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			return;
 
 		F44_Catalog.Get(m_sCatalogPath);
+		F44_WorldDump.RunIfRequested();
 		F44_MissionHeader header = F44_MissionHeader.Get();
 		if (header)
 			m_Link.Init(header.m_sApiUrl, header.m_sToken);
@@ -280,6 +351,16 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 
+		// city layout (battle.layout / layoutData / cityMap[cityId]) replaces the world sectors
+		m_Layout = cfg.m_InlineLayout;
+		if (!m_Layout)
+			m_Layout = F44_CityLayout.Resolve(cfg.m_sLayoutId, cfg.m_sCityId);
+		if (m_Layout)
+		{
+			m_sLayoutSectors = m_Layout.SerializeSectors();
+			F44_CityLayout.ApplySectors(m_sLayoutSectors);
+		}
+
 		// sectors: ASSAULT = defender holds everything, SKIRMISH = neutral
 		m_aSectorOwners.Clear();
 		m_aSectorProgress.Clear();
@@ -298,6 +379,14 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		}
 
 		ConfigureSpawnPoints();
+		if (m_Layout)
+		{
+			F44_Catalog lcat = F44_Catalog.Get();
+			m_Layout.ApplySpawns(lcat.GetFactionKey(m_sAttacker), lcat.GetFactionKey(m_sDefender));
+		}
+		CollectSlotAnchors();
+		GetGame().GetCallqueue().CallLater(SetupVehicleSlots, 5000, false);	// road network ready
+		GetGame().GetCallqueue().CallLater(SetupFieldSupply, 8000, false);	// after layout spawns/sectors
 
 		int aiLimit = m_iAILimit;
 		if (cfg.m_iAILimit >= 0)
@@ -440,6 +529,27 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		if (side == F44_ESectorOwner.DEFENDER)
 			return m_sDefender;
 		return string.Empty;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//! Field supply (F44_FieldSupply.c): spawn crates/boxes and civilian vehicles once the layout is applied
+	protected void SetupFieldSupply()
+	{
+		if (!m_Config || m_bEnded)
+			return;
+		m_FieldSupply.Init(this, m_Config);
+		m_CivVehicles.Init(m_Config, m_FieldSupply.GetConfig());
+	}
+
+	//! Logistics credit for the owner of a loaded supply box
+	void F44_AddLogistics(int playerId, int resupply, int heal)
+	{
+		F44_PlayerStats st = GetStats(playerId);
+		if (!st)
+			return;
+		st.m_iResupplyGiven += resupply;
+		st.m_iHealGiven += heal;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -794,6 +904,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			GetStats(pid).m_iCaptures++;
 
 		UpdateVehicles();
+		m_FieldSupply.Tick(m_fTickInterval);
+		m_CivVehicles.Tick(m_fTickInterval);
+		m_FieldSupply.SelfTest(m_fTickInterval, botsAtt, botsDef, m_CivVehicles);
 		m_iAIAtt = botsAtt.Count();
 		m_iAIDef = botsDef.Count();
 		m_iPlayersAtt = playersAtt;
@@ -867,6 +980,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				if (prefab.IsEmpty())
 					continue;
 				IEntity veh = sp.SpawnVehicle(prefab);
+				F44_VehicleStorageLock.Apply(veh);
 				if (!veh)
 					continue;
 				e.m_iRemaining--;
@@ -1010,6 +1124,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			json += "," + q + "kills" + q + ":" + st.m_iKills.ToString();
 			json += "," + q + "deaths" + q + ":" + st.m_iDeaths.ToString();
 			json += "," + q + "captures" + q + ":" + st.m_iCaptures.ToString();
+			json += "," + q + "resupplyGiven" + q + ":" + st.m_iResupplyGiven.ToString();
+			json += "," + q + "boxHealGiven" + q + ":" + st.m_iHealGiven.ToString();	// field supply med box (F44_FieldSupply.c), distinct from medical healGiven
 			json += "," + q + "killsByCategory" + q + ":{";
 			bool firstC = true;
 			foreach (string ck, int cv : st.m_mKillsByCategory)

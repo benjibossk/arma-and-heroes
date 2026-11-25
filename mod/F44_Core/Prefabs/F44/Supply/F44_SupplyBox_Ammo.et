@@ -1,0 +1,42 @@
+GenericEntity : "{2C303FA30DF3D73F}Prefabs/Props/Military/AmmoBoxes/US/EquipmentBoxWooden_Ammunition_01_US.et" {
+ ID "6F44A7C2E1B39000"
+ components {
+  ActionsManagerComponent "{5476B36C403D4CC0}" {
+   Enabled 1
+   ActionContexts {
+    UserActionContext "{5476B36C47B0461A}" {
+     ContextName "default"
+     Position PointInfo "{5476B36C45ADDA89}" {
+      Offset 0 0.45 0
+     }
+     Radius 1.6
+    }
+   }
+   additionalActions {
+    F44_ResupplyAction "{6F44A7C2E1B32001}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B42001}" {
+      Name "Resupply ammo"
+     }
+     Duration 2
+    }
+    F44_LoadBoxOnVehicleAction "{6F44A7C2E1B32002}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B42002}" {
+      Name "Load box on vehicle"
+     }
+     Duration 2
+    }
+   }
+  }
+  Hierarchy "{6F44A7C2E1B38001}" {
+  }
+  RplComponent "{5476B36C54387F41}" {
+   Enabled 1
+  }
+ }
+}

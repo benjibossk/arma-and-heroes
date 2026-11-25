@@ -1,0 +1,42 @@
+GenericEntity : "{F0404B3895D3F80E}Prefabs/Props/Military/AmmoBoxes/US/EquipmentBoxWooden_Medical_01_US.et" {
+ ID "6F44A7C2E1B39000"
+ components {
+  ActionsManagerComponent "{5476B36C403D4CC0}" {
+   Enabled 1
+   ActionContexts {
+    UserActionContext "{5476B36C47B0461A}" {
+     ContextName "default"
+     Position PointInfo "{5476B36C45ADDA89}" {
+      Offset 0 0.45 0
+     }
+     Radius 1.6
+    }
+   }
+   additionalActions {
+    F44_HealAction "{6F44A7C2E1B33001}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B43001}" {
+      Name "Treat wounds"
+     }
+     Duration 3
+    }
+    F44_LoadBoxOnVehicleAction "{6F44A7C2E1B33002}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B43002}" {
+      Name "Load box on vehicle"
+     }
+     Duration 2
+    }
+   }
+  }
+  Hierarchy "{6F44A7C2E1B38001}" {
+  }
+  RplComponent "{5476B36C54387F41}" {
+   Enabled 1
+  }
+ }
+}

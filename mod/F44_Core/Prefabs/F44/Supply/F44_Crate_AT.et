@@ -1,0 +1,42 @@
+GenericEntity : "{7389C3874BF54AC2}Prefabs/Props/Military/AmmoBoxes/US/EquipmentBoxWooden_Launcher_01_US.et" {
+ ID "6F44A7C2E1B39000"
+ components {
+  ActionsManagerComponent "{5476B36C403D4CC0}" {
+   Enabled 1
+   ActionContexts {
+    UserActionContext "{5476B36C47B0461A}" {
+     ContextName "default"
+     Position PointInfo "{5476B36C45ADDA89}" {
+      Offset 0 0.45 0
+     }
+     Radius 1.6
+    }
+   }
+   additionalActions {
+    F44_TakeLauncherAction "{6F44A7C2E1B31001}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B41001}" {
+      Name "Take launcher"
+     }
+     Duration 1
+    }
+    F44_TakeATGrenadeAction "{6F44A7C2E1B31002}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6F44A7C2E1B41002}" {
+      Name "Take AT grenade"
+     }
+     Duration 1
+    }
+   }
+  }
+  Hierarchy "{6F44A7C2E1B38001}" {
+  }
+  RplComponent "{5476B36C54387F41}" {
+   Enabled 1
+  }
+ }
+}

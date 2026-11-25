@@ -51,6 +51,7 @@ Full JSON schemas: `PLAN.md` §3–§4.
 Built on top of community WW2 content — **we do not redistribute any of their assets**, only depend on them:
 
 - **Finest Hour** (US / GER uniforms, gear, units, vehicles) by SalamiBoiDev and contributors
+- WW2_Bicycle (62B4A8E40D31F94B, Modest23, APL) + Modest VehicleCore (6A7D4E7B69969355)
 - Chungus Core / Bolt Guns, CIE Tracked Core / Thermal, WW2 Tank Core, M4A2 Sherman (Cole_reforge), Northcom German Voice Pack
 
 Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods.json).
@@ -87,7 +88,11 @@ Done:
 - [x] Orchestrator as a long-lived service (lock, restart, log rotation, Task Scheduler)
 - [x] F44_Core published PUBLIC on the Workshop (`EAD65CE1E596E39C`); the WW2 server and orchestrator now run in Workshop mode (`-config`, mod auto-downloaded), `--local-addon` keeps the old CLI mode for unpublished dev builds
 - [x] BattleResult POST retried 3x with backoff, HTTP 409 = already recorded (mod 1.0.1)
+- [x] AI vehicles (mod 1.1.0): road-snapped waypoint chains, cruise speed, transports unload ~150 m out and the driver returns the vehicle to base, armor holds the sector edge, 2-6 road-side vehicle slots per side from the pools, movement telemetry in the log
+- [x] City layouts on Arland (mod 1.1.0, `mod/F44_Core/Configs/F44/layouts.json`): Arleville, Beauregard, military base, airfield; website cityId -> layout (`cityMap`: arland-ville, arland-village, arland-ferme, arland-airfield), or battle `layout` / inline `layoutData`
 - [x] Medical (mod 1.1.0, `docs/MEDICAL.md`): bandages for all, medic kit + full heal + revive, unconscious with 60 s bleed-out, heal/revive counters for ribbons
+- [x] Field supply (mod 1.1.0, `F44_FieldSupply.c`): free AT crates (1 Panzerfaust 60 / Bazooka per player, carried only, + AT grenades, refill every N min) near spawns and sectors, ammo/med boxes (hold to resupply/heal, slow regen) that can be loaded on a vehicle as a mobile logistics point (resupplyGiven/boxHealGiven credits), vehicle storage disabled in battles
+- [x] Free light vehicles (mod 1.1.0, `F44_CivVehicleSpawner.c`): WW2 bicycles (WW2_Bicycle by Modest23) and civilian cars/vans near each side spawn on the roads, capped per side, respawn when destroyed/abandoned; all counts/timers in battle `fieldSupply`
 
 In progress:
 - [ ] End-to-end result posting, proof of AI sector captures
@@ -95,7 +100,7 @@ In progress:
 
 To do:
 - [ ] Deploy web changes (team vehicle keys, live bounds) to the VM
-- [ ] AI vehicle driving is slow/hesitant (M3A1 ~1 m/s, defender tanks hold): tune waypoints, more vehicle slots per side
+- [ ] Tracked / half-track mod vehicles (M3A1, SdKfz 251, Panzer IV) still drive poorly under AI (wheeled jeeps reach 5-6 m/s); a stuck fallback unloads / holds in place after 3 re-routes
 - [ ] Missing items: Thompson, M3 Grease, G43, FJ outfit (no prefab installed)
 - [ ] HUD verified by compile + replicated state only: check it in a client session
 - [ ] QR code drawn in-game

@@ -174,6 +174,9 @@ class F44_BattleConfig
 	string m_sBattleId;
 	int m_iWarId;
 	string m_sCityId;
+	string m_sLayoutId;	// optional explicit layout id (Configs/F44/layouts.json)
+	ref F44_CityLayout m_InlineLayout;	// optional "layoutData" object sent by the site
+	ref F44_FieldSupplyConfig m_FieldSupply;	// optional "fieldSupply" object (F44_FieldSupply.c)
 	string m_sMode = "ASSAULT";
 	string m_sScenario;
 	int m_iTimeLimitMin = 45;
@@ -196,6 +199,17 @@ class F44_BattleConfig
 		root.ReadValue("attacker", m_sAttacker);
 		root.ReadValue("defender", m_sDefender);
 		root.ReadValue("aiLimit", m_iAILimit);
+		root.ReadValue("layout", m_sLayoutId);
+		m_FieldSupply = F44_FieldSupplyConfig.Read(root);
+		if (root.StartObject("layoutData"))
+		{
+			m_InlineLayout = new F44_CityLayout();
+			m_InlineLayout.m_sId = "inline";
+			m_InlineLayout.FromJson(root);
+			root.EndObject();
+			if (m_InlineLayout.m_aSectors.IsEmpty())
+				m_InlineLayout = null;
+		}
 
 		m_Attacker = new F44_Side();
 		m_Defender = new F44_Side();

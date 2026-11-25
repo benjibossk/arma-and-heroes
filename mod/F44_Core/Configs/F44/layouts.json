@@ -1,0 +1,61 @@
+{
+  "_doc": "City battle layouts on Arland (coords = Arland world X/Z, from the map descriptors / buildings of worlds/Arland). cityMap: website cityId -> layout id. Sectors in ASSAULT order (attacker takes them first to last). Vehicle anchors are snapped to the nearest road and get several slots lined up along it.",
+  "cityMap": {
+    "arland-ville": "arleville",
+    "arland-village": "beauregard",
+    "arland-ferme": "military-base",
+    "arland-airfield": "airfield"
+  },
+  "layouts": {
+    "arleville": {
+      "name": "Arleville",
+      "sectors": [
+        {"name": "A Highfield crossroads", "x": 2614, "z": 1949, "radius": 40},
+        {"name": "B Arleville pub", "x": 2750, "z": 1640, "radius": 40},
+        {"name": "C Farmhouse", "x": 2869, "z": 1702, "radius": 35},
+        {"name": "D Chapel", "x": 3075, "z": 1583, "radius": 35}
+      ],
+      "attackerSpawns": [{"x": 2300, "z": 1760}, {"x": 2320, "z": 1800}],
+      "defenderSpawns": [{"x": 3010, "z": 1800}, {"x": 2990, "z": 1830}],
+      "attackerVehicles": [{"x": 2255, "z": 1817}],
+      "defenderVehicles": [{"x": 2999, "z": 1808}]
+    },
+    "beauregard": {
+      "name": "Beauregard",
+      "sectors": [
+        {"name": "A West houses", "x": 3073, "z": 2742, "radius": 35},
+        {"name": "B Drugstore", "x": 3144, "z": 2784, "radius": 35},
+        {"name": "C Fuel station", "x": 3083, "z": 2882, "radius": 35},
+        {"name": "D Harbour warehouse", "x": 3237, "z": 2903, "radius": 40}
+      ],
+      "attackerSpawns": [{"x": 2870, "z": 2740}, {"x": 2880, "z": 2710}],
+      "defenderSpawns": [{"x": 3300, "z": 2930}],
+      "attackerVehicles": [{"x": 2906, "z": 2746}],
+      "defenderVehicles": [{"x": 3129, "z": 2983}]
+    },
+    "military-base": {
+      "name": "Arland military base",
+      "sectors": [
+        {"name": "A Water station", "x": 1446, "z": 2257, "radius": 40},
+        {"name": "B Medical barracks", "x": 1382, "z": 2434, "radius": 40},
+        {"name": "C Bunkers", "x": 1284, "z": 2418, "radius": 40}
+      ],
+      "attackerSpawns": [{"x": 1420, "z": 1900}],
+      "defenderSpawns": [{"x": 1440, "z": 2640}],
+      "attackerVehicles": [{"x": 1421, "z": 1865}],
+      "defenderVehicles": [{"x": 1450, "z": 2650}]
+    },
+    "airfield": {
+      "name": "Arland airfield",
+      "sectors": [
+        {"name": "A Workshop", "x": 1450, "z": 2664, "radius": 40},
+        {"name": "B Control tower", "x": 1365, "z": 2964, "radius": 40},
+        {"name": "C Hangars", "x": 1082, "z": 2867, "radius": 45}
+      ],
+      "attackerSpawns": [{"x": 1440, "z": 2400}],
+      "defenderSpawns": [{"x": 1030, "z": 2990}],
+      "attackerVehicles": [{"x": 1420, "z": 2420}],
+      "defenderVehicles": [{"x": 1100, "z": 2950}]
+    }
+  }
+}
