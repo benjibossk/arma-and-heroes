@@ -14,16 +14,23 @@ class F44_AIGroupInfo
 	string m_sTeamId;
 	int m_iTargetSector = -1;
 	AIWaypoint m_Waypoint;
+	// vehicle use: transports carry the group to the target sector then unload, tanks keep their crew
+	F44_TrackedVehicle m_Vehicle;
+	bool m_bTank;
+	bool m_bDismounted;
 }
 
 //------------------------------------------------------------------------------------------------
 class F44_AIDirector
 {
 	static const ResourceName WP_ATTACK = "{B3E7B8DC2BAB8ACC}Prefabs/AI/Waypoints/AIWaypoint_SearchAndDestroy.et";
+	static const ResourceName WP_MOVE = "{750A8D1695BD6998}Prefabs/AI/Waypoints/AIWaypoint_Move.et";
 	static const ResourceName WP_DEFEND = "{93291E72AC23930F}Prefabs/AI/Waypoints/AIWaypoint_Defend.et";
 	static const int GROUP_SIZE = 4;
 
 	protected F44_GameModeComponent m_GameMode;
+	protected F44_EBattleMode m_eMode;
+	protected int m_iPlayersAtt, m_iPlayersDef;
 	protected ref array<ref F44_AIGroupInfo> m_aGroups = {};
 	// living bot -> (side, teamId)
 	protected ref map<IEntity, int> m_mBotSide = new map<IEntity, int>();
@@ -157,12 +164,21 @@ class F44_AIDirector
 		globalAlive = CountAlive(-1);
 		TrySpawnSide(cfg, cfg.m_Defender, F44_ESectorOwner.DEFENDER, playersDef, ticketsDef, globalAlive);
 
+		m_eMode = cfg.GetMode();
+		m_iPlayersAtt = playersAtt;
+		m_iPlayersDef = playersDef;
+		foreach (F44_AIGroupInfo vg : m_aGroups)
+			CheckDismount(vg);
+
 		m_fRetargetAccu += dt;
 		if (m_fRetargetAccu >= 30)
 		{
 			m_fRetargetAccu = 0;
 			foreach (F44_AIGroupInfo gi : m_aGroups)
+			{
 				Retarget(gi, cfg.GetMode(), owners, true);
+				LogVehicle(gi);
+			}
 		}
 	}
 
@@ -331,6 +347,7 @@ class F44_AIDirector
 		gi.m_sTeamId = team.m_sTeamId;
 		m_aGroups.Insert(gi);
 		Retarget(gi, cfg.GetMode(), m_GameMode.GetSectorOwners(), false);
+		TryAssignVehicle(gi, team, pos);
 		MapAddI(m_mSkillSum, sideId, SKILLS.Find(GetSkill(sideId)));
 		MapAddI(m_mSkillN, sideId, 1);
 		PrintFormat("[F44] AI: %1 group of %2 spawned (team %3 \"%4\", skill %5)", side.m_sSideKey, spawned, team.m_sTeamId, team.m_sDisplayName, GetSkill(sideId));
@@ -427,8 +444,18 @@ class F44_AIDirector
 			|| (gi.m_iSide == F44_ESectorOwner.ATTACKER && owners[target] == F44_ESectorOwner.ATTACKER);
 		if (ownSector)
 			wpPrefab = WP_DEFEND;
+		// mounted groups (transport not yet unloaded, or tank crew) get a plain move order: drive there
+		bool mounted = gi.m_Vehicle && gi.m_Vehicle.m_Entity && !gi.m_bDismounted;
+		if (mounted)
+			wpPrefab = WP_MOVE;
 
 		Resource res = Resource.Load(wpPrefab);
+		if ((!res || !res.IsValid()) && mounted)
+		{
+			Print("[F44] AI: move waypoint prefab missing, using search and destroy", LogLevel.WARNING);
+			wpPrefab = WP_ATTACK;
+			res = Resource.Load(wpPrefab);
+		}
 		if (!res || !res.IsValid())
 			return;
 		EntitySpawnParams params = new EntitySpawnParams();
@@ -449,6 +476,8 @@ class F44_AIDirector
 		string wpKind = "attack";
 		if (ownSector)
 			wpKind = "defend";
+		if (wpPrefab == WP_MOVE)
+			wpKind = "drive to";
 		PrintFormat("[F44] AI: side %1 group (team %2) -> %3 sector %4", gi.m_iSide, gi.m_sTeamId, wpKind, sector.m_sSectorName);
 		gi.m_iTargetSector = target;
 	}
@@ -500,6 +529,158 @@ class F44_AIDirector
 			}
 		}
 		return best;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Vehicles: a new group takes a free pool vehicle of its side parked near its spawn
+	//! (empty, unclaimed, parked for 30 s so players get first pick). Armor teams crew tanks, the others ride transports.
+	protected void TryAssignVehicle(F44_AIGroupInfo gi, F44_Team team, vector pos)
+	{
+		bool wantTank = team.m_sType == "ARM";
+		if (gi.m_Group.GetAgentsCount() < 2)
+			return;	// a lone bot does not take a vehicle
+		float now = GetGame().GetWorld().GetWorldTime() * 0.001;
+		int sidePlayers = m_iPlayersDef;
+		if (gi.m_iSide == F44_ESectorOwner.ATTACKER)
+			sidePlayers = m_iPlayersAtt;
+		F44_Catalog cat = F44_Catalog.Get();
+		foreach (F44_TrackedVehicle tv : m_GameMode.GetTrackedVehicles())
+		{
+			if (!tv.m_Entity || tv.m_AIGroup || tv.m_iSide != gi.m_iSide)
+				continue;
+			// players of the side get a 30 s first pick; bots-only sides take vehicles at once
+			if (sidePlayers > 0 && now - tv.m_fSpawnTime < 30)
+				continue;
+			F44_CatalogEntry e = cat.GetEntry(tv.m_sKey);
+			if (!e || (wantTank && !e.IsTank()) || (!wantTank && !e.IsTransport()))
+				continue;
+			if (vector.Distance(tv.m_Entity.GetOrigin(), pos) > 250 || !IsVehicleEmpty(tv.m_Entity))
+				continue;
+			tv.m_AIGroup = gi.m_Group;
+			gi.m_Vehicle = tv;
+			gi.m_bTank = e.IsTank();
+			// let the characters finish their init before moving them in
+			GetGame().GetCallqueue().CallLater(Board, 2000, false, gi);
+			return;
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool IsVehicleEmpty(IEntity veh)
+	{
+		BaseCompartmentManagerComponent mgr = BaseCompartmentManagerComponent.Cast(veh.FindComponent(BaseCompartmentManagerComponent));
+		if (!mgr)
+			return false;
+		array<BaseCompartmentSlot> slots = {};
+		mgr.GetCompartments(slots);
+		foreach (BaseCompartmentSlot s : slots)
+		{
+			if (s.GetOccupant())
+				return false;
+		}
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static array<IEntity> GroupMembers(SCR_AIGroup g)
+	{
+		array<IEntity> res = {};
+		array<AIAgent> agents = {};
+		g.GetAgents(agents);
+		foreach (AIAgent a : agents)
+		{
+			if (a && a.GetControlledEntity())
+				res.Insert(a.GetControlledEntity());
+		}
+		return res;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void Board(F44_AIGroupInfo gi)
+	{
+		if (!gi || !gi.m_Group || !gi.m_Vehicle || !gi.m_Vehicle.m_Entity)
+			return;
+		IEntity veh = gi.m_Vehicle.m_Entity;
+		array<IEntity> members = GroupMembers(gi.m_Group);
+		int seated;
+		foreach (int i, IEntity ch : members)
+		{
+			SCR_CompartmentAccessComponent ca = SCR_CompartmentAccessComponent.Cast(ch.FindComponent(SCR_CompartmentAccessComponent));
+			if (!ca)
+				continue;
+			ECompartmentType seat = ECompartmentType.CARGO;
+			if (i == 0)
+				seat = ECompartmentType.PILOT;
+			else if (gi.m_bTank || i == 1)
+				seat = ECompartmentType.TURRET;
+			bool ok = ca.MoveInVehicle(veh, seat, true);
+			if (!ok)
+				ok = ca.MoveInVehicleAny(veh);
+			if (ok)
+				seated++;
+		}
+		SCR_AIGroupUtilityComponent util = SCR_AIGroupUtilityComponent.Cast(gi.m_Group.FindComponent(SCR_AIGroupUtilityComponent));
+		SCR_AIVehicleUsageComponent usage = SCR_AIVehicleUsageComponent.FindOnNearestParent(veh, veh);
+		if (util && usage)
+			util.AddUsableVehicle(usage);
+		string kind = "transport";
+		if (gi.m_bTank)
+			kind = "crew";
+		PrintFormat("[F44] AI: side %1 group (team %2) boards %3 as %4 (%5/%6 seated)", gi.m_iSide, gi.m_sTeamId, gi.m_Vehicle.m_sKey, kind, seated, members.Count());
+		if (seated == 0)
+		{
+			gi.m_Vehicle.m_AIGroup = null;
+			gi.m_Vehicle = null;
+			return;
+		}
+		// re-issue the sector waypoint now that the group is mounted (the planner then drives)
+		if (gi.m_Waypoint)
+		{
+			gi.m_Group.RemoveWaypoint(gi.m_Waypoint);
+			SCR_EntityHelper.DeleteEntityAndChildren(gi.m_Waypoint);
+			gi.m_Waypoint = null;
+		}
+		Retarget(gi, m_eMode, m_GameMode.GetSectorOwners(), false);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void LogVehicle(F44_AIGroupInfo gi)
+	{
+		if (!gi.m_Vehicle || !gi.m_Vehicle.m_Entity || gi.m_bDismounted || gi.m_iTargetSector < 0)
+			return;
+		F44_SectorComponent sector = F44_SectorManager.GetSector(gi.m_iTargetSector);
+		if (sector)
+			PrintFormat("[F44] AI: %1 (team %2) %3 m from sector %4", gi.m_Vehicle.m_sKey, gi.m_sTeamId, Math.Round(vector.DistanceXZ(gi.m_Vehicle.m_Entity.GetOrigin(), sector.GetOwner().GetOrigin())), sector.m_sSectorName);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Transports unload near the target sector (tanks keep fighting mounted)
+	protected void CheckDismount(F44_AIGroupInfo gi)
+	{
+		if (!gi.m_Vehicle || gi.m_bTank || gi.m_bDismounted || !gi.m_Group || gi.m_iTargetSector < 0)
+			return;
+		IEntity veh = gi.m_Vehicle.m_Entity;
+		F44_SectorComponent sector = F44_SectorManager.GetSector(gi.m_iTargetSector);
+		if (!veh || !sector)
+			return;
+		float dist = vector.DistanceXZ(veh.GetOrigin(), sector.GetOwner().GetOrigin());
+		if (dist > sector.m_fRadius + 120)
+			return;
+		gi.m_bDismounted = true;
+		int nOut;
+		foreach (IEntity ch : GroupMembers(gi.m_Group))
+		{
+			CompartmentAccessComponent ca = CompartmentAccessComponent.Cast(ch.FindComponent(CompartmentAccessComponent));
+			if (ca && ca.IsInCompartment() && ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false))
+				nOut++;
+		}
+		SCR_AIGroupUtilityComponent util = SCR_AIGroupUtilityComponent.Cast(gi.m_Group.FindComponent(SCR_AIGroupUtilityComponent));
+		SCR_AIVehicleUsageComponent usage = SCR_AIVehicleUsageComponent.FindOnNearestParent(veh, veh);
+		if (util && usage)
+			util.RemoveUsableVehicle(usage);
+		gi.m_Vehicle.m_AIGroup = null;	// left near the front: players may take it
+		Retarget(gi, m_eMode, m_GameMode.GetSectorOwners(), false);	// fight on foot
+		PrintFormat("[F44] AI: side %1 group (team %2) unloads from %3 %4 m from sector %5 (%6 out)", gi.m_iSide, gi.m_sTeamId, gi.m_Vehicle.m_sKey, Math.Round(dist), sector.m_sSectorName, nOut);
 	}
 
 	//------------------------------------------------------------------------------------------------

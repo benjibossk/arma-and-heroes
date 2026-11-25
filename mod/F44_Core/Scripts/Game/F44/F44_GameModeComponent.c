@@ -38,6 +38,8 @@ class F44_TrackedVehicle
 	string m_sTeamId;
 	string m_sKey;
 	int m_iSide;
+	float m_fSpawnTime;	// world time (s)
+	SCR_AIGroup m_AIGroup;	// AI group that took it (null = free for players / AI)
 }
 
 //------------------------------------------------------------------------------------------------
@@ -82,6 +84,23 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected ref array<int> m_aSectorProgress = {};
 	[RplProp()]
 	protected string m_sWinner;
+	// HUD / scoreboard (Style B)
+	[RplProp()]
+	protected string m_sAttName;	// roleplay unit names of the side (web displayName)
+	[RplProp()]
+	protected string m_sDefName;
+	[RplProp()]
+	protected int m_iTicketsAttMax;
+	[RplProp()]
+	protected int m_iTicketsDefMax;
+	[RplProp()]
+	protected int m_iAIAtt;
+	[RplProp()]
+	protected int m_iAIDef;
+	[RplProp()]
+	protected int m_iPlayersAtt;
+	[RplProp()]
+	protected int m_iPlayersDef;
 
 	// ---- server state ----
 	protected ref F44_BattleLoader m_Loader;
@@ -228,11 +247,35 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		m_iTicketsAtt = cfg.m_Attacker.GetTotalManpower();
 		m_iTicketsDef = cfg.m_Defender.GetTotalManpower();
 		m_iTimeLeft = cfg.m_iTimeLimitMin * 60;
+		m_iTicketsAttMax = Math.Max(1, m_iTicketsAtt);
+		m_iTicketsDefMax = Math.Max(1, m_iTicketsDef);
+		m_sAttName = SideDisplayName(cfg.m_Attacker);
+		m_sDefName = SideDisplayName(cfg.m_Defender);
+		PrintFormat("[F44] HUD: %1 \"%2\" vs %3 \"%4\"", m_sAttacker, m_sAttName, m_sDefender, m_sDefName);
 
 		foreach (F44_Team t : cfg.m_Attacker.m_aTeams)
 			InitTeam(t, m_aPoolAtt, cfg.m_sAttacker);
 		foreach (F44_Team t : cfg.m_Defender.m_aTeams)
 			InitTeam(t, m_aPoolDef, cfg.m_sDefender);
+
+		// test only (orchestrator "testVehicles"): extra pool keys, side = key prefix (US_/GER_)
+		if (hdr && !hdr.m_sTestVehicles.IsEmpty())
+		{
+			array<string> extra = {};
+			hdr.m_sTestVehicles.Split(",", extra, true);
+			foreach (string xk : extra)
+			{
+				F44_PoolEntry xe = new F44_PoolEntry();
+				xe.m_sTeamId = "test";
+				xe.m_sKey = xk.Trim();
+				xe.m_iRemaining = 1;
+				if (xe.m_sKey.StartsWith(cfg.m_sAttacker + "_"))
+					m_aPoolAtt.InsertAt(xe, 0);
+				else if (xe.m_sKey.StartsWith(cfg.m_sDefender + "_"))
+					m_aPoolDef.InsertAt(xe, 0);
+				Print("[F44] Test vehicle added to pool: " + xe.m_sKey);
+			}
+		}
 
 		// sectors: ASSAULT = defender holds everything, SKIRMISH = neutral
 		m_aSectorOwners.Clear();
@@ -264,6 +307,75 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		GetGame().GetCallqueue().CallLater(ServerTick, m_fTickInterval * 1000, true);
 		PrintFormat("[F44] Battle %1 started: %2 (%3) vs %4 (%5), %6 sectors, %7 min",
 			cfg.m_sBattleId, m_sAttacker, m_iTicketsAtt, m_sDefender, m_iTicketsDef, F44_SectorManager.Count(), cfg.m_iTimeLimitMin);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Real terrain extent for the web live map: world bound box + map entity size (what the map texture covers)
+	protected string m_sWorldJson;
+	protected GenericTerrainEntity m_Terrain;
+	protected float ProbeTerrainEdge(bool alongX)
+	{
+		float last = -1;
+		for (float d = 8; d < 20480; d += 8)
+		{
+			vector p = Vector(d, 0, 64);
+			if (!alongX)
+				p = Vector(64, 0, d);
+			vector tc = m_Terrain.WorldToTerrCoord(p);
+			float y;
+			if (!m_Terrain.TryGetHeightTC(tc[0], tc[2], y))
+				break;
+			last = d;
+		}
+		return last;
+	}
+	protected string WorldJson()
+	{
+		if (!m_sWorldJson.IsEmpty())
+			return m_sWorldJson;
+		vector mins, maxs;
+		GetGame().GetWorld().GetBoundBox(mins, maxs);
+		float mapX, mapZ;
+		SCR_MapEntity me = SCR_MapEntity.GetMapInstance();
+		if (me)
+		{
+			mapX = me.GetMapSizeX();
+			mapZ = me.GetMapSizeY();
+		}
+		// terrain entity extent (the world bound box also counts objects placed off the terrain)
+		GenericWorldEntity we = GetGame().GetWorldEntity();
+		if (we)
+			m_Terrain = we.GetTerrain(1000, 1000);
+		if (m_Terrain)
+		{
+			// terrain extent: probe where the terrain has a height sample (8 m steps along both axes)
+			float tMaxX = ProbeTerrainEdge(true);
+			float tMaxZ = ProbeTerrainEdge(false);
+			if (tMaxX > 0 && tMaxZ > 0)
+			{
+				mins = Vector(0, 0, 0);
+				maxs = Vector(tMaxX, 0, tMaxZ);
+			}
+		}
+		else
+			Print("[F44] Terrain entity not found, using the world bound box", LogLevel.WARNING);
+		string wf = GetGame().GetWorldFile();
+		m_sWorldJson = string.Format("\"world\":{\"file\":\"%1\",\"minX\":%2,\"minZ\":%3,\"maxX\":%4,\"maxZ\":%5,\"mapSizeX\":%6,\"mapSizeZ\":%7},",
+			wf, Math.Round(mins[0]), Math.Round(mins[2]), Math.Round(maxs[0]), Math.Round(maxs[2]), Math.Round(mapX), Math.Round(mapZ));
+		Print("[F44] Terrain bounds: " + m_sWorldJson);
+		return m_sWorldJson;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! "Easy Company, 2nd Bn, 506th PIR +1" (first team name, + number of other teams)
+	protected static string SideDisplayName(F44_Side side)
+	{
+		if (!side || side.m_aTeams.IsEmpty())
+			return "Garrison";
+		string n = side.m_aTeams[0].m_sDisplayName;
+		if (side.m_aTeams.Count() > 1)
+			n += " +" + (side.m_aTeams.Count() - 1).ToString();
+		return n;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -568,6 +680,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		string json = string.Format("{\"elapsed\":%1,\"timeLeft\":%2,\"tickets\":{\"%3\":%4,\"%5\":%6},",
 			Math.Round(m_fElapsed), m_iTimeLeft, m_sAttacker, m_iTicketsAtt, m_sDefender, m_iTicketsDef);
 		json += string.Format("\"aiSkill\":{\"%1\":\"%2\",\"%3\":\"%4\"},", m_sAttacker, m_AI.GetSkill(F44_ESectorOwner.ATTACKER), m_sDefender, m_AI.GetSkill(F44_ESectorOwner.DEFENDER));
+		json += WorldJson();
 		json += "\"sectors\":[";
 		bool first = true;
 		for (int i = 0; i < m_aSectorOwners.Count(); i++)
@@ -676,6 +789,10 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			GetStats(pid).m_iCaptures++;
 
 		UpdateVehicles();
+		m_iAIAtt = botsAtt.Count();
+		m_iAIDef = botsDef.Count();
+		m_iPlayersAtt = playersAtt;
+		m_iPlayersDef = playersDef;
 		m_fStatusAccu += m_fTickInterval;
 		if (m_fStatusAccu >= 30)
 		{
@@ -754,6 +871,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				tv2.m_sKey = e.m_sKey;
 				tv2.m_sTeamId = e.m_sTeamId;
 				tv2.m_iSide = sp.m_eSide;
+				tv2.m_fSpawnTime = now;
 				m_aVehicles.Insert(tv2);
 				PrintFormat("[F44] Spawned %1 for %2 (%3 left)", e.m_sKey, e.m_sTeamId, e.m_iRemaining);
 				break;
@@ -964,5 +1082,14 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	string GetDefender() { return m_sDefender; }
 	string GetWinner() { return m_sWinner; }
 	array<int> GetSectorOwners() { return m_aSectorOwners; }
+	array<ref F44_TrackedVehicle> GetTrackedVehicles() { return m_aVehicles; }
 	array<int> GetSectorProgress() { return m_aSectorProgress; }
+	string GetAttackerName() { return m_sAttName; }
+	string GetDefenderName() { return m_sDefName; }
+	int GetTicketsAttackerMax() { return m_iTicketsAttMax; }
+	int GetTicketsDefenderMax() { return m_iTicketsDefMax; }
+	int GetAIAttacker() { return m_iAIAtt; }
+	int GetAIDefender() { return m_iAIDef; }
+	int GetPlayersAttacker() { return m_iPlayersAtt; }
+	int GetPlayersDefender() { return m_iPlayersDef; }
 }
