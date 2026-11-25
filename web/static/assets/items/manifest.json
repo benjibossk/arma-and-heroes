@@ -1,13 +1,15 @@
 {
  "US_M1_GARAND": {
-  "img": "_sil_rifle.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_M1_GARAND.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et"
  },
  "US_M1_CARBINE": {
-  "img": "_sil_rifle.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_M1_CARBINE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et"
  },
  "US_THOMPSON": {
   "img": "_sil_smg.svg",
@@ -20,74 +22,88 @@
   "source": "Arma & Heroes (original)"
  },
  "US_BAR": {
-  "img": "_sil_mg.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_BAR.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et"
  },
  "US_M1903A4": {
-  "img": "_sil_scoped.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_M1903A4.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{4191E250FDEC2FBF}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A4.et"
  },
  "US_M1911": {
-  "img": "_sil_pistol.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_M1911.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
  },
  "US_BAZOOKA": {
-  "img": "_sil_launcher.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_BAZOOKA.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et"
  },
  "US_MK2_GRENADE": {
-  "img": "_sil_grenade.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_MK2_GRENADE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{9404B8186F1501E7}Prefabs/Weapons/Grenades/Mk2/Grenade_Mk2_Olive.et"
  },
  "US_SMOKE": {
-  "img": "_sil_smoke.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_SMOKE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{317E432F7873B898}Prefabs/Weapons/Grenades/M16/Smoke_M16_White.et"
  },
  "US_MEDKIT": {
-  "img": "_sil_medkit.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_MEDKIT.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et"
  },
  "US_TNT": {
-  "img": "_sil_explosive.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_TNT.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et"
  },
  "US_BINOCULARS": {
-  "img": "_sil_binoculars.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_BINOCULARS.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{0B8B76B888ED5187}Prefabs/Items/Equipment/Binoculars/Binoculars_M9/Binoculars_M9.et"
  },
  "US_OUTFIT_M41": {
-  "img": "_sil_uniform.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_OUTFIT_M41.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et"
  },
  "US_OUTFIT_PARA": {
-  "img": "_sil_uniform.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_OUTFIT_PARA.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et"
  },
  "US_OUTFIT_CREW": {
-  "img": "_sil_uniform.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_OUTFIT_CREW.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et"
  },
  "US_OUTFIT_NETTING": {
-  "img": "_sil_helmet.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "US_OUTFIT_NETTING.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et"
  },
  "GER_KAR98K": {
-  "img": "_sil_rifle.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_KAR98K.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{3B460BBAF682C13D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et"
  },
  "GER_G43": {
   "img": "_sil_rifle.svg",
@@ -95,80 +111,621 @@
   "source": "Arma & Heroes (original)"
  },
  "GER_MP40": {
-  "img": "_sil_smg.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_MP40.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{6D18C148A668A0AB}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP40.et"
  },
  "GER_MG42": {
-  "img": "_sil_mg.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_MG42.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{885A147293847F5C}Prefabs/Weapons/Machineguns/MG42/MG_MG42.et"
  },
  "GER_KAR98K_SCOPE": {
-  "img": "_sil_scoped.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_KAR98K_SCOPE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{EB136040466EF11D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Sniper.et"
  },
  "GER_P38": {
-  "img": "_sil_pistol.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_P38.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{97C3AA4555300B75}Prefabs/Weapons/Handguns/P38/Handgun_P38.et"
  },
  "GER_PANZERFAUST": {
-  "img": "_sil_pfaust.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_PANZERFAUST.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{15F0473A1454A801}Prefabs/Weapons/Launchers/Panzerfaust/Launcher_Panzerfaust60.et"
  },
  "GER_PANZERSCHRECK": {
-  "img": "_sil_launcher.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_PANZERSCHRECK.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{28B66C43B847AE14}Prefabs/Weapons/Launchers/RPzB_54/Launcher_RPzB54_Green.et"
  },
  "GER_M24_GRENADE": {
-  "img": "_sil_stick.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_M24_GRENADE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{C13716F9532136B8}Prefabs/Weapons/Grenades/M24_Stielhandgranate/Grenade_M24.et"
  },
  "GER_SMOKE": {
-  "img": "_sil_smoke.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_SMOKE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{25FEB029453493DA}Prefabs/Weapons/Grenades/M39_Nebelhandgranate/Smoke_M39.et"
  },
  "GER_MEDKIT": {
-  "img": "_sil_medkit.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_MEDKIT.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{4DC939F9FA9D5349}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_HEER_WW2.et"
  },
  "GER_MINES": {
-  "img": "_sil_mine.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_MINES.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{9049080FDB51254F}Prefabs/Weapons/Explosives/Mine_Tellermine42/Mine_Tellermine42AT.et"
  },
  "GER_BINOCULARS": {
-  "img": "_sil_binoculars.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_BINOCULARS.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{30D6485A99328588}Prefabs/Items/Equipment/Binoculars/Binoculars_Dienatglas_6x30/Binoculars_Dienatglas_6x30.et"
  },
  "GER_OUTFIT_M40": {
   "img": "GER_OUTFIT_M40.webp",
-  "kind": "photo",
-  "source": "FinestHour-GERUnits",
-  "path": "UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Infantry/Character_HEER_Rifleman_Kar98k_Infantry.edds"
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et"
  },
  "GER_OUTFIT_FJ": {
-  "img": "_sil_uniform.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_OUTFIT_FJ.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{C56B9D549F8B495A}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Painted.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et,{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
  },
  "GER_OUTFIT_PANZER": {
   "img": "GER_OUTFIT_PANZER.webp",
-  "kind": "photo",
-  "source": "FinestHour-GERUnits",
-  "path": "UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Panzergrenadiers/Character_HEER_PanzerCrew_Panzergrenadiers.edds"
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et"
  },
  "GER_OUTFIT_SMOCK": {
-  "img": "_sil_uniform.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_OUTFIT_SMOCK.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{B68B08E8EC896865}Prefabs/Characters/Uniforms/Smock_M38/Jacket_HEER_M38_Splinter.et"
+ },
+ "GER_TIGER1": {
+  "img": "GER_TIGER1.webp",
+  "kind": "render",
+  "source": "Tiger_H1",
+  "path": "{67750217922403FC}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_Grey.et"
+ },
+ "GER_TIGER1_DUNKELGELB": {
+  "img": "GER_TIGER1_DUNKELGELB.webp",
+  "kind": "render",
+  "source": "Tiger_H1",
+  "path": "{E5FD8C6B920C906B}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_DunkelGelb.et"
+ },
+ "GER_TIGER1_KURSK": {
+  "img": "GER_TIGER1_KURSK.webp",
+  "kind": "render",
+  "source": "Tiger_H1",
+  "path": "{FD034D161D354E6B}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_KurskCamo.et"
+ },
+ "GER_TIGER1_BASE": {
+  "img": "GER_TIGER1_BASE.webp",
+  "kind": "render",
+  "source": "Tiger_H1",
+  "path": "{93C317E21908A7FE}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_BASE.et"
+ },
+ "GER_PZ4": {
+  "img": "GER_PZ4.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{E44C69F0A2538279}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_H_Base.et"
+ },
+ "GER_PZ4_G": {
+  "img": "GER_PZ4_G.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{6E1EFC04B7356FE6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_G.et"
+ },
+ "GER_PZ4_F2": {
+  "img": "GER_PZ4_F2.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{3C7E824E65A93FA9}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F2.et"
+ },
+ "GER_PZ4_F": {
+  "img": "GER_PZ4_F.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{70971D2B05042098}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F.et"
+ },
+ "GER_PZ4_D": {
+  "img": "GER_PZ4_D.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{1CC329CBB9C0AFB6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_E.et"
+ },
+ "GER_PZ4_WIRBELWIND": {
+  "img": "GER_PZ4_WIRBELWIND.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{7E7B98C2756C68DD}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_WW.et"
+ },
+ "GER_JAGDPANZER4": {
+  "img": "GER_JAGDPANZER4.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{71F142BC3276CE44}Prefabs/Vehicles/Wheeled/M151A2/V2/Jagdpanzer.et"
+ },
+ "GER_PZ4_CHASSIS": {
+  "img": "GER_PZ4_CHASSIS.webp",
+  "kind": "render",
+  "source": "RMS WW2 PANZER IV",
+  "path": "{00889F6B072E47F5}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Chassis_Base.et"
+ },
+ "GER_STURMTIGER": {
+  "img": "GER_STURMTIGER.webp",
+  "kind": "render",
+  "source": "RMS WW2 Sturmtiger",
+  "path": "{D49FFA19F12CA057}Prefabs/Vehicles/Wheeled/M151A2/Sturmtiger.et"
+ },
+ "GER_SDKFZ251": {
+  "img": "GER_SDKFZ251.webp",
+  "kind": "render",
+  "source": "SDKFZ251",
+  "path": "{561C8A71E69790A1}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_MG.et"
+ },
+ "GER_SDKFZ251_TRANSPORT": {
+  "img": "GER_SDKFZ251_TRANSPORT.webp",
+  "kind": "render",
+  "source": "SDKFZ251",
+  "path": "{D253646DF96D27EA}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport.et"
+ },
+ "GER_SDKFZ251_MG_CAMO": {
+  "img": "GER_SDKFZ251_MG_CAMO.webp",
+  "kind": "render",
+  "source": "SDKFZ251",
+  "path": "{AB976FB2C94E3BF9}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_MG_camo.et"
+ },
+ "GER_SDKFZ251_TRANSPORT_CAMO": {
+  "img": "GER_SDKFZ251_TRANSPORT_CAMO.webp",
+  "kind": "render",
+  "source": "SDKFZ251",
+  "path": "{FB19BB480885C8F8}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport_Camo.et"
+ },
+ "GER_SDKFZ251_BASE": {
+  "img": "GER_SDKFZ251_BASE.webp",
+  "kind": "render",
+  "source": "SDKFZ251",
+  "path": "{4E0A51F1E4013D06}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_BASE.et"
+ },
+ "GER_KFZ": {
+  "img": "GER_KFZ.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et"
+ },
+ "GER_KFZ_MG34": {
+  "img": "GER_KFZ_MG34.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et"
+ },
+ "GER_KFZ_CANVAS": {
+  "img": "GER_KFZ_CANVAS.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{0373FCB583E39633}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_Canvas.et"
+ },
+ "GER_TRUCK": {
+  "img": "GER_TRUCK.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et"
+ },
+ "GER_TRUCK_OPEN": {
+  "img": "GER_TRUCK_OPEN.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et"
+ },
+ "GER_FLAK_TRUCK": {
+  "img": "GER_FLAK_TRUCK.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et"
+ },
+ "GER_FLAKVIERLING_TRUCK": {
+  "img": "GER_FLAKVIERLING_TRUCK.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{EBA339690C35F864}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flakvierling.et"
+ },
+ "GER_TRUCK_COMMAND": {
+  "img": "GER_TRUCK_COMMAND.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{34E9C5F482B11D65}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_command.et"
+ },
+ "GER_TRUCK_REPAIR": {
+  "img": "GER_TRUCK_REPAIR.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{55CD8305C5032C21}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_repair.et"
+ },
+ "GER_TRUCK_ENGINEER": {
+  "img": "GER_TRUCK_ENGINEER.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{FC9C7C7EFCF8C216}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_engineer.et"
+ },
+ "GER_TRUCK_AMMO": {
+  "img": "GER_TRUCK_AMMO.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{6CD8B6D9848D7877}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_ammo.et"
+ },
+ "GER_TRUCK_ARSENAL": {
+  "img": "GER_TRUCK_ARSENAL.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{1DA54D8491C30502}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Arsenal.et"
+ },
+ "GER_TRUCK_TANKER": {
+  "img": "GER_TRUCK_TANKER.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{974E023D12A97DC7}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_tanker.et"
+ },
+ "GER_SDKFZ222": {
+  "img": "GER_SDKFZ222.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et"
+ },
+ "GER_SDKFZ223": {
+  "img": "GER_SDKFZ223.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et"
+ },
+ "GER_PAK40": {
+  "img": "GER_PAK40.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et"
+ },
+ "GER_PAK36": {
+  "img": "GER_PAK36.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et"
+ },
+ "GER_FLAK36": {
+  "img": "GER_FLAK36.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{5A9635F186D9ED7A}Prefabs/Weapons/Artillery/AntiAir/Flak36/AntiAir_Flak36_Grey.et"
+ },
+ "GER_FLAK38": {
+  "img": "GER_FLAK38.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et"
+ },
+ "GER_FLAKVIERLING": {
+  "img": "GER_FLAKVIERLING.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et"
+ },
+ "GER_LEFH18": {
+  "img": "GER_LEFH18.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et"
+ },
+ "GER_LEIG18": {
+  "img": "GER_LEIG18.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles",
+  "path": "{A3397E731682B0A1}Prefabs/Weapons/Artillery/Howitzer/Leig18/Howitzer_Leig18_Grey.et"
+ },
+ "GER_MG34_TRIPOD": {
+  "img": "GER_MG34_TRIPOD.webp",
+  "kind": "render",
+  "source": "RMS Op Ostfront German Arms",
+  "path": "{CF539B000DA7B22D}Prefabs/Weapons/Tripods/Tripod_M122_MG_MG34.et"
+ },
+ "US_M3A1": {
+  "img": "US_M3A1.webp",
+  "kind": "render",
+  "source": "M3A1 HalfTrack",
+  "path": "{80C7FDE83DE6D000}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_MG.et"
+ },
+ "US_M3A1_TRANSPORT": {
+  "img": "US_M3A1_TRANSPORT.webp",
+  "kind": "render",
+  "source": "M3A1 HalfTrack",
+  "path": "{EC62ED156FC6F05C}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_Transport.et"
+ },
+ "US_M3A1_BASE": {
+  "img": "US_M3A1_BASE.webp",
+  "kind": "render",
+  "source": "M3A1 HalfTrack",
+  "path": "{C47A236EC4547CEF}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_BASE.et"
+ },
+ "US_JEEP_WILLYS": {
+  "img": "US_JEEP_WILLYS.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{0CFB9416659192D2}Prefabs/Vehicles/ww2 jeep/Willys Jeep_uncovered.et"
+ },
+ "US_JEEP_WILLYS_COVERED": {
+  "img": "US_JEEP_WILLYS_COVERED.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{CC78138E645F75E7}Prefabs/Vehicles/ww2 jeep/Willys Jeep_covered.et"
+ },
+ "US_JEEP_WILLYS_MG": {
+  "img": "US_JEEP_WILLYS_MG.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{10448D0351BF0979}Prefabs/Vehicles/ww2 jeep/Willys Jeep_MG.et"
+ },
+ "US_JEEP_WILLYS_MEDICAL": {
+  "img": "US_JEEP_WILLYS_MEDICAL.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{2B6F31F0D50AB7CD}Prefabs/Vehicles/ww2 jeep/Willys_Jeep_Medical.et"
+ },
+ "US_JEEP_WILLYS_BASE": {
+  "img": "US_JEEP_WILLYS_BASE.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{99FA6C1DFA682998}Prefabs/Vehicles/ww2 jeep/Willys Jeep_base.et"
+ },
+ "US_WC63_COVERED": {
+  "img": "US_WC63_COVERED.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{884FF5DF74E94D7F}Prefabs/Vehicles/Wheeled/WC63/WC63_Covered.et"
+ },
+ "US_WC63_UNCOVERED": {
+  "img": "US_WC63_UNCOVERED.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{AF7DA63E2177F11E}Prefabs/Vehicles/Wheeled/WC63/WC63_Uncovered.et"
+ },
+ "US_WC63_MG": {
+  "img": "US_WC63_MG.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{B12E900E074349E4}Prefabs/Vehicles/Wheeled/WC63/WC63_covered_mg.et"
+ },
+ "US_WC63_REPAIR": {
+  "img": "US_WC63_REPAIR.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{6FF58947033154D1}Prefabs/Vehicles/Wheeled/WC63/WC63_Repair.et"
+ },
+ "US_WC63_ENGINEER": {
+  "img": "US_WC63_ENGINEER.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{CB6185DC2DA8C597}Prefabs/Vehicles/Wheeled/WC63/WC63_Engineer.et"
+ },
+ "US_WC63_ARSENAL": {
+  "img": "US_WC63_ARSENAL.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles",
+  "path": "{986F891F5DC8CFAB}Prefabs/Vehicles/Wheeled/WC63/WC63_Arsenal.et"
+ },
+ "US_SHERMAN_M4A2": {
+  "img": "US_SHERMAN_M4A2.webp",
+  "kind": "render",
+  "source": "M4A2 Sherman",
+  "path": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et"
+ },
+ "AI_GER_Recruit_Infantry": {
+  "img": "AI_GER_Recruit_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et,{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+ },
+ "AI_GER_Recruit_Recon": {
+  "img": "AI_GER_Recruit_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et,{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et,{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et,{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et,{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+ },
+ "AI_GER_Recruit_Para": {
+  "img": "AI_GER_Recruit_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{D62A72E894FA605B}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_01.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et,{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+ },
+ "AI_GER_Recruit_ArmorCrew": {
+  "img": "AI_GER_Recruit_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{79770150D9286630}Prefabs/Characters/HeadGear/Hat_M40_01/Hat_M40_01_TankCrew.et,{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et,{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et,{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et,{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+ },
+ "AI_GER_Regular_Infantry": {
+  "img": "AI_GER_Regular_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et,{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et,{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et,{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et,{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+ },
+ "AI_GER_Regular_Recon": {
+  "img": "AI_GER_Regular_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{A34221AB5A70F92C}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Feldgrau.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et,{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+ },
+ "AI_GER_Regular_Para": {
+  "img": "AI_GER_Regular_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{C56B9D549F8B495A}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Painted.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et,{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+ },
+ "AI_GER_Regular_ArmorCrew": {
+  "img": "AI_GER_Regular_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{868355C2B87B0AB2}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCrew.et,{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et,{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et,{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et,{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+ },
+ "AI_GER_Veteran_Infantry": {
+  "img": "AI_GER_Veteran_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{19463B1006FA1EF4}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Net.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et,{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+ },
+ "AI_GER_Veteran_Recon": {
+  "img": "AI_GER_Veteran_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{F6A9BD9EA6F00C13}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Splinter.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et,{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+ },
+ "AI_GER_Veteran_Para": {
+  "img": "AI_GER_Veteran_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{0EFFE36965141049}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Green_Cover.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et,{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+ },
+ "AI_GER_Veteran_ArmorCrew": {
+  "img": "AI_GER_Veteran_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{47ECF4DCE5F7DB8F}Prefabs/Characters/HeadGear/Hat_Schirmmutze_01/Hat_Schirmmutze_01_Panzer.et,{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et,{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et,{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et,{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+ },
+ "AI_GER_Elite_Infantry": {
+  "img": "AI_GER_Elite_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et,{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+ },
+ "AI_GER_Elite_Recon": {
+  "img": "AI_GER_Elite_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et,{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et,{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+ },
+ "AI_GER_Elite_Para": {
+  "img": "AI_GER_Elite_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{4E1FC79E3E28A143}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Splinter_Cover.et,{B68B08E8EC896865}Prefabs/Characters/Uniforms/Smock_M38/Jacket_HEER_M38_Splinter.et,{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et,{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et,{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+ },
+ "AI_GER_Elite_ArmorCrew": {
+  "img": "AI_GER_Elite_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{D35C610DE45084FA}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCommander.et,{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et,{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et,{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et,{372D108439DAFA30}Prefabs/Characters/Vests/M1939/Variants/M1939_Officer_SMG.et"
+ },
+ "AI_US_Recruit_Infantry": {
+  "img": "AI_US_Recruit_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et,{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et,{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et,{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et,{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+ },
+ "AI_US_Recruit_Recon": {
+  "img": "AI_US_Recruit_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et,{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et,{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et,{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et,{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+ },
+ "AI_US_Recruit_Para": {
+  "img": "AI_US_Recruit_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et,{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et,{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et,{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et,{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+ },
+ "AI_US_Recruit_ArmorCrew": {
+  "img": "AI_US_Recruit_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et,{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et,{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et"
+ },
+ "AI_US_Regular_Infantry": {
+  "img": "AI_US_Regular_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et,{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et,{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et,{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et,{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+ },
+ "AI_US_Regular_Recon": {
+  "img": "AI_US_Regular_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et,{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+ },
+ "AI_US_Regular_Para": {
+  "img": "AI_US_Regular_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et,{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et,{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et,{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et,{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+ },
+ "AI_US_Regular_ArmorCrew": {
+  "img": "AI_US_Regular_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et,{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et,{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et,{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et,{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+ },
+ "AI_US_Veteran_Infantry": {
+  "img": "AI_US_Veteran_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et,{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et"
+ },
+ "AI_US_Veteran_Recon": {
+  "img": "AI_US_Veteran_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et,{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+ },
+ "AI_US_Veteran_Para": {
+  "img": "AI_US_Veteran_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et,{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et,{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et,{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et,{F92D179AC7D87AF1}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_AutomaticRifleman_Airborne.et"
+ },
+ "AI_US_Veteran_ArmorCrew": {
+  "img": "AI_US_Veteran_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et,{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+ },
+ "AI_US_Elite_Infantry": {
+  "img": "AI_US_Elite_Infantry.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et,{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{DB5ED4EAF58211E7}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_NCO.et"
+ },
+ "AI_US_Elite_Recon": {
+  "img": "AI_US_Elite_Recon.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{0C6685EF6A9A4382}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting_Goggles.et,{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+ },
+ "AI_US_Elite_Para": {
+  "img": "AI_US_Elite_Para.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et,{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et,{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et,{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et,{FDF82EC7ED08EAFF}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_NCO_Airborne.et"
+ },
+ "AI_US_Elite_ArmorCrew": {
+  "img": "AI_US_Elite_ArmorCrew.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{315D6B514A3B01E1}Prefabs/Characters/HeadGear/Hat_ServiceCap_01/Hat_ServiceCap_01_Captain.et,{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et,{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et,{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et,{EC47EB0214B18D75}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Officer_SMG.et"
  }
 }
