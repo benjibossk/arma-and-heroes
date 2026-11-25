@@ -1,0 +1,41 @@
+# Arma & Heroes — site + API.  Lancer : docker compose up --build -d
+services:
+  f44-db:
+    image: mariadb:11
+    container_name: f44-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${F44_DB_ROOT_PASSWORD:-change-me-root}
+      MARIADB_DATABASE: front44
+      MARIADB_USER: f44
+      MARIADB_PASSWORD: ${F44_DB_PASSWORD:-change-me}
+    volumes:
+      - f44_db:/var/lib/mysql
+    networks: [f44-internal]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  f44-app:
+    container_name: f44-app
+    build: .
+    restart: always
+    env_file: .env
+    environment:
+      F44_DB_DSN: "f44:${F44_DB_PASSWORD:-change-me}@tcp(f44-db:3306)/front44?charset=utf8mb4&parseTime=True&loc=UTC"
+    depends_on:
+      f44-db:
+        condition: service_healthy
+    volumes:
+      - ./static:/static:ro      # front en volume : modifs sans rebuild
+    networks: [f44-internal, cfa-net]
+
+networks:
+  f44-internal:
+  cfa-net:
+    external: true
+
+volumes:
+  f44_db:

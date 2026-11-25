@@ -1,0 +1,28 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Profil</title><link rel="stylesheet" href="/style.css"></head><body>
+<main><div class="grid"><div class="panel"><h2>Classement</h2>
+<div class="row"><select id="ff" onchange="board()"><option value="">Toutes factions</option><option value="US">Alliés</option><option value="GER">Axe</option></select></div><div id="lb"></div></div>
+<div><div class="panel"><h2>Livret militaire</h2><div id="prof" class="muted">Connectez-vous ou choisissez un joueur.</div></div>
+<div class="panel" id="mine" style="display:none"><h2>Mon compte</h2>
+<div id="facrow" class="row" style="display:none">Choisir mon camp : <button onclick="fac('US')">Alliés</button><button onclick="fac('GER')">Axe</button></div>
+<div class="row"><input id="ident" placeholder="identityId Reforger" style="flex:1"><button onclick="ident_()">Lier</button></div>
+<div class="row"><input id="pw" type="password" placeholder="Nouveau mot de passe" style="flex:1"><button onclick="pw_()">Changer</button></div>
+<div id="msg" class="muted"></div></div></div></div></main>
+<script src="/common.js"></script><script>
+async function board() {
+  const l = await api('/players' + (ff.value ? '?faction=' + ff.value : ''));
+  lb.innerHTML = '<table><tr><th>#</th><th>Nom</th><th>Grade</th><th>Camp</th><th>XP</th><th>K/M</th><th>Batailles</th></tr>' + l.map((p, i) =>
+    `<tr style="cursor:pointer" onclick="show(${p.id})"><td>${i + 1}</td><td>${esc(p.name)}</td><td>${esc(p.rank)}</td><td class="${p.faction}">${p.faction || '—'}</td><td>${p.xp}</td><td>${p.kills}/${p.deaths}</td><td>${p.battles}</td></tr>`).join('') + '</table>';
+}
+async function show(id) {
+  const d = await api('/players/' + id), p = d.player;
+  prof.innerHTML = `<b style="font-size:18px">${esc(p.name)}</b> <span class="${p.faction}">${FNAME[p.faction] || 'sans camp'}</span><br>${esc(d.rank)} · ${esc(p.role)}<br>
+   XP ${p.xp} · crédits ${p.credits}<br>Tués ${p.kills} · morts ${p.deaths} · captures ${p.captures} · batailles ${p.battles}<br><span class="muted">identityId : ${esc(p.identityId || 'non lié')}</span>
+   <h3>Dernières batailles</h3><table>${d.history.map(h => `<tr><td><a href="/battles.html#b_${String(h.battleId).padStart(6, '0')}">b_${String(h.battleId).padStart(6, '0')}</a></td><td class="${h.side}">${h.side}</td><td>${h.kills}/${h.deaths}</td><td>+${h.xp} XP</td></tr>`).join('')}</table>`;
+}
+const say = t => msg.textContent = t;
+async function fac(f) { try { await api('/me/faction', { method: 'POST', body: { faction: f } }); location.reload(); } catch (e) { say(e.message); } }
+async function ident_() { try { await api('/me/identity', { method: 'POST', body: { identityId: ident.value } }); say('identityId lié.'); show(ME.id); } catch (e) { say(e.message); } }
+async function pw_() { try { await api('/me/password', { method: 'POST', body: { password: pw.value } }); say('Mot de passe changé.'); } catch (e) { say(e.message); } }
+initPage('profile.html').then(me => { board(); if (me) { mine.style.display = ''; if (!me.faction) facrow.style.display = ''; ident.value = me.identityId || ''; show(me.id); } });
+</script></body></html>

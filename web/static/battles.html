@@ -1,0 +1,33 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Batailles</title><link rel="stylesheet" href="/style.css"></head><body>
+<main><div class="grid"><div>
+<div class="panel"><h2>Batailles en cours</h2><div id="live"></div></div>
+<div class="panel"><h2>Historique</h2><div id="hist"></div></div></div>
+<div><div class="panel"><h2>Détail</h2><div id="det" class="muted">Sélectionnez une bataille.</div></div></div></div></main>
+<script src="/common.js"></script><script>
+const row = b => `<tr style="cursor:pointer" onclick="detail('${b.battleId}')"><td>${b.battleId}</td><td>${esc(b.cityName)}</td><td><span class="${b.attacker}">${b.attacker}</span> ⟶ <span class="${b.defender}">${b.defender}</span></td>
+ <td>${STLABEL[b.status]}${b.winner ? ' — <b class="' + b.winner + '">' + b.winner + '</b>' : ''}</td><td>${b.tickets[b.attacker] || 0} / ${b.tickets[b.defender] || 0}</td><td class="muted">${fmtDate(b.createdAt)}</td></tr>`;
+const tbl = l => l.length ? '<table><tr><th>ID</th><th>Ville</th><th>Att. ⟶ Déf.</th><th>Statut</th><th>Tickets</th><th>Créée</th></tr>' + l.map(row).join('') + '</table>' : '<p class="muted">Aucune.</p>';
+async function load() {
+  live.innerHTML = tbl(await api('/battles?status=pending,starting,running'));
+  hist.innerHTML = tbl(await api('/battles?status=finished,cancelled&limit=50'));
+}
+async function detail(id) {
+  location.hash = id;
+  const b = await api('/battles/' + id + '/detail'), c = b.config;
+  let h = `<b>${b.battleId} — ${esc(b.cityName)}</b><br>Mode ${c.mode} · ${c.timeLimitMin} min · ${STLABEL[b.status]}<br><span class="muted">Scénario ${esc(c.scenario)}<br>Serveur : ${esc(b.serverInstance || '—')} · dernier signal ${fmtDate(b.heartbeatAt)}</span>`;
+  for (const f of [c.attacker, c.defender]) {
+    h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attaque)' : '(défense)'}</h3><table>` + c.sides[f].teams.map(t =>
+      `<tr><td>${t.teamId}</td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} h.</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
+  }
+  if (b.result) {
+    const r = b.result;
+    h += `<h3>Résultat : <span class="${r.winner}">${FNAME[r.winner]}</span> (${r.reason}, ${Math.round(r.durationSec / 60)} min)</h3>`;
+    h += '<table><tr><th>Joueur</th><th>Camp</th><th>K</th><th>M</th><th>Cap.</th><th>XP</th></tr>' + (r.players || []).sort((a, b) => b.xp - a.xp).map(p =>
+      `<tr><td>${esc(p.name)}</td><td class="${p.side}">${p.side}</td><td>${p.kills}</td><td>${p.deaths}</td><td>${p.captures}</td><td>${p.xp}</td></tr>`).join('') + '</table>';
+  }
+  if (b.live) h += `<h3>Données live</h3><pre style="white-space:pre-wrap;font-size:12px">${esc(JSON.stringify(b.live, null, 1))}</pre>`;
+  det.innerHTML = h;
+}
+initPage('battles.html').then(() => { load(); setInterval(load, 15000); if (location.hash.length > 1) detail(location.hash.slice(1)); });
+</script></body></html>

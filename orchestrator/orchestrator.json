@@ -1,0 +1,14 @@
+{
+  "apiUrl": "https://heroes.collectifxxl.fr",
+  "envFile": "D:\\Serveur\\ww2-heroes\\web\\.env",
+  "serverExe": "D:\\Serveur\\arma-reforger\\server\\ArmaReforgerServer.exe",
+  "templateConfig": "D:\\Serveur\\arma-reforger-ww2\\config.json",
+  "pollSec": 15,
+  "graceMin": 15,
+  "serverArgs": ["-maxFPS", "60", "-logStats", "60000"],
+  "instances": [
+    {"name": "ww2-1", "dir": "D:\\Serveur\\arma-reforger-ww2",   "bindPort": 2002, "a2s": 17778, "rcon": 19997},
+    {"name": "ww2-2", "dir": "D:\\Serveur\\arma-reforger-ww2-2", "bindPort": 2003, "a2s": 17779, "rcon": 19996},
+    {"name": "ww2-3", "dir": "D:\\Serveur\\arma-reforger-ww2-3", "bindPort": 2004, "a2s": 17780, "rcon": 19995}
+  ]
+}

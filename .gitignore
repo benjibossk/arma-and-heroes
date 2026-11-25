@@ -1,0 +1,12 @@
+# secrets
+.env
+**/.env
+# runtime
+orchestrator/state.json
+orchestrator/*.log*
+orchestrator/*.bak
+# extracted third-party mod content (not ours to redistribute)
+inventory/extract/
+# private notes
+PROMPT_CLOUDFLARE.md
+__pycache__/
