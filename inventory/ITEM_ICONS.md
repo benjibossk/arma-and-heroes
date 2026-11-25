@@ -19,17 +19,22 @@ no `kind: photo` entry remains in `manifest.json`.
 pfaust, grenade, stick, smoke, medkit, explosive, mine, binoculars, uniform, helmet). No third-party art.
 To upgrade later: render weapons in Workbench (EnforceCam / photo mode) and drop `<KEY>.webp` + update manifest.
 
-## In-engine renders (119)
+## In-engine renders (143)
 Rendered in-engine from the mod named in each row (credit to each mod's authors) through Arma Reforger's inventory item
 preview (ItemPreviewWidget) by `tools/icon-renderer` (AH_IconRenderer addon, `-ahStudio` CLI flag,
 `make_jobs.py` -> game -> `postprocess.py`). The addon spawns its own ItemPreviewManager whose preview world
 (`Prefabs/AH/AH_ChromaPreviewWorld.et`) has a flat chroma-green sky (`UI/AH/AH_ChromaSky.emat`, probes desaturated
 and lowered so the green does not light the item); `postprocess.py` keys the green out (soft alpha, colour
 un-mixing, edge despill), trims to content with 5% padding. WebP with alpha: weapons 512x256, others 512x384.
-Not renderable through ItemPreviewWidget (prefab preview shows nothing, even with a fresh PreviewRenderAttributes
-or spawned in the world first): GER_GRW34, GER_SW36, GER_TRAILER_SDAH51, US_WC63, US_WC63_TRANSPORT (no manifest entry).
+Not renderable (preview shows nothing, from prefab or spawned): GER_SW36, GER_TRAILER_SDAH51 (no manifest entry).
+GER_GRW34 renders only spawned in the world (`spawn` job). US_WC63 / US_WC63_TRANSPORT reuse the US_WC63_COVERED /
+US_WC63_UNCOVERED pictures (same model). Panzer IV family (RMS mod): the preview draws the turret detached from the
+hull, from the prefab or spawned (even after 12 s) - still unsolved.
+Side-view pass: `make_jobs.py --side` emits `KEY|spawn|<prefab>||veh|10,-48,0` (entity spawned, prefab
+PreviewRenderAttributes camera rotated by that delta); outputs go to `tools/icon-silhouettes/side/` and
+`make_icons.py` traces those profiles for vehicle SVGs (cat-tank = Tiger side). PZ4 side renders dropped (detached
+turret). Some spawns hang the game (Opel repair/tanker, Willys medical, WC63 repair...): run with a stall watchdog.
 `manifest.json` entries with `kind: render` take precedence over the SVG placeholders.
-Still on silhouettes (no prefab / no render): GER_G43, US_M3_GREASE, US_THOMPSON.
 
 | Key | File | Rendered in-engine from |
 |---|---|---|
@@ -152,3 +157,27 @@ Still on silhouettes (no prefab / no render): GER_G43, US_M3_GREASE, US_THOMPSON
 | AI_US_Elite_Recon | AI_US_Elite_Recon.webp | installed WW2 mods (Finest Hour & co.) |
 | AI_US_Elite_Para | AI_US_Elite_Para.webp | installed WW2 mods (Finest Hour & co.) |
 | AI_US_Elite_ArmorCrew | AI_US_Elite_ArmorCrew.webp | installed WW2 mods (Finest Hour & co.) |
+| US_THOMPSON | US_THOMPSON.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M3_GREASE | US_M3_GREASE.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_G43 | GER_G43.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M1903A3 | US_M1903A3.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M1A1_CARBINE | US_M1A1_CARBINE.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M2_CARBINE | US_M2_CARBINE.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M1919A4 | US_M1919A4.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M1919A6 | US_M1919A6.webp | installed WW2 mods (Finest Hour & co.) |
+| US_M7AT_GRENADE | US_M7AT_GRENADE.webp | installed WW2 mods (Finest Hour & co.) |
+| US_GAMMON | US_GAMMON.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_STG44 | GER_STG44.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_G43_SCOPE | GER_G43_SCOPE.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_FG42 | GER_FG42.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_MP38 | GER_MP38.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_MG34 | GER_MG34.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_KAR98K_GL | GER_KAR98K_GL.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_LP34 | GER_LP34.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_PANZERFAUST100 | GER_PANZERFAUST100.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_M39_GRENADE | GER_M39_GRENADE.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_GEBALLTE | GER_GEBALLTE.webp | installed WW2 mods (Finest Hour & co.) |
+| US_FLAREGUN | US_FLAREGUN.webp | installed WW2 mods (Finest Hour & co.) |
+| GER_GRW34 | GER_GRW34.webp | FH GER Vehicles |
+| US_WC63 | US_WC63_COVERED.webp | Operation Overlord US Vehicles |
+| US_WC63_TRANSPORT | US_WC63_UNCOVERED.webp | Operation Overlord US Vehicles |

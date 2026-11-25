@@ -29,6 +29,7 @@ class AH_IconJob
 	ResourceName m_sPrefab;
 	ref array<string> m_aCloth = {};
 	string m_sCat = "item";
+	string m_sYaw; //!< optional camera delta rotation "yaw,pitch" (side-view pass)
 }
 
 class AH_IconStudio
@@ -92,6 +93,8 @@ class AH_IconStudio
 				p[3].Split(",", j.m_aCloth, true);
 			if (p.Count() > 4 && !p[4].IsEmpty())
 				j.m_sCat = p[4];
+			if (p.Count() > 5 && !p[5].IsEmpty())
+				j.m_sYaw = p[5];
 			m_aJobs.Insert(j);
 		}
 		f.Close();
@@ -113,9 +116,16 @@ class AH_IconStudio
 	}
 
 	//------------------------------------------------------------------------------------------------
+	protected PreviewRenderAttributes m_Attrs;
+
 	protected void Next()
 	{
 		GetGame().GetMenuManager().CloseAllMenus();
+		if (m_Attrs)
+		{
+			m_Attrs.ResetDeltaRotation();
+			m_Attrs = null;
+		}
 		if (m_Spawned)
 		{
 			SCR_EntityHelper.DeleteEntityAndChildren(m_Spawned);
@@ -152,6 +162,35 @@ class AH_IconStudio
 			return;
 		}
 
+		if (j.m_sMode == "spawn" || !j.m_sYaw.IsEmpty())
+		{
+			// spawn in the world first (assembles slotted turrets), optionally yawed for the side-view pass
+			Resource vr = Resource.Load(j.m_sPrefab);
+			if (vr && vr.IsValid())
+			{
+				EntitySpawnParams vp = new EntitySpawnParams();
+				vp.TransformMode = ETransformMode.WORLD;
+				Math3D.MatrixIdentity4(vp.Transform);
+				vp.Transform[3] = Vector(0, 2000, 0);
+				m_Spawned = GetGame().SpawnEntityPrefab(vr, GetGame().GetWorld(), vp);
+			}
+			if (!m_Spawned)
+			{
+				PrintFormat("[AHS] FAIL spawn %1", j.m_sKey);
+				GetGame().GetCallqueue().CallLater(Next, 10, false);
+				return;
+			}
+			Physics ph = m_Spawned.GetPhysics();
+			if (ph)
+				ph.SetActive(ActiveState.INACTIVE);
+			string sw;
+			int spawnWait = 2500;
+			if (System.GetCLIParam("ahSpawnWait", sw))
+				spawnWait = sw.ToInt();
+			GetGame().GetCallqueue().CallLater(PreviewSpawnedYaw, spawnWait, false);
+			return;
+		}
+
 		mgr.SetPreviewItemFromPrefab(m_wPreview, j.m_sPrefab, null, true, 0);
 		PrintFormat("[AHS] job %1/%2 %3", m_iIndex + 1, m_aJobs.Count(), j.m_sKey);
 		GetGame().GetCallqueue().CallLater(ShotBlack, m_iWaitMs, false);
@@ -184,6 +223,32 @@ class AH_IconStudio
 		if (mgr && m_Spawned)
 			mgr.SetPreviewItem(m_wPreview, m_Spawned, null, true, 0);
 		PrintFormat("[AHS] job %1/%2 %3 (char)", m_iIndex + 1, m_aJobs.Count(), m_aJobs[m_iIndex].m_sKey);
+		GetGame().GetCallqueue().CallLater(ShotBlack, m_iWaitMs, false);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void PreviewSpawnedYaw()
+	{
+		ItemPreviewManagerEntity mgr = GetManager();
+		AH_IconJob j = m_aJobs[m_iIndex];
+		PreviewRenderAttributes attrs = null;
+		InventoryItemComponent iic = InventoryItemComponent.Cast(m_Spawned.FindComponent(InventoryItemComponent));
+		if (iic)
+			attrs = PreviewRenderAttributes.Cast(iic.FindAttribute(PreviewRenderAttributes));
+		if (attrs && !j.m_sYaw.IsEmpty())
+		{
+			array<string> yp = {};
+			j.m_sYaw.Split(",", yp, true);
+			vector d;
+			for (int i = 0; i < yp.Count() && i < 3; i++)
+				d[i] = yp[i].ToFloat();
+			PrintFormat("[AHS] rotate %1", d);
+			attrs.RotateItemCamera(d, Vector(-180, -180, -180), Vector(180, 180, 180));
+			m_Attrs = attrs;
+		}
+		if (mgr && m_Spawned)
+			mgr.SetPreviewItem(m_wPreview, m_Spawned, attrs, true, 0);
+		PrintFormat("[AHS] job %1/%2 %3 (spawn yaw %4, attrs %5)", m_iIndex + 1, m_aJobs.Count(), j.m_sKey, j.m_sYaw, attrs);
 		GetGame().GetCallqueue().CallLater(ShotBlack, m_iWaitMs, false);
 	}
 

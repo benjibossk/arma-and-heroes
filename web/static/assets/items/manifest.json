@@ -18,18 +18,22 @@
   "cat": "rifle"
  },
  "US_THOMPSON": {
-  "img": "_sil_smg.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)",
-  "cat": "smg",
-  "icon": "cat-smg.svg"
+  "img": "US_THOMPSON.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
+  "bg": "transparent",
+  "icon": "US_THOMPSON.svg",
+  "cat": "smg"
  },
  "US_M3_GREASE": {
-  "img": "_sil_smg.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)",
-  "cat": "smg",
-  "icon": "cat-smg.svg"
+  "img": "US_M3_GREASE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
+  "bg": "transparent",
+  "icon": "US_M3_GREASE.svg",
+  "cat": "smg"
  },
  "US_BAR": {
   "img": "US_BAR.webp",
@@ -158,9 +162,13 @@
   "cat": "rifle"
  },
  "GER_G43": {
-  "img": "_sil_rifle.svg",
-  "kind": "silhouette",
-  "source": "Arma & Heroes (original)"
+  "img": "GER_G43.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{D0B2A68A3BD9085E}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43.et",
+  "bg": "transparent",
+  "icon": "GER_G43.svg",
+  "cat": "rifle"
  },
  "GER_MP40": {
   "img": "GER_MP40.webp",
@@ -1088,5 +1096,193 @@
   "bg": "transparent",
   "icon": "AI_US_Elite_ArmorCrew.svg",
   "cat": "armor"
+ },
+ "US_M1903A3": {
+  "img": "US_M1903A3.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{7CA5C7688880A688}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A3.et",
+  "bg": "transparent",
+  "icon": "US_M1903A3.svg",
+  "cat": "rifle"
+ },
+ "US_M1A1_CARBINE": {
+  "img": "US_M1A1_CARBINE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{8D7E8742E9F08061}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1A1_Carbine.et",
+  "bg": "transparent",
+  "icon": "US_M1A1_CARBINE.svg",
+  "cat": "rifle"
+ },
+ "US_M2_CARBINE": {
+  "img": "US_M2_CARBINE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{F34FA45A2DE16C2D}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M2_Carbine.et",
+  "bg": "transparent",
+  "icon": "US_M2_CARBINE.svg",
+  "cat": "rifle"
+ },
+ "US_M1919A4": {
+  "img": "US_M1919A4.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{AB3A3ADC8CE3F848}Prefabs/Weapons/MachineGuns/M1919/MG_M1919A4.et",
+  "bg": "transparent",
+  "icon": "US_M1919A4.svg",
+  "cat": "mg"
+ },
+ "US_M1919A6": {
+  "img": "US_M1919A6.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
+  "bg": "transparent",
+  "icon": "US_M1919A6.svg",
+  "cat": "mg"
+ },
+ "US_M7AT_GRENADE": {
+  "img": "US_M7AT_GRENADE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et",
+  "bg": "transparent",
+  "icon": "US_M7AT_GRENADE.svg",
+  "cat": "grenade"
+ },
+ "US_GAMMON": {
+  "img": "US_GAMMON.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{3BB958D8E5152FED}Prefabs/Weapons/Grenades/No82/Grenade_No82_600g.et",
+  "bg": "transparent",
+  "icon": "US_GAMMON.svg",
+  "cat": "grenade"
+ },
+ "GER_STG44": {
+  "img": "GER_STG44.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{D9340572C7EF6CB7}Prefabs/Weapons/Rifles/STG44/Rifle_STG44.et",
+  "bg": "transparent",
+  "icon": "GER_STG44.svg",
+  "cat": "rifle"
+ },
+ "GER_G43_SCOPE": {
+  "img": "GER_G43_SCOPE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{75DDC146073EFD22}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43_Optic.et",
+  "bg": "transparent",
+  "icon": "GER_G43_SCOPE.svg",
+  "cat": "sniper"
+ },
+ "GER_FG42": {
+  "img": "GER_FG42.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{F6BD5104680D2991}Prefabs/Weapons/Machineguns/FG42G/Machinegun_FG42G.et",
+  "bg": "transparent",
+  "icon": "GER_FG42.svg",
+  "cat": "rifle"
+ },
+ "GER_MP38": {
+  "img": "GER_MP38.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{C81F18A853BE165A}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP38.et",
+  "bg": "transparent",
+  "icon": "GER_MP38.svg",
+  "cat": "smg"
+ },
+ "GER_MG34": {
+  "img": "GER_MG34.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{5D838074E66C006C}Prefabs/Weapons/MachineGuns/MG34/MG_MG34.et",
+  "bg": "transparent",
+  "icon": "GER_MG34.svg",
+  "cat": "mg"
+ },
+ "GER_KAR98K_GL": {
+  "img": "GER_KAR98K_GL.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{AEE8B1A7356E943E}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Scheissbecher.et",
+  "bg": "transparent",
+  "icon": "GER_KAR98K_GL.svg",
+  "cat": "rifle"
+ },
+ "GER_LP34": {
+  "img": "GER_LP34.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{72B77F14D2073B5D}Prefabs/Weapons/Handguns/LP34/Handgun_Leichtpistole34.et",
+  "bg": "transparent",
+  "icon": "GER_LP34.svg",
+  "cat": "pistol"
+ },
+ "GER_PANZERFAUST100": {
+  "img": "GER_PANZERFAUST100.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{EADCBEFD2705B515}Prefabs/Weapons/Launchers/Panzerfaust/Launcher_Panzerfaust100.et",
+  "bg": "transparent",
+  "icon": "GER_PANZERFAUST100.svg",
+  "cat": "at"
+ },
+ "GER_M39_GRENADE": {
+  "img": "GER_M39_GRENADE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{BE26CD5EB5FF1374}Prefabs/Weapons/Grenades/M39_Eihandgranate/Grenade_M39.et",
+  "bg": "transparent",
+  "icon": "GER_M39_GRENADE.svg",
+  "cat": "grenade"
+ },
+ "GER_GEBALLTE": {
+  "img": "GER_GEBALLTE.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{886DA8E3CFF0C54F}Prefabs/Weapons/Grenades/GeballteLadung/Grenade_GeballteLadung.et",
+  "bg": "transparent",
+  "icon": "GER_GEBALLTE.svg",
+  "cat": "explosive"
+ },
+ "US_FLAREGUN": {
+  "img": "US_FLAREGUN.webp",
+  "kind": "render",
+  "source": "installed WW2 mods (Finest Hour & co.)",
+  "path": "{DBD5C4E1C81D8363}Prefabs/Weapons/Handguns/ANM8/Handgun_ANM8.et",
+  "bg": "transparent",
+  "icon": "US_FLAREGUN.svg",
+  "cat": "pistol"
+ },
+ "GER_GRW34": {
+  "img": "GER_GRW34.webp",
+  "kind": "render",
+  "source": "FH GER Vehicles (side view, spawned in world)",
+  "path": "{8BE4C8A97C5FD444}Prefabs/Weapons/Mortars/Grw34/Mortar_Gwr34.et",
+  "bg": "transparent",
+  "icon": "GER_GRW34.svg"
+ },
+ "US_WC63": {
+  "img": "US_WC63_COVERED.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles (same model as US_WC63_COVERED)",
+  "path": "{1DF2AB34BE13692A}Prefabs/Vehicles/Wheeled/WC63/WC63.et",
+  "bg": "transparent",
+  "icon": "US_WC63.svg",
+  "cat": "truck"
+ },
+ "US_WC63_TRANSPORT": {
+  "img": "US_WC63_UNCOVERED.webp",
+  "kind": "render",
+  "source": "Operation Overlord US Vehicles (same model as US_WC63_UNCOVERED)",
+  "path": "{773E8E154D18321C}Prefabs/Vehicles/Wheeled/WC63/WC63_transport.et",
+  "bg": "transparent",
+  "icon": "US_WC63_TRANSPORT.svg",
+  "cat": "truck"
  }
 }

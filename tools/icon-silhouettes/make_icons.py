@@ -7,14 +7,15 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 ITEMS = os.path.join(ROOT, 'web/static/assets/items'); OUT = os.path.join(ROOT, 'web/static/assets/icons')
 SHEET = os.path.join(ROOT, 'docs/screenshots/icons.png')
+SIDE = os.path.join(os.path.dirname(__file__), 'side')  # vehicle side-view renders (make_jobs.py --side): profiles read better as pictograms
 os.makedirs(OUT, exist_ok=True)
 
 RULES = [  # (regex on key, category) — first match wins
     (r'WIRBELWIND|FLAKVIERLING_TRUCK|FLAK_TRUCK', 'aa'), (r'FLAK', 'aa'), (r'PAK', 'atgun'), (r'LEFH|LEIG', 'artillery'),
     (r'TIGER|PZ4|JAGDPANZER|SHERMAN', 'tank'), (r'SDKFZ251|M3A1', 'halftrack'), (r'SDKFZ22', 'armoredcar'),
-    (r'KFZ|JEEP', 'jeep'), (r'TRUCK|WC63', 'truck'), (r'MG34_TRIPOD|MG42|_BAR$', 'mg'), (r'SCOPE|M1903', 'sniper'),
-    (r'GARAND|CARBINE|KAR98K$', 'rifle'), (r'MP40|THOMPSON|GREASE', 'smg'), (r'BAZOOKA|PANZERFAUST|PANZERSCHRECK', 'at'),
-    (r'M1911|P38', 'pistol'), (r'GRENADE|SMOKE', 'grenade'), (r'MEDKIT', 'medic'), (r'TNT|MINES', 'explosive'),
+    (r'KFZ|JEEP', 'jeep'), (r'TRUCK|WC63', 'truck'), (r'MG34|MG42|_BAR$|M1919', 'mg'), (r'SCOPE|M1903A4', 'sniper'),
+    (r'GARAND|CARBINE|KAR98K|M1903A3|STG44|FG42|G43$', 'rifle'), (r'MP40|MP38|THOMPSON|GREASE', 'smg'), (r'BAZOOKA|PANZERFAUST|PANZERSCHRECK', 'at'),
+    (r'M1911|P38|LP34|FLAREGUN', 'pistol'), (r'GRENADE|SMOKE|GAMMON', 'grenade'), (r'MEDKIT', 'medic'), (r'TNT|MINES|GEBALLTE', 'explosive'),
     (r'BINOCULARS', 'binoculars'), (r'_Para$|OUTFIT_PARA|OUTFIT_FJ', 'para'), (r'ArmorCrew|OUTFIT_CREW|OUTFIT_PANZER', 'armor'),
     (r'_Recon$|NETTING|SMOCK', 'recon'), (r'_Infantry$|OUTFIT_M4', 'infantry')]
 BEST = {'tank': 'GER_TIGER1', 'halftrack': 'GER_SDKFZ251', 'armoredcar': 'GER_SDKFZ222', 'jeep': 'US_JEEP_WILLYS', 'truck': 'GER_TRUCK',
@@ -70,7 +71,8 @@ man = json.load(open(os.path.join(ITEMS, 'manifest.json')))
 polys = {}
 for k, v in man.items():
     if v.get('kind') != 'render': v.pop('icon', None); continue
-    d, polys[k] = trace(mask(os.path.join(ITEMS, v['img']))); write(k + '.svg', d); v['icon'] = k + '.svg'
+    side = os.path.join(SIDE, k + '.webp')
+    d, polys[k] = trace(mask(side if os.path.exists(side) else os.path.join(ITEMS, v['img']))); write(k + '.svg', d); v['icon'] = k + '.svg'
     c = category(k)
     if c: v['cat'] = c
 for k, v in man.items():  # non-render items get their category icon

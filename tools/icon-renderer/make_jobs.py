@@ -1,5 +1,7 @@
 """Build the AH_IconRenderer job list from catalog.json + inventory/vehicles.json.
-Usage: python make_jobs.py <out ah_jobs.txt>
+Usage: python make_jobs.py <out ah_jobs.txt> [--keys K1,K2,...] [--side]
+  --keys  only these keys;  --side  vehicles only, spawned in the world and seen from the side
+          (camera delta "10,-48,0"), for the SVG pictograms (tools/icon-silhouettes/side/)
 Line: KEY|item|<prefab>||<cat>   or   KEY|char|<character>|<cloth,...>|char
 """
 import json, os, sys
@@ -46,5 +48,11 @@ for fa, tiers in cat["aiAppearance"].items():
         for r, cloth in roles.items():
             lines.append(f"AI_{fa}_{t}_{r}|char|{CHAR[fa]}|{','.join(cloth)}|char")
 
+args = sys.argv[2:]
+if "--keys" in args:
+    keep = set(args[args.index("--keys") + 1].split(","))
+    lines = [l for l in lines if l.split("|")[0] in keep]
+if "--side" in args:
+    lines = [l.replace("|item|", "|spawn|", 1) + "|10,-48,0" for l in lines if l.endswith("|veh")]
 open(sys.argv[1], "w", encoding="utf-8").write("\n".join(lines) + "\n")
 print(len(lines), "jobs")
