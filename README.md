@@ -87,6 +87,7 @@ Done:
 - [x] Orchestrator as a long-lived service (lock, restart, log rotation, Task Scheduler)
 - [x] F44_Core published PUBLIC on the Workshop (`EAD65CE1E596E39C`); the WW2 server and orchestrator now run in Workshop mode (`-config`, mod auto-downloaded), `--local-addon` keeps the old CLI mode for unpublished dev builds
 - [x] BattleResult POST retried 3x with backoff, HTTP 409 = already recorded (mod 1.0.1)
+- [x] Medical (mod 1.1.0, `docs/MEDICAL.md`): bandages for all, medic kit + full heal + revive, unconscious with 60 s bleed-out, heal/revive counters for ribbons
 
 In progress:
 - [ ] End-to-end result posting, proof of AI sector captures

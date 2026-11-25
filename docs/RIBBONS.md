@@ -94,6 +94,8 @@ Counter definitions (what the mod should count):
 | `resupplyGiven` | ammo resupplies given to **other** players (one per magazine pack / interaction) |
 | `healGiven` | heals applied to **other** players (bandage/medkit uses) |
 | `revives` | unconscious teammates brought back |
+| `stats.bandagesApplied` | bandages applied to **other** soldiers (F44_Medical, docs/MEDICAL.md) |
+| `stats.healHp` | health points restored on **other** soldiers |
 | `repairs` | repair actions on friendly vehicles (one per completed repair) |
 | `spots` | enemies marked that were later damaged/killed by the team |
 | `transportPassengers` | distinct teammates transported ≥ 300 m as driver |

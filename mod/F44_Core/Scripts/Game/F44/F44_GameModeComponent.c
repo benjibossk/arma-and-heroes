@@ -527,6 +527,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		st.m_sSide = cfgSide.m_sSideKey;
 		st.m_sTeamId = team.m_sTeamId;
 		m_mPlayerSide.Set(playerId, side);
+		F44_Medical.SetPlayerClass(playerId, classKey);	// medical (F44_Medical.c)
 		return true;
 	}
 
@@ -1019,6 +1020,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				json += q + Esc(ck) + q + ":" + cv.ToString();
 			}
 			json += "}";
+			json += F44_Medical.ResultJson(pid);	// healGiven, revives, stats (F44_Medical.c)
 			json += "," + q + "xp" + q + ":" + xp.ToString() + "}";
 		}
 		json += "]}";

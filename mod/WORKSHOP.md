@@ -31,3 +31,5 @@ First public release: game mode, sectors, tickets, AI bots, vehicle pool, loadou
 ## Changelog 1.0.1 (ready, not yet published by this change)
 Battle results are now more reliable: the result POST to the website is retried up to 3 times with backoff (5 s, 10 s), and an HTTP 409 reply (battle already finished) counts as success. Fixes a battle reported as failed (http 0) when the website answered slowly although it had saved the result.
 
+## Changelog 1.1.0 (ready, not yet published by this change)
+- Medical (F44_Medical.c, docs/MEDICAL.md): every soldier (players and AI) is topped up to 2 field dressings at spawn, medics to 6 dressings + 2 morphine + 1 saline; a bandage also heals 20 HP; a medic treating someone else heals to full at double speed; unconsciousness on, only a medic revives (60 s bleed-out); healGiven / revives / stats.bandagesApplied / stats.healHp in the BattleResult. Optional $profile:F44/medical.json override.

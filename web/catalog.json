@@ -13,56 +13,81 @@
    "FinestHour-GERVehicles",
    "M4A2Sherman"
   ],
-  "items_note": "Soldier arsenal (web store, loadouts). price in soldier credits, weight in loadout points (budget INF 10, others 6), rankRequired = soldier rank name, ribbon = {category, kills} needed. prefab null = to map in the mod. Copied to web/catalog.json for the website."
+  "items_note": "Soldier arsenal (web store, loadouts). price in soldier credits, weight in loadout points (budget INF 10, others 6), rankRequired = soldier rank name, ribbon = {category, kills} needed. prefab null = to map in the mod. Copied to web/catalog.json for the website.",
+  "medical_note": "medical = starter kit applied by F44_Medical at spawn (top-up, docs/MEDICAL.md); MEDKIT items = extra field dressing"
  },
  "catalog": {
   "US_RIFLEMAN": {
    "prefab": "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et",
    "label": "US Rifleman (M1 Garand)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_SMG": {
    "prefab": "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et",
    "label": "US SMG (M1A1 Thompson)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_SL": {
    "prefab": "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et",
    "label": "US Squad Leader",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_PL": {
    "prefab": "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et",
    "label": "US Platoon Leader (M1 Carbine + ANM8)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_RTO": {
    "prefab": "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et",
    "label": "US Radio operator (SCR-300)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_OFFICER": {
    "prefab": "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et",
    "label": "US Officer (M1911)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_SNIPER": {
    "prefab": "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et",
    "label": "US Sniper (M1903A4)",
    "cost": 2,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_SR": {
    "prefab": "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et",
    "label": "US Scout/Recon rifleman (M1 + helmet netting)",
    "cost": 1,
-   "source": "FH US Units"
+   "source": "FH US Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_MG": {
    "prefab": null,
@@ -77,6 +102,9 @@
     "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
     "vest": "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et",
     "mags": "Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_*"
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "US_MEDIC": {
@@ -94,6 +122,11 @@
      "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
      "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
     ]
+   },
+   "medical": {
+    "bandages": 6,
+    "morphine": 2,
+    "saline": 1
    }
   },
   "US_AT": {
@@ -110,6 +143,9 @@
     "extra": [
      "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et"
     ]
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "US_ENGINEER": {
@@ -126,6 +162,9 @@
      "{23858F4966E84B94}Prefabs/Weapons/Explosives/Mine_M1A1/Mine_M1A1AT.et",
      "{2A2F3A62EDD51EC7}Prefabs/Items/Equipment/Accessories/ETool_M1910/ETool_M1910.et"
     ]
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "US_CREW": {
@@ -141,6 +180,9 @@
     "jacket": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
     "suit_alt": "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
     "handgun": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "US_PARA": {
@@ -157,97 +199,147 @@
     "boots": "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
     "vest": "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et",
     "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et"
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "GER_RIFLEMAN": {
    "prefab": "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et",
    "label": "GER Rifleman (Kar98k)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_RIFLEMAN_G43": {
    "prefab": "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et",
    "label": "GER Rifleman (G43)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_MG": {
    "prefab": "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et",
    "label": "GER MG gunner (MG42)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_MEDIC": {
    "prefab": "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et",
    "label": "GER Medic (Sanitater)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 6,
+    "morphine": 2,
+    "saline": 1
+   }
   },
   "GER_AT": {
    "prefab": "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et",
    "label": "GER Anti-tank (Panzerschreck RPzB54)",
    "cost": 2,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_LAT": {
    "prefab": "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et",
    "label": "GER Light AT (Panzerfaust 100)",
    "cost": 2,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_OFFICER": {
    "prefab": "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et",
    "label": "GER Officer (P38)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_SNIPER": {
    "prefab": "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et",
    "label": "GER Sniper (Kar98k scope)",
    "cost": 2,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_ENGINEER": {
    "prefab": "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et",
    "label": "GER Pioneer/Engineer (mines)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_SMG": {
    "prefab": "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et",
    "label": "GER SMG (MP40)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_SL": {
    "prefab": "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et",
    "label": "GER Squad Leader (MP40)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_PL": {
    "prefab": "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et",
    "label": "GER Platoon Leader (MP38)",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_RTO": {
    "prefab": "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et",
    "label": "GER Radio operator",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_CREW": {
    "prefab": "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et",
    "label": "GER Panzer crew",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_PANZER_COMMANDER": {
    "prefab": "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et",
    "label": "GER Panzer commander",
    "cost": 1,
-   "source": "FH GER Units"
+   "source": "FH GER Units",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_PARA": {
    "prefab": null,
@@ -261,6 +353,9 @@
     "boots": "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
     "jacket": "{051E32E58B7C5853}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Luftwaffe.et",
     "hat": "Helmet_Stahlhelm_M42_* (GER Uniforms)"
+   },
+   "medical": {
+    "bandages": 2
    }
   },
   "GER_KFZ": {
@@ -269,7 +364,10 @@
    "cost": 2,
    "role": "light_utility",
    "crew": "1 pilote + 3 passagers",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_KFZ_MG34": {
    "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
@@ -277,7 +375,10 @@
    "cost": 2,
    "role": "light_armed",
    "crew": "1 pilote + passagers + tireur",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_TRUCK": {
    "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
@@ -285,7 +386,10 @@
    "cost": 3,
    "role": "truck",
    "crew": "1 pilote + cargo",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_TRUCK_OPEN": {
    "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
@@ -293,7 +397,10 @@
    "cost": 3,
    "role": "truck",
    "crew": "1 pilote + cargo",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_FLAK_TRUCK": {
    "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
@@ -301,7 +408,10 @@
    "cost": 6,
    "role": "light_armored_aa",
    "crew": "1 pilote + 1-2 servants",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_SDKFZ222": {
    "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
@@ -313,7 +423,10 @@
    "variants": [
     "{C5BD2985070AABC2}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Camo.et",
     "{EDC4DE87D69BACB7}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Desert.et"
-   ]
+   ],
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_SDKFZ223": {
    "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
@@ -322,7 +435,10 @@
    "role": "light_armored",
    "crew": "3",
    "source": "FH GER Vehicles",
-   "note": "racine _base : prefab placable a verifier en Workbench"
+   "note": "racine _base : prefab placable a verifier en Workbench",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_SHERMAN": {
    "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
@@ -330,7 +446,10 @@
    "cost": 12,
    "role": "tank",
    "crew": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)",
-   "source": "M4A2 Sherman mod"
+   "source": "M4A2 Sherman mod",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_JEEP": {
    "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
@@ -340,7 +459,10 @@
    "crew": "1 pilote + 3",
    "source": "Arma Reforger vanilla",
    "status": "proxy",
-   "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys."
+   "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys.",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_TRUCK": {
    "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
@@ -350,7 +472,10 @@
    "crew": "1 pilote + cargo",
    "source": "Arma Reforger vanilla",
    "status": "proxy",
-   "note": "Aucun camion WW2 US (GMC CCKW) installe."
+   "note": "Aucun camion WW2 US (GMC CCKW) installe.",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_TIGER": {
    "prefab": null,
@@ -359,7 +484,10 @@
    "role": "tank",
    "crew": "5",
    "status": "missing",
-   "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule."
+   "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule.",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_HALFTRACK": {
    "prefab": null,
@@ -368,7 +496,10 @@
    "role": "light_armored",
    "crew": "",
    "status": "missing",
-   "note": "Absent."
+   "note": "Absent.",
+   "medical": {
+    "bandages": 2
+   }
   },
   "US_STUART_OR_ARMORED_CAR": {
    "prefab": null,
@@ -377,42 +508,60 @@
    "role": "light_armored",
    "crew": "",
    "status": "missing",
-   "note": "Absent : seul LAV-25 moderne (vanilla) existe."
+   "note": "Absent : seul LAV-25 moderne (vanilla) existe.",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_PAK40": {
    "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
    "label": "Pak 40 75 mm AT (gris)",
    "cost": 4,
    "role": "static_or_towed",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_PAK36": {
    "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
    "label": "Pak 36 37 mm AT (gris)",
    "cost": 3,
    "role": "static_or_towed",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_FLAK38": {
    "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
    "label": "Flak 38 20 mm (gris)",
    "cost": 4,
    "role": "static_or_towed",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_FLAKVIERLING": {
    "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
    "label": "Flakvierling 38 (gris)",
    "cost": 5,
    "role": "static_or_towed",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   },
   "GER_LEFH18": {
    "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
    "label": "leFH 18 obusier 105 mm (gris)",
    "cost": 6,
    "role": "static_or_towed",
-   "source": "FH GER Vehicles"
+   "source": "FH GER Vehicles",
+   "medical": {
+    "bandages": 2
+   }
   }
  },
  "items": {
@@ -586,7 +735,7 @@
    "ribbon": null
   },
   "US_MEDKIT": {
-   "prefab": null,
+   "prefab": "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
    "label": "First aid pouch",
    "faction": "US",
    "slot": "equipment",
@@ -870,7 +1019,7 @@
    "ribbon": null
   },
   "GER_MEDKIT": {
-   "prefab": null,
+   "prefab": "{4DC939F9FA9D5349}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_HEER_WW2.et",
    "label": "Verbandpäckchen",
    "faction": "GER",
    "slot": "equipment",
