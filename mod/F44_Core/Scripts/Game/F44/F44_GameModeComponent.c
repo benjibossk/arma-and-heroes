@@ -105,6 +105,30 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected ref map<string, int> m_mAIKills = new map<string, int>();	// side key -> kills made by bots
 	protected ref map<string, int> m_mTeamAIKills = new map<string, int>();	// team id -> kills made by its bots
 
+	//! average rank index (0 = Private .. 7 = Captain) of connected players of a side, -1 if none known
+	float AvgPlayerRank(int side)
+	{
+		array<string> ranks = {"Private", "Corporal", "Sergeant", "Staff Sergeant", "Warrant Officer", "Second Lieutenant", "Lieutenant", "Captain"};
+		float sum;
+		int n;
+		foreach (int pid, int s : m_mPlayerSide)
+		{
+			if (s != side || !m_Loadouts)
+				continue;
+			F44_PlayerLoadout l = m_Loadouts.Get(SCR_PlayerIdentityUtils.GetPlayerIdentityId(pid));
+			if (!l)
+				continue;
+			int r = ranks.Find(l.m_sRank);
+			if (r < 0)
+				continue;
+			sum += r;
+			n++;
+		}
+		if (n == 0)
+			return -1;
+		return sum / n;
+	}
+
 	protected string SideKeyOf(int side)
 	{
 		if (side == F44_ESectorOwner.ATTACKER)
@@ -541,8 +565,10 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		RestContext ctx = F44_BattleLoader.GetRestContext(m_Loader.GetApiUrl(), m_Loader.GetToken());
 		if (!ctx)
 			return;
-		string json = string.Format("{\"elapsed\":%1,\"timeLeft\":%2,\"tickets\":{\"%3\":%4,\"%5\":%6},\"sectors\":[",
+		string json = string.Format("{\"elapsed\":%1,\"timeLeft\":%2,\"tickets\":{\"%3\":%4,\"%5\":%6},",
 			Math.Round(m_fElapsed), m_iTimeLeft, m_sAttacker, m_iTicketsAtt, m_sDefender, m_iTicketsDef);
+		json += string.Format("\"aiSkill\":{\"%1\":\"%2\",\"%3\":\"%4\"},", m_sAttacker, m_AI.GetSkill(F44_ESectorOwner.ATTACKER), m_sDefender, m_AI.GetSkill(F44_ESectorOwner.DEFENDER));
+		json += "\"sectors\":[";
 		bool first = true;
 		for (int i = 0; i < m_aSectorOwners.Count(); i++)
 		{
@@ -842,7 +868,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		}
 		json += "}";
 
-		json += ",\"aiDeaths\":" + MapJson(m_mAIDeaths) + ",\"aiKills\":" + MapJson(m_mAIKills) + ",\"teamAiKills\":" + MapJson(m_mTeamAIKills);
+		json += ",\"aiDeaths\":" + MapJson(m_mAIDeaths) + ",\"aiKills\":" + MapJson(m_mAIKills) + ",\"teamAiKills\":" + MapJson(m_mTeamAIKills)
+			+ string.Format(",\"aiSkill\":{\"%1\":{\"final\":\"%2\",\"avg\":\"%3\"},\"%4\":{\"final\":\"%5\",\"avg\":\"%6\"}}", m_sAttacker, m_AI.GetSkill(F44_ESectorOwner.ATTACKER), m_AI.GetAvgSkill(F44_ESectorOwner.ATTACKER), m_sDefender, m_AI.GetSkill(F44_ESectorOwner.DEFENDER), m_AI.GetAvgSkill(F44_ESectorOwner.DEFENDER));
 		json += "," + q + "players" + q + ":[";
 		first = true;
 		foreach (int pid, F44_PlayerStats st : m_mStats)

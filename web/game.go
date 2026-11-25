@@ -318,6 +318,8 @@ type BattleResult struct {
 	Players     []ResPlayer        `json:"players"`
 	AIKills     map[string]int     `json:"aiKills,omitempty"`  // per side, display only
 	AIDeaths    map[string]int     `json:"aiDeaths,omitempty"` // per side, display only (already included in losses.manpower)
+	TeamAIKills map[string]int     `json:"teamAiKills,omitempty"`
+	AISkill     map[string]map[string]string `json:"aiSkill,omitempty"` // side -> {final, avg}
 }
 
 // applyResult : appelant tient gameMu

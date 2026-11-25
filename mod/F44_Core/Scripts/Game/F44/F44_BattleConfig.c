@@ -68,7 +68,9 @@ class F44_Side
 	bool m_bAIEnabled = true;
 	int m_iAIMaxAlive = 24;
 	float m_fAIPerPlayerScale = 1.0;
-	string m_sAISkill = "Regular";	// Recruit | Regular | Veteran | Elite
+	string m_sAISkill = "Regular";	// base: Recruit | Regular | Veteran | Elite
+	string m_sAISkillMin = "Recruit";
+	string m_sAISkillMax = "Elite";
 
 	void FromJson(LoadContext n)
 	{
@@ -85,6 +87,12 @@ class F44_Side
 			string sk;
 			if (n.ReadValue("skill", sk) && !sk.IsEmpty())
 				m_sAISkill = sk;
+			sk = "";
+			if (n.ReadValue("minSkill", sk) && !sk.IsEmpty())
+				m_sAISkillMin = sk;
+			sk = "";
+			if (n.ReadValue("maxSkill", sk) && !sk.IsEmpty())
+				m_sAISkillMax = sk;
 			n.EndObject();
 		}
 		int count;
@@ -127,6 +135,7 @@ class F44_PlayerLoadout
 	string m_sSoldierId;
 	string m_sClass;
 	int m_iPoints;
+	string m_sRank;
 	ref array<string> m_aItems = {};
 
 	void FromJson(LoadContext n)
@@ -134,6 +143,7 @@ class F44_PlayerLoadout
 		n.ReadValue("soldierId", m_sSoldierId);
 		n.ReadValue("class", m_sClass);
 		n.ReadValue("points", m_iPoints);
+		n.ReadValue("rank", m_sRank);
 		n.ReadValue("items", m_aItems);
 	}
 

@@ -27,6 +27,64 @@ class F44_AIDirector
 	protected ref array<ref F44_AIGroupInfo> m_aGroups = {};
 	// living bot -> (side, teamId)
 	protected ref map<IEntity, int> m_mBotSide = new map<IEntity, int>();
+	protected ref map<int, int> m_mSkill = new map<int, int>();	// side -> effective skill level 1..4
+	protected ref map<int, int> m_mSkillSum = new map<int, int>();	// side -> sum of levels at spawns (average)
+	protected ref map<int, int> m_mSkillN = new map<int, int>();
+	static const ref array<string> SKILLS = {"", "Recruit", "Regular", "Veteran", "Elite"};
+
+	//! Dynamic skill: base preset, +1 if outnumbered by enemy players (+2 if by 3+), -1 if own side has 3+ more players,
+	//! +1 if enemy players' average rank >= Sergeant (+2 >= Second Lieutenant); clamped to [min..max].
+	protected void UpdateSkill(F44_Side side, int sideId, int ownPlayers, int enemyPlayers, float enemyRank)
+	{
+		int lvl = Math.Max(1, SKILLS.Find(side.m_sAISkill));
+		int diff = enemyPlayers - ownPlayers;
+		if (diff >= 3)
+			lvl += 2;
+		else if (diff >= 1)
+			lvl += 1;
+		else if (diff <= -3)
+			lvl -= 1;
+		if (enemyRank >= 5)
+			lvl += 2;
+		else if (enemyRank >= 2)
+			lvl += 1;
+		int lo = Math.Max(1, SKILLS.Find(side.m_sAISkillMin));
+		int hi = SKILLS.Find(side.m_sAISkillMax);
+		if (hi < 1)
+			hi = 4;
+		lvl = Math.ClampInt(lvl, lo, hi);
+		int cur;
+		if (m_mSkill.Find(sideId, cur) && cur == lvl)
+			return;
+		m_mSkill.Set(sideId, lvl);
+		PrintFormat("[F44] AI skill side=%1 players=%2 enemyPlayers=%3 avgEnemyRank=%4 -> %5", side.m_sSideKey, ownPlayers, enemyPlayers, enemyRank, SKILLS[lvl]);
+		EAISkill sk = SkillFromName(SKILLS[lvl]);
+		foreach (IEntity e, int s : m_mBotSide)
+		{
+			if (!e || s != sideId)
+				continue;
+			SCR_AICombatComponent c = SCR_AICombatComponent.Cast(e.FindComponent(SCR_AICombatComponent));
+			if (c)
+				c.SetAISkill(sk);
+		}
+	}
+
+	string GetSkill(int sideId)
+	{
+		int l;
+		m_mSkill.Find(sideId, l);
+		return SKILLS[Math.ClampInt(l, 0, 4)];
+	}
+
+	string GetAvgSkill(int sideId)
+	{
+		int s, n;
+		m_mSkillSum.Find(sideId, s);
+		m_mSkillN.Find(sideId, n);
+		if (n == 0)
+			return GetSkill(sideId);
+		return SKILLS[Math.ClampInt(Math.Round(s / (float)n), 1, 4)];
+	}
 	protected ref map<IEntity, string> m_mBotTeam = new map<IEntity, string>();
 	protected int m_iLimit = 48;
 	protected float m_fRetargetAccu = 1000;
@@ -91,6 +149,8 @@ class F44_AIDirector
 			PrintFormat("[F44] AI director running (limit %1, targets %2/%3)", m_iLimit, cfg.m_Attacker.GetAITarget(playersAtt), cfg.m_Defender.GetAITarget(playersDef));
 		}
 
+		UpdateSkill(cfg.m_Attacker, F44_ESectorOwner.ATTACKER, playersAtt, playersDef, m_GameMode.AvgPlayerRank(F44_ESectorOwner.DEFENDER));
+		UpdateSkill(cfg.m_Defender, F44_ESectorOwner.DEFENDER, playersDef, playersAtt, m_GameMode.AvgPlayerRank(F44_ESectorOwner.ATTACKER));
 		// spawn at most one group per side per tick (keeps frame cost low)
 		int globalAlive = CountAlive(-1);
 		TrySpawnSide(cfg, cfg.m_Attacker, F44_ESectorOwner.ATTACKER, playersAtt, ticketsAtt, globalAlive);
@@ -252,7 +312,7 @@ class F44_AIDirector
 				ctrl.ActivateAI();
 			SCR_AICombatComponent combat = SCR_AICombatComponent.Cast(ch.FindComponent(SCR_AICombatComponent));
 			if (combat)
-				combat.SetAISkill(SkillFromName(side.m_sAISkill));
+				combat.SetAISkill(SkillFromName(GetSkill(sideId)));
 			group.AddAIEntityToGroup(ch);
 			m_mBotSide.Set(ch, sideId);
 			m_mBotTeam.Set(ch, team.m_sTeamId);
@@ -270,10 +330,19 @@ class F44_AIDirector
 		gi.m_sTeamId = team.m_sTeamId;
 		m_aGroups.Insert(gi);
 		Retarget(gi, cfg.GetMode(), m_GameMode.GetSectorOwners(), false);
-		PrintFormat("[F44] AI: %1 group of %2 spawned (team %3 \"%4\", skill %5)", side.m_sSideKey, spawned, team.m_sTeamId, team.m_sDisplayName, side.m_sAISkill);
+		MapAddI(m_mSkillSum, sideId, SKILLS.Find(GetSkill(sideId)));
+		MapAddI(m_mSkillN, sideId, 1);
+		PrintFormat("[F44] AI: %1 group of %2 spawned (team %3 \"%4\", skill %5)", side.m_sSideKey, spawned, team.m_sTeamId, team.m_sDisplayName, GetSkill(sideId));
 	}
 
 	//------------------------------------------------------------------------------------------------
+	protected static void MapAddI(map<int, int> m, int k, int v)
+	{
+		int c;
+		m.Find(k, c);
+		m.Set(k, c + v);
+	}
+
 	static EAISkill SkillFromName(string s)
 	{
 		switch (s)

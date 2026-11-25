@@ -11,7 +11,9 @@ type AIConfig struct {
 	Enabled        bool    `json:"enabled"`
 	MaxAlive       int     `json:"maxAlive"`
 	PerPlayerScale float64 `json:"perPlayerScale"`
-	Skill          string  `json:"skill"` // Recruit | Regular | Veteran | Elite (applied by the mod at spawn)
+	Skill          string  `json:"skill"`    // base: Recruit | Regular | Veteran | Elite; the mod adjusts it live from players
+	MinSkill       string  `json:"minSkill"` // clamp of the dynamic skill
+	MaxSkill       string  `json:"maxSkill"`
 }
 
 var skillRank = map[string]int{"Recruit": 1, "Regular": 2, "Veteran": 3, "Elite": 4}
@@ -28,7 +30,7 @@ type Setting struct {
 }
 
 func defaultAI() AISettings {
-	return AISettings{Default: AIConfig{true, 24, 1.0, "Regular"}, PerType: map[string]int{"INF": 24, "PARA": 16, "ARM": 8, "REC": 8, "MOT": 20},
+	return AISettings{Default: AIConfig{true, 24, 1.0, "Regular", "Recruit", "Elite"}, PerType: map[string]int{"INF": 24, "PARA": 16, "ARM": 8, "REC": 8, "MOT": 20},
 		PerTypeSkill: map[string]string{"INF": "Regular", "PARA": "Elite", "ARM": "Regular", "REC": "Veteran", "MOT": "Regular"}}
 }
 
@@ -46,6 +48,12 @@ func loadAI() AISettings {
 	}
 	if skillRank[s.Default.Skill] == 0 {
 		s.Default.Skill = "Regular"
+	}
+	if skillRank[s.Default.MinSkill] == 0 {
+		s.Default.MinSkill = "Recruit"
+	}
+	if skillRank[s.Default.MaxSkill] == 0 {
+		s.Default.MaxSkill = "Elite"
 	}
 	return s
 }
@@ -82,7 +90,13 @@ func adminPutAI(c *gin.Context) {
 	if s.Default.Skill == "" {
 		s.Default.Skill = "Regular"
 	}
-	ok := skillRank[s.Default.Skill] > 0
+	if s.Default.MinSkill == "" {
+		s.Default.MinSkill = "Recruit"
+	}
+	if s.Default.MaxSkill == "" {
+		s.Default.MaxSkill = "Elite"
+	}
+	ok := skillRank[s.Default.Skill] > 0 && skillRank[s.Default.MinSkill] > 0 && skillRank[s.Default.MaxSkill] >= skillRank[s.Default.MinSkill]
 	for _, v := range s.PerTypeSkill {
 		ok = ok && skillRank[v] > 0
 	}

@@ -18,13 +18,13 @@ async function detail(id) {
   let h = `<b>${b.battleId} — ${esc(b.cityName)}</b><br>Mode ${c.mode} · ${c.timeLimitMin} min · ${STLABEL[b.status]}<br><span class="muted">Scenario ${esc(c.scenario)}<br>Server: ${esc(b.serverInstance || '—')} · last heartbeat ${fmtDate(b.heartbeatAt)}</span>`;
   for (const f of [c.attacker, c.defender]) {
     const ai = c.sides[f].ai || {};
-    h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attacking)' : '(defending)'}</h3><div class="muted">AI bots: ${ai.enabled ? 'on, max ' + ai.maxAlive + ' alive, x' + ai.perPlayerScale + ' per player' + (ai.skill ? ', skill ' + ai.skill : '') : 'off'}</div><table>` + c.sides[f].teams.map(t =>
-      `<tr><td>${esc(t.displayName || t.teamId)}<br><span class="muted">${t.teamId}</span></td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
+    h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attacking)' : '(defending)'}</h3><div class="muted">AI bots: ${ai.enabled ? 'on, max ' + ai.maxAlive + ' alive, x' + ai.perPlayerScale + ' per player' + (ai.skill ? ', base skill ' + ai.skill + (ai.minSkill ? ' [' + ai.minSkill + '–' + ai.maxSkill + ']' : '') : '') : 'off'}</div><table>` + c.sides[f].teams.map(t =>
+      `<tr><td>${esc(t.displayName || t.teamId)}<br><span class="muted">${t.teamId}</span></td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men${b.result ? '<br><span class="muted">lost ' + (((b.result.losses || {})[t.teamId] || {}).manpower ?? 0) + ' · AI kills ' + ((b.result.teamAiKills || {})[t.teamId] ?? 0) + '</span>' : ''}</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
   }
   if (b.result) {
     const r = b.result;
     const pc = s => (r.players || []).filter(p => p.side === s).length;
-    h += '<p>' + [c.attacker, c.defender].map(s => `<span class="${s}">${s}</span>: Players ${pc(s)} · AI ${(r.aiDeaths || {})[s] ?? '—'} lost / ${(r.aiKills || {})[s] ?? '—'} kills`).join('<br>') + '</p>';
+    h += '<p>' + [c.attacker, c.defender].map(s => `<span class="${s}">${s}</span>: Players ${pc(s)} · AI ${(r.aiDeaths || {})[s] ?? '—'} lost / ${(r.aiKills || {})[s] ?? '—'} kills${(r.aiSkill || {})[s] ? ' · skill ' + r.aiSkill[s].final + ' (avg ' + r.aiSkill[s].avg + ')' : ''}`).join('<br>') + '</p>';
     h += `<h3>Result: <span class="${r.winner}">${FNAME[r.winner]}</span> (${r.reason}, ${Math.round(r.durationSec / 60)} min)</h3>`;
     h += '<table><tr><th>Player</th><th>Side</th><th>K</th><th>D</th><th>Cap.</th><th>XP</th></tr>' + (r.players || []).sort((a, b) => b.xp - a.xp).map(p =>
       `<tr><td>${esc(p.name)}</td><td class="${p.side}">${p.side}</td><td>${p.kills}</td><td>${p.deaths}</td><td>${p.captures}</td><td>${p.xp}</td></tr>`).join('') + '</table>';

@@ -77,7 +77,7 @@ async function tick() {
   for (const f of [d.attacker, d.defender]) maxT[f] = Math.max(maxT[f] || 0, t[f] || 0);
   const cnt = f => (s.units || []).filter(u => u.side === f).length;
   side.innerHTML = `<b>${STLABEL[d.status] || d.status}</b>${d.winner ? ' — winner <b class="' + d.winner + '">' + d.winner + '</b>' : ''}<br>Elapsed ${fmtS(s.elapsed)} · left ${fmtS(s.timeLeft)}<br><br>` +
-    [d.attacker, d.defender].map(f => `<span class="${f}"><b>${FNAME[f] || f}</b> ${f === d.attacker ? '(attacking)' : '(defending)'} — ${t[f] ?? '?'} tickets · ${cnt(f)} units</span>
+    [d.attacker, d.defender].map(f => `<span class="${f}"><b>${FNAME[f] || f}</b> ${f === d.attacker ? '(attacking)' : '(defending)'} — ${t[f] ?? '?'} tickets · ${cnt(f)} units${(s.aiSkill || {})[f] ? ' · AI ' + s.aiSkill[f] : ''}</span>
      <div class="tk"><div style="width:${maxT[f] ? 100 * (t[f] || 0) / maxT[f] : 0}%;background:${COL[f]}"></div></div>`).join('') +
     `<span class="muted">Sectors: ${(s.sectors || []).map(x => x.name + ' ' + (x.owner || 'neutral')).join(' · ')}<br>${map ? 'Map: ' + esc(map.name) + ' · ' : ''}Updated ${fmtDate(d.at)} · refresh 5 s</span>`;
 }
