@@ -24,6 +24,7 @@ class F44_AIGroupInfo
 	F44_TrackedVehicle m_Vehicle;
 	bool m_bTank;
 	bool m_bDismounted;
+	bool m_bBoarded;	// crew seated (Board ran)
 	bool m_bReturning;	// driver bringing the transport back to base
 	bool m_bInPosition;	// tank reached its support position
 	vector m_vHome;	// spawn position of the group
@@ -699,6 +700,15 @@ class F44_AIDirector
 	{
 		if (gi.m_Vehicle || gi.m_Group.GetAgentsCount() < 2)
 			return false;	// a lone bot does not take a vehicle
+		// no transport ride when the spawn is already within walking distance of a sector
+		if (!wantTank)
+		{
+			for (int si = 0; si < F44_SectorManager.Count(); si++)
+			{
+				if (vector.DistanceXZ(pos, F44_SectorManager.GetSector(si).GetOwner().GetOrigin()) < UNLOAD_DIST + 80)
+					return false;
+			}
+		}
 		float now = GetGame().GetWorld().GetWorldTime() * 0.001;
 		int sidePlayers = m_iPlayersDef;
 		if (gi.m_iSide == F44_ESectorOwner.ATTACKER)
@@ -839,6 +849,7 @@ class F44_AIDirector
 			gi.m_Vehicle = null;
 			return;
 		}
+		gi.m_bBoarded = true;
 		// re-issue the sector order now that the group is mounted (road route)
 		ClearWaypoints(gi);
 		Retarget(gi, m_eMode, m_GameMode.GetSectorOwners(), false);
@@ -848,7 +859,7 @@ class F44_AIDirector
 	//! per tick: telemetry, stuck detection, unload / support position / return to base
 	protected void UpdateVehicle(F44_AIGroupInfo gi, float dt)
 	{
-		if (!gi.m_Vehicle || !gi.m_Group || (gi.m_bDismounted && !gi.m_bReturning))
+		if (!gi.m_Vehicle || !gi.m_Group || !gi.m_bBoarded || (gi.m_bDismounted && !gi.m_bReturning))
 			return;
 		IEntity veh = gi.m_Vehicle.m_Entity;
 		if (!veh)
@@ -959,7 +970,10 @@ class F44_AIDirector
 			if (split && ch == driver)
 				continue;
 			CompartmentAccessComponent ca = CompartmentAccessComponent.Cast(ch.FindComponent(CompartmentAccessComponent));
-			if (ca && ca.IsInCompartment() && ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false))
+			if (!ca || !ca.IsInCompartment())
+				continue;
+			// animated get-out can fail (vehicle still moving / just boarded): teleport out then
+			if (ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false) || ca.GetOutVehicle(EGetOutType.TELEPORT, -1, ECloseDoorAfterActions.INVALID, false))
 				nOut++;
 		}
 		SetUsable(gi.m_Group, veh, false);
@@ -1000,6 +1014,7 @@ class F44_AIDirector
 		d.m_iTargetSector = gi.m_iTargetSector;
 		d.m_Vehicle = tv;
 		d.m_bReturning = true;
+		d.m_bBoarded = true;
 		d.m_vHome = gi.m_vHome;
 		d.m_vLastPos = tv.m_Entity.GetOrigin();
 		tv.m_AIGroup = ng;
@@ -1026,8 +1041,8 @@ class F44_AIDirector
 		foreach (IEntity ch : GroupMembers(gi.m_Group))
 		{
 			CompartmentAccessComponent ca = CompartmentAccessComponent.Cast(ch.FindComponent(CompartmentAccessComponent));
-			if (ca && ca.IsInCompartment())
-				ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
+			if (ca && ca.IsInCompartment() && !ca.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false))
+				ca.GetOutVehicle(EGetOutType.TELEPORT, -1, ECloseDoorAfterActions.INVALID, false);
 		}
 		SetUsable(gi.m_Group, veh, false);
 		tv.m_AIGroup = null;
