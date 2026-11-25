@@ -5,6 +5,7 @@
 //  - P2-F field maintenance load: F44_Maintenance.c
 //  - P2-G combat badges: F44_Badges.c
 //  - P3 squads (orders, spawn on leader): F44_Squads.c
+//  - P3 access points, multi-line layouts, pushed off the map: F44_AccessPoints.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -29,11 +30,13 @@ class F44_Rules
 		F44_Maintenance.s_Cfg.Read(root);
 		F44_Squads.s_Cfg = new F44_SquadConfig();
 		F44_Squads.s_Cfg.Read(root);
+		F44_AccessPoints.Read(root);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static void Init(F44_BattleConfig cfg)
+	static void Init(F44_BattleConfig cfg, array<int> owners, array<int> progress)
 	{
+		F44_AccessPoints.Init(cfg, owners, progress);
 		s_mTeamKills.Clear();
 		F44_Maintenance.Reset();
 		F44_Badges.Reset();
@@ -44,7 +47,9 @@ class F44_Rules
 	//! deploy gate (PreparePlayerEntity_S, class and team already validated). false = refused, player notified.
 	static bool CanDeploy(int pid, string classKey, string teamId, int points)
 	{
-		string why = F44_Maintenance.CheckDeploy(pid, classKey, points);
+		string why = F44_AccessPoints.CheckDeploy(teamId);
+		if (why.IsEmpty())
+			why = F44_Maintenance.CheckDeploy(pid, classKey, points);
 		if (!why.IsEmpty())
 		{
 			Notify(pid, why);
@@ -76,6 +81,7 @@ class F44_Rules
 		s_mPlayerSide = playerSide;
 		F44_Maintenance.Tick(dt);
 		F44_Squads.Tick(dt, owners, mode, playerSide);
+		F44_AccessPoints.Tick(owners);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -89,6 +95,16 @@ class F44_Rules
 	static void OnVehicleDestroyed(IEntity veh, string key)
 	{
 		F44_Maintenance.OnVehicleDestroyed(veh, F44_Catalog.Get().GetVehicleCost(key));
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! extra end conditions; returns the end reason ("" = none), winnerIsDefender tells who wins
+	static string CheckEnd(out bool winnerIsDefender)
+	{
+		winnerIsDefender = true;
+		if (F44_AccessPoints.AllLost())
+			return "PUSHED_OFF";
+		return string.Empty;
 	}
 
 	//------------------------------------------------------------------------------------------------

@@ -104,10 +104,27 @@ class F44_SectorManager
 	//! Is the sector capturable right now
 	//! ASSAULT: only the first sector (by order) not yet owned by the attacker.
 	//! SKIRMISH: all sectors.
+	// P3 multi-line layouts (F44_AccessPoints.c): each line is its own assault chain; access point sectors stay contestable
+	static ref array<ref array<int>> s_aLines = {};
+	static ref array<int> s_aAlwaysActive = {};
+
 	static bool IsActive(int idx, F44_EBattleMode mode, array<int> owners)
 	{
 		if (mode == F44_EBattleMode.SKIRMISH)
 			return true;
+		if (s_aAlwaysActive.Contains(idx))
+			return true;
+		foreach (array<int> line : s_aLines)
+		{
+			if (!line.Contains(idx))
+				continue;
+			foreach (int li : line)
+			{
+				if (li < owners.Count() && owners[li] != F44_ESectorOwner.ATTACKER && !s_aAlwaysActive.Contains(li))
+					return li == idx;
+			}
+			return false;
+		}
 		for (int i = 0; i < owners.Count(); i++)
 		{
 			if (owners[i] != F44_ESectorOwner.ATTACKER)

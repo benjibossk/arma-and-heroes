@@ -401,7 +401,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		m_AI.Init(this, aiLimit);
 		m_Loadouts.Init(cfg, m_Loader.GetApiUrl(), m_Loader.GetToken(), m_Loader.GetBattleId());
 
-		F44_Rules.Init(cfg);	// GAP_PLAN rules (F44_Rules.c)
+		F44_Rules.Init(cfg, m_aSectorOwners, m_aSectorProgress);	// GAP_PLAN rules (F44_Rules.c)
 		m_bRunning = true;
 		Replication.BumpMe();
 		GetGame().GetCallqueue().CallLater(ServerTick, m_fTickInterval * 1000, true);
@@ -1125,6 +1125,16 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			&& F44_SectorManager.AllOwnedBy(m_aSectorOwners, F44_ESectorOwner.DEFENDER))
 		{
 			EndBattle(m_sDefender, "SECTORS");
+			return;
+		}
+		bool ruleDef;
+		string ruleEnd = F44_Rules.CheckEnd(ruleDef);	// GAP_PLAN: pushed off the map...
+		if (!ruleEnd.IsEmpty())
+		{
+			if (ruleDef)
+				EndBattle(m_sDefender, ruleEnd);
+			else
+				EndBattle(m_sAttacker, ruleEnd);
 			return;
 		}
 		if (m_iTicketsAtt <= 0)

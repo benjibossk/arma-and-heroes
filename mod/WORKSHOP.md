@@ -50,6 +50,7 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Field maintenance load: each death adds your soldier's load (class + equipment points) to a 4-minute timer that counts down while you are alive; a soldier whose next death would overflow it cannot deploy until the timer drops. Same for vehicles you lose as a driver.
 - Combat badges: wear one badge per soldier (chosen in the barracks, unlocked by ribbons, bronze/silver/gold): First Aid (extra dressings), Combat Medic (faster treatment), Heavy Set (less damage taken).
 - Squads: your vanilla group is your squad. The leader's order (attack/defend a sector) is shown to members, and members deploy next to their leader when he is safe.
+- Access points and multi-line maps: attack lines are captured independently; if defenders retake an access point, the teams attacking from it can no longer deploy, and losing every access point ends the battle (pushed off the map).
 
 
 ## Changelog 1.2.1 (draft)

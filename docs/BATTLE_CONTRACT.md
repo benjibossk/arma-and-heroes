@@ -110,4 +110,12 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - Spawn on leader: a member who deploys on foot is moved 2.5 m behind his leader when the leader is alive, on foot and has no enemy player within the radius.
 - BattleResult players gain `"squad": {"size", "leader", "orderSec"}` (time inside the ordered sector). The web does not pay a squad bonus yet.
 
+### P3 Access points, multi-line layouts, pushed off the map — `F44_AccessPoints.c` (ASSAULT only)
+- `"lines": [{"sectors": [0, 1, 2]}, {"sectors": [3, 4, 5]}]` (optional): sector indices of each attack line; each line is captured
+  in order independently (`F44_SectorManager.IsActive`). Absent = the single assault chain of before.
+- `"accessPoints": [{"id": "A1", "sector": 0, "teams": ["at_12"]}]` (optional): the access point sector starts attacker-owned and stays
+  contestable. While the defender holds it, the listed attacker teams cannot deploy (hint "pushed off the map"); unlisted teams are never blocked.
+- When every access point is defender-owned the battle ends: defender wins, `reason: "PUSHED_OFF"`. Log: `[F44] ACCESS`.
+- The web does not send `lines` / `accessPoints` yet (layouts with several lines belong to the maps lane).
+
 
