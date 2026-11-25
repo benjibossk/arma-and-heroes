@@ -118,30 +118,34 @@ function wChart(a, b) {
     <div class="muted wnc">Damage per hit vs range (energy model from mod drag/mass, armour ignored)${cs.some(w => w.warnings) ? ' — ⚠ ' + esc(cs.find(w => w.warnings).warnings[0]) : ''}</div>`;
 }
 // i: item as returned by /unlocks or /store (key, label, category, price, rank, rankName, classes, tree)
-async function openWeapon(i, list = []) {
+// into: render inline (dedicated /weapon page) instead of the modal
+async function openWeapon(i, list = [], into = null) {
   const S = await weaponStats(), a = S[i.key];
-  let box = document.getElementById('wdlg');
+  let box = into || document.getElementById('wdlg');
   if (!box) { box = document.createElement('div'); box.id = 'wdlg'; box.className = 'wdlg'; document.body.appendChild(box); box.onclick = e => { if (e.target === box) box.remove(); }; }
   const others = list.filter(o => o.key !== i.key && S[o.key] && S[o.key].damageCurve);
   const draw = cmpKey => {
     const b = cmpKey ? S[cmpKey] : null, bi = list.find(o => o.key === cmpKey);
     const modes = a && a.fireModes && a.fireModes.length ? [...new Set(a.fireModes.filter(m => m.mode && m.mode !== 'safe').map(m => m.mode[0].toUpperCase() + m.mode.slice(1) + (m.burst ? ' ' + m.burst : '') + (m.rpm ? ` (${m.rpm} rpm)` : '')))].join(' / ') || '—' : '—';
-    box.innerHTML = `<div class="wcard"><button class="wx" onclick="document.getElementById('wdlg').remove()">✕</button>
+    box.innerHTML = `<div class="wcard">${into ? '' : `<button class="wx" onclick="document.getElementById('wdlg').remove()">✕</button><a class="wfull" href="/weapon?id=${encodeURIComponent(i.key)}" title="Shareable page">Full page ↗</a>`}
      <div class="whead"><div class="wimg ${ITEMIMG[i.key]?.kind === 'photo' ? 'photo' : ''}"><img src="${itemSrc(i.key)}" alt=""></div>
       <div><div class="wcat">${esc(i.category || '')}${a && a.caliber ? ' · ' + esc(a.caliber) : ''}</div><h2>${esc(i.label)}</h2>
        <div class="wtags"><span>${i.price ? nfmt(i.price) + ' cr' : 'Free'}</span><span>${i.rank ? 'Rank ' + i.rank + (i.rankName ? ' · ' + esc(i.rankName) : '') : esc(i.rankRequired || 'No rank required')}</span>
        ${(i.classes || []).map(c => `<span>${esc(c)}</span>`).join('')}${i.tree ? `<span>${esc(i.tree)}</span>` : ''}</div>
        <div class="muted" style="font-size:13px">Fire modes: ${esc(modes)}${a && a.zeroing ? ` · Sights ${a.zeroing.min}–${a.zeroing.max} m` : ''}${a && a.damage ? ` · Damage ${a.damage}` : ''}</div></div></div>
      ${a ? `<div class="wbars">${b ? `<div class="wleg"><i class="a"></i>${esc(i.label)} <i class="b"></i>${esc(bi?.label || cmpKey)}</div>` : ''}${wBars(a, b)}</div>${wChart(a, b)}` : '<p class="muted">No stats extracted for this item.</p>'}
-     ${others.length && a && a.damageCurve ? `<div class="wcmp">Compare with <select onchange="this.closest('.wdlg')._draw(this.value)"><option value="">—</option>${others.map(o => `<option value="${o.key}" ${o.key === cmpKey ? 'selected' : ''}>${esc(o.label)}</option>`).join('')}</select></div>` : ''}</div>`;
+     ${others.length && a && a.damageCurve ? `<div class="wcmp">Compare with <select onchange="this.closest('[data-wbox]')._draw(this.value)"><option value="">—</option>${others.map(o => `<option value="${o.key}" ${o.key === cmpKey ? 'selected' : ''}>${esc(o.label)}</option>`).join('')}</select></div>` : ''}</div>`;
   };
-  box._draw = draw; draw('');
+  box.dataset.wbox = 1; box._draw = draw; draw('');
 }
 const nfmt = n => Number(n).toLocaleString('en-US').replace(/,/g, ' ');
+// vehicle keys (progression vehicles, LIC_ licences) -> /vehicle page; anything else -> weapon card
+const vehicleUrl = k => '/vehicle?id=' + encodeURIComponent(String(k).replace(/^LIC_/, ''));
+const isVehicleItem = i => i && (i.category === 'vehicle' || /^LIC_/.test(i.key));
 // make every .icard of a container open the weapon card (items = list the cards came from)
 function bindWeaponCards(root, items) {
   root.querySelectorAll('.icard[data-k]').forEach(el => {
     el.classList.add('wclick');
-    el.onclick = e => { if (e.target.closest('button,select,a')) return; const i = items.find(x => x.key === el.dataset.k); if (i) openWeapon(i, items.filter(x => x.slot !== 'license')); };
+    el.onclick = e => { if (e.target.closest('button,select,a')) return; const i = items.find(x => x.key === el.dataset.k); if (isVehicleItem(i)) location.href = vehicleUrl(i.key); else if (i) openWeapon(i, items.filter(x => x.slot !== 'license')); };
   });
 }

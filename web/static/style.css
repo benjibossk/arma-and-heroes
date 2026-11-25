@@ -107,6 +107,7 @@ details summary{cursor:pointer}
 /* weapon detail card */
 .icard.wclick{cursor:pointer}.icard.wclick:hover{border-color:var(--amber)}
 .wdlg{position:fixed;inset:0;background:rgba(10,10,10,.72);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:40px 16px}
+.wfull{position:absolute;top:12px;right:44px;font-size:12px;color:var(--amber);text-decoration:none;font-family:'Roboto Condensed',sans-serif}.wfull:hover{text-decoration:underline}
 .wcard{position:relative;width:min(620px,100%);background:#262827;border:1px solid var(--line);border-top:3px solid var(--amber);padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
 .wx{position:absolute;top:8px;right:8px;width:auto;margin:0;padding:2px 9px;background:transparent;border:1px solid var(--line);color:var(--text)}
 .whead{display:flex;gap:16px;align-items:center;flex-wrap:wrap}

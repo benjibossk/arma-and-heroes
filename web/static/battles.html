@@ -19,7 +19,7 @@ async function detail(id) {
   for (const f of [c.attacker, c.defender]) {
     const ai = c.sides[f].ai || {};
     h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attacking)' : '(defending)'}</h3><div class="muted">AI bots: ${ai.enabled ? 'on, max ' + ai.maxAlive + ' alive, x' + ai.perPlayerScale + ' per player' + (ai.skill ? ', base skill ' + ai.skill + (ai.minSkill ? ' [' + ai.minSkill + '–' + ai.maxSkill + ']' : '') : '') : 'off'}</div><table>` + c.sides[f].teams.map(t =>
-      `<tr><td>${esc(t.displayName || t.teamId)}<br><span class="muted">${t.teamId}</span></td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men${b.result ? '<br><span class="muted">lost ' + (((b.result.losses || {})[t.teamId] || {}).manpower ?? 0) + ' · AI kills ' + ((b.result.teamAiKills || {})[t.teamId] ?? 0) + '</span>' : ''}</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
+      `<tr><td>${esc(t.displayName || t.teamId)}<br><span class="muted">${t.teamId}</span></td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men${b.result ? '<br><span class="muted">lost ' + (((b.result.losses || {})[t.teamId] || {}).manpower ?? 0) + ' · AI kills ' + ((b.result.teamAiKills || {})[t.teamId] ?? 0) + '</span>' : ''}</td><td class="muted">${t.vehicles.map(v => v.count + '× <a href="' + vehicleUrl(v.key) + '">' + esc(v.key) + '</a>').join(', ')}</td></tr>`).join('') + '</table>';
   }
   if (b.result) {
     const r = b.result;

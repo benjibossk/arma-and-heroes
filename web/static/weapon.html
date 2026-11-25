@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Weapon</title><link rel="stylesheet" href="/style.css">
+<style>.wpage .wcard{width:min(760px,100%);margin:0 auto}.wnav{width:min(760px,100%);margin:0 auto 10px;display:flex;gap:14px;font-size:13px}.wnav a{color:var(--amber)}</style></head><body>
+<main><div class="wnav"><a href="/unlocks">← Unlocks</a><a href="/barracks">Barracks</a></div><div class="wpage" id="w"><p class="muted">Loading…</p></div></main>
+<script src="/common.js"></script>
+<script>
+// /weapon?id=KEY : shareable full weapon card (same renderer as the modal, with comparison)
+(async () => {
+  const key = new URLSearchParams(location.search).get('id') || '', box = document.getElementById('w');
+  const [S, U] = await Promise.all([weaponStats(), fetch('/api/v1/unlocks').then(r => r.json()).catch(() => ({})), itemImgsReady]);
+  const items = (U.items || []).filter(x => x.slot !== 'license');
+  let i = items.find(x => x.key === key);
+  if (!i && S[key]) i = { key, label: S[key].label || key, category: S[key].category };
+  if (!i) { box.innerHTML = `<div class="panel"><h2>Unknown weapon</h2><p class="muted">No weapon “${esc(key)}”.</p></div>`; return; }
+  document.title = 'Arma & Heroes — ' + i.label;
+  openWeapon(i, items.filter(x => !i.faction || x.faction === i.faction), box);
+})();
+</script></body></html>

@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Vehicle</title><link rel="stylesheet" href="/style.css">
+<style>
+.wpage .wcard{width:min(760px,100%);margin:0 auto}.wnav{width:min(760px,100%);margin:0 auto 10px;display:flex;gap:14px;font-size:13px;flex-wrap:wrap}.wnav a{color:var(--amber)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:12px 0}
+.vgrid div{background:#1f2120;border:1px solid var(--line);padding:8px 10px}.vgrid span{display:block;font-size:11px;text-transform:uppercase;color:#9a9890;font-family:'Roboto Condensed',sans-serif}
+.vgrid b{font-family:Oswald,sans-serif;font-size:18px;color:var(--text);font-weight:500}
+.vsec h3{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:15px;color:var(--amber);margin:14px 0 6px}.vsec ul{margin:0;padding-left:18px;font-size:14px}
+.vlist{display:flex;flex-wrap:wrap;gap:6px}.vlist a{font-size:13px;color:var(--text);border:1px solid var(--line);padding:3px 8px;text-decoration:none}.vlist a.on{border-color:var(--amber);color:var(--amber)}
+</style></head><body>
+<main><div class="wnav"><a href="/unlocks">← Unlocks</a><a href="/battles">Battles</a></div><div class="wpage" id="v"><p class="muted">Loading…</p></div></main>
+<script src="/common.js"></script>
+<script>
+// /vehicle?id=KEY : vehicle detail (stats from the mod prefabs: /api/v1/vehicles/stats, tools/vehicle-stats/extract.py)
+const ROLE = { tank: 'Tank', light_armored: 'Armoured', light_armored_aa: 'Armoured AA', light_utility: 'Utility car', light_armed: 'Armed car', truck: 'Truck' };
+const SIDE = { US: 'Allies (US)', GER: 'Axis (GER)' };
+(async () => {
+  const key = (new URLSearchParams(location.search).get('id') || '').replace(/^LIC_/, ''), box = document.getElementById('v');
+  const [V, U, O] = await Promise.all([fetch('/api/v1/vehicles/stats').then(r => r.json()).then(j => j.vehicles || {}).catch(() => ({})),
+    fetch('/api/v1/unlocks').then(r => r.json()).catch(() => ({})), fetch('/api/v1/teams/options').then(r => r.json()).catch(() => ({})), itemImgsReady]);
+  const v = V[key], lic = (U.items || []).find(x => x.key === 'LIC_' + key);
+  const nav = Object.entries(V).map(([k, x]) => `<a class="${k === key ? 'on' : ''}" href="/vehicle?id=${k}">${esc(x.label)}</a>`).join('');
+  if (!v) { box.innerHTML = `<div class="panel"><h2>Unknown vehicle</h2><p class="muted">No vehicle “${esc(key)}”.</p><div class="vlist">${nav}</div></div>`; return; }
+  document.title = 'Arma & Heroes — ' + v.label;
+  const n = x => x == null ? '—' : nfmt(x), cell = (l, x) => `<div><span>${l}</span><b>${x}</b></div>`;
+  const crew = v.crew ? [v.crew.pilot && v.crew.pilot + ' driver', v.crew.turret && v.crew.turret + ' turret', v.crew.cargo && v.crew.cargo + ' cargo'].filter(Boolean).join(' · ') : '';
+  const crates = Object.entries(O.crates || {});
+  box.innerHTML = `<div class="wcard">
+   <div class="whead"><div class="wimg"><img src="/assets/items/${esc(v.img)}" alt=""></div>
+    <div><div class="wcat ${v.faction}">${SIDE[v.faction] || v.faction} · ${ROLE[v.role] || esc(v.role || '')}</div><h2>${esc(v.label)}</h2>
+     <div class="wtags"><span>${lic && lic.price ? nfmt(lic.price) + ' cr licence' : 'No licence'}</span><span>${esc(lic?.rankRequired || 'No rank required')}</span>${lic?.tree ? `<span>${esc(lic.tree)}</span>` : ''}</div>
+     <div class="muted" style="font-size:13px">Mod: ${esc(v.source || '—')}</div></div></div>
+   <div class="vgrid">${cell('Seats', n(v.seats))}${cell('Mass', v.mass ? n(v.mass) + ' kg' : '—')}${cell('Hull health', n(v.hullHealth))}${cell('Hull damage reduction', n(v.hullReduction))}${cell('Mobile spawn', v.mobileSpawn ? 'Yes' : 'No')}</div>
+   <div class="vsec">
+    <h3>Crew &amp; seats</h3><ul><li>${esc(v.crewNote || crew || '—')}</li>${crew && v.crewNote ? `<li class="muted">Compartments found in the prefab: ${crew}</li>` : ''}</ul>
+    <h3>Armament</h3><ul>${(v.armament || []).length ? v.armament.map(a => `<li>${esc(a)}</li>`).join('') : '<li class="muted">No mounted weapon in the base version</li>'}
+     ${v.armed ? `<li>Upgrade: <b>${esc(v.armed.label || 'armed variant')}</b> — ${n(v.armed.cost)} war funds per vehicle</li>` : ''}</ul>
+    <h3>Assault teams</h3><ul>${(v.teams || []).map(t => `<li>${esc(t.label)} (${t.type}): ${t.count} in the pool</li>`).join('') || '<li class="muted">Not in a default pool</li>'}
+     ${(v.allowedIn || []).length ? `<li class="muted">Allowed in: ${v.allowedIn.join(', ')}</li>` : ''}</ul>
+    ${crates.length ? `<h3>Supply crate options</h3><ul>${crates.map(([k, c]) => `<li>${esc(c.label)} — ${n(c.cost)} war funds</li>`).join('')}</ul>` : ''}
+    ${v.mobileSpawn ? '<h3>Mobile spawn</h3><ul><li>Team members can spawn in a free seat while the vehicle is alive and not taken by the enemy.</li></ul>' : ''}
+   </div>
+   <p class="muted" style="font-size:12px">Values read from the mod prefab files; “—” = not defined there (top speed is not stored in the prefabs).</p>
+   <div class="vlist">${nav}</div></div>`;
+})();
+</script></body></html>

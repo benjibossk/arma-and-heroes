@@ -1,0 +1,385 @@
+{
+ "_meta": {
+  "generated_by": "tools/vehicle-stats/extract.py",
+  "sources": "vehicle mods data.pak (.et) + vanilla Reforger base prefabs",
+  "units": {
+   "mass": "kg",
+   "hullReduction": "flat damage reduction of the Hull hit zone"
+  },
+  "null": "valeur absente des fichiers du mod (non inventee)"
+ },
+ "vehicles": {
+  "US_JEEP": {
+   "label": "Willys MB Jeep",
+   "faction": "US",
+   "role": "light_utility",
+   "source": "Arma Reforger vanilla",
+   "prefab": "{0CFB9416659192D2}Prefabs/Vehicles/ww2 jeep/Willys Jeep_uncovered.et",
+   "seats": 4,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 1
+   },
+   "armament": [],
+   "mass": 1100,
+   "hullHealth": null,
+   "hullReduction": null,
+   "parentChain": 4,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "US_JEEP_WILLYS.webp",
+   "teams": [
+    {
+     "type": "REC",
+     "label": "Reconnaissance",
+     "count": 2
+    },
+    {
+     "type": "MOT",
+     "label": "Motorized",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "REC",
+    "MOT"
+   ],
+   "mobileSpawn": false,
+   "crewNote": "1 pilote + 3",
+   "armed": {
+    "label": "M1919 / M2 mount",
+    "cost": 40,
+    "armament": [
+     "M2HB"
+    ],
+    "seats": 3
+   }
+  },
+  "US_TRUCK": {
+   "label": "GMC CCKW Truck",
+   "faction": "US",
+   "role": "truck",
+   "source": "Arma Reforger vanilla",
+   "prefab": "{773E8E154D18321C}Prefabs/Vehicles/Wheeled/WC63/WC63_transport.et",
+   "seats": 2,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 1
+   },
+   "armament": [],
+   "mass": 2380,
+   "hullHealth": 600,
+   "hullReduction": 5.0,
+   "parentChain": 5,
+   "img": "US_WC63_UNCOVERED.webp",
+   "teams": [
+    {
+     "type": "MOT",
+     "label": "Motorized",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "MOT"
+   ],
+   "mobileSpawn": true,
+   "crewNote": "1 pilote + cargo",
+   "armed": {
+    "label": "ring-mounted MG",
+    "cost": 60,
+    "armament": [
+     "M2HB"
+    ],
+    "seats": 3
+   }
+  },
+  "US_M3A1": {
+   "label": "M3A1 Half-track",
+   "faction": "US",
+   "role": "light_armored",
+   "source": "M3A1 HalfTrack",
+   "prefab": "{EC62ED156FC6F05C}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_Transport.et",
+   "seats": 12,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 9
+   },
+   "armament": [],
+   "mass": 9000,
+   "hullHealth": 600,
+   "hullReduction": 5.0,
+   "parentChain": 4,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "US_M3A1.webp",
+   "teams": [
+    {
+     "type": "MOT",
+     "label": "Motorized",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "ARM",
+    "REC",
+    "MOT"
+   ],
+   "mobileSpawn": true,
+   "armed": {
+    "label": "M2 .50 ring mount",
+    "cost": 60,
+    "armament": [
+     "M2HB"
+    ],
+    "seats": 19
+   }
+  },
+  "US_SHERMAN": {
+   "label": "M4 Sherman",
+   "faction": "US",
+   "role": "tank",
+   "source": "M4A2 Sherman mod",
+   "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
+   "seats": 10,
+   "crew": {
+    "pilot": 1,
+    "turret": 3,
+    "cargo": 6
+   },
+   "armament": [
+    "75 mm M3 cannon",
+    "M26 pershing"
+   ],
+   "mass": 27900,
+   "hullHealth": 6000,
+   "hullReduction": null,
+   "parentChain": 3,
+   "img": "US_SHERMAN_M4A2.webp",
+   "teams": [
+    {
+     "type": "ARM",
+     "label": "Armor",
+     "count": 3
+    }
+   ],
+   "allowedIn": [
+    "ARM"
+   ],
+   "mobileSpawn": true,
+   "crewNote": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)"
+  },
+  "GER_KFZ": {
+   "label": "Kfz. 1 Kübelwagen",
+   "faction": "GER",
+   "role": "light_utility",
+   "source": "FH GER Vehicles",
+   "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
+   "seats": 4,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 1
+   },
+   "armament": [],
+   "mass": 725,
+   "hullHealth": null,
+   "hullReduction": null,
+   "parentChain": 5,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "GER_KFZ.webp",
+   "teams": [
+    {
+     "type": "REC",
+     "label": "Reconnaissance",
+     "count": 2
+    }
+   ],
+   "allowedIn": [
+    "REC",
+    "MOT"
+   ],
+   "mobileSpawn": false,
+   "crewNote": "1 pilote + 3 passagers",
+   "armed": {
+    "label": "MG34 mount",
+    "cost": 40,
+    "armament": [],
+    "seats": 2
+   }
+  },
+  "GER_TRUCK": {
+   "label": "Opel Blitz Truck",
+   "faction": "GER",
+   "role": "truck",
+   "source": "FH GER Vehicles",
+   "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
+   "seats": 2,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 1
+   },
+   "armament": [],
+   "mass": 2500,
+   "hullHealth": null,
+   "hullReduction": null,
+   "parentChain": 6,
+   "img": "GER_TRUCK.webp",
+   "teams": [
+    {
+     "type": "MOT",
+     "label": "Motorized",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "MOT"
+   ],
+   "mobileSpawn": true,
+   "crewNote": "1 pilote + cargo"
+  },
+  "GER_SDKFZ222": {
+   "label": "Sd.Kfz. 222 Armoured Car",
+   "faction": "GER",
+   "role": "light_armored",
+   "source": "FH GER Vehicles",
+   "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
+   "seats": 3,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 0
+   },
+   "armament": [],
+   "mass": 4800,
+   "hullHealth": null,
+   "hullReduction": null,
+   "parentChain": 5,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "GER_SDKFZ222.webp",
+   "teams": [
+    {
+     "type": "ARM",
+     "label": "Armor",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "ARM",
+    "REC",
+    "MOT"
+   ],
+   "mobileSpawn": false,
+   "crewNote": "3 (pilote, tireur, commandant)"
+  },
+  "GER_SDKFZ251": {
+   "label": "Sd.Kfz. 251 Half-track",
+   "faction": "GER",
+   "role": "light_armored",
+   "source": "SDKFZ251",
+   "prefab": "{D253646DF96D27EA}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport.et",
+   "seats": 12,
+   "crew": {
+    "pilot": 1,
+    "turret": 0,
+    "cargo": 9
+   },
+   "armament": [],
+   "mass": 11500,
+   "hullHealth": 8000,
+   "hullReduction": 40.0,
+   "parentChain": 4,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "GER_SDKFZ251.webp",
+   "teams": [
+    {
+     "type": "MOT",
+     "label": "Motorized",
+     "count": 2
+    }
+   ],
+   "allowedIn": [
+    "ARM",
+    "REC",
+    "MOT"
+   ],
+   "mobileSpawn": true,
+   "armed": {
+    "label": "MG34 shield mount",
+    "cost": 60,
+    "armament": [
+     "MG42"
+    ],
+    "seats": 11
+   }
+  },
+  "GER_PZ4": {
+   "label": "Panzer IV",
+   "faction": "GER",
+   "role": "tank",
+   "source": "RMS WW2 PANZER IV",
+   "prefab": "{E44C69F0A2538279}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_H_Base.et",
+   "seats": 5,
+   "crew": {
+    "pilot": 1,
+    "turret": 1,
+    "cargo": 0
+   },
+   "armament": [
+    "MG15"
+   ],
+   "mass": 11598,
+   "hullHealth": null,
+   "hullReduction": null,
+   "parentChain": 5,
+   "seatsSource": "inventory/vehicles.json (resourceDatabase)",
+   "img": "GER_PZ4_side.svg",
+   "teams": [
+    {
+     "type": "ARM",
+     "label": "Armor",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "ARM"
+   ],
+   "mobileSpawn": true
+  },
+  "GER_TIGER1": {
+   "label": "Tiger I",
+   "faction": "GER",
+   "role": "tank",
+   "source": "Tiger_H1",
+   "prefab": "{67750217922403FC}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_Grey.et",
+   "seats": 6,
+   "crew": {
+    "pilot": 1,
+    "turret": 3,
+    "cargo": 2
+   },
+   "armament": [
+    "Tiger1 cannon-Grey",
+    "Tiger1 cannon",
+    "MG34"
+   ],
+   "mass": 57000,
+   "hullHealth": 9000,
+   "hullReduction": null,
+   "parentChain": 4,
+   "img": "GER_TIGER1.webp",
+   "teams": [
+    {
+     "type": "ARM",
+     "label": "Armor",
+     "count": 1
+    }
+   ],
+   "allowedIn": [
+    "ARM"
+   ],
+   "mobileSpawn": true
+  }
+ }
+}
