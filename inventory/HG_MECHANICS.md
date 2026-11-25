@@ -201,3 +201,37 @@ Checked, no change: medical defaults (wiki has no heal/bleed numbers; 2 bandages
 
 **Remaining gaps (not on the wiki):** AT crate respawn timer and launchers per crate, per-death/vehicle ticket cost,
 max team size, first-aid heal amount, bleeding, free-vehicle counts/respawn, factory production rates.
+
+## 11. Air force teams and planes (wiki PDFs, 2026-11-25)
+Source: two user-supplied wiki page exports (Paratrooper assault team; Fighter Planes). Paraphrased, numbers only.
+Note: the "Paratrooper" export is the **assault-team** page, not the soldier page — it gives no jump/chute/landing,
+loadout or soldier-rank rules. Those stay `[M]` (section 1 / AIRCRAFT_PARA.md) until a soldier-page export is read.
+
+**Para assault teams `[S]`**
+- Airforce branch holds 5 team types: Fighter Recon -> Fighter Squadron -> Heavy Fighter Squadron, and Pathfinders -> Paratroopers.
+- Paratroopers team: level 1, map speed 2.7, costs 2 command points, carries max 72 para-soldier resources + 18 transport-plane resources; final tier (no upgrade).
+- It is the upgraded Pathfinders: same resource kinds, more of them, slightly slower on the map (same pattern as Fighter Squadron vs Fighter Recon).
+- Enables the Paratrooper soldier type + one transport plane per side (US: C-47; GER: Ju 52; USSR: lend-lease C-47).
+- Commanded by a rank-15 Paratrooper or a General.
+- Ratio 4 soldiers : 1 transport plane resource -> transports are a consumable of the team, like soldiers.
+
+**Fighter planes `[S]`** — 3 classes per faction, same price ladder for every side:
+| Class | Purchase (credits / gold) | Spawn price | Rearm time | Seats | Rank req. |
+|---|---|---|---|---|---|
+| Recon plane | 55 000 / 650 | 55 | 60 s | 2 (pilot + rear gunner) | none |
+| Fighter tier 1 | 96 000 / 1 150 | 308 | 65 s | 1 | 5 |
+| Fighter tier 2 | 138 000 / 1 650 | 442 | 70 s (US 87 s) | 1 | 7 |
+| Heavy fighter (twin) | 167 000 / 2 000 | 668 | 87 s (US 97 s) | 2? (blank) | 9 |
+| Fighter tier 3 | 188 000 / 2 250 | 451 | 65-75 s | 1 | 12 |
+
+| Side | Recon | Fighter T1 | Fighter T2 | Heavy | Fighter T3 |
+|---|---|---|---|---|---|
+| GER | Hs 126 (2 MG, 1x250 kg) | Bf 109D (20 mm + 2 MG, 250 kg) | Bf 109E (2x20 mm + MG, 250 kg) | Me 410 (2x20 mm + 13 mm, 250 kg) | Fw 190 D-9 (MG151/131, 500 kg) |
+| US | O-52 Owl (.30, small bombs) | P-35A (.50 + .30, small bombs) | P-40N (.50s, small bombs) | P-38 (20 mm + .50s, 250 kg) | P-51D (.50s, 250 kg) |
+| USSR | R-Z (2 MG, FAB-100) | MiG-3 (12.7 + 2x7.62, FAB-100) | Yak-9B (20 mm + 12.7, FAB-100) | Pe-3bis (20 mm + 2x12.7, FAB-250) | La-7 (3x20 mm, FAB-100) |
+- Every plane carries guns + **one bomb load**; no rockets listed. "Maintenance load" = rearm/refuel time (on runway/airfield `[M]`).
+- Spawn price ~ 1/3 of a tier's gold price; heavy fighters cost most per spawn (best ground attack).
+- Not in these exports: damage model, AA, per-battle plane limits (see section 5: plane tickets 10, air spawn 15 s), war-map air interaction beyond team gating.
+
+**Adopt for A&H**: AIR team (fighters) and PARA team keep the "resources = soldiers + vehicles" model; transport is a team resource;
+planes owned by Pilot class, bought by rank, spawn price per sortie; 1 bomb per sortie, rearm on airfield with a timer.

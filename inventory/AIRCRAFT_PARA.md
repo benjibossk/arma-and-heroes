@@ -47,3 +47,32 @@ Pas de Ju 52, Fw 190, Spitfire Reforger trouvés.
 Avion = absent ou mesh placeholder invisible ; « spawn haut » : joueur spawné à 300 m au-dessus du point choisi sur la carte de déploiement, chute libre + notre composant parachute scripté (voile = mesh simple ou aucune, drag + action d'ouverture). Caisses : spawn en altitude + descente scriptée + fumigène. Tout faisable en script A&H Core, sans dépendance.
 
 Sources : pages Workshop citées (reforger.armaplatform.com/workshop/<ID>).
+
+## 6. Mécaniques H&G (wiki PDFs, HG_MECHANICS.md §11) → faisabilité
+Légende : **OK** = faisable maintenant (vanilla + nos scripts) · **MOD** = nécessite le mod cité · **SKIP**.
+| Mécanique | Statut | Moyen |
+|---|---|---|
+| Équipe PARA = soldats + ressources « avion de transport » (ratio 4:1) | OK | backend war map (teams.json / payload bataille) |
+| Équipe PARA commandée par rang 15 / général | OK | règle backend |
+| C-47 scripté en boucle au-dessus du secteur | MOD C-47 CrackrDev 690B26AF12774741 (coque statique) ; repli OK = mesh placeholder déplacé par script | composant serveur trajectoire |
+| Joueur spawn assis dans l'avion | OK (compartiments cargo + spawn véhicule) une fois la coque dispo | dépend de la coque C-47 |
+| Saut quand il veut (sortie compartiment en vol) | OK | moteur gère la sortie en mouvement |
+| Chute libre + ouverture manuelle de la voile | MOD Grey Mans Chute 69EEAA01F4A11001 ; repli OK = composant drag maison | |
+| Ju 52 côté GER | SKIP (aucun mod) → C-47 repeint/neutre ou même coque | |
+| Chasseurs pilotés par joueurs (3 classes × 2 camps) | MOD RMS WW2 WarBirds 69E3578A86951C05 (P-51, Stuka) — pilotabilité à confirmer ; Bf109/Fw190/P-38/P-40 : SKIP (inexistants) | |
+| Chasseurs IA (patrouille / mitraillage scripté) | MOD Pingus P-51D/Bf109G CA5F1717E5100000 | « soutien aérien » acheté par le général |
+| 1 bombe par sortie, réarmement chronométré sur aérodrome | MOD (dépend de l'avion) ; timer = OK script | |
+| Prix de spawn par sortie, achat par rang | OK | progression.json |
+| Avion de reco 2 places (mitrailleur arrière) | SKIP (aucun mod) | |
+| Modèle de dégâts / DCA | non décrit par la source ; DCA = rôle light_armored_aa existant | |
+
+## 7. Proposition catalogue / équipes (NE PAS appliquer tel quel — à valider)
+teams.json :
+- `allowedRoles.PARA`: `["transport_plane"]` ; `vehicleRoles`: `US_C47`/`GER_C47`: `transport_plane` ; `vehicleShare.PARA`: 0.2.
+- Nouveau type `AIR` : `allowedRoles.AIR`: `["fighter","fighter_ai"]`, `vehicleShare.AIR`: 0.8 ; `vehicleRoles`: `US_P51`: `fighter`, `GER_BF109_AI`/`US_P51_AI`: `fighter_ai`.
+- Gate : PARA commandable rang 15 ou général ; AIR seulement si le camp tient une ville avec aérodrome (option).
+progression.json :
+- `trees` += `"para"`, `"pilot"`.
+- unlocks para (rang/prix) : `US_OUTFIT_PARA` → tree `para` ; `US_M1A1_CARBINE` para r2 300 ; `US_THOMPSON` para r4 600 ; `GER_FG42` para r8 1500 (si dispo) ; `GER_MP40` para r2 300 ; `US_CHUTE_RESERVE` para r6 400 (voile de secours = 2e ouverture).
+- vehicles : `US_P51` {pilot, r12, 5000} (RMS) ; `GER_STUKA` {pilot, r9, 4000} (RMS) ; `US_P51_AI`/`GER_BF109_AI` {soutien général, coût WF 200/sortie} ; `US_C47`/`GER_C47` non achetables (ressource d'équipe).
+- `warFunds.teamCost` += `"AIR": 900` ; PARA reste 450.
