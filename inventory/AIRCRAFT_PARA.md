@@ -76,3 +76,21 @@ progression.json :
 - unlocks para (rang/prix) : `US_OUTFIT_PARA` → tree `para` ; `US_M1A1_CARBINE` para r2 300 ; `US_THOMPSON` para r4 600 ; `GER_FG42` para r8 1500 (si dispo) ; `GER_MP40` para r2 300 ; `US_CHUTE_RESERVE` para r6 400 (voile de secours = 2e ouverture).
 - vehicles : `US_P51` {pilot, r12, 5000} (RMS) ; `GER_STUKA` {pilot, r9, 4000} (RMS) ; `US_P51_AI`/`GER_BF109_AI` {soutien général, coût WF 200/sortie} ; `US_C47`/`GER_C47` non achetables (ressource d'équipe).
 - `warFunds.teamCost` += `"AIR": 900` ; PARA reste 450.
+
+## 8. Vérification + inspection des mods (2026-11-25, serveur test isolé port 2010, rien en prod)
+| Mod | Version / taille / MAJ | Licence | Dépendances | Contenu vérifié (pak) |
+|---|---|---|---|---|
+| Grey Mans Chute Framework | 0.2.8 / 211 Mo / 2026-10-02 | APL-SA | aucune | `GMS_FreeFallComponent` (chute libre pilotable, roulis Q/E, **Espace = ouverture manuelle** après 1 s), canopées V2 (4 couleurs) + static line (`GMS_StaticLineComponent`), dégâts d'atterrissage, prefabs de test (`GMS_HaloParadropTest.et`…). Moddé `Character_Base.et` (ajoute le composant). |
+| Prontos Parachutes | 1.0.2 / 20 Mo / 2026-08-18 | APL-SA | aucune | T-10 (sac + voile), `Pronto_ParachuteComponent`, slot de chargement ; moddé `Character_Base` + `DefaultPlayerController`. |
+| Static Line Parachutes | 1.4.0 / 20 Mo / 2026-11-15 | APL-SA | **aucune** (n'utilise plus Prontos) | Fork MacPara_* (T-10, largage cargo) ; mêmes overrides Character_Base/PlayerController → **incompatible en pratique avec Prontos** (doublon). |
+| JMParaAI | 1.0.6 / 52 Mo / 2026-10-17 | APL | aucune | Avions scriptés C-17/Il-112 (`JMPara_Plane`, `JMPara_JumpRun`), sacs RamAir/ronds, IA paras, action GM. Scripts réutilisables comme modèle (APL = dérivé autorisé). |
+| C-47 Skytrain (CrackrDev) | 1.1.1 / 45 Mo / 2026-04-17 | APL | GM FX, You can sit, Op Overlord GMFX Pack | **NON TÉLÉCHARGEABLE** : backend « Addon has dependencies deleted from workshop » (GMFX Pack) → serveur refuse de démarrer. À écarter. |
+| AeroplaneHavens C47 Dakota | 1.1.28 / 369 Mo / 2026-11-22 | **APL-ND** | USAAF Bomber Attire, Aviation-Toolkit | Prefab `AeroplaneHaven-C47.et` : **30 CargoCompartmentSlot + 2 pilotes**, vol JSBSim (`FGFDMExec`), `TK_AIPilotComponent` + autopilote (IA pilote possible), lumières cabine rouge/verte para, `C47GetOutAction` = sortie en vol par la porte cargo (sans limite 15 km/h, option « toujours paradrop »), marche dans l'allée. ND = utilisable en dépendance, pas de modification/repack. |
+| Pingus P-51D / Bf109G | 1.0.66 / 2 Mo / 2026-06-19 | APL | **10 deps** (C-130J 434 Mo, WCS_Armaments 424 Mo, US/GER plane props, Pegasus, MFD, Propeller Flight Core, Grey Chute…) ≈ 1,6 Go | Vol cinématique IA (`CASF_AutopilotComponent`, `CASF_GunComponent`), prefabs `_Fly`/`_CAS` : ambiance/CAS seulement, non pilotable. |
+| RMS WW2 WarBirds II | 1.0.8 / 133 Mo / 2026-11-07 | Custom | WCS_Armaments, RMS Fixed Wing Flight Core | Stuka + **Ju-88** (bombes, mitrailleurs MG-15) ; plus de P-51 dans cette version. Modèle de vol = RMS Flight Core (WIP). |
+
+**Conflits** : FH Core moddé aussi `Character_Base.et` et `DefaultPlayerController.et` → les overrides se chaînent (composants ajoutés) ; à tester mais pas de collision de script détectée. Ne pas empiler Grey + Prontos + Static Line (3 systèmes parachute sur le même personnage).
+
+**Test** : serveur dédié (FH Core + Grey Chute + AH C47 + JMParaAI, scénario vanilla Conflict) → **compilation scripts OK, 0 erreur SCRIPT, monde chargé** (warnings seulement). Test en vol (perso placé dans l'avion, saut, chute, ouverture) **non réalisé** : impossible sans client ni scénario de test dédié — à faire en Workbench (prefab `GMS_HaloParadropTest.et` + C47 AH en altitude).
+
+**Recommandation mise à jour** : parachute = **Grey Mans Chute Framework** (seul). Avion = **AeroplaneHavens C47** (sièges cargo + sortie en vol + IA pilote) en dépendance, déplacé par notre script ou son autopilote ; CrackrDev écarté. Pingus trop lourd en dépendances ; JMParaAI = source d'inspiration script (pas en dépendance).
