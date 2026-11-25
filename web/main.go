@@ -99,6 +99,7 @@ func main() {
 	loadProgression()
 	loadTeamRules()
 	seedStarterKits()
+	seedBaseSoldiers()
 	ensureAdmin()
 	if currentWar() == nil {
 		seedWar()

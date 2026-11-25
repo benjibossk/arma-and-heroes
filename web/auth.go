@@ -215,6 +215,7 @@ func discordCallback(c *gin.Context) {
 		p = Player{Name: name, DiscordID: du.ID, Role: "soldier"}
 		db.Create(&p)
 	}
+	ensureBaseSoldiers(&p)
 	startSession(c, &p)
 	c.Redirect(302, next)
 }

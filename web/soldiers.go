@@ -294,6 +294,7 @@ func mySoldier(c *gin.Context) *Soldier {
 
 func listSoldiers(c *gin.Context) {
 	u := user(c)
+	ensureBaseSoldiers(u)
 	var ss []Soldier
 	db.Where("player_id = ?", u.ID).Order("id").Find(&ss)
 	out := []gin.H{}
@@ -532,4 +533,34 @@ func creditSoldier(p *Player, b *Battle, rp *ResPlayer, xp, credits int) {
 	xp, credits = xp+rxp, credits+rcr
 	db.Model(s).Updates(map[string]interface{}{"xp": s.XP + xp, "credits": s.Credits + credits, "kills": s.Kills + rp.Kills,
 		"deaths": s.Deaths + rp.Deaths, "cat_kills": string(cb)})
+}
+
+// ensureBaseSoldiers : every player always owns one base soldier (INF) per faction,
+// free and outside the slot limit. Safe to rerun.
+func ensureBaseSoldiers(p *Player) {
+	if p == nil || p.ID == 0 {
+		return
+	}
+	for _, fac := range []string{"US", "GER"} {
+		var n int64
+		db.Model(&Soldier{}).Where("player_id = ? AND faction = ?", p.ID, fac).Count(&n)
+		if n > 0 {
+			continue
+		}
+		s := Soldier{PlayerID: p.ID, Faction: fac, Class: "INF", CreatedAt: time.Now().UTC(), CatKills: "{}"}
+		db.Create(&s)
+		grantStarters(&s)
+		if p.ActiveSoldierID == 0 || p.Faction == fac {
+			db.Model(p).Update("active_soldier_id", s.ID)
+			p.ActiveSoldierID = s.ID
+		}
+	}
+}
+
+func seedBaseSoldiers() {
+	var ps []Player
+	db.Where("role <> ?", "admin").Find(&ps)
+	for i := range ps {
+		ensureBaseSoldiers(&ps[i])
+	}
 }
