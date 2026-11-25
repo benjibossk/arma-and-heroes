@@ -1,429 +1,673 @@
 {
-  "_meta": {
-    "generated": "2026-11-25",
-    "note": "Cles logiques Front 44 -> prefabs Reforger. cost classes = tickets/manpower unitaire indicatif ; cost vehicules = indicatif (jeep 2, camion 3, blinde leger 6, char 12). prefab null = manquant (voir note/compose/stub_base). status=proxy : substitut hors epoque.",
-    "mods_required": [
-      "FinestHour-CoreMod",
-      "FinestHour-USGear",
-      "FinestHour-USUniforms",
-      "FinestHour-USUnits",
-      "FinestHour-GERGear",
-      "FinestHour-GERUniforms",
-      "FinestHour-GERUnits",
-      "FinestHour-GERVehicles",
-      "M4A2Sherman"
+ "_meta": {
+  "generated": "2026-11-25",
+  "note": "Cles logiques Front 44 -> prefabs Reforger. cost classes = tickets/manpower unitaire indicatif ; cost vehicules = indicatif (jeep 2, camion 3, blinde leger 6, char 12). prefab null = manquant (voir note/compose/stub_base). status=proxy : substitut hors epoque.",
+  "mods_required": [
+   "FinestHour-CoreMod",
+   "FinestHour-USGear",
+   "FinestHour-USUniforms",
+   "FinestHour-USUnits",
+   "FinestHour-GERGear",
+   "FinestHour-GERUniforms",
+   "FinestHour-GERUnits",
+   "FinestHour-GERVehicles",
+   "M4A2Sherman"
+  ]
+ },
+ "factions": {
+  "US": "FH_USAWW2",
+  "GER": "FH_HEERWW2"
+ },
+ "catalog": {
+  "US_RIFLEMAN": {
+   "prefab": "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et",
+   "label": "US Rifleman (M1 Garand)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_SMG": {
+   "prefab": "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et",
+   "label": "US SMG (M1A1 Thompson)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_SL": {
+   "prefab": "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et",
+   "label": "US Squad Leader",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_PL": {
+   "prefab": "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et",
+   "label": "US Platoon Leader (M1 Carbine + ANM8)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_RTO": {
+   "prefab": "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et",
+   "label": "US Radio operator (SCR-300)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_OFFICER": {
+   "prefab": "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et",
+   "label": "US Officer (M1911)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_SNIPER": {
+   "prefab": "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et",
+   "label": "US Sniper (M1903A4)",
+   "cost": 2,
+   "source": "FH US Units"
+  },
+  "US_SR": {
+   "prefab": "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et",
+   "label": "US Scout/Recon rifleman (M1 + helmet netting)",
+   "cost": 1,
+   "source": "FH US Units"
+  },
+  "US_MG": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Automatic Rifleman / MG",
+   "cost": 1,
+   "stub_base": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
+    "alt_weapon": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
+    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+    "vest": "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et",
+    "mags": "Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_*"
+   }
+  },
+  "US_MEDIC": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Medic",
+   "cost": 1,
+   "stub_base": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et",
+    "hat": "{AC96B59D4F15AEC6}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Medic.et",
+    "vest": "{556BFE2077F40EDB}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Medic.et",
+    "items": [
+     "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
+     "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
     ]
+   }
   },
-  "factions": {
-    "US": "FH_USAWW2",
-    "GER": "FH_HEERWW2"
+  "US_AT": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Anti-tank (Bazooka)",
+   "cost": 2,
+   "stub_base": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et",
+    "launcher": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et",
+    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+    "extra": [
+     "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et"
+    ]
+   }
   },
-  "catalog": {
-    "US_RIFLEMAN": {
-      "prefab": "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et",
-      "label": "US Rifleman (M1 Garand)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_SMG": {
-      "prefab": "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et",
-      "label": "US SMG (M1A1 Thompson)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_SL": {
-      "prefab": "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et",
-      "label": "US Squad Leader",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_PL": {
-      "prefab": "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et",
-      "label": "US Platoon Leader (M1 Carbine + ANM8)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_RTO": {
-      "prefab": "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et",
-      "label": "US Radio operator (SCR-300)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_OFFICER": {
-      "prefab": "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et",
-      "label": "US Officer (M1911)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_SNIPER": {
-      "prefab": "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et",
-      "label": "US Sniper (M1903A4)",
-      "cost": 2,
-      "source": "FH US Units"
-    },
-    "US_SR": {
-      "prefab": "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et",
-      "label": "US Scout/Recon rifleman (M1 + helmet netting)",
-      "cost": 1,
-      "source": "FH US Units"
-    },
-    "US_MG": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Automatic Rifleman / MG",
-      "cost": 1,
-      "stub_base": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
-        "alt_weapon": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
-        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
-        "vest": "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et",
-        "mags": "Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_*"
-      }
-    },
-    "US_MEDIC": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Medic",
-      "cost": 1,
-      "stub_base": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et",
-        "hat": "{AC96B59D4F15AEC6}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Medic.et",
-        "vest": "{556BFE2077F40EDB}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Medic.et",
-        "items": [
-          "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
-          "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
-        ]
-      }
-    },
-    "US_AT": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Anti-tank (Bazooka)",
-      "cost": 2,
-      "stub_base": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et",
-        "launcher": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et",
-        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
-        "extra": [
-          "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et"
-        ]
-      }
-    },
-    "US_ENGINEER": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Engineer",
-      "cost": 1,
-      "stub_base": "{C93138F6731FC3CC}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Builder_Mid.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
-        "items": [
-          "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et",
-          "{23858F4966E84B94}Prefabs/Weapons/Explosives/Mine_M1A1/Mine_M1A1AT.et",
-          "{2A2F3A62EDD51EC7}Prefabs/Items/Equipment/Accessories/ETool_M1910/ETool_M1910.et"
-        ]
-      }
-    },
-    "US_CREW": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Tank crew",
-      "cost": 1,
-      "stub_base": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
-        "hat": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
-        "jacket": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
-        "suit_alt": "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
-        "handgun": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
-      }
-    },
-    "US_PARA": {
-      "prefab": null,
-      "status": "missing",
-      "label": "US Paratrooper (82nd/101st)",
-      "cost": 1,
-      "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
-      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-      "compose": {
-        "weapon": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et",
-        "jacket": "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
-        "pants": "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
-        "boots": "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
-        "vest": "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et",
-        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et"
-      }
-    },
-    "GER_RIFLEMAN": {
-      "prefab": "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et",
-      "label": "GER Rifleman (Kar98k)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_RIFLEMAN_G43": {
-      "prefab": "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et",
-      "label": "GER Rifleman (G43)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_MG": {
-      "prefab": "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et",
-      "label": "GER MG gunner (MG42)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_MEDIC": {
-      "prefab": "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et",
-      "label": "GER Medic (Sanitater)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_AT": {
-      "prefab": "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et",
-      "label": "GER Anti-tank (Panzerschreck RPzB54)",
-      "cost": 2,
-      "source": "FH GER Units"
-    },
-    "GER_LAT": {
-      "prefab": "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et",
-      "label": "GER Light AT (Panzerfaust 100)",
-      "cost": 2,
-      "source": "FH GER Units"
-    },
-    "GER_OFFICER": {
-      "prefab": "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et",
-      "label": "GER Officer (P38)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_SNIPER": {
-      "prefab": "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et",
-      "label": "GER Sniper (Kar98k scope)",
-      "cost": 2,
-      "source": "FH GER Units"
-    },
-    "GER_ENGINEER": {
-      "prefab": "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et",
-      "label": "GER Pioneer/Engineer (mines)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_SMG": {
-      "prefab": "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et",
-      "label": "GER SMG (MP40)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_SL": {
-      "prefab": "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et",
-      "label": "GER Squad Leader (MP40)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_PL": {
-      "prefab": "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et",
-      "label": "GER Platoon Leader (MP38)",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_RTO": {
-      "prefab": "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et",
-      "label": "GER Radio operator",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_CREW": {
-      "prefab": "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et",
-      "label": "GER Panzer crew",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_PANZER_COMMANDER": {
-      "prefab": "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et",
-      "label": "GER Panzer commander",
-      "cost": 1,
-      "source": "FH GER Units"
-    },
-    "GER_PARA": {
-      "prefab": null,
-      "status": "missing",
-      "label": "GER Fallschirmjager",
-      "cost": 1,
-      "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",
-      "note": "Pas de classe Fallschirmjager dediee (pas de casque M38 ni smock Splittertarn). Approximation Luftwaffe.",
-      "compose": {
-        "weapon": "Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et (voir INVENTAIRE)",
-        "boots": "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
-        "jacket": "{051E32E58B7C5853}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Luftwaffe.et",
-        "hat": "Helmet_Stahlhelm_M42_* (GER Uniforms)"
-      }
-    },
-    "GER_KFZ": {
-      "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
-      "label": "Volkswagen Kubelwagen",
-      "cost": 2,
-      "role": "light_utility",
-      "crew": "1 pilote + 3 passagers",
-      "source": "FH GER Vehicles"
-    },
-    "GER_KFZ_MG34": {
-      "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
-      "label": "Kubelwagen + MG34",
-      "cost": 2,
-      "role": "light_armed",
-      "crew": "1 pilote + passagers + tireur",
-      "source": "FH GER Vehicles"
-    },
-    "GER_TRUCK": {
-      "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
-      "label": "Opel Blitz bache (transport)",
-      "cost": 3,
-      "role": "truck",
-      "crew": "1 pilote + cargo",
-      "source": "FH GER Vehicles"
-    },
-    "GER_TRUCK_OPEN": {
-      "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
-      "label": "Opel Blitz plateau",
-      "cost": 3,
-      "role": "truck",
-      "crew": "1 pilote + cargo",
-      "source": "FH GER Vehicles"
-    },
-    "GER_FLAK_TRUCK": {
-      "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
-      "label": "Opel Blitz + Flak 38 (AA)",
-      "cost": 6,
-      "role": "light_armored_aa",
-      "crew": "1 pilote + 1-2 servants",
-      "source": "FH GER Vehicles"
-    },
-    "GER_SDKFZ222": {
-      "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
-      "label": "Sd.Kfz. 222 (gris)",
-      "cost": 6,
-      "role": "light_armored",
-      "crew": "3 (pilote, tireur, commandant)",
-      "source": "FH GER Vehicles",
-      "variants": [
-        "{C5BD2985070AABC2}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Camo.et",
-        "{EDC4DE87D69BACB7}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Desert.et"
-      ]
-    },
-    "GER_SDKFZ223": {
-      "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
-      "label": "Sd.Kfz. 223 (radio)",
-      "cost": 6,
-      "role": "light_armored",
-      "crew": "3",
-      "source": "FH GER Vehicles",
-      "note": "racine _base : prefab placable a verifier en Workbench"
-    },
-    "US_SHERMAN": {
-      "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
-      "label": "M4A2 Sherman (75 mm)",
-      "cost": 12,
-      "role": "tank",
-      "crew": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)",
-      "source": "M4A2 Sherman mod"
-    },
-    "US_JEEP": {
-      "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
-      "label": "Jeep M151A2 (SUBSTITUT vanilla, hors epoque)",
-      "cost": 2,
-      "role": "light_utility",
-      "crew": "1 pilote + 3",
-      "source": "Arma Reforger vanilla",
-      "status": "proxy",
-      "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys."
-    },
-    "US_TRUCK": {
-      "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
-      "label": "Camion M923A1 (SUBSTITUT vanilla, hors epoque)",
-      "cost": 3,
-      "role": "truck",
-      "crew": "1 pilote + cargo",
-      "source": "Arma Reforger vanilla",
-      "status": "proxy",
-      "note": "Aucun camion WW2 US (GMC CCKW) installe."
-    },
-    "GER_TIGER": {
-      "prefab": null,
-      "label": "Tiger I (non fournissable)",
-      "cost": 12,
-      "role": "tank",
-      "crew": "5",
-      "status": "missing",
-      "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule."
-    },
-    "US_HALFTRACK": {
-      "prefab": null,
-      "label": "M3 Halftrack",
-      "cost": 6,
-      "role": "light_armored",
-      "crew": "",
-      "status": "missing",
-      "note": "Absent."
-    },
-    "US_STUART_OR_ARMORED_CAR": {
-      "prefab": null,
-      "label": "Blinde leger US (M8 Greyhound/M3 Stuart)",
-      "cost": 6,
-      "role": "light_armored",
-      "crew": "",
-      "status": "missing",
-      "note": "Absent : seul LAV-25 moderne (vanilla) existe."
-    },
-    "GER_PAK40": {
-      "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
-      "label": "Pak 40 75 mm AT (gris)",
-      "cost": 4,
-      "role": "static_or_towed",
-      "source": "FH GER Vehicles"
-    },
-    "GER_PAK36": {
-      "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
-      "label": "Pak 36 37 mm AT (gris)",
-      "cost": 3,
-      "role": "static_or_towed",
-      "source": "FH GER Vehicles"
-    },
-    "GER_FLAK38": {
-      "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
-      "label": "Flak 38 20 mm (gris)",
-      "cost": 4,
-      "role": "static_or_towed",
-      "source": "FH GER Vehicles"
-    },
-    "GER_FLAKVIERLING": {
-      "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
-      "label": "Flakvierling 38 (gris)",
-      "cost": 5,
-      "role": "static_or_towed",
-      "source": "FH GER Vehicles"
-    },
-    "GER_LEFH18": {
-      "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
-      "label": "leFH 18 obusier 105 mm (gris)",
-      "cost": 6,
-      "role": "static_or_towed",
-      "source": "FH GER Vehicles"
-    },
-    "US_AIGROUP": {
-      "prefab": "{766D107569871A6A}Prefabs/Groups/BLUFOR/Group_FH_USAWW2_Base.et",
-      "cost": 0
-    },
-    "GER_AIGROUP": {
-      "prefab": "{B50B7BF31273C2A6}Prefabs/Groups/OPFOR/Group_FH_HEERWW2_Base.et",
-      "cost": 0
-    }
+  "US_ENGINEER": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Engineer",
+   "cost": 1,
+   "stub_base": "{C93138F6731FC3CC}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Builder_Mid.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
+    "items": [
+     "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et",
+     "{23858F4966E84B94}Prefabs/Weapons/Explosives/Mine_M1A1/Mine_M1A1AT.et",
+     "{2A2F3A62EDD51EC7}Prefabs/Items/Equipment/Accessories/ETool_M1910/ETool_M1910.et"
+    ]
+   }
+  },
+  "US_CREW": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Tank crew",
+   "cost": 1,
+   "stub_base": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
+    "hat": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+    "jacket": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+    "suit_alt": "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
+    "handgun": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
+   }
+  },
+  "US_PARA": {
+   "prefab": null,
+   "status": "missing",
+   "label": "US Paratrooper (82nd/101st)",
+   "cost": 1,
+   "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
+   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+   "compose": {
+    "weapon": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et",
+    "jacket": "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+    "pants": "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+    "boots": "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+    "vest": "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et",
+    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et"
+   }
+  },
+  "GER_RIFLEMAN": {
+   "prefab": "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et",
+   "label": "GER Rifleman (Kar98k)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_RIFLEMAN_G43": {
+   "prefab": "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et",
+   "label": "GER Rifleman (G43)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_MG": {
+   "prefab": "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et",
+   "label": "GER MG gunner (MG42)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_MEDIC": {
+   "prefab": "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et",
+   "label": "GER Medic (Sanitater)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_AT": {
+   "prefab": "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et",
+   "label": "GER Anti-tank (Panzerschreck RPzB54)",
+   "cost": 2,
+   "source": "FH GER Units"
+  },
+  "GER_LAT": {
+   "prefab": "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et",
+   "label": "GER Light AT (Panzerfaust 100)",
+   "cost": 2,
+   "source": "FH GER Units"
+  },
+  "GER_OFFICER": {
+   "prefab": "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et",
+   "label": "GER Officer (P38)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_SNIPER": {
+   "prefab": "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et",
+   "label": "GER Sniper (Kar98k scope)",
+   "cost": 2,
+   "source": "FH GER Units"
+  },
+  "GER_ENGINEER": {
+   "prefab": "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et",
+   "label": "GER Pioneer/Engineer (mines)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_SMG": {
+   "prefab": "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et",
+   "label": "GER SMG (MP40)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_SL": {
+   "prefab": "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et",
+   "label": "GER Squad Leader (MP40)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_PL": {
+   "prefab": "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et",
+   "label": "GER Platoon Leader (MP38)",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_RTO": {
+   "prefab": "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et",
+   "label": "GER Radio operator",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_CREW": {
+   "prefab": "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et",
+   "label": "GER Panzer crew",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_PANZER_COMMANDER": {
+   "prefab": "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et",
+   "label": "GER Panzer commander",
+   "cost": 1,
+   "source": "FH GER Units"
+  },
+  "GER_PARA": {
+   "prefab": null,
+   "status": "missing",
+   "label": "GER Fallschirmjager",
+   "cost": 1,
+   "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",
+   "note": "Pas de classe Fallschirmjager dediee (pas de casque M38 ni smock Splittertarn). Approximation Luftwaffe.",
+   "compose": {
+    "weapon": "Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et (voir INVENTAIRE)",
+    "boots": "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+    "jacket": "{051E32E58B7C5853}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Luftwaffe.et",
+    "hat": "Helmet_Stahlhelm_M42_* (GER Uniforms)"
+   }
+  },
+  "GER_KFZ": {
+   "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
+   "label": "Volkswagen Kubelwagen",
+   "cost": 2,
+   "role": "light_utility",
+   "crew": "1 pilote + 3 passagers",
+   "source": "FH GER Vehicles"
+  },
+  "GER_KFZ_MG34": {
+   "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
+   "label": "Kubelwagen + MG34",
+   "cost": 2,
+   "role": "light_armed",
+   "crew": "1 pilote + passagers + tireur",
+   "source": "FH GER Vehicles"
+  },
+  "GER_TRUCK": {
+   "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
+   "label": "Opel Blitz bache (transport)",
+   "cost": 3,
+   "role": "truck",
+   "crew": "1 pilote + cargo",
+   "source": "FH GER Vehicles"
+  },
+  "GER_TRUCK_OPEN": {
+   "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
+   "label": "Opel Blitz plateau",
+   "cost": 3,
+   "role": "truck",
+   "crew": "1 pilote + cargo",
+   "source": "FH GER Vehicles"
+  },
+  "GER_FLAK_TRUCK": {
+   "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
+   "label": "Opel Blitz + Flak 38 (AA)",
+   "cost": 6,
+   "role": "light_armored_aa",
+   "crew": "1 pilote + 1-2 servants",
+   "source": "FH GER Vehicles"
+  },
+  "GER_SDKFZ222": {
+   "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
+   "label": "Sd.Kfz. 222 (gris)",
+   "cost": 6,
+   "role": "light_armored",
+   "crew": "3 (pilote, tireur, commandant)",
+   "source": "FH GER Vehicles",
+   "variants": [
+    "{C5BD2985070AABC2}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Camo.et",
+    "{EDC4DE87D69BACB7}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Desert.et"
+   ]
+  },
+  "GER_SDKFZ223": {
+   "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
+   "label": "Sd.Kfz. 223 (radio)",
+   "cost": 6,
+   "role": "light_armored",
+   "crew": "3",
+   "source": "FH GER Vehicles",
+   "note": "racine _base : prefab placable a verifier en Workbench"
+  },
+  "US_SHERMAN": {
+   "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
+   "label": "M4A2 Sherman (75 mm)",
+   "cost": 12,
+   "role": "tank",
+   "crew": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)",
+   "source": "M4A2 Sherman mod"
+  },
+  "US_JEEP": {
+   "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
+   "label": "Jeep M151A2 (SUBSTITUT vanilla, hors epoque)",
+   "cost": 2,
+   "role": "light_utility",
+   "crew": "1 pilote + 3",
+   "source": "Arma Reforger vanilla",
+   "status": "proxy",
+   "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys."
+  },
+  "US_TRUCK": {
+   "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
+   "label": "Camion M923A1 (SUBSTITUT vanilla, hors epoque)",
+   "cost": 3,
+   "role": "truck",
+   "crew": "1 pilote + cargo",
+   "source": "Arma Reforger vanilla",
+   "status": "proxy",
+   "note": "Aucun camion WW2 US (GMC CCKW) installe."
+  },
+  "GER_TIGER": {
+   "prefab": null,
+   "label": "Tiger I (non fournissable)",
+   "cost": 12,
+   "role": "tank",
+   "crew": "5",
+   "status": "missing",
+   "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule."
+  },
+  "US_HALFTRACK": {
+   "prefab": null,
+   "label": "M3 Halftrack",
+   "cost": 6,
+   "role": "light_armored",
+   "crew": "",
+   "status": "missing",
+   "note": "Absent."
+  },
+  "US_STUART_OR_ARMORED_CAR": {
+   "prefab": null,
+   "label": "Blinde leger US (M8 Greyhound/M3 Stuart)",
+   "cost": 6,
+   "role": "light_armored",
+   "crew": "",
+   "status": "missing",
+   "note": "Absent : seul LAV-25 moderne (vanilla) existe."
+  },
+  "GER_PAK40": {
+   "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
+   "label": "Pak 40 75 mm AT (gris)",
+   "cost": 4,
+   "role": "static_or_towed",
+   "source": "FH GER Vehicles"
+  },
+  "GER_PAK36": {
+   "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
+   "label": "Pak 36 37 mm AT (gris)",
+   "cost": 3,
+   "role": "static_or_towed",
+   "source": "FH GER Vehicles"
+  },
+  "GER_FLAK38": {
+   "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
+   "label": "Flak 38 20 mm (gris)",
+   "cost": 4,
+   "role": "static_or_towed",
+   "source": "FH GER Vehicles"
+  },
+  "GER_FLAKVIERLING": {
+   "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
+   "label": "Flakvierling 38 (gris)",
+   "cost": 5,
+   "role": "static_or_towed",
+   "source": "FH GER Vehicles"
+  },
+  "GER_LEFH18": {
+   "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
+   "label": "leFH 18 obusier 105 mm (gris)",
+   "cost": 6,
+   "role": "static_or_towed",
+   "source": "FH GER Vehicles"
+  },
+  "US_AIGROUP": {
+   "prefab": "{766D107569871A6A}Prefabs/Groups/BLUFOR/Group_FH_USAWW2_Base.et",
+   "cost": 0
+  },
+  "GER_AIGROUP": {
+   "prefab": "{B50B7BF31273C2A6}Prefabs/Groups/OPFOR/Group_FH_HEERWW2_Base.et",
+   "cost": 0
   }
+ },
+ "aiAppearance": {
+  "GER": {
+   "Recruit": {
+    "Infantry": [
+     "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Recon": [
+     "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et",
+     "{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et",
+     "{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Para": [
+     "{D62A72E894FA605B}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_01.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "ArmorCrew": [
+     "{79770150D9286630}Prefabs/Characters/HeadGear/Hat_M40_01/Hat_M40_01_TankCrew.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Regular": {
+    "Infantry": [
+     "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et",
+     "{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et",
+     "{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Recon": [
+     "{A34221AB5A70F92C}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Feldgrau.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+    ],
+    "Para": [
+     "{C56B9D549F8B495A}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Painted.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "ArmorCrew": [
+     "{868355C2B87B0AB2}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCrew.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Veteran": {
+    "Infantry": [
+     "{19463B1006FA1EF4}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Net.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "Recon": [
+     "{F6A9BD9EA6F00C13}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+    ],
+    "Para": [
+     "{0EFFE36965141049}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Green_Cover.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "ArmorCrew": [
+     "{47ECF4DCE5F7DB8F}Prefabs/Characters/HeadGear/Hat_Schirmmutze_01/Hat_Schirmmutze_01_Panzer.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Elite": {
+    "Infantry": [
+     "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "Recon": [
+     "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+    ],
+    "Para": [
+     "{4E1FC79E3E28A143}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Splinter_Cover.et",
+     "{B68B08E8EC896865}Prefabs/Characters/Uniforms/Smock_M38/Jacket_HEER_M38_Splinter.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+    ],
+    "ArmorCrew": [
+     "{D35C610DE45084FA}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCommander.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{372D108439DAFA30}Prefabs/Characters/Vests/M1939/Variants/M1939_Officer_SMG.et"
+    ]
+   }
+  },
+  "US": {
+   "Recruit": {
+    "Infantry": [
+     "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+    ],
+    "Recon": [
+     "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+    ],
+    "Para": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et"
+    ]
+   },
+   "Regular": {
+    "Infantry": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+    ],
+    "Recon": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+    ],
+    "Para": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+    ]
+   },
+   "Veteran": {
+    "Infantry": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et"
+    ],
+    "Recon": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+    ],
+    "Para": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{F92D179AC7D87AF1}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_AutomaticRifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+    ]
+   },
+   "Elite": {
+    "Infantry": [
+     "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{DB5ED4EAF58211E7}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_NCO.et"
+    ],
+    "Recon": [
+     "{0C6685EF6A9A4382}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting_Goggles.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+    ],
+    "Para": [
+     "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{FDF82EC7ED08EAFF}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_NCO_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{315D6B514A3B01E1}Prefabs/Characters/HeadGear/Hat_ServiceCap_01/Hat_ServiceCap_01_Captain.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{EC47EB0214B18D75}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Officer_SMG.et"
+    ]
+   }
+  }
+ }
 }

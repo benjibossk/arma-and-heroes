@@ -313,6 +313,7 @@ class F44_AIDirector
 			SCR_AICombatComponent combat = SCR_AICombatComponent.Cast(ch.FindComponent(SCR_AICombatComponent));
 			if (combat)
 				combat.SetAISkill(SkillFromName(GetSkill(sideId)));
+			ApplyAppearance(ch, side.m_sSideKey, GetSkill(sideId), team);
 			group.AddAIEntityToGroup(ch);
 			m_mBotSide.Set(ch, sideId);
 			m_mBotTeam.Set(ch, team.m_sTeamId);
@@ -336,6 +337,52 @@ class F44_AIDirector
 	}
 
 	//------------------------------------------------------------------------------------------------
+	//! swap the bot's clothing slots for the tier/team-type loadout of the catalog "aiAppearance"
+	protected void ApplyAppearance(IEntity ch, string faction, string tier, F44_Team team)
+	{
+		array<string> items = F44_Catalog.Get().GetAppearance(faction, tier, team.m_sType);
+		if (!items)
+			return;
+		EquipedLoadoutStorageComponent storage = EquipedLoadoutStorageComponent.Cast(ch.FindComponent(EquipedLoadoutStorageComponent));
+		SCR_InventoryStorageManagerComponent inv = SCR_InventoryStorageManagerComponent.Cast(ch.FindComponent(SCR_InventoryStorageManagerComponent));
+		if (!storage || !inv)
+			return;
+		int ok;
+		foreach (string prefab : items)
+		{
+			Resource res = Resource.Load(prefab);
+			if (!res || !res.IsValid())
+				continue;
+			EntitySpawnParams sp = new EntitySpawnParams();
+			sp.Transform[3] = ch.GetOrigin();
+			IEntity item = GetGame().SpawnEntityPrefab(res, GetGame().GetWorld(), sp);
+			if (!item)
+				continue;
+			BaseLoadoutClothComponent cloth = BaseLoadoutClothComponent.Cast(item.FindComponent(BaseLoadoutClothComponent));
+			if (!cloth || !cloth.GetAreaType())
+			{
+				SCR_EntityHelper.DeleteEntityAndChildren(item);
+				continue;
+			}
+			IEntity old = storage.GetClothFromArea(cloth.GetAreaType().Type());
+			if (old)
+			{
+				inv.TryRemoveItemFromStorage(old, storage);
+				SCR_EntityHelper.DeleteEntityAndChildren(old);
+			}
+			if (inv.TryInsertItemInStorage(item, storage))
+				ok++;
+			else
+				SCR_EntityHelper.DeleteEntityAndChildren(item);
+		}
+		if (!m_mAppearLogged.Contains(faction + tier + team.m_sTeamId))
+		{
+			m_mAppearLogged.Insert(faction + tier + team.m_sTeamId);
+			PrintFormat("[F44] AI appearance tier=%1 team=%2 (%3, %4/%5 items)", tier, team.m_sTeamId, team.m_sType, ok, items.Count());
+		}
+	}
+	protected ref set<string> m_mAppearLogged = new set<string>();
+
 	protected static void MapAddI(map<int, int> m, int k, int v)
 	{
 		int c;

@@ -24,6 +24,51 @@ class F44_Catalog
 	protected ref map<string, string> m_mFactions = new map<string, string>();
 	protected ref map<string, ref F44_CatalogEntry> m_mEntries = new map<string, ref F44_CatalogEntry>();
 	protected ref array<string> m_aUnavailable = {};
+	protected ref map<string, ref array<string>> m_mAppearance = new map<string, ref array<string>>();	// "GER|Veteran|Recon" -> cloth prefabs
+
+	//! cloth prefabs for a bot of faction/tier/team type (INF/MOT -> Infantry, REC -> Recon, PARA -> Para, ARM -> ArmorCrew)
+	array<string> GetAppearance(string faction, string tier, string teamType)
+	{
+		string ty = "Infantry";
+		if (teamType == "REC")
+			ty = "Recon";
+		else if (teamType == "PARA")
+			ty = "Para";
+		else if (teamType == "ARM")
+			ty = "ArmorCrew";
+		array<string> l;
+		m_mAppearance.Find(faction + "|" + tier + "|" + ty, l);
+		return l;
+	}
+
+	protected void ReadAppearance(LoadContext ctx)
+	{
+		int nf, nt, nk;
+		if (!ctx.StartMap("aiAppearance", nf))
+			return;
+		string f, t, k;
+		for (int i = 0; i < nf; i++)
+		{
+			if (!ctx.ReadMapKey(i, f) || !ctx.StartMap(f, nt))
+				continue;
+			for (int j = 0; j < nt; j++)
+			{
+				if (!ctx.ReadMapKey(j, t) || !ctx.StartMap(t, nk))
+					continue;
+				for (int m = 0; m < nk; m++)
+				{
+					if (!ctx.ReadMapKey(m, k))
+						continue;
+					array<string> l = {};
+					if (ctx.ReadValue(k, l))
+						m_mAppearance.Set(f + "|" + t + "|" + k, l);
+				}
+				ctx.EndMap();
+			}
+			ctx.EndMap();
+		}
+		ctx.EndMap();
+	}
 
 	//------------------------------------------------------------------------------------------------
 	//! \param modPath catalog path inside the mod (used when no profile override exists)
@@ -55,6 +100,7 @@ class F44_Catalog
 
 		ReadFactions(ctx);
 		ReadEntries(ctx);
+		ReadAppearance(ctx);
 
 		int classes, vehicles;
 		foreach (string k, F44_CatalogEntry e : m_mEntries)
