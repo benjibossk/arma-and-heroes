@@ -426,8 +426,11 @@ class F44_DeployOverlay
 		if (name.IsEmpty())
 			name = "HQ";
 		bool forward = name.StartsWith(F44_SectorSpawns.NAME_PREFIX);
+		bool mobile = name.StartsWith(F44_MobileSpawns.NAME_PREFIX);
 		string info = Up(WidgetManager.Translate(name));
-		if (forward)
+		if (mobile)
+			info = "[TRUCK] " + info + string.Format("   MOBILE SPAWN - DEPLOY DELAY PENALTY +%1 S", Math.Round(sp.GetRespawnTime()));
+		else if (forward)
 			info += string.Format("   DEPLOY DELAY PENALTY +%1 S", Math.Round(sp.GetRespawnTime()));
 
 		float f = 1;

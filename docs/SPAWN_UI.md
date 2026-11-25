@@ -62,7 +62,7 @@ Spawn point icons and selection are the vanilla `SCR_MapUISpawnPoint` ones. We d
 - **Verified:** compiles (dedicated server load of the addon, no `SCRIPT (E)` from F44 scripts).
 - **Not verified in play:** visual rendering in-game, and forward-point creation (the test battle never reached a sector capture).
 
-## Mobile spawn (design, not implemented)
+## Mobile spawn (implemented 1.2.0, `F44_MobileSpawn.c`)
 
 Source of the mechanic: `inventory/HG_MECHANICS.md` section 12 (paraphrased; the wiki gives no numbers for conditions, so the values below are ours and tunable).
 
@@ -85,7 +85,22 @@ Armed and unarmed variants (`variants` in teams.json) behave the same; firing th
 5. **Destruction / abandon:** vehicle destroyed or driver leaves for more than 15 s: the point is disabled and deleted; passengers keep the usual vehicle rules. Optional: lose one ticket on destruction (H&G: vehicle death costs a ticket, `[M]`).
 6. Map label `<vehicle> - <driver name>`; if the driver leaves, the label is removed (the "unlocked APC" tip in H&G).
 
-### Implementation plan (vanilla `SCR_SpawnPoint` on the vehicle)
+### As implemented (1.2.0)
+- `F44_MobileSpawns` (server) ticked in `ServerTick` after `F44_SectorSpawns.Tick`; vehicles come from the game mode's tracked list (`RegisterMobileSpawns`, idempotent `Register(veh, key, faction)` API), so the vehicle spawning code is untouched.
+- **Not parented to the hull**: a moving child spawn point is not guaranteed to re-send its position to clients. The point is only usable when the vehicle is stopped, so it is created 3 m behind the vehicle when the rules pass and deleted/re-created when the stopped vehicle is more than 5 m away from it (creation replicates the transform). Removed on destruction or driver absent > 15 s.
+- Uses consumed in `PreparePlayerEntity_S` (`SCR_SpawnPointSpawnData.GetSpawnPoint()`); cooldown disables the point. Name `MOBILE <key> - <driver> (<uses left>)`; the deploy menu shows `[TRUCK] ... MOBILE SPAWN - DEPLOY DELAY PENALTY +N S`.
+- Battle JSON `mobileSpawn` (all optional): `enabled`, `usesHalftrack` 8, `usesTruck` 3, `cooldownSec` 20, `penaltySec` 10, `maxSpeedKmh` 2, `stopSec` 3, `enemyRadius` 40, `driverAbsentSec` 15, `backOffset` 3, `requireDriver` true, `halftrackKeys` [`GER_SDKFZ251*`, `US_M3A1*`], `truckKeys` [`GER_TRUCK`, `GER_TRUCK_OPEN`, `US_TRUCK*`] (`*` = prefix).
+
+### Spawn timers: H&G source vs ours
+| Timer | H&G (wiki Action_Rules + Spawn_Time) | Arma & Heroes default | JSON |
+|---|---|---|---|
+| Base soldier respawn | 10 s (+0.5 s per link, + equipment points / distance terms) | 10 s, flat (vanilla `SCR_RespawnTimerComponent`) | `spawnTimes.baseSec` |
+| Forward / capture point | no fixed value; distance from access point / objective | +10 s | `spawnTimes.forwardPenaltySec` |
+| Half-track mobile | 20 s total ("fixed multiplier" on vehicle deploy) | +10 s (= 20 s total) | `mobileSpawn.penaltySec` |
+| Para / air | 15 s, vehicle delay overrides | see F44_ParaDrop (not here) | n/a |
+| Suicide / first join | extra penalty, no number | none | n/a |
+
+### Original implementation plan (vanilla `SCR_SpawnPoint` on the vehicle)
 No mod code edited here. Steps, in the order we would do them:
 1. New `Scripts/Game/F44/F44_MobileSpawn.c`: `class F44_MobileSpawns`, owned by `F44_GameModeComponent` next to `m_SectorSpawns` and ticked from `ServerTick` right after `F44_SectorSpawns.Tick` (same hook, same server-only pattern).
 2. Discovery: when a vehicle with role `light_armored`/`truck` is spawned by the F44 vehicle logic (or on `SCR_VehicleSpawnerComponent` / `F44_FieldSupply` loaded-box creation), register it. Resolve role from the prefab key via the same table as `web/teams.json` `vehicleRoles`.

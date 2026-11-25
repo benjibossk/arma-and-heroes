@@ -4,9 +4,28 @@
 // side's HQ spawn point prefab (vanilla SCR_SpawnPoint, so the vanilla deploy menu / map lists it).
 // Contested sector (capture progress not full) = spawn point disabled. Forward points carry a
 // deploy delay penalty (SCR_SpawnPoint respawn time, checked by the vanilla server respawn timer).
+//! Optional battle JSON "spawnTimes" object (aligned on H&G, see inventory/HG_MECHANICS.md spawn time)
+class F44_SpawnTimesConfig
+{
+	float m_fBaseSec = 10;	// vanilla SCR_RespawnTimerComponent base timer (H&G soldier base 10 s)
+	float m_fForwardPenaltySec = 10;	// added on a forward sector point
+
+	static F44_SpawnTimesConfig Read(LoadContext root)
+	{
+		F44_SpawnTimesConfig c = new F44_SpawnTimesConfig();
+		if (!root || !root.StartObject("spawnTimes"))
+			return c;
+		root.ReadValue("baseSec", c.m_fBaseSec);
+		root.ReadValue("forwardPenaltySec", c.m_fForwardPenaltySec);
+		root.EndObject();
+		return c;
+	}
+}
+
+//------------------------------------------------------------------------------------------------
 class F44_SectorSpawns
 {
-	static const float FORWARD_PENALTY = 10;	// s added to the deploy timer on a forward point
+	float m_fForwardPenalty = 10;	// s added to the deploy timer on a forward point (spawnTimes.forwardPenaltySec)
 	static const string NAME_PREFIX = "SECTOR ";
 
 	protected ref map<int, SCR_SpawnPoint> m_mPoints = new map<int, SCR_SpawnPoint>();	// sector idx -> point
@@ -43,13 +62,19 @@ class F44_SectorSpawns
 	{
 		foreach (SCR_SpawnPoint sp : SCR_SpawnPoint.GetSpawnPoints())
 		{
-			if (sp.GetFactionKey() != factionKey || sp.GetSpawnPointName().StartsWith(NAME_PREFIX))
+			if (sp.GetFactionKey() != factionKey || sp.GetSpawnPointName().StartsWith(NAME_PREFIX) || sp.GetSpawnPointName().StartsWith(F44_MobileSpawns.NAME_PREFIX))
 				continue;
 			EntityPrefabData pd = sp.GetPrefabData();
 			if (pd)
 				return pd.GetPrefabName();
 		}
 		return ResourceName.Empty;
+	}
+
+	//! HQ spawn point prefab of a faction (used by F44_MobileSpawns)
+	static ResourceName FindHqPrefabPublic(string factionKey)
+	{
+		return FindHqPrefab(factionKey);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -112,7 +137,7 @@ class F44_SectorSpawns
 			return null;
 		sp.SetFactionKey(fk);
 		sp.SetSpawnPointName(NAME_PREFIX + sc.m_sSectorName);
-		sp.SetRespawnTime(FORWARD_PENALTY);
+		sp.SetRespawnTime(m_fForwardPenalty);
 		m_mPoints.Set(idx, sp);
 		m_mPointSide.Set(idx, side);
 		PrintFormat("[F44] Forward spawn point on sector %1 for %2", sc.m_sSectorName, fk);

@@ -55,3 +55,17 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
   refills to full, debits faction war funds.
 - `moveTeam` to an enemy city is refused when `strengthPct < minAttackPct` (50).
 - `/map` team views of your own teams carry `strengthPct`, `resupplyCost`, `canAttack`.
+
+## Spawn timers and mobile spawn (battle JSON, optional, mod 1.2.0)
+- `spawnTimes`: `{ "baseSec": 10, "forwardPenaltySec": 10 }` — base respawn timer and the extra delay on forward sector points.
+- `mobileSpawn`: `{ "enabled": true, "usesHalftrack": 8, "usesTruck": 3, "cooldownSec": 20, "penaltySec": 10, "maxSpeedKmh": 2, "stopSec": 3, "enemyRadius": 40, "driverAbsentSec": 15, "backOffset": 3, "requireDriver": true, "halftrackKeys": ["GER_SDKFZ251*", "US_M3A1*"], "truckKeys": ["GER_TRUCK", "GER_TRUCK_OPEN", "US_TRUCK*"] }`.
+  Applies to the team pool vehicles whose key matches; rules and defaults in docs/SPAWN_UI.md "Mobile spawn". Absent = defaults.
+
+## Air drop (battle JSON, optional, mod 1.2.0) — `F44_ParaDrop.c`
+- `airDrop`: `{ "enabled": true, "altitude": 350, "radius": 1200, "speed": 65, "planeCount": { "US": 1, "GER": 0 }, "classes": ["PARA"] }`.
+  - `altitude` (m AGL), `radius` (m from the layout centre) and `speed` (m/s) set the C-47 **spawn** state; then the Aviation-Toolkit AI pilot orbits the layout centre with the prefab's own profile (cruise 350 m AGL, orbit radius 1200 m, ~140 kt).
+  - `planeCount`: planes per side key (0/absent = none). Each plane = one `AIR DROP` spawn point for that side's faction, disabled while its 30 cargo seats are full.
+  - `classes`: class keys allowed to use it (default `["PARA"]`). Gate is server-side (loadout at reservation + spawned prefab), the client still lists the point for everyone.
+  - `testSeatBot` (debug only): seats a PARA bot after each plane spawn and logs `AirDrop TEST/TRACK` lines.
+- Server mods required for the feature: AeroplaneHavens C47 Dakota `66A2A0B8531C9D2A` (+ Aviation-Toolkit `69B307004DF5C417`, USAAF Bomber Attire `64F8C1AB4CFD207A`), Grey Mans Chute Framework `69EEAA01F4A11001`. Not dependencies of F44_Core: without them the plane prefab does not load and the air drop is skipped with a warning.
+- **Web side (later, not implemented):** a team of type `PARA` should carry "transport plane" resources (H&G ratio 4 soldiers : 1 plane) and the battle payload should then fill `airDrop.planeCount[side]` from them; PARA teams list `classes: ["PARA"]`.

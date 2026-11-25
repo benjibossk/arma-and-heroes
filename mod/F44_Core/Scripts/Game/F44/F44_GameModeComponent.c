@@ -122,6 +122,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 
 	protected ref F44_CityLayout m_Layout;
 	protected ref F44_SectorSpawns m_SectorSpawns = new F44_SectorSpawns();
+	protected ref F44_MobileSpawns m_MobileSpawns = new F44_MobileSpawns();	// F44_MobileSpawn.c
 	protected ref array<vector> m_aSlotAnchorsAtt = {};
 	protected ref array<vector> m_aSlotAnchorsDef = {};
 	protected int m_iSlotTries;
@@ -322,6 +323,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		}
 		m_sAttacker = cfg.m_sAttacker;
 		m_sDefender = cfg.m_sDefender;
+		ApplySpawnTimes(cfg);
 		m_iTicketsAtt = cfg.m_Attacker.GetTotalManpower();
 		m_iTicketsDef = cfg.m_Defender.GetTotalManpower();
 		m_iTimeLeft = cfg.m_iTimeLimitMin * 60;
@@ -582,6 +584,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		SCR_ChimeraCharacter character = SCR_ChimeraCharacter.Cast(entity);
 		if (!character)
 			return true;
+		SCR_SpawnPointSpawnData spData = SCR_SpawnPointSpawnData.Cast(data);
+		if (spData)
+			m_MobileSpawns.OnSpawnAt(spData.GetSpawnPoint());
 
 		int side = GetSideOfFaction(character.GetFactionKey());
 		F44_Side cfgSide = m_Config.GetSide(SideKey(side));
@@ -910,6 +915,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			GetStats(pid).m_iCaptures++;
 		F44_Catalog spCat = F44_Catalog.Get();
 		m_SectorSpawns.Tick(m_fTickInterval, m_aSectorOwners, m_aSectorProgress, spCat.GetFactionKey(m_sAttacker), spCat.GetFactionKey(m_sDefender));
+		RegisterMobileSpawns(spCat);
+		m_MobileSpawns.Tick(m_fTickInterval, m_aSectorOwners, m_aSectorProgress);
 
 		UpdateVehicles();
 		m_FieldSupply.Tick(m_fTickInterval);
@@ -934,6 +941,32 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		}
 		Replication.BumpMe();
 		CheckEnd();
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Spawn timers from battle JSON "spawnTimes" / "mobileSpawn" (docs/SPAWN_UI.md)
+	protected void ApplySpawnTimes(F44_BattleConfig cfg)
+	{
+		if (cfg.m_MobileSpawn)
+			m_MobileSpawns.SetConfig(cfg.m_MobileSpawn);
+		if (!cfg.m_SpawnTimes || !cfg.m_MobileSpawn)
+			return;
+		m_SectorSpawns.m_fForwardPenalty = cfg.m_SpawnTimes.m_fForwardPenaltySec;
+		SCR_RespawnTimerComponent rt = SCR_RespawnTimerComponent.Cast(GetOwner().FindComponent(SCR_RespawnTimerComponent));
+		if (rt && cfg.m_SpawnTimes.m_fBaseSec >= 0)
+			rt.SetRespawnTime(cfg.m_SpawnTimes.m_fBaseSec);
+		PrintFormat("[F44] Spawn times: base %1 s, forward +%2 s, mobile +%3 s", cfg.m_SpawnTimes.m_fBaseSec, cfg.m_SpawnTimes.m_fForwardPenaltySec, cfg.m_MobileSpawn.m_fPenaltySec);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Mobile spawns (F44_MobileSpawn.c): hand every tracked battle vehicle to the registry (idempotent)
+	protected void RegisterMobileSpawns(F44_Catalog cat)
+	{
+		foreach (F44_TrackedVehicle tv : m_aVehicles)
+		{
+			if (tv.m_Entity)
+				m_MobileSpawns.Register(tv.m_Entity, tv.m_sKey, cat.GetFactionKey(SideKey(tv.m_iSide)));
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------

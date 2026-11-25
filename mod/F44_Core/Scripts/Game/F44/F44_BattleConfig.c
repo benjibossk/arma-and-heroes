@@ -182,6 +182,8 @@ class F44_BattleConfig
 	string m_sCityId;
 	string m_sLayoutId;	// optional explicit layout id (Configs/F44/layouts.json)
 	ref F44_CityLayout m_InlineLayout;	// optional "layoutData" object sent by the site
+	ref F44_SpawnTimesConfig m_SpawnTimes;	// optional "spawnTimes" object (F44_SectorSpawn.c)
+	ref F44_MobileSpawnConfig m_MobileSpawn;	// optional "mobileSpawn" object (F44_MobileSpawn.c)
 	ref F44_FieldSupplyConfig m_FieldSupply;	// optional "fieldSupply" object (F44_FieldSupply.c)
 	string m_sMode = "ASSAULT";
 	string m_sScenario;
@@ -207,6 +209,8 @@ class F44_BattleConfig
 		root.ReadValue("aiLimit", m_iAILimit);
 		root.ReadValue("layout", m_sLayoutId);
 		m_FieldSupply = F44_FieldSupplyConfig.Read(root);
+		m_MobileSpawn = F44_MobileSpawnConfig.Read(root);
+		m_SpawnTimes = F44_SpawnTimesConfig.Read(root);
 		if (root.StartObject("layoutData"))
 		{
 			m_InlineLayout = new F44_CityLayout();
