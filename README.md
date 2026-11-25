@@ -62,12 +62,27 @@ Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods
 
 ## Roadmap
 
-- [x] V1 — war map, assault teams, orders, economy, battle API
-- [x] V2 — battle orchestrator (instance pool, start/stop, results)
-- [ ] V0 — playable battle game mode on a first map (in progress)
-- [ ] City scenarios on several terrains (WW2 Arland, Montferrier 1944, Utah Beach…)
-- [ ] Player progression (ranks, credits, unlocks), Discord login
-- [ ] US vehicles / paratroopers / aircraft, USSR when a maintained WW2 faction exists
+Done:
+- [x] Website live: war map, Discord sign-in, anti-spoof account linking (one-time `AH-` codes + QR for console players), soldiers / arsenal / loadouts, admin AI settings, "Veteran" look
+- [x] Battle orchestrator (instance pool, start/stop, results)
+- [x] F44_Core mod V0 running (unpublished) on the dedicated server, Finest Hour factions
+- [x] AI bots spawn per side, receive sector orders, bot deaths cost tickets
+- [x] Live battle view (mod posts snapshots every 5 s, `/battle` page)
+- [x] WW2 server with 22 mods incl. armor (Tiger I, Panzer IV / Sturmtiger, SdKfz 251, M3A1, Overlord US vehicles)
+- [x] Content inventory vs Heroes & Generals (`inventory/HG_CONTENT.md`, `ARMOR_MODS.md`)
+
+In progress:
+- [ ] End-to-end result posting, proof of AI sector captures
+- [ ] Live view terrain background + zoom
+
+To do:
+- [ ] AI in vehicles
+- [ ] QR code drawn in-game
+- [ ] Full "Veteran" in-game HUD / scoreboard
+- [ ] Missing Finest Hour US classes (MG, medic, AT, engineer, crew, paratrooper)
+- [ ] Soviet faction
+- [ ] City scenarios on Arland
+- [ ] Finest Hour authors' permission
 
 ## Screenshots
 
