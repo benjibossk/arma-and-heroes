@@ -125,4 +125,10 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - Suicide: a self-kill adds `suicidePenaltySec` to the maintenance equipment timer; BattleResult players gain `"suicides": n`. Log `[F44] SUICIDE`.
 - Join penalty: leaving a running battle and reconnecting (same identity) blocks deploy for `joinPenaltySec` (hint).
 
+### P3 Seat enforcement for account classes — battle JSON `seatRules` (optional) — `F44_SeatRules.c`
+`{ "enabled": true, "armorRoles": ["tank", "tank_destroyer"] }`
+- Pool vehicles whose catalog role is in `armorRoles`: driver / gunner / commander seats only for the CREW class family (class key contains CREW or TANK); others are ejected with a hint. Passenger seats stay free.
+- Catalog `type: "AIR"`: pilot seat only for the PILOT family; while the catalog has no `US_PILOT` / `GER_PILOT` class, CREW may fly. AI crews are never restricted.
+- The class is the one the player deployed with (account class lock itself is web side: web/models.go, soldiers.go).
+
 

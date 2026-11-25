@@ -14,6 +14,7 @@ class F44_CatalogEntry
 	string m_sCategory; // optional: rifle, smg, lmg, sniper, at, explosive, vehicle...
 	string m_sRole;     // vehicles: light_utility, truck, halftrack, tank...
 	bool m_bIsItem;     // entry of the "items" section (player loadout)
+	string m_sType;     // vehicles: optional catalog "type" (AIR...)
 
 	bool IsVehicle() { return !m_bIsClass && !m_bIsItem; }
 	bool IsTank() { return m_sRole == "tank"; }
@@ -162,6 +163,8 @@ class F44_Catalog
 			ctx.ReadValue("category", category);
 			string role;
 			ctx.ReadValue("role", role);
+			string vtype;
+			ctx.ReadValue("type", vtype);
 			ctx.EndObject();
 
 			if (prefab.IsEmpty() || prefab == "null")
@@ -173,6 +176,7 @@ class F44_Catalog
 			e.m_sKey = key;
 			e.m_sPrefab = prefab;
 			e.m_iCost = cost;
+			e.m_sType = vtype;
 			e.m_bIsItem = section == "items";
 			e.m_bIsClass = !e.m_bIsItem && prefab.Contains("Prefabs/Characters/");
 			e.m_sCategory = category;
@@ -232,6 +236,24 @@ class F44_Catalog
 		if (m_mEntries.Find(vehicleKey, e) && e.IsVehicle())
 			return e.m_sPrefab;
 		return ResourceName.Empty;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! catalog role / type of a vehicle key ("" = unknown)
+	string GetVehicleRole(string vehicleKey)
+	{
+		F44_CatalogEntry e;
+		if (m_mEntries.Find(vehicleKey, e))
+			return e.m_sRole;
+		return string.Empty;
+	}
+
+	string GetVehicleType(string vehicleKey)
+	{
+		F44_CatalogEntry e;
+		if (m_mEntries.Find(vehicleKey, e))
+			return e.m_sType;
+		return string.Empty;
 	}
 
 	//------------------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@
 //  - P3 squads (orders, spawn on leader): F44_Squads.c
 //  - P3 access points, multi-line layouts, pushed off the map: F44_AccessPoints.c
 //  - P3 vehicle spawn lock, mine cap, suicide / join penalties: F44_SpawnRules.c
+//  - P3 seat enforcement for the account classes: F44_SeatRules.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -34,6 +35,8 @@ class F44_Rules
 		F44_AccessPoints.Read(root);
 		F44_SpawnRules.s_Cfg = new F44_SpawnRulesConfig();
 		F44_SpawnRules.s_Cfg.Read(root);
+		F44_SeatRules.s_Cfg = new F44_SeatRulesConfig();
+		F44_SeatRules.s_Cfg.Read(root);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -45,6 +48,7 @@ class F44_Rules
 		F44_Badges.Reset();
 		F44_Squads.Reset();
 		F44_SpawnRules.Reset();
+		F44_SeatRules.Reset();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -70,6 +74,7 @@ class F44_Rules
 	{
 		F44_Maintenance.OnDeployed(pid, classKey, points);
 		F44_Badges.OnDeployed(pid, character, lo);
+		F44_SeatRules.OnDeployed(pid, classKey);
 		if (s_mPlayerSide)
 			F44_Squads.OnDeployed(pid, character, s_mPlayerSide);
 	}
@@ -96,6 +101,7 @@ class F44_Rules
 	static void WatchVehicle(IEntity veh, string key, int side, string teamId)
 	{
 		F44_Maintenance.WatchVehicle(veh, F44_Catalog.Get().GetVehicleCost(key));
+		F44_SeatRules.Watch(veh, key);
 	}
 
 	//------------------------------------------------------------------------------------------------

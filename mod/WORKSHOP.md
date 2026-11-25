@@ -52,6 +52,7 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Squads: your vanilla group is your squad. The leader's order (attack/defend a sector) is shown to members, and members deploy next to their leader when he is safe.
 - Access points and multi-line maps: attack lines are captured independently; if defenders retake an access point, the teams attacking from it can no longer deploy, and losing every access point ends the battle (pushed off the map).
 - A lost vehicle cannot respawn for its team for a minute; armed mines are capped per side (oldest removed); suicides add maintenance time; leaving and rejoining a battle delays your next deploy.
+- Seat rules: only tank crew soldiers may drive or man a tank, only pilots (tank crew until a pilot class exists) may fly a plane.
 
 
 ## Changelog 1.2.1 (draft)
