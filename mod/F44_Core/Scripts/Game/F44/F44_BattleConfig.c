@@ -184,7 +184,6 @@ class F44_BattleConfig
 	string m_sBattleId;
 	int m_iWarId;
 	string m_sCityId;
-	string m_sWorld;	// optional world key (docs/MAPS.md); the orchestrator picks the mission, the mod only checks it
 	string m_sLayoutId;	// optional explicit layout id (Configs/F44/layouts.json)
 	ref F44_CityLayout m_InlineLayout;	// optional "layoutData" object sent by the site
 	ref F44_SpawnTimesConfig m_SpawnTimes;	// optional "spawnTimes" object (F44_SectorSpawn.c)
@@ -213,9 +212,6 @@ class F44_BattleConfig
 		root.ReadValue("defender", m_sDefender);
 		root.ReadValue("aiLimit", m_iAILimit);
 		root.ReadValue("layout", m_sLayoutId);
-		root.ReadValue("world", m_sWorld);
-		if (!F44_CityLayout.IsWorldLoaded(m_sWorld))
-			PrintFormat("[F44] Battle %1 expects world '%2' but %3 is loaded (wrong mission?)", m_sBattleId, m_sWorld, GetGame().GetWorldFile(), level: LogLevel.WARNING);
 		m_FieldSupply = F44_FieldSupplyConfig.Read(root);
 		m_MobileSpawn = F44_MobileSpawnConfig.Read(root);
 		m_SpawnTimes = F44_SpawnTimesConfig.Read(root);
