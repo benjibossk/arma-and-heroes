@@ -51,3 +51,15 @@ next to the code (one file per package) unless noted.
 - Mod hook (seat enforcement [GM], not done): `GET /api/v1/careers/by-identity/:identityId`
   (server key) -> `{linked, career, seats[]}` with seats `tank_driver|tank_gunner|tank_commander|pilot|recon_driver`.
 - UI: barracks -> "Service record" panel.
+
+## P3 Cosmetics, weapon upgrades, cross-faction surcharge (`web/cosmetics.go`)
+- **Cosmetics** per soldier: camo (`standard` free, `field` 150, `mud` 250 r2, `winter` 400 r3,
+  `veteran` 800 r5 — bought once with soldier credits) + face preset 1..8 (free).
+  `GET/POST /api/v1/soldiers/:id/cosmetics` (GET is public so the mod can read it).
+- **Weapon upgrades**: owned primary/secondary, 3 levels (sights, action, match ammo);
+  level n needs rank n+1; price = 100 x n + weapon price x n / 4.
+  `GET /api/v1/soldiers/:id/weapon-upgrades`, `POST .../weapon-upgrades/:item`.
+  Gameplay effects are mod-side (not done): web only stores and exports the levels.
+- **Cross-faction**: enemy primary/secondary weapons become buyable from rank 3 at +50%
+  (`itemUsable` / `unlockPrice`; depot, unlock tree and loadout validation use them).
+- UI: barracks "Service record" panel (appearance + armourer).

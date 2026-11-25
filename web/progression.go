@@ -327,12 +327,13 @@ func getUnlocks(c *gin.Context) {
 			"weight": it.Weight, "price": it.Price, "rank": n, "rankName": rankLabel(n, it.Faction), "tree": itemTree[k], "ribbon": it.Ribbon,
 			"starter": it.Starter}
 		if s != nil {
+			v["price"] = unlockPrice(it, s) // P3 cross-faction surcharge
 			switch reason := unlockState(it, s); {
 			case owned[k]:
 				v["state"] = "owned"
 			case reason != "":
 				v["state"], v["reason"] = "locked", reason
-			case s.Credits < it.Price:
+			case s.Credits < unlockPrice(it, s):
 				v["state"], v["reason"] = "locked", "not enough credits"
 			default:
 				v["state"] = "buyable"
@@ -366,18 +367,19 @@ func buyUnlock(c *gin.Context) {
 		errJ(c, 400, r)
 		return
 	}
-	res := db.Model(&Soldier{}).Where("id = ? AND credits >= ?", s.ID, it.Price).Update("credits", gormExprCol("credits", -it.Price))
+	price := unlockPrice(it, s)
+	res := db.Model(&Soldier{}).Where("id = ? AND credits >= ?", s.ID, price).Update("credits", gormExprCol("credits", -price))
 	if res.RowsAffected == 0 {
 		errJ(c, 400, "not enough credits")
 		return
 	}
 	if err := db.Create(&SoldierItem{SoldierID: s.ID, ItemKey: key, CreatedAt: time.Now().UTC()}).Error; err != nil {
 		// concurrent duplicate buy: refund, stay idempotent
-		db.Model(&Soldier{}).Where("id = ?", s.ID).Update("credits", gormExprCol("credits", it.Price))
+		db.Model(&Soldier{}).Where("id = ?", s.ID).Update("credits", gormExprCol("credits", price))
 		c.JSON(200, gin.H{"ok": true, "already": true, "credits": s.Credits})
 		return
 	}
-	c.JSON(200, gin.H{"ok": true, "credits": s.Credits - it.Price, "item": key})
+	c.JSON(200, gin.H{"ok": true, "credits": s.Credits - price, "item": key})
 }
 
 // seedStarterKits : existing soldiers get any starter item they lack (safe to rerun)

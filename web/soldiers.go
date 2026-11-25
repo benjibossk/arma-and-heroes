@@ -152,7 +152,7 @@ func itemFits(it *Item, s *Soldier) bool {
 
 // unlockState : "" if purchasable, else the reason
 func unlockState(it *Item, s *Soldier) string {
-	if !itemFits(it, s) {
+	if !itemUsable(it, s) { // P3: enemy weapons purchasable with a surcharge (cosmetics.go)
 		return "not available for this class/faction"
 	}
 	if it.RankRequired != nil && rankIdxFor(s.XP) < rankIndex(*it.RankRequired) {
@@ -226,7 +226,7 @@ func validateLoadout(s *Soldier, l Loadout) (int, string) {
 		if !owned[k] {
 			return k + " is not owned"
 		}
-		if !itemFits(it, s) {
+		if !itemUsable(it, s) {
 			return k + " is not compatible with this class/faction"
 		}
 		return ""
@@ -403,7 +403,7 @@ func getStore(c *gin.Context) {
 	sort.Strings(keys)
 	for _, k := range keys {
 		it := items[k]
-		if s != nil && !itemFits(it, s) {
+		if s != nil && !itemUsable(it, s) {
 			continue
 		}
 		v := gin.H{"key": k, "label": it.Label, "faction": it.Faction, "slot": it.Slot, "category": it.Category, "classes": it.Classes,

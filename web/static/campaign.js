@@ -33,3 +33,21 @@ async function svcSetCareer() {
   try { await api('/me/career', { method: 'POST', body: { career: v } }); svcCareer(); } catch (e) { alert(e.message); }
 }
 if (document.getElementById('svc')) addEventListener('load', () => { svcCareer(); });
+async function svcSoldier(s) {
+  try {
+    const [c, w] = await Promise.all([api('/soldiers/' + s.id + '/cosmetics'), api('/soldiers/' + s.id + '/weapon-upgrades')]);
+    const camo = Object.values(c.camos).sort((a, b) => a.price - b.price).map(x => `<option value="${x.key}" ${x.key === c.camo ? 'selected' : ''}>${esc(x.label)}${c.owned[x.key] ? '' : ` — ${x.price} cr${x.rank > 1 ? ', rank ' + x.rank : ''}`}</option>`).join('');
+    const face = Array.from({ length: c.faces }, (_, i) => `<option value="${i + 1}" ${i + 1 === c.face ? 'selected' : ''}>Face ${i + 1}</option>`).join('');
+    svcSection('cosm', `<h3 style="margin:10px 0 4px">Appearance — soldier #${s.id}</h3>Camo <select id="cmsel">${camo}</select> Face <select id="fcsel">${face}</select> <button onclick="svcSetCosm(${s.id})">Apply</button>`);
+    svcSection('wupg', `<h3 style="margin:10px 0 4px">Armourer — weapon upgrades</h3>` + (w.weapons.length ? w.weapons.map(x => `<div class="list-item" style="padding:4px 6px;margin:3px 0">${esc(x.label)} — level <b>${x.level}/${x.max}</b>
+      ${x.next ? ` · next: ${esc(x.next)} (${x.price} cr) ${x.blocked ? `<span class="muted">${esc(x.blocked)}</span>` : `<button onclick="svcWUpg(${s.id},'${x.item}',${x.price})">Upgrade</button>`}` : ''}</div>`).join('') : '<span class="muted">No weapon owned yet.</span>') +
+      `<p class="muted" style="margin:4px 0">Enemy weapons can be bought in the depot from rank 3, at +50%.</p>`);
+  } catch (e) { svcSection('cosm', ''); }
+}
+async function svcSetCosm(id) {
+  try { await api('/soldiers/' + id + '/cosmetics', { method: 'POST', body: { camo: cmsel.value, face: +fcsel.value } }); svcSoldier({ id }); } catch (e) { alert(e.message); }
+}
+async function svcWUpg(id, item, price) {
+  if (!confirm('Upgrade ' + item + ' for ' + price + ' credits ?')) return;
+  try { await api('/soldiers/' + id + '/weapon-upgrades/' + item, { method: 'POST' }); svcSoldier({ id }); } catch (e) { alert(e.message); }
+}

@@ -23,6 +23,7 @@ async function load() {
   if (cur) cur = S.find(s => s.id === cur.id) || null;
   if (!cur && S.length) cur = S.find(s => s.active) || S[0];
   if (cur) await show();
+  if (cur && window.svcSoldier) svcSoldier(cur);
   if (location.hash === '#depot') document.getElementById('depot')?.scrollIntoView();
 }
 async function pick(id) { cur = S.find(s => s.id === id); await load(); }

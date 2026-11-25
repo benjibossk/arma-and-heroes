@@ -172,6 +172,6 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 - Air layer: airfields, air teams, fighter spawn, plane tickets (web + F44_ParaDrop.c) (L).
 - Vehicle temporary spawn lock, mine cap, suicide/join penalties [GM] (S each).
 - Account classes tank/pilot/recon + career lock — WEB DONE 2026-11-26 (web/careers.go; seat enforcement [GM] still open) — (web/models.go, soldiers.go) and in-battle seat enforcement [GM].
-- Cosmetics (camo, face presets), weapon upgrades, cross-faction unlock surcharge (web/progression.go, soldiers.go).
+- Cosmetics (camo, face presets), weapon upgrades, cross-faction unlock surcharge — WEB DONE 2026-11-26 (web/cosmetics.go; mod-side visuals/effects open) — (web/progression.go, soldiers.go).
 - Daily reward cycle + seasonal track (web/progression.go, [API] routes).
 - Skip: premium currency, membership, bonds.
