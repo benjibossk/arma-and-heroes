@@ -97,6 +97,7 @@ func main() {
 	loadItems()
 	loadRibbons()
 	loadProgression()
+	loadTeamRules()
 	seedStarterKits()
 	ensureAdmin()
 	if currentWar() == nil {

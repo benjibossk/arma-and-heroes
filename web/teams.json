@@ -1,0 +1,19 @@
+{
+  "note": "Assault-team tuning. allowedRoles: vehicle roles a team type may field (anything else is stripped from the pool and the battle payload). vehicleRoles: vehicle key -> role. vehicleShare: part of the team cost that pays for its vehicles (rest = manpower). resupplyFactor: resupply price = factor x pro-rata cost of what is missing. minAttackPct: a team below this strength cannot attack an enemy city.",
+  "resupplyFactor": 0.5,
+  "minAttackPct": 50,
+  "allowedRoles": {
+    "INF": [],
+    "PARA": [],
+    "ARM": ["tank", "light_armored", "light_armored_aa"],
+    "REC": ["light_utility", "light_armed", "light_armored"],
+    "MOT": ["truck", "light_utility", "light_armed", "light_armored"]
+  },
+  "vehicleShare": { "ARM": 0.7, "REC": 0.3, "MOT": 0.4 },
+  "vehicleRoles": {
+    "US_JEEP": "light_utility", "GER_KFZ": "light_utility",
+    "US_TRUCK": "truck", "GER_TRUCK": "truck",
+    "US_M3A1": "light_armored", "GER_SDKFZ251": "light_armored", "GER_SDKFZ222": "light_armored",
+    "US_SHERMAN": "tank", "GER_PZ4": "tank", "GER_TIGER1": "tank"
+  }
+}

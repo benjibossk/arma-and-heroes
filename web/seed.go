@@ -102,7 +102,7 @@ func countWars() int64 {
 func newTeam(warID uint, typ, faction string, owner uint, city string) AssaultTeam {
 	s := atSpecs[typ]
 	t := AssaultTeam{WarID: warID, Type: typ, Faction: faction, OwnerID: owner, Manpower: s.Manpower, EquipLevel: 1, CityID: city, Status: "idle"}
-	t.SetVehicles(s.Vehicles[faction])
+	t.SetVehicles(filterVehicles(typ, s.Vehicles[faction]))
 	return t
 }
 

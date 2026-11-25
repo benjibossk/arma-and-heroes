@@ -170,7 +170,7 @@ func mergeTeam(w *War, t *AssaultTeam, c *City) {
 	for k, n := range vm {
 		vs = append(vs, VehicleCount{k, n})
 	}
-	o.SetVehicles(vs)
+	o.SetVehicles(filterVehicles(o.Type, vs))
 	if t.EquipLevel > o.EquipLevel {
 		o.EquipLevel = t.EquipLevel
 	}
@@ -258,7 +258,7 @@ func buildConfig(b *Battle) BattleConfig {
 				continue
 			}
 			s.Teams = append(s.Teams, BCTeam{TeamID: id, DisplayName: t.DisplayName, Type: t.Type, Manpower: t.Manpower, EquipLevel: t.EquipLevel,
-				Classes: atSpecs[t.Type].Classes, Vehicles: t.GetVehicles()})
+				Classes: atSpecs[t.Type].Classes, Vehicles: filterVehicles(t.Type, t.GetVehicles())})
 		}
 		out.Sides[side] = s
 	}

@@ -59,6 +59,7 @@ func setupRouter() *gin.Engine {
 	g.POST("", createTeam)
 	g.POST("/:id/move", moveTeam)
 	g.DELETE("/:id", dissolveTeam)
+	g.POST("/:id/resupply", resupplyTeam)
 	// serveur (orchestrateur / mod)
 	s := a.Group("/battles/:id", requireServer)
 	s.POST("/claim", claimBattle)
@@ -111,12 +112,17 @@ type TeamView struct {
 	VehList   []VehicleCount `json:"vehicles"`
 	OwnerName string         `json:"ownerName"`
 	BattleRef string         `json:"battleId"`
+	*TeamStrength
 }
 
 func teamView(t *AssaultTeam, names map[uint]string, hideDest bool) TeamView {
 	v := TeamView{AssaultTeam: *t, TeamID: t.TeamID(), VehList: t.GetVehicles(), OwnerName: names[t.OwnerID]}
 	if t.BattleID > 0 {
 		v.BattleRef = "b_" + pad6(int(t.BattleID))
+	}
+	if !hideDest {
+		st := teamStrength(t)
+		v.TeamStrength = &st
 	}
 	if hideDest {
 		v.DestCityID, v.ArrivalAt, v.DepartAt = "", nil, nil
@@ -307,6 +313,12 @@ func moveTeam(c *gin.Context) {
 	if rd == nil {
 		errJ(c, 400, "no direct road to this city")
 		return
+	}
+	if dc := getCity(w.ID, in.DestCityID); dc != nil && dc.Owner != t.Faction {
+		if st := teamStrength(&t); !st.CanAttack {
+			errJ(c, 400, fmt.Sprintf("assault team too weak to attack (%d%% < %d%%): resupply it first", st.Pct, teamRules.MinAttackPct))
+			return
+		}
 	}
 	dur := travelDuration(rd.Distance)
 	if t.Type == "MOT" || t.Type == "REC" {
