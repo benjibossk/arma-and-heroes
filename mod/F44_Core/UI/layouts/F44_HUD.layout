@@ -1,48 +1,296 @@
 FrameWidgetClass {
  Name "F44_HudRoot"
-  {
-  ImageWidgetClass "{6A1F0C2B9D3E4A51}" {
-   Name "F44_HudBg"
-   Color 0.118 0.122 0.125 0.9
-   Slot FrameWidgetSlot "{6A1F0C2B9D3E4A52}" {
-    Anchor 0.5 0 0.5 0
-    PositionX -260
-    PositionY 4
-    SizeX 520
-    SizeY 72
-   }
-  }
-  VerticalLayoutWidgetClass "{8ABA1B6E9A6C1665}" {
-   Name "F44_Panel"
-   Slot FrameWidgetSlot "{B7F3283B8AD2E9CF}" {
-    Anchor 0.5 0 0.5 0
-    PositionX -250
-    PositionY 10
-    SizeX 500
-    SizeY 90
-   }
-    {
-    TextWidgetClass "{BBFE7535A0A89891}" {
-     Name "F44_Tickets"
-     Text "US 0 | 00:00 | GER 0"
-     Color 0.91 0.902 0.882 1
-     ExactFontSize 1
-     FontSize 24
-     Slot LayoutSlot "{85894586D674A755}" {
-      HorizontalAlign 1
-     }
-    }
-    TextWidgetClass "{597030C36316416C}" {
-     Name "F44_Sectors"
-     Text "[A] [B] [C]"
-     Color 0.941 0.659 0.188 1
-     ExactFontSize 1
-     FontSize 20
-     Slot LayoutSlot "{8987B1A9727CAF27}" {
-      HorizontalAlign 1
-     }
-    }
-   }
-  }
+ {
+FrameWidgetClass "{F44B00000000001B}" {
+ Name "F44_Top"
+ 
+ Slot FrameWidgetSlot "{F44B00000000001C}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -340
+  PositionY 6
+  SizeX 680
+  SizeY 84
+ }
+ {
+ImageWidgetClass "{F44B000000000001}" {
+ Name "F44_TopBg"
+ 
+ Color 0.118 0.122 0.125 0.9
+ Slot FrameWidgetSlot "{F44B000000000002}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 680
+  SizeY 84
+ }
+}
+TextWidgetClass "{F44B000000000003}" {
+ Name "F44_AttName"
+ Text "ALLIES"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44B000000000004}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 6
+  SizeX 250
+  SizeY 18
+ }
+}
+TextWidgetClass "{F44B000000000005}" {
+ Name "F44_AttTickets"
+ Text "0"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 28
+ Slot FrameWidgetSlot "{F44B000000000006}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 24
+  SizeX 90
+  SizeY 32
+ }
+}
+TextWidgetClass "{F44B000000000007}" {
+ Name "F44_AttInfo"
+ Text "AI 0  PL 0"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44B000000000008}" {
+  Anchor 0 0 0 0
+  PositionX 110
+  PositionY 34
+  SizeX 150
+  SizeY 18
+ }
+}
+ImageWidgetClass "{F44B000000000009}" {
+ Name "F44_AttBarBg"
+ 
+ Color 0 0 0 0.6
+ Slot FrameWidgetSlot "{F44B00000000000A}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 64
+  SizeX 250
+  SizeY 8
+ }
+}
+ImageWidgetClass "{F44B00000000000B}" {
+ Name "F44_AttBar"
+ 
+ Color 0.231 0.435 0.714 1
+ Slot FrameWidgetSlot "{F44B00000000000C}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 64
+  SizeX 250
+  SizeY 8
+ }
+}
+TextWidgetClass "{F44B00000000000D}" {
+ Name "F44_Timer"
+ Text "00:00"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 28
+ Slot FrameWidgetSlot "{F44B00000000000E}" {
+  Anchor 0 0 0 0
+  PositionX 295
+  PositionY 6
+  SizeX 100
+  SizeY 32
+ }
+}
+TextWidgetClass "{F44B00000000000F}" {
+ Name "F44_Sectors"
+ Text "A  B  C"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 16
+ Slot FrameWidgetSlot "{F44B000000000010}" {
+  Anchor 0 0 0 0
+  PositionX 276
+  PositionY 46
+  SizeX 140
+  SizeY 22
+ }
+}
+TextWidgetClass "{F44B000000000011}" {
+ Name "F44_DefName"
+ Text "AXIS"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44B000000000012}" {
+  Anchor 0 0 0 0
+  PositionX 418
+  PositionY 6
+  SizeX 250
+  SizeY 18
+ }
+}
+TextWidgetClass "{F44B000000000013}" {
+ Name "F44_DefTickets"
+ Text "0"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 28
+ Slot FrameWidgetSlot "{F44B000000000014}" {
+  Anchor 0 0 0 0
+  PositionX 418
+  PositionY 24
+  SizeX 90
+  SizeY 32
+ }
+}
+TextWidgetClass "{F44B000000000015}" {
+ Name "F44_DefInfo"
+ Text "AI 0  PL 0"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44B000000000016}" {
+  Anchor 0 0 0 0
+  PositionX 520
+  PositionY 34
+  SizeX 150
+  SizeY 18
+ }
+}
+ImageWidgetClass "{F44B000000000017}" {
+ Name "F44_DefBarBg"
+ 
+ Color 0 0 0 0.6
+ Slot FrameWidgetSlot "{F44B000000000018}" {
+  Anchor 0 0 0 0
+  PositionX 418
+  PositionY 64
+  SizeX 250
+  SizeY 8
+ }
+}
+ImageWidgetClass "{F44B000000000019}" {
+ Name "F44_DefBar"
+ 
+ Color 0.702 0.188 0.169 1
+ Slot FrameWidgetSlot "{F44B00000000001A}" {
+  Anchor 0 0 0 0
+  PositionX 418
+  PositionY 64
+  SizeX 250
+  SizeY 8
+ }
+}
+ }
+}
+FrameWidgetClass "{F44B000000000023}" {
+ Name "F44_Ammo"
+ 
+ Slot FrameWidgetSlot "{F44B000000000024}" {
+  Anchor 1 1 1 1
+  PositionX -236
+  PositionY -80
+  SizeX 220
+  SizeY 64
+ }
+ {
+ImageWidgetClass "{F44B00000000001D}" {
+ Name "F44_AmmoBg"
+ 
+ Color 0.118 0.122 0.125 0.9
+ Slot FrameWidgetSlot "{F44B00000000001E}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 220
+  SizeY 64
+ }
+}
+TextWidgetClass "{F44B00000000001F}" {
+ Name "F44_Weapon"
+ Text ""
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44B000000000020}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 6
+  SizeX 200
+  SizeY 18
+ }
+}
+TextWidgetClass "{F44B000000000021}" {
+ Name "F44_AmmoCount"
+ Text ""
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 30
+ Slot FrameWidgetSlot "{F44B000000000022}" {
+  Anchor 0 0 0 0
+  PositionX 12
+  PositionY 24
+  SizeX 200
+  SizeY 34
+ }
+}
+ }
+}
+FrameWidgetClass "{F44B00000000002B}" {
+ Name "F44_Score"
+ Visible 0
+ Slot FrameWidgetSlot "{F44B00000000002C}" {
+  Anchor 0.5 0.5 0.5 0.5
+  PositionX -320
+  PositionY -180
+  SizeX 640
+  SizeY 360
+ }
+ {
+ImageWidgetClass "{F44B000000000025}" {
+ Name "F44_ScoreBg"
+ 
+ Color 0.118 0.122 0.125 0.9
+ Slot FrameWidgetSlot "{F44B000000000026}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 640
+  SizeY 360
+ }
+}
+TextWidgetClass "{F44B000000000027}" {
+ Name "F44_ScoreTitle"
+ Text "SCOREBOARD"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 22
+ Slot FrameWidgetSlot "{F44B000000000028}" {
+  Anchor 0 0 0 0
+  PositionX 16
+  PositionY 10
+  SizeX 600
+  SizeY 28
+ }
+}
+TextWidgetClass "{F44B000000000029}" {
+ Name "F44_ScoreText"
+ Text ""
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 16
+ Slot FrameWidgetSlot "{F44B00000000002A}" {
+  Anchor 0 0 0 0
+  PositionX 16
+  PositionY 48
+  SizeX 608
+  SizeY 300
+ }
+}
+ }
+}
  }
 }
