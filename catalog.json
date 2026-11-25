@@ -12,7 +12,8 @@
    "FinestHour-GERUnits",
    "FinestHour-GERVehicles",
    "M4A2Sherman"
-  ]
+  ],
+  "items_note": "Soldier arsenal (web store, loadouts). price in soldier credits, weight in loadout points (budget INF 10, others 6), rankRequired = soldier rank name, ribbon = {category, kills} needed. prefab null = to map in the mod. Copied to web/catalog.json for the website."
  },
  "catalog": {
   "US_RIFLEMAN": {
@@ -412,6 +413,570 @@
    "cost": 6,
    "role": "static_or_towed",
    "source": "FH GER Vehicles"
+  }
+ },
+ "items": {
+  "US_M1_GARAND": {
+   "prefab": null,
+   "label": "M1 Garand",
+   "faction": "US",
+   "slot": "primary",
+   "category": "rifle",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC"
+   ],
+   "price": 0,
+   "weight": 3,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "US_M1_CARBINE": {
+   "prefab": null,
+   "label": "M1 Carbine",
+   "faction": "US",
+   "slot": "primary",
+   "category": "rifle",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 300,
+   "weight": 2,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_THOMPSON": {
+   "prefab": null,
+   "label": "M1A1 Thompson",
+   "faction": "US",
+   "slot": "primary",
+   "category": "smg",
+   "classes": [
+    "INF",
+    "PARA"
+   ],
+   "price": 800,
+   "weight": 3,
+   "rankRequired": "Corporal",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 25
+   }
+  },
+  "US_M3_GREASE": {
+   "prefab": null,
+   "label": "M3 Grease Gun",
+   "faction": "US",
+   "slot": "primary",
+   "category": "smg",
+   "classes": [
+    "INF",
+    "PARA",
+    "CREW"
+   ],
+   "price": 500,
+   "weight": 2,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_BAR": {
+   "prefab": null,
+   "label": "M1918 BAR",
+   "faction": "US",
+   "slot": "primary",
+   "category": "mg",
+   "classes": [
+    "INF"
+   ],
+   "price": 1500,
+   "weight": 5,
+   "rankRequired": "Sergeant",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 50
+   }
+  },
+  "US_M1903A4": {
+   "prefab": null,
+   "label": "M1903A4 Springfield (scoped)",
+   "faction": "US",
+   "slot": "primary",
+   "category": "sniper",
+   "classes": [
+    "REC"
+   ],
+   "price": 1800,
+   "weight": 4,
+   "rankRequired": "Corporal",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 40
+   }
+  },
+  "US_M1911": {
+   "prefab": null,
+   "label": "M1911 pistol",
+   "faction": "US",
+   "slot": "secondary",
+   "category": "pistol",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 0,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "US_BAZOOKA": {
+   "prefab": null,
+   "label": "M1A1 Bazooka",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "at",
+   "classes": [
+    "INF",
+    "PARA"
+   ],
+   "price": 1200,
+   "weight": 4,
+   "rankRequired": "Corporal",
+   "ribbon": null
+  },
+  "US_MK2_GRENADE": {
+   "prefab": null,
+   "label": "Mk 2 grenade",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "grenade",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 100,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_SMOKE": {
+   "prefab": null,
+   "label": "M15 smoke grenade",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "smoke",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 80,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_MEDKIT": {
+   "prefab": null,
+   "label": "First aid pouch",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "medical",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 150,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_TNT": {
+   "prefab": null,
+   "label": "TNT charge",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "explosive",
+   "classes": [
+    "INF",
+    "PARA"
+   ],
+   "price": 600,
+   "weight": 2,
+   "rankRequired": "Sergeant",
+   "ribbon": null
+  },
+  "US_BINOCULARS": {
+   "prefab": null,
+   "label": "M3 binoculars",
+   "faction": "US",
+   "slot": "equipment",
+   "category": "tool",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 200,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "US_OUTFIT_M41": {
+   "prefab": null,
+   "label": "M41 field uniform",
+   "faction": "US",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "INF",
+    "REC"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "US_OUTFIT_PARA": {
+   "prefab": null,
+   "label": "M42 jump uniform",
+   "faction": "US",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "PARA"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "US_OUTFIT_CREW": {
+   "prefab": null,
+   "label": "Tanker uniform",
+   "faction": "US",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "CREW"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "US_OUTFIT_NETTING": {
+   "prefab": null,
+   "label": "M41 uniform + helmet netting",
+   "faction": "US",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "INF",
+    "REC",
+    "PARA"
+   ],
+   "price": 400,
+   "weight": 0,
+   "rankRequired": "Corporal",
+   "ribbon": null
+  },
+  "GER_KAR98K": {
+   "prefab": null,
+   "label": "Kar98k",
+   "faction": "GER",
+   "slot": "primary",
+   "category": "rifle",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 0,
+   "weight": 3,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "GER_G43": {
+   "prefab": null,
+   "label": "Gewehr 43",
+   "faction": "GER",
+   "slot": "primary",
+   "category": "rifle",
+   "classes": [
+    "INF",
+    "REC"
+   ],
+   "price": 900,
+   "weight": 3,
+   "rankRequired": "Corporal",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 25
+   }
+  },
+  "GER_MP40": {
+   "prefab": null,
+   "label": "MP40",
+   "faction": "GER",
+   "slot": "primary",
+   "category": "smg",
+   "classes": [
+    "INF",
+    "PARA",
+    "CREW"
+   ],
+   "price": 800,
+   "weight": 3,
+   "rankRequired": "Corporal",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 25
+   }
+  },
+  "GER_MG42": {
+   "prefab": null,
+   "label": "MG42",
+   "faction": "GER",
+   "slot": "primary",
+   "category": "mg",
+   "classes": [
+    "INF"
+   ],
+   "price": 1800,
+   "weight": 6,
+   "rankRequired": "Sergeant",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 50
+   }
+  },
+  "GER_KAR98K_SCOPE": {
+   "prefab": null,
+   "label": "Kar98k (scoped)",
+   "faction": "GER",
+   "slot": "primary",
+   "category": "sniper",
+   "classes": [
+    "REC"
+   ],
+   "price": 1800,
+   "weight": 4,
+   "rankRequired": "Corporal",
+   "ribbon": {
+    "category": "rifle",
+    "kills": 40
+   }
+  },
+  "GER_P38": {
+   "prefab": null,
+   "label": "Walther P38",
+   "faction": "GER",
+   "slot": "secondary",
+   "category": "pistol",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 0,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "GER_PANZERFAUST": {
+   "prefab": null,
+   "label": "Panzerfaust 100",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "at",
+   "classes": [
+    "INF",
+    "PARA"
+   ],
+   "price": 700,
+   "weight": 3,
+   "rankRequired": "Corporal",
+   "ribbon": null
+  },
+  "GER_PANZERSCHRECK": {
+   "prefab": null,
+   "label": "Panzerschreck RPzB 54",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "at",
+   "classes": [
+    "INF"
+   ],
+   "price": 1400,
+   "weight": 5,
+   "rankRequired": "Sergeant",
+   "ribbon": {
+    "category": "at",
+    "kills": 5
+   }
+  },
+  "GER_M24_GRENADE": {
+   "prefab": null,
+   "label": "Stielhandgranate 24",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "grenade",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 100,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "GER_SMOKE": {
+   "prefab": null,
+   "label": "NbHgr 39 smoke grenade",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "smoke",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 80,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "GER_MEDKIT": {
+   "prefab": null,
+   "label": "Verbandpäckchen",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "medical",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 150,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "GER_MINES": {
+   "prefab": null,
+   "label": "Teller mine",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "explosive",
+   "classes": [
+    "INF"
+   ],
+   "price": 600,
+   "weight": 2,
+   "rankRequired": "Sergeant",
+   "ribbon": null
+  },
+  "GER_BINOCULARS": {
+   "prefab": null,
+   "label": "Dienstglas 6x30",
+   "faction": "GER",
+   "slot": "equipment",
+   "category": "tool",
+   "classes": [
+    "INF",
+    "PARA",
+    "REC",
+    "CREW"
+   ],
+   "price": 200,
+   "weight": 1,
+   "rankRequired": null,
+   "ribbon": null
+  },
+  "GER_OUTFIT_M40": {
+   "prefab": null,
+   "label": "M40 field uniform",
+   "faction": "GER",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "INF",
+    "REC"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "GER_OUTFIT_FJ": {
+   "prefab": null,
+   "label": "Fallschirmjäger smock",
+   "faction": "GER",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "PARA"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "GER_OUTFIT_PANZER": {
+   "prefab": null,
+   "label": "Panzer wrap uniform",
+   "faction": "GER",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "CREW"
+   ],
+   "price": 0,
+   "weight": 0,
+   "rankRequired": null,
+   "ribbon": null,
+   "starter": true
+  },
+  "GER_OUTFIT_SMOCK": {
+   "prefab": null,
+   "label": "Splinter camo smock",
+   "faction": "GER",
+   "slot": "outfit",
+   "category": "outfit",
+   "classes": [
+    "INF",
+    "REC"
+   ],
+   "price": 400,
+   "weight": 0,
+   "rankRequired": "Corporal",
+   "ribbon": null
   }
  }
 }

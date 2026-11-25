@@ -1,6 +1,6 @@
 // Arma & Heroes — interactive war map
 let M = null, selCity = null, selTeam = null;
-const COL = { US: '#3d5a80', GER: '#7a2e2a', '': '#888' };
+const COL = { US: '#3B6FB6', GER: '#B3302B', '': '#888' };
 const svgNS = 'http://www.w3.org/2000/svg';
 const cityById = id => M.cities.find(c => c.id === id);
 const neighbors = id => M.roads.filter(r => r.cityA === id || r.cityB === id).map(r => ({ id: r.cityA === id ? r.cityB : r.cityA, km: r.distance }));
@@ -19,22 +19,22 @@ function teamIcon(g, t, x, y) {
   if (t.type === 'ARM') el('ellipse', { cx: x, cy: y, rx: 9, ry: 5, ...s }, g);
   if (t.type === 'REC') el('line', { x1: x - 13, y1: y + 9, x2: x + 13, y2: y - 9, ...s }, g);
   if (t.type === 'MOT') { el('line', { x1: x - 13, y1: y - 9, x2: x + 13, y2: y + 9, ...s }, g); el('line', { x1: x + 13, y1: y - 9, x2: x - 13, y2: y + 9, ...s }, g); el('line', { x1: x, y1: y - 9, x2: x, y2: y + 9, ...s }, g); }
-  const tx = el('text', { x: x, y: y + 21, 'text-anchor': 'middle', fill: '#111', style: 'fill:#111;font-size:10px' }, g); tx.textContent = t.manpower;
+  const tx = el('text', { x: x, y: y + 21, 'text-anchor': 'middle', fill: '#E8E6E1', style: 'fill:#E8E6E1;font-size:10px' }, g); tx.textContent = t.manpower;
 }
 
 function draw() {
   const s = document.getElementById('map'); s.innerHTML = '';
   const defs = el('defs', {}, s);
   ['US', 'GER'].forEach(f => { const m = el('marker', { id: 'arrow' + f, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto' }, defs); el('path', { d: 'M0 0L10 5L0 10z', fill: COL[f] }, m); });
-  el('rect', { x: 0, y: 0, width: 1000, height: 680, fill: '#cbc19f' }, s);
-  for (let i = 0; i < 1000; i += 50) el('line', { x1: i, y1: 0, x2: i, y2: 680, stroke: '#b9ae8c', 'stroke-width': .5 }, s);
-  for (let j = 0; j < 680; j += 50) el('line', { x1: 0, y1: j, x2: 1000, y2: j, stroke: '#b9ae8c', 'stroke-width': .5 }, s);
+  el('rect', { x: 0, y: 0, width: 1000, height: 680, fill: '#2a2c2b' }, s);
+  for (let i = 0; i < 1000; i += 50) el('line', { x1: i, y1: 0, x2: i, y2: 680, stroke: '#373938', 'stroke-width': .5 }, s);
+  for (let j = 0; j < 680; j += 50) el('line', { x1: 0, y1: j, x2: 1000, y2: j, stroke: '#373938', 'stroke-width': .5 }, s);
   const targets = selTeam && selTeam.status === 'idle' ? neighbors(selTeam.cityId).map(n => n.id) : [];
   M.roads.forEach(r => {
     const a = cityById(r.cityA), b = cityById(r.cityB); if (!a || !b) return;
     const tg = selTeam && ((r.cityA === selTeam.cityId && targets.includes(r.cityB)) || (r.cityB === selTeam.cityId && targets.includes(r.cityA)));
     el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'road' + (tg ? ' target' : '') }, s);
-    const t = el('text', { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 - 4, 'font-size': 10, fill: '#5d5340', 'text-anchor': 'middle' }, s); t.textContent = r.distance + ' km';
+    const t = el('text', { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 - 4, 'font-size': 10, fill: '#B9B8B2', 'text-anchor': 'middle' }, s); t.textContent = r.distance + ' km';
   });
   // movement arrows
   M.teams.filter(t => t.status === 'moving' && t.destCityId).forEach(t => {
@@ -93,7 +93,7 @@ function showSel() {
     d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
      Terrain: ${esc(c.terrain)} · mode ${esc(c.mode)} · garrison ${c.garrison}<br><span class="muted">Scenario: ${esc(c.scenarioId)}</span><br>
      Neighbours: ${neighbors(c.id).map(n => esc(cityById(n.id)?.name) + ' (' + n.km + ' km)').join(', ')}<br>
-     ${b ? `<b style="color:#c22">Battle ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">view</a>` : ''}`;
+     ${b ? `<b style="color:#F0A830">Battle ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">view</a>` : ''}`;
   } else d.innerHTML = 'Tap a city or a team.';
 }
 

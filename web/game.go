@@ -217,7 +217,8 @@ type BattleConfig struct {
 	Attacker      string              `json:"attacker"`
 	Defender      string              `json:"defender"`
 	Sides         map[string]BCSide   `json:"sides"`
-	PlayerUnlocks map[string][]string `json:"playerUnlocks"`
+	PlayerUnlocks  map[string][]string      `json:"playerUnlocks"`
+	PlayerLoadouts map[string]PlayerLoadout `json:"playerLoadouts"`
 }
 
 func teamByTeamID(id string) *AssaultTeam {
@@ -239,7 +240,7 @@ func buildConfig(b *Battle) BattleConfig {
 		scen = c.ScenarioID
 	}
 	out := BattleConfig{BattleID: b.BattleID(), WarID: b.WarID, CityID: b.CityID, Mode: b.Mode, Scenario: scen,
-		TimeLimitMin: b.TimeLimitMin, Attacker: b.Attacker, Defender: b.Defender, Sides: map[string]BCSide{}, PlayerUnlocks: map[string][]string{}}
+		TimeLimitMin: b.TimeLimitMin, Attacker: b.Attacker, Defender: b.Defender, Sides: map[string]BCSide{}, PlayerUnlocks: map[string][]string{}, PlayerLoadouts: battleLoadouts(b)}
 	for side, ids := range b.GetSides() {
 		s := BCSide{Teams: []BCTeam{}}
 		for _, id := range ids {
@@ -290,6 +291,13 @@ type ResPlayer struct {
 	Deaths     int    `json:"deaths"`
 	Captures   int    `json:"captures"`
 	XP         int    `json:"xp"`
+	SoldierID  uint   `json:"soldierId,omitempty"`
+	// per weapon category (rifle, smg, mg, sniper, at, grenade, explosive, pistol, vehicle...) for ribbons
+	WeaponStats map[string]WeaponStat `json:"weaponStats,omitempty"`
+}
+
+type WeaponStat struct {
+	Kills int `json:"kills"`
 }
 
 type BattleResult struct {
@@ -392,6 +400,7 @@ func applyResult(b *Battle, r *BattleResult) error {
 		p.Captures += rp.Captures
 		p.Battles++
 		db.Save(&p)
+		creditSoldier(&p, b, &rp, xp)
 		db.Create(&PlayerBattle{PlayerID: p.ID, BattleID: b.ID, Side: rp.Side, TeamID: rp.TeamID, Kills: rp.Kills, Deaths: rp.Deaths, Captures: rp.Captures, XP: xp})
 	}
 	db.Model(b).Updates(map[string]interface{}{"status": "finished", "winner": r.Winner, "result": string(raw), "finished_at": now})
@@ -454,3 +463,5 @@ func checkVictory(w *War) {
 }
 
 func gormExprAdd(v int) interface{} { return gorm.Expr("resources + ?", v) }
+
+func gormExprCol(col string, v int) interface{} { return gorm.Expr(col+" + ?", v) }

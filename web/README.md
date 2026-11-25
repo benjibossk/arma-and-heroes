@@ -38,6 +38,15 @@ AI bots: each side of BattleConfig carries `"ai": {"enabled", "maxAlive", "perPl
 
 Battle `{id}`: `b_000123` or `123`.
 
+## Soldiers, arsenal & loadouts (V3 groundwork)
+- An account owns several soldiers (first one per faction free, `2 + XP/5000` slots, max 6), each with class (`INF`, `PARA`, `REC`, `CREW`), XP/rank, credits, kills and ribbons (kills per weapon category).
+- Items come from the `items` section of `catalog.json` (`price`, `weight`, `rankRequired`, `ribbon`, `slot`, `classes`, `faction`, `starter`). `web/catalog.json` is a copy of `../catalog.json`, embedded at build time: re-copy it after editing.
+- Loadout: primary, secondary, 4 equipment slots, outfit; point budget 10 (INF) / 6 (others). Server-side validation: owned, slot, class/faction, budget.
+- API (session): `GET|POST /me/soldiers {faction,class}`, `POST /soldiers/{id}/activate`, `GET|PUT /soldiers/{id}/loadout`, `POST /soldiers/{id}/buy {item}`; public `GET /store[?soldierId=]` (with `owned` / `locked` reason).
+- BattleConfig adds `playerLoadouts: {identityId: {soldierId, class, rank, items, points}}` for linked players with a soldier in either side; `GET /battles/{id}/loadout/{identityId}` (server key) for late joiners.
+- BattleResult players may add `soldierId` and `weaponStats: {"rifle": {"kills": 4}, ...}`: XP, credits (XP/10) and ribbons go to that soldier (else the active one).
+- Page: `/barracks.html`.
+
 ## Game rules
 - Income: 10/city, +30 factory, +20 capital. Teams can only be raised in a capital or factory city.
 - Arriving on a friendly city: the team garrisons it (merges with a team of the same type/general). Enemy city: `pending` battle (defenders = teams present, otherwise garrison). Existing battle: reinforcement.

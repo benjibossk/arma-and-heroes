@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Barracks</title><link rel="stylesheet" href="/style.css"></head><body>
+<main><div class="grid"><div>
+ <div class="panel"><h2>My soldiers</h2><div id="sol"></div>
+  <div class="row" id="newrow"><select id="nf"><option value="US">Allies (US)</option><option value="GER">Axis (GER)</option></select>
+  <select id="nc"><option value="INF">Infantry</option><option value="PARA">Paratrooper</option><option value="REC">Recon</option><option value="CREW">Tank crew</option></select>
+  <button class="cta" style="width:auto;margin:0;padding:8px 14px;font-size:14px" onclick="createS()">Enlist soldier</button></div><div id="msg" class="err"></div></div>
+ <div class="panel" id="lopanel" style="display:none"><h2>Loadout</h2><div id="lo"></div></div>
+</div><div>
+ <div class="panel" id="stpanel" style="display:none"><h2 id="depot">Quartermaster — depot</h2><div id="st"></div></div>
+ <div class="panel" id="nxpanel" style="display:none"><h2>Next unlocks</h2><div id="nx"></div></div>
+</div></div></main>
+<script src="/common.js"></script><script>
+let S = [], cur = null, store = [];
+const CL = { INF: 'Infantry', PARA: 'Paratrooper', REC: 'Recon', CREW: 'Tank crew' };
+const say = (t, ok) => { msg.className = ok ? 'ok' : 'err'; msg.textContent = t; };
+async function load() {
+  const d = await api('/me/soldiers'); S = d.soldiers;
+  sol.innerHTML = S.length ? S.map(s => `<div class="list-item" style="cursor:pointer" onclick="pick(${s.id})"><b class="${s.faction}">${s.faction}</b> ${CL[s.class]} — ${esc(s.rank)} · ${s.xp} XP · <b>${s.credits}</b> cr. ${s.active ? '<span class="tag">active</span>' : ''}${cur && cur.id === s.id ? ' ◀' : ''}</div>`).join('') : '<p class="muted">No soldier yet: enlist one per faction.</p>';
+  sol.insertAdjacentHTML('beforeend', `<p class="muted">Slots: ${S.length} / ${d.maxSoldiers} (first soldier of each faction is free; more slots with XP).</p>`);
+  if (cur) cur = S.find(s => s.id === cur.id) || null;
+  if (!cur && S.length) cur = S.find(s => s.active) || S[0];
+  if (cur) await show();
+  if (location.hash === '#depot') document.getElementById('depot')?.scrollIntoView();
+}
+async function pick(id) { cur = S.find(s => s.id === id); await load(); }
+async function createS() { try { await api('/me/soldiers', { method: 'POST', body: { faction: nf.value, class: nc.value } }); say('Soldier enlisted', 1); await load(); } catch (e) { say(e.message); } }
+const lbl = k => { const i = store.find(x => x.key === k); return i ? i.label : k; };
+async function show() {
+  store = await api('/store?soldierId=' + cur.id);
+  const own = slot => store.filter(i => i.owned && i.slot === slot);
+  const sel = (id, slot, val) => `<select id="${id}" style="width:100%" onchange="pts()"><option value="">— empty —</option>${own(slot).map(i => `<option value="${i.key}" ${i.key === val ? 'selected' : ''}>${esc(i.label)} (${i.weight} pt)</option>`).join('')}</select>`;
+  const L = cur.loadout, eq = L.equipment || [];
+  lopanel.style.display = stpanel.style.display = nxpanel.style.display = '';
+  lo.innerHTML = `<p><b class="${cur.faction}">${cur.faction}</b> ${CL[cur.class]} · ${esc(cur.rank)} · ${cur.credits} credits ${cur.active ? '' : `<button onclick="act()">Set active</button>`}</p>
+   <div class="muted">Ribbons: ${Object.entries(cur.ribbons || {}).map(([k, v]) => k + ' ' + v).join(' · ') || 'none yet'}</div>
+   <label>Primary</label>${sel('lp', 'primary', L.primary)}<label>Secondary</label>${sel('ls', 'secondary', L.secondary)}
+   ${[0, 1, 2, 3].map(i => `<label>Equipment ${i + 1}</label>${sel('le' + i, 'equipment', eq[i])}`).join('')}
+   <label>Outfit</label>${sel('lo_', 'outfit', L.outfit)}
+   <p id="ptsl"></p><button class="btn-big" onclick="saveLo()">Save loadout</button><p id="lmsg"></p>`;
+  pts();
+  st.innerHTML = '<table>' + store.filter(i => !i.owned && !i.locked).map(i => `<tr><td>${esc(i.label)}<br><span class="muted">${i.slot} · ${i.category} · ${i.weight} pt</span></td><td>${i.price} cr.</td><td><button onclick="buy('${i.key}')" ${cur.credits < i.price ? 'disabled' : ''}>Buy</button></td></tr>`).join('') + '</table>' || '<p class="muted">Nothing new to buy.</p>';
+  const locked = store.filter(i => !i.owned && i.locked).sort((a, b) => a.price - b.price);
+  nx.innerHTML = locked.map(i => `<div class="list-item">${esc(i.label)} — ${i.price} cr.<br><span class="muted">${esc(i.locked)}</span></div>`).join('') || '<p class="muted">Everything is unlocked.</p>';
+}
+function cur_lo() { return { primary: lp.value, secondary: ls.value, outfit: lo_.value, equipment: [le0, le1, le2, le3].map(e => e.value).filter(Boolean) }; }
+function pts() { const l = cur_lo(); const p = [l.primary, l.secondary, l.outfit, ...l.equipment].filter(Boolean).reduce((a, k) => a + (store.find(i => i.key === k)?.weight || 0), 0);
+  ptsl.innerHTML = `Points: <b class="${p > cur.budget ? 'err' : ''}">${p} / ${cur.budget}</b>`; }
+async function saveLo() { try { await api(`/soldiers/${cur.id}/loadout`, { method: 'PUT', body: cur_lo() }); lmsg.className = 'ok'; lmsg.textContent = 'Loadout saved'; await load(); } catch (e) { lmsg.className = 'err'; lmsg.textContent = e.message; } }
+async function buy(k) { try { await api(`/soldiers/${cur.id}/buy`, { method: 'POST', body: { item: k } }); await load(); } catch (e) { alert(e.message); } }
+async function act() { await api(`/soldiers/${cur.id}/activate`, { method: 'POST' }); await load(); }
+initPage(location.hash === '#depot' ? 'quartermaster' : 'barracks.html').then(me => { if (!me) { document.querySelector('main').innerHTML = `<div class="panel"><p>Log in to manage your soldiers.</p><a href="/login.html?next=/barracks.html"><button class="btn-big">Log in with Discord</button></a></div>`; return; } load(); });
+</script></body></html>

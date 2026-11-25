@@ -142,6 +142,7 @@ type Player struct {
 	Deaths     int       `json:"deaths"`
 	Captures   int       `json:"captures"`
 	Battles    int       `json:"battles"`
+	ActiveSoldierID uint `json:"activeSoldierId"`
 	CreatedAt  time.Time `json:"createdAt"`
 }
 

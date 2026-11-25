@@ -36,6 +36,15 @@ func setupRouter() *gin.Engine {
 	a.GET("/auth/discord", discordStart)
 	a.GET("/auth/discord/callback", discordCallback)
 	a.POST("/me/faction", requireUser, setFaction)
+	// soldiers, arsenal, loadouts
+	a.GET("/store", getStore)
+	a.GET("/me/soldiers", requireUser, listSoldiers)
+	a.POST("/me/soldiers", requireUser, createSoldier)
+	a.POST("/soldiers/:id/activate", requireUser, activateSoldier)
+	a.GET("/soldiers/:id/loadout", requireUser, getLoadout)
+	a.PUT("/soldiers/:id/loadout", requireUser, putLoadout)
+	a.POST("/soldiers/:id/buy", requireUser, buyItem)
+	a.GET("/battles/:id/loadout/:identityId", requireServer, getBattleLoadout)
 	// account linking
 	a.POST("/link/request", requireServer, linkRequest)
 	a.POST("/link/confirm", requireUser, linkConfirm)

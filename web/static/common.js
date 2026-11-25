@@ -17,9 +17,12 @@ function fmtLeft(d) { const s = Math.max(0, Math.round((new Date(d) - Date.now()
 const discordLogin = next => '/api/v1/auth/discord?next=' + encodeURIComponent(next || (location.pathname + location.search));
 let ME = null;
 async function initPage(active) {
-  const nav = [['index.html', 'War map'], ['battles.html', 'Battles'], ['link.html', 'Link game'], ['profile.html', 'Profile & ranking'], ['admin.html', 'Admin']];
-  document.body.insertAdjacentHTML('afterbegin', `<header><h1>ARMA &amp; HEROES</h1><nav>${nav.map(([h, l]) =>
-    `<a href="/${h}" class="${h === active ? 'on' : ''}" ${h === 'admin.html' ? 'id="nav-admin" style="display:none"' : ''}>${l}</a>`).join('')}</nav><div id="who"></div></header>`);
+  const tabs = [['barracks.html', 'Barracks'], ['index.html', 'War map'], ['profile.html', 'Progression'], ['quartermaster', 'Quartermaster']];
+  const sub = [['battles.html', 'Battles'], ['link.html', 'Link game'], ['admin.html', 'Admin']];
+  const href = h => h === 'quartermaster' ? '/barracks.html#depot' : '/' + h;
+  document.body.insertAdjacentHTML('afterbegin', `<header><div class="logo">A&amp;H</div><nav>${tabs.map(([h, l]) =>
+    `<a href="${href(h)}" class="${h === active ? 'on' : ''}">${l}</a>`).join('')}</nav><div class="subnav">${sub.map(([h, l]) =>
+    `<a href="/${h}" class="${h === active ? 'on' : ''}" ${h === 'admin.html' ? 'id="nav-admin" style="display:none"' : ''}>${l}</a>`).join('')}<span id="who"></span></div></header>`);
   try { const m = await api('/auth/me'); ME = m.user ? { ...m.user, rank: m.rank, isGeneral: m.isGeneral, linked: m.linked } : null; } catch (e) { ME = null; }
   const who = document.getElementById('who');
   if (ME) {

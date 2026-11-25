@@ -1,7 +1,7 @@
 FROM golang:1.24-alpine AS builder
 WORKDIR /app
 COPY go.mod ./
-COPY *.go ./
+COPY *.go catalog.json ./
 RUN go mod tidy && CGO_ENABLED=0 go build -ldflags "-w -s" -o /front44 .
 
 FROM alpine:3.20
