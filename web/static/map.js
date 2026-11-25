@@ -91,7 +91,7 @@ function showSel() {
   const d = document.getElementById('sel');
   if (selTeam) {
     const t = selTeam, c = cityById(t.cityId);
-    d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — <span class="${t.faction}">${icoHtml(teamIconFile(t))}</span> ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${vehChips(t.vehicles, t.faction)}<br>
+    d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — <span class="${t.faction}">${icoHtml(teamIconFile(t))}</span> ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Morale: <b>${t.morale ?? 100}</b>${t.routed ? ' (routed)' : ''} · Team level ${t.teamLevel || 1} (${t.teamXp || 0} XP)<br>Strength: <b>${t.manpower}</b> · Vehicles: ${vehChips(t.vehicles, t.faction)}<br>
       Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
       ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
       ${vehFitHtml(t)}

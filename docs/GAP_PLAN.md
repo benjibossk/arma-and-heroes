@@ -143,7 +143,7 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 - Effort: M (3 h). Test: `go test ./web/...` with fake clock: pending battle → starting after prep; undersized battle cancelled, teams retreat; idle battle resolved after timeout, stronger side wins. `go vet`.
 - Deps: none. Shared file: game.go (only `doTick`).
 
-**P1-B Team morale + team XP (web)** — morale field (start 100, −per battle, +win, +regen per tick, rout under threshold), team XP/levels on win/loss with participation threshold, shown on the map card.
+**P1-B Team morale + team XP (web)** — DONE 2026-11-26 (web/morale.go, lazy regen 5/h, rout <25 = 10% desertion, XP only if battle ≥300 s; deploy pending). — morale field (start 100, −per battle, +win, +regen per tick, rout under threshold), team XP/levels on win/loss with participation threshold, shown on the map card.
 - Files: new `web/morale.go` (+ test); `web/models.go` (`AssaultTeam` fields + migration); hook in `applyResult` (game.go); display in `web/static/map.js`.
 - Effort: M (3 h). Test: unit tests on applyResult outcomes; DB migration on a copy of the SQLite file; map card renders morale.
 - Deps: none; P1-A may later apply morale penalties (call `adjustMorale`, read-only dependency). Shared file: game.go (only `applyResult`).

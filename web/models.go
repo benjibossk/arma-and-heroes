@@ -68,6 +68,11 @@ type AssaultTeam struct {
 	ArrivalAt   *time.Time `json:"arrivalAt"`
 	Status      string     `gorm:"size:16;index" json:"status"` // idle | moving | in_battle | destroyed | dissolved
 	BattleID    uint       `json:"-"`
+	Morale      int        `gorm:"default:100" json:"morale"`
+	MoraleAt    *time.Time `json:"-"`
+	Routed      bool       `json:"routed"`
+	TeamXP      int        `json:"teamXp"`
+	TeamLevel   int        `gorm:"default:1" json:"teamLevel"`
 	CreatedAt   time.Time  `json:"createdAt"`
 }
 

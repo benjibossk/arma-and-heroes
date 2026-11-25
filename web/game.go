@@ -401,6 +401,7 @@ func applyResult(b *Battle, r *BattleResult) error {
 			db.Model(&AssaultTeam{}).Where("id = ?", t.ID).Updates(upd)
 		}
 	}
+	applyMoraleXP(b, r, now)
 	cname := b.CityID
 	if city != nil {
 		cname = city.Name
