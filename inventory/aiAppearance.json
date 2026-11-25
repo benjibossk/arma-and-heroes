@@ -1,0 +1,246 @@
+{
+ "aiAppearance": {
+  "GER": {
+   "Recruit": {
+    "Infantry": [
+     "{A34221AB5A70F92C}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Feldgrau.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Recon": [
+     "{C3C3B64455FC06C6}Prefabs/Characters/HeadGear/Hat_M40_01/Hat_M40_01_Feldgrau.et",
+     "{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et",
+     "{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Para": [
+     "{D62A72E894FA605B}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_01.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "ArmorCrew": [
+     "{79770150D9286630}Prefabs/Characters/HeadGear/Hat_M40_01/Hat_M40_01_TankCrew.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Regular": {
+    "Infantry": [
+     "{EFEEC9D16CB32D5F}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M35_01/Helmet_Stahlhelm_M35_01.et",
+     "{B7E538F48ED5B12F}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Feldgrau.et",
+     "{7033D8D854B77A37}Prefabs/Characters/Uniforms/Trousers_M40/Pants_HEER_M40_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{07489DC04EBE67C8}Prefabs/Characters/Vests/M1939/Variants/M1939_Rifleman.et"
+    ],
+    "Recon": [
+     "{A34221AB5A70F92C}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Feldgrau.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+    ],
+    "Para": [
+     "{C56B9D549F8B495A}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Painted.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "ArmorCrew": [
+     "{868355C2B87B0AB2}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCrew.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Veteran": {
+    "Infantry": [
+     "{19463B1006FA1EF4}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Net.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "Recon": [
+     "{F6A9BD9EA6F00C13}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{1EEC4C28D81CE28A}Prefabs/Characters/Vests/M1939/Variants/M1939_Marksman.et"
+    ],
+    "Para": [
+     "{0EFFE36965141049}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Green_Cover.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "ArmorCrew": [
+     "{47ECF4DCE5F7DB8F}Prefabs/Characters/HeadGear/Hat_Schirmmutze_01/Hat_Schirmmutze_01_Panzer.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{6711E2FD2135C748}Prefabs/Characters/Vests/M1939/Variants/M1939_Crewman.et"
+    ]
+   },
+   "Elite": {
+    "Infantry": [
+     "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{FD5C132FF8AF2185}Prefabs/Characters/Footwear/JackBoots_M39/CombatBoots_HEER_M39_01.et",
+     "{DA6B7A838193CAE1}Prefabs/Characters/Vests/M1939/Variants/M1939_AssaultRifleman.et"
+    ],
+    "Recon": [
+     "{307C507641AE33C7}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M42_01/Helmet_Stahlhelm_M42_Cover_Splinter.et",
+     "{A39F24A1384336F8}Prefabs/Characters/Uniforms/Blouse_M43/Jacket_HEER_M43_Feldgrau.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{6550F264F1E19FCB}Prefabs/Characters/Footwear/LowBoots_M43/CombatBoots_HEER_M43_01.et",
+     "{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+    ],
+    "Para": [
+     "{4E1FC79E3E28A143}Prefabs/Characters/HeadGear/Helmet_Stahlhelm_M38_01/Helmet_Stahlhelm_M38_Splinter_Cover.et",
+     "{B68B08E8EC896865}Prefabs/Characters/Uniforms/Smock_M38/Jacket_HEER_M38_Splinter.et",
+     "{8DF157D185B22225}Prefabs/Characters/Uniforms/Trousers_M43/Pants_HEER_M43_Feldgrau.et",
+     "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+     "{2FFAF6DCD6222EEE}Prefabs/Characters/Vests/M1939/Variants/M1939_AutomaticRifleman_Camo.et"
+    ],
+    "ArmorCrew": [
+     "{D35C610DE45084FA}Prefabs/Characters/HeadGear/Hat_M43_01/Hat_M43_01_TankCommander.et",
+     "{7844FAD04826C7EE}Prefabs/Characters/Uniforms/Jacket_Tanker_HEER_01/Jacket_Tanker_HEER_01.et",
+     "{5AC77EE3E5EF3277}Prefabs/Characters/Uniforms/Pants_Tanker_HEER_01/Pants_Tanker_HEER_01.et",
+     "{FDBAE1C8FE705B97}Prefabs/Characters/Footwear/LowBoots_Panzer/TankBoots_HEER_01.et",
+     "{372D108439DAFA30}Prefabs/Characters/Vests/M1939/Variants/M1939_Officer_SMG.et"
+    ]
+   }
+  },
+  "US": {
+   "Recruit": {
+    "Infantry": [
+     "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+    ],
+    "Recon": [
+     "{5AA5F82DF6924487}Prefabs/Characters/HeadGear/Hat_GarrisonCap_01/Hat_GarrisonCap_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+    ],
+    "Para": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et"
+    ]
+   },
+   "Regular": {
+    "Infantry": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{5257D583335C6DED}Prefabs/Characters/Uniforms/M41_Jacket/Jacket_USA_M41.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{CC2A24E573D91381}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Rifleman.et"
+    ],
+    "Recon": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{ABEE1A07FDC407EE}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Carbine.et"
+    ],
+    "Para": [
+     "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{35BD45F9F734DC81}Prefabs/Characters/Uniforms/M41_Trousers/Pants_USA_M41_HBT.et",
+     "{EDE057A6A4F9B6E4}Prefabs/Characters/Footwear/ServiceBoots_USA_M1939.et",
+     "{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+    ]
+   },
+   "Veteran": {
+    "Infantry": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et"
+    ],
+    "Recon": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+    ],
+    "Para": [
+     "{15405974502B16A4}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{F92D179AC7D87AF1}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_AutomaticRifleman_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{8619FA7DC7274A5D}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_VehicleCrew.et"
+    ]
+   },
+   "Elite": {
+    "Infantry": [
+     "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{DB5ED4EAF58211E7}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_NCO.et"
+    ],
+    "Recon": [
+     "{0C6685EF6A9A4382}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Netting_Goggles.et",
+     "{8877C4F9636D04FC}Prefabs/Characters/Uniforms/M43_Jacket/Jacket_USA_M43.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{E789F1F7C4F1E71C}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_SMG.et"
+    ],
+    "Para": [
+     "{9883084BCFCEB903}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Scrim.et",
+     "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+     "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+     "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+     "{FDF82EC7ED08EAFF}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_NCO_Airborne.et"
+    ],
+    "ArmorCrew": [
+     "{315D6B514A3B01E1}Prefabs/Characters/HeadGear/Hat_ServiceCap_01/Hat_ServiceCap_01_Captain.et",
+     "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+     "{8C9163B5C656BF41}Prefabs/Characters/Uniforms/M43_Trousers/Pants_USA_M43_HBT.et",
+     "{C12FF65FE10E1850}Prefabs/Characters/Footwear/ServiceBoots_USA_M1943.et",
+     "{EC47EB0214B18D75}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Officer_SMG.et"
+    ]
+   }
+  }
+ }
+}
