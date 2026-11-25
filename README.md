@@ -90,7 +90,7 @@ Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods
 
 ## Contributing
 
-Mod creators, mission makers and web devs welcome — open an issue or join the Collectif XXL Discord.
+Mod creators, mission makers and web devs welcome — open an issue.
 
 ## License
 
