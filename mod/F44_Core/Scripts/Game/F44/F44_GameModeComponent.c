@@ -116,6 +116,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected ref array<ref F44_PoolEntry> m_aPoolDef = {};
 	protected ref array<ref F44_TrackedVehicle> m_aVehicles = {};
 	protected ref RestCallback m_ResultCallback;
+	protected string m_sResultJson;
+	protected int m_iResultAttempt;
+	static const int RESULT_MAX_ATTEMPTS = 3;
 	protected ref F44_AccountLinkManager m_Link = new F44_AccountLinkManager();
 	protected ref F44_AIDirector m_AI = new F44_AIDirector();
 	protected ref F44_LoadoutService m_Loadouts = new F44_LoadoutService();
@@ -1040,23 +1043,47 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	{
 		if (m_Loader.GetApiUrl().IsEmpty() || m_Loader.GetBattleId().IsEmpty())
 			return;
+		m_sResultJson = json;
+		m_iResultAttempt = 0;
+		SendResult();
+	}
+
+	// RestContext exposes no timeout setter; a slow site can make the engine report
+	// http 0 although the result was saved. We retry with backoff and the site answers
+	// 409 (battle already finished) on a duplicate, which counts as success.
+	protected void SendResult()
+	{
+		m_iResultAttempt++;
 		RestContext ctx = F44_BattleLoader.GetRestContext(m_Loader.GetApiUrl(), m_Loader.GetToken());
 		if (!ctx)
 			return;
 		m_ResultCallback = new RestCallback();
 		m_ResultCallback.SetOnSuccess(OnResultPosted);
 		m_ResultCallback.SetOnError(OnResultError);
-		ctx.POST(m_ResultCallback, "/api/v1/battles/" + m_Loader.GetBattleId() + "/result", json);
+		ctx.POST(m_ResultCallback, "/api/v1/battles/" + m_Loader.GetBattleId() + "/result", m_sResultJson);
 	}
 
 	protected void OnResultPosted(RestCallback cb)
 	{
-		Print("[F44] BattleResult posted");
+		PrintFormat("[F44] BattleResult posted (attempt %1)", m_iResultAttempt);
 	}
 
 	protected void OnResultError(RestCallback cb)
 	{
-		PrintFormat("[F44] BattleResult POST failed (rest %1, http %2), kept in $profile:F44", cb.GetRestResult(), cb.GetHttpCode(), level: LogLevel.ERROR);
+		int http = cb.GetHttpCode();
+		if (http == 409)
+		{
+			Print("[F44] BattleResult already recorded by site (http 409), OK");
+			return;
+		}
+		if (m_iResultAttempt < RESULT_MAX_ATTEMPTS)
+		{
+			int delayMs = 5000 * m_iResultAttempt;
+			PrintFormat("[F44] BattleResult POST attempt %1 failed (rest %2, http %3), retry in %4 ms", m_iResultAttempt, cb.GetRestResult(), http, delayMs, level: LogLevel.WARNING);
+			GetGame().GetCallqueue().CallLater(SendResult, delayMs, false);
+			return;
+		}
+		PrintFormat("[F44] BattleResult POST failed (rest %1, http %2), kept in $profile:F44", cb.GetRestResult(), http, level: LogLevel.ERROR);
 	}
 
 	//------------------------------------------------------------------------------------------------

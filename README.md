@@ -4,6 +4,7 @@
 Inspired by the gameplay loop of the late *Heroes & Generals* (no affiliation, no assets from it).
 
 > Status: **early development (V0–V2)**. Live demo war map: https://heroes.collectifxxl.fr
+> Mod on the Workshop: **Arma & Heroes - Core** https://reforger.armaplatform.com/workshop/EAD65CE1E596E39C
 
 ![War map](docs/screenshots/warmap.png)
 
@@ -57,7 +58,7 @@ Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods
 ## Getting started
 
 **Web** — `cd web && cp .env.example .env` (set keys), `docker compose up --build -d`, reverse-proxy port 8080.
-**Orchestrator** — edit `orchestrator/orchestrator.json` (API URL, server exe, instance pool), then `python orchestrator.py --dry-run --once` to test, `start-orchestrator.bat` to run.
+**Orchestrator** — edit `orchestrator/orchestrator.json` (API URL, server exe, instance pool), then `python orchestrator.py --dry-run --once` to test (add `--local-addon` to run an unpublished build from `localAddonsDir`), `start-orchestrator.bat` to run.
 
 **Orchestrator as a service** — `start-orchestrator.bat` runs the long-lived loop (poll every `pollSec`) and restarts it 30 s after a crash. Safety: one loop at a time (`orchestrator.pid`, a second start exits with code 1), it only stops server PIDs whose command line points at its own instance profile, `orchestrator.log` rotates (2 MB x 5) and old server `logs_*` folders are pruned hourly (`keepServerLogs`, default 20 per instance). Dev: `python orchestrator.py --relaunch <battleId>` restarts a running battle after a mod change.
 Start at boot with the Task Scheduler (no window, survives logoff):
@@ -73,7 +74,7 @@ schtasks /Create /TN "ArmaHeroes Orchestrator" /SC ONSTART /DELAY 0002:00 /RU %U
 Done:
 - [x] Website live: war map, Discord sign-in, anti-spoof account linking (one-time `AH-` codes + QR for console players), soldiers / arsenal / loadouts, admin AI settings, "Veteran" look
 - [x] Battle orchestrator (instance pool, start/stop, results)
-- [x] F44_Core mod V0 running (unpublished) on the dedicated server, Finest Hour factions
+- [x] F44_Core mod V0 running on the dedicated server, Finest Hour factions
 - [x] AI bots spawn per side, receive sector orders, bot deaths cost tickets
 - [x] Live battle view (mod posts snapshots every 5 s, `/battle` page)
 - [x] WW2 server with 22 mods incl. armor (Tiger I, Panzer IV / Sturmtiger, SdKfz 251, M3A1, Overlord US vehicles)
@@ -84,6 +85,8 @@ Done:
 - [x] In-game HUD Style B + scoreboard (names, ticket bars, timer, sectors, AI/players, ammo)
 - [x] Live map: real terrain extent measured by the mod (Arland 0..4096 m) and sent in the live snapshot
 - [x] Orchestrator as a long-lived service (lock, restart, log rotation, Task Scheduler)
+- [x] F44_Core published PUBLIC on the Workshop (`EAD65CE1E596E39C`); the WW2 server and orchestrator now run in Workshop mode (`-config`, mod auto-downloaded), `--local-addon` keeps the old CLI mode for unpublished dev builds
+- [x] BattleResult POST retried 3x with backoff, HTTP 409 = already recorded (mod 1.0.1)
 
 In progress:
 - [ ] End-to-end result posting, proof of AI sector captures

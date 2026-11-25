@@ -152,7 +152,7 @@ def cli_args(cfg, inst, conf):
     local NON publie (F44_Core). Avec -config, le serveur interroge le Workshop pour chaque mod
     de game.mods et echoue ; -config et -addons sont incompatibles. Voir mod/README.md."""
     prof = os.path.join(inst["dir"], "profile")
-    mods = [m["modId"] for m in cfg.get("localAddons", [])] + [m["modId"] for m in conf["game"].get("mods", [])]
+    mods = list(dict.fromkeys([m["modId"] for m in cfg.get("localAddons", [])] + [m["modId"] for m in conf["game"].get("mods", [])]))
     dirs = [cfg["localAddonsDir"], os.path.join(prof, "addons")]
     return ["-addr", f"0.0.0.0:{inst['bindPort']}", "-bindPort", str(inst["bindPort"]), "-a2sPort", str(inst["a2s"]),
             "-profile", prof, "-addonsDir", ",".join(dirs), "-addons", ",".join(mods),
@@ -236,7 +236,9 @@ class Orchestrator:
         cpath = os.path.join(inst["dir"], "config.json")
         bid = battle["battleId"]
         exe = self.cfg["serverExe"]
-        cli = bool(self.cfg.get("localAddons"))
+        # Workshop (defaut) : -config genere par instance, F44_Core telecharge depuis le Workshop.
+        # --local-addon : ancien mode CLI pour un build dev non publie (localAddonsDir).
+        cli = bool(self.cfg.get("_localAddon") and self.cfg.get("localAddons"))
         if cli:
             args = [exe] + cli_args(self.cfg, inst, conf) + self.cfg.get("serverArgs", [])
         else:
@@ -247,8 +249,7 @@ class Orchestrator:
             out = os.path.join(HERE, f"dryrun-{inst['name']}-config.json")
             save_json(out, safe)
             log.info("[dry] config ecrite (token masque) : %s ; lancerait : %s", out, " ".join(args))
-            if cli:
-                log.info("[dry] ecrirait %s (battleId/apiUrl/token)", os.path.join(prof, "profile", "F44", "server.json"))
+            log.info("[dry] ecrirait %s (battleId/apiUrl/token)", os.path.join(prof, "profile", "F44", "server.json"))
             return
         if inst["name"] == self.cfg["instances"][0]["name"]:
             # ww2-1 sert de modele : on garde l'original
@@ -262,11 +263,11 @@ class Orchestrator:
         save_json(os.path.join(f44, "battle.json"), battle)
         if self.cfg.get("catalog"):
             import shutil; shutil.copy2(self.cfg["catalog"], os.path.join(f44, "catalog.json"))
-        if cli:  # pas de gameProperties en mode CLI : le mod lit $profile:F44/server.json
-            mh = conf["game"]["gameProperties"]["missionHeader"]
-            save_json(os.path.join(f44, "server.json"), {"battleId": mh["m_sBattleId"], "apiUrl": mh["m_sApiUrl"],
-                      "token": mh["m_sToken"], "timeLimitOverrideMin": mh.get("m_iTimeLimitOverrideMin", 0),
-                      "testVehicles": mh.get("m_sTestVehicles", "")})
+        # toujours ecrit : en mode CLI pas de gameProperties, et en mode Workshop c'est un secours
+        mh = conf["game"]["gameProperties"]["missionHeader"]
+        save_json(os.path.join(f44, "server.json"), {"battleId": mh["m_sBattleId"], "apiUrl": mh["m_sApiUrl"],
+                  "token": mh["m_sToken"], "timeLimitOverrideMin": mh.get("m_iTimeLimitOverrideMin", 0),
+                  "testVehicles": mh.get("m_sTestVehicles", "")})
         p = subprocess.Popen(args, cwd=os.path.dirname(exe), creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS)
         self.state[inst["name"]] = {"battleId": bid, "pid": p.pid, "started": time.time(), "deadline": deadline}
         self.save()
@@ -288,16 +289,18 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="aucun claim, aucun serveur lance, aucun fichier d'instance modifie")
     ap.add_argument("--api", help="surcharge apiUrl")
     ap.add_argument("--relaunch", metavar="BATTLE_ID", help="dev: arrete l'instance de cette bataille (PID verifie) et la relance (mod modifie)")
+    ap.add_argument("--local-addon", action="store_true", help="dev: ancien mode CLI (-server/-addons) avec l'addon local non publie")
     ap.add_argument("--config", default=os.path.join(HERE, "orchestrator.json"))
     a = ap.parse_args()
     setup_log()
     cfg = load_json(a.config)
+    cfg["_localAddon"] = a.local_addon
     # templateConfig : si ww2-1 a deja ete reecrit par nous, utiliser la sauvegarde
     bak = cfg["templateConfig"] + ".template.bak"
     if os.path.exists(bak):
         cfg["templateConfig"] = bak
     api = Api(a.api or os.environ.get("F44_API_URL") or cfg["apiUrl"], read_key(cfg["envFile"]))
-    log.info("demarrage api=%s dry=%s once=%s", api.base, a.dry_run, a.once)
+    log.info("demarrage api=%s dry=%s once=%s mode=%s", api.base, a.dry_run, a.once, "local-addon" if a.local_addon else "workshop")
     ensure_instance_dirs(cfg, a.dry_run)
     o = Orchestrator(cfg, api, a.dry_run)
     loop = not a.once and not a.relaunch and not a.dry_run
