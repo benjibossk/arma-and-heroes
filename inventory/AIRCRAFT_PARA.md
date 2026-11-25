@@ -94,3 +94,8 @@ progression.json :
 **Test** : serveur dédié (FH Core + Grey Chute + AH C47 + JMParaAI, scénario vanilla Conflict) → **compilation scripts OK, 0 erreur SCRIPT, monde chargé** (warnings seulement). Test en vol (perso placé dans l'avion, saut, chute, ouverture) **non réalisé** : impossible sans client ni scénario de test dédié — à faire en Workbench (prefab `GMS_HaloParadropTest.et` + C47 AH en altitude).
 
 **Recommandation mise à jour** : parachute = **Grey Mans Chute Framework** (seul). Avion = **AeroplaneHavens C47** (sièges cargo + sortie en vol + IA pilote) en dépendance, déplacé par notre script ou son autopilote ; CrackrDev écarté. Pingus trop lourd en dépendances ; JMParaAI = source d'inspiration script (pas en dépendance).
+
+## 9. Implémentation (2026-11-25, F44_ParaDrop.c, mod 1.2.0 draft)
+- Intégration **souple** : aucun lien gproj vers C47/Aviation-Toolkit/Grey Chute ; prefab C-47 `{A2B54744389B4105}` chargé par nom, pilote IA vanilla + waypoint Move → `TK_AIPilotComponent` orbite le centre du layout. Mods ajoutés au serveur WW2 (config.json + template).
+- Test serveur isolé (port 2010, F44_Test) : C-47 spawné à 350 m AGL, pilote assis, point « AIR DROP » enregistré, bot assis en cargo (siège 2, 29 libres), avion en orbite ~1200 m autour du centre à 72 m/s.
+- Reste à tester avec client : apparition du point dans le menu, spawn joueur en siège, saut porte cargo, chute libre + ouverture Espace, refus classe non-PARA. Catalogue : `US_PARA`/`GER_PARA` sans prefab → à remplir (sinon personne n'est PARA).
