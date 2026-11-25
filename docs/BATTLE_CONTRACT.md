@@ -76,3 +76,14 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - **Prep window**: a new battle stays `pending` for 5 min (`readyAt` in the battle summary). `POST /claim` before `readyAt` returns 409; servers retry later.
 - **Minimum size**: at `readyAt`, if attacker strength (manpower + 10 per vehicle) is under 20, the battle is `cancelled`; attacker teams fall back to their origin city with −10 % manpower, defenders return to `idle`.
 - **Auto-resolve** (`autoResolveAt` in the summary): an unclaimed battle 60 min after `readyAt`, or a claimed one 15 min without heartbeat, is resolved by the web with reason `auto-resolved`: the stronger side wins (tie → defender), winner loses 20 % manpower, loser 40 %. The mod must keep sending heartbeats while a battle runs.
+
+## GAP_PLAN battle rules (mod 1.3.0, `F44_Rules.c`)
+
+### P2-E Per-kill war funds — BattleResult `teamKills`
+- The mod counts, per **killer team id**, the enemy players and bots it killed and the enemy pool vehicles it destroyed:
+  `"teamKills": { "at_12": { "players": 3, "bots": 5, "vehicles": { "GER_PZ4": 1 } }, "_side_US": { "players": 0, "bots": 0, "vehicles": { "GER_TRUCK": 1 } } }`.
+  A destroyed pool vehicle has no reliable killer, so it is reported under `_side_<enemy side>`. Bots killing players count for the bot's team.
+- Web (`web/killfunds.go`, called from `applyWarFunds`): each entry pays the killer team's faction treasury
+  player 10, bot 5, vehicle by role (tank 80, light_armored(_aa) 40, light_armed 20, truck 15, light_utility 10, other 15), capped at 1500 per faction per battle.
+- Server log: `[F44] KILLFUND team= victim= key`.
+

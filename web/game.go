@@ -358,6 +358,7 @@ type BattleResult struct {
 	AIDeaths    map[string]int               `json:"aiDeaths,omitempty"` // per side, display only (already included in losses.manpower)
 	TeamAIKills map[string]int               `json:"teamAiKills,omitempty"`
 	AISkill     map[string]map[string]string `json:"aiSkill,omitempty"` // side -> {final, avg}
+	TeamKills   map[string]VictimKills       `json:"teamKills,omitempty"` // P2-E killer team -> kills by victim type (killfunds.go)
 }
 
 // applyResult : appelant tient gameMu

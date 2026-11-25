@@ -45,7 +45,11 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Free light vehicles (F44_CivVehicleSpawner.c): WW2 bicycles (new dependency WW2_Bicycle 62B4A8E40D31F94B by Modest23 + Modest VehicleCore 6A7D4E7B69969355) and civilian cars/vans (S1203, S105, UAZ452) by the roads near each side spawn, capped per side, respawn after destruction or when abandoned far away.
 - All counts/timers in the battle JSON "fieldSupply" object (cratesPerSector, cratesPerSpawn, launchersPerCrate, grenadesPerCrate, crateRefillMin, ammo/medBoxesPerSpawn, ammo/medBoxCharges, boxRegenPerMin, healStep, looseLauncherSec, civVehicles, bikesPerSide, carsPerSide, vehRespawnSec, vehAbandonDist, vehAbandonSec); explicit points via "supplyCrates"/"civSpawns" [{type: AT|AMMO|MED|BIKE|CAR, side, x, z, yaw}] in fieldSupply or in layouts.json; else fallback around spawns/sectors.
 
+## Changelog 1.3.0 (draft, GAP_PLAN rules — not published)
+- War funds per kill: each enemy soldier, bot or vehicle destroyed by your assault team is reported to the campaign site, which pays your faction's commanders.
+
 ## Changelog 1.2.1 (draft)
+
 - Mobile spawn reworked to the H&G rules: you spawn directly inside a free seat of your team's half-track / truck / tank; no driver, stationary or enemy-distance condition. A vehicle is lost for mobile spawn if an enemy, or another assault team (while it was empty), gets in.
 - Mech infantry: one active half-track per team (a new one comes from the pool when none is left); Armor/TD teams: every tank is a mobile spawn, max 3 active per team. Mobile deploy delay 20 s total.
 - Air drop plane uses the same seat helper.

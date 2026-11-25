@@ -258,6 +258,7 @@ func applyWarFunds(b *Battle, r *BattleResult) {
 			db.Model(&Faction{}).Where("war_id = ? AND code = ?", b.WarID, side).Update("resources", gormExprAdd(v))
 		}
 	}
+	applyKillFunds(b, r) // P2-E (killfunds.go)
 }
 
 // ---------- unlocks API ----------

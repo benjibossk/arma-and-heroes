@@ -401,6 +401,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		m_AI.Init(this, aiLimit);
 		m_Loadouts.Init(cfg, m_Loader.GetApiUrl(), m_Loader.GetToken(), m_Loader.GetBattleId());
 
+		F44_Rules.Init(cfg);	// GAP_PLAN rules (F44_Rules.c)
 		m_bRunning = true;
 		Replication.BumpMe();
 		GetGame().GetCallqueue().CallLater(ServerTick, m_fTickInterval * 1000, true);
@@ -702,8 +703,20 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		{
 			int killerSide;
 			if (m_mPlayerSide.Find(killerId, killerSide) && killerSide != side)
+			{
 				RecordKill(killerId, instigatorContextData.GetKillerEntity());
+				F44_Rules.OnKill(GetStats(killerId).m_sTeamId, "player");
+			}
 		}
+		else
+		{
+			int bSide;
+			string bTeam;
+			IEntity bKiller = instigatorContextData.GetKillerEntity();
+			if (bKiller && m_AI.IsBot(bKiller, bSide, bTeam) && bSide != side)
+				F44_Rules.OnKill(bTeam, "player");
+		}
+		F44_Rules.OnPlayerKilled(victimId, victim.m_sTeamId, killerId);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -728,6 +741,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		{
 			MapAdd(m_mAIKills, SideKeyOf(kSide), 1);
 			MapAdd(m_mTeamAIKills, kTeam, 1);
+			F44_Rules.OnKill(kTeam, "bot");
 		}
 		PrintFormat("[F44] Tickets: bot of side %1 (team %2) killed -> att %3 / def %4", side, teamId, m_iTicketsAtt, m_iTicketsDef);
 
@@ -737,6 +751,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		{
 			RecordKill(killerId, instigatorContextData.GetKillerEntity());
 			m_iBotKills++;
+			F44_Rules.OnKill(GetStats(killerId).m_sTeamId, "bot");
 		}
 	}
 
@@ -1018,6 +1033,10 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 					l.m_mVehicles.Set(tv.m_sKey, n + 1);
 				}
 				RemoveTickets(tv.m_iSide, F44_Catalog.Get().GetVehicleCost(tv.m_sKey));
+				string enemyKey = m_sAttacker;
+				if (tv.m_iSide == F44_ESectorOwner.ATTACKER)
+					enemyKey = m_sDefender;
+				F44_Rules.OnKill("_side_" + enemyKey, "veh", tv.m_sKey);	// killer team unknown: credited to the enemy side
 				PrintFormat("[F44] Vehicle %1 of %2 destroyed", tv.m_sKey, tv.m_sTeamId);
 				m_aVehicles.Remove(i);
 			}
@@ -1193,6 +1212,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 
 		json += ",\"aiDeaths\":" + MapJson(m_mAIDeaths) + ",\"aiKills\":" + MapJson(m_mAIKills) + ",\"teamAiKills\":" + MapJson(m_mTeamAIKills)
 			+ string.Format(",\"aiSkill\":{\"%1\":{\"final\":\"%2\",\"avg\":\"%3\"},\"%4\":{\"final\":\"%5\",\"avg\":\"%6\"}}", m_sAttacker, m_AI.GetSkill(F44_ESectorOwner.ATTACKER), m_AI.GetAvgSkill(F44_ESectorOwner.ATTACKER), m_sDefender, m_AI.GetSkill(F44_ESectorOwner.DEFENDER), m_AI.GetAvgSkill(F44_ESectorOwner.DEFENDER));
+		json += F44_Rules.ResultJson();	// teamKills (P2-E) + rule stats
 		json += "," + q + "players" + q + ":[";
 		first = true;
 		foreach (int pid, F44_PlayerStats st : m_mStats)
