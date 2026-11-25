@@ -102,4 +102,12 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - Mod (`F44_Badges.c`): `FIRST_AID` (ribbon heal) +level field dressings per deploy; `COMBAT_MEDIC` (ribbon revive) medical items used 15 %/level faster;
   `HEAVY_SET` (ribbon rifle) 5 %/level less damage taken. Log: `[F44] BADGE`.
 
+### P3 Squads — battle JSON `squads` (optional, on by default) — `F44_Squads.c`
+`{ "enabled": true, "spawnOnLeader": true, "leaderSpawnEnemyRadius": 60 }`
+- A squad is a vanilla player group (>= 2 players); its group leader is the squad leader.
+- Orders (every 10 s, hint to members on change): ATTACK / DEFEND a sector. ASSAULT: the active sector; SKIRMISH: nearest to the leader.
+  The leader overrides it by standing 5 s inside another sector.
+- Spawn on leader: a member who deploys on foot is moved 2.5 m behind his leader when the leader is alive, on foot and has no enemy player within the radius.
+- BattleResult players gain `"squad": {"size", "leader", "orderSec"}` (time inside the ordered sector). The web does not pay a squad bonus yet.
+
 

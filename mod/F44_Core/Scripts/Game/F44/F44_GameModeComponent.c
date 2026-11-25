@@ -943,7 +943,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		m_MobileSpawns.Tick(m_fTickInterval, m_aSectorOwners, m_aSectorProgress);
 
 		UpdateVehicles();
-		F44_Rules.Tick(m_fTickInterval);
+		F44_Rules.Tick(m_fTickInterval, m_aSectorOwners, m_Config.GetMode(), m_mPlayerSide);
 		m_FieldSupply.Tick(m_fTickInterval);
 		m_CivVehicles.Tick(m_fTickInterval);
 		m_FieldSupply.SelfTest(m_fTickInterval, botsAtt, botsDef, m_CivVehicles);

@@ -4,6 +4,7 @@
 //    the web (web/killfunds.go) converts them into faction war funds for the killer team's commander.
 //  - P2-F field maintenance load: F44_Maintenance.c
 //  - P2-G combat badges: F44_Badges.c
+//  - P3 squads (orders, spawn on leader): F44_Squads.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -18,6 +19,7 @@ class F44_Rules
 {
 	// killer team id (or "_side_<SIDE>" when only the side is known) -> kills by victim type
 	protected static ref map<string, ref F44_VictimKills> s_mTeamKills = new map<string, ref F44_VictimKills>();
+	protected static ref map<int, int> s_mPlayerSide;	// game mode's player -> side map (set every tick)
 
 	//------------------------------------------------------------------------------------------------
 	//! battle JSON keys of the rule packages (called from F44_BattleConfig.FromJson)
@@ -25,6 +27,8 @@ class F44_Rules
 	{
 		F44_Maintenance.s_Cfg = new F44_MaintenanceConfig();
 		F44_Maintenance.s_Cfg.Read(root);
+		F44_Squads.s_Cfg = new F44_SquadConfig();
+		F44_Squads.s_Cfg.Read(root);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -33,6 +37,7 @@ class F44_Rules
 		s_mTeamKills.Clear();
 		F44_Maintenance.Reset();
 		F44_Badges.Reset();
+		F44_Squads.Reset();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -54,6 +59,8 @@ class F44_Rules
 	{
 		F44_Maintenance.OnDeployed(pid, classKey, points);
 		F44_Badges.OnDeployed(pid, character, lo);
+		if (s_mPlayerSide)
+			F44_Squads.OnDeployed(pid, character, s_mPlayerSide);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -64,9 +71,11 @@ class F44_Rules
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static void Tick(float dt)
+	static void Tick(float dt, array<int> owners, F44_EBattleMode mode, map<int, int> playerSide)
 	{
+		s_mPlayerSide = playerSide;
 		F44_Maintenance.Tick(dt);
+		F44_Squads.Tick(dt, owners, mode, playerSide);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -86,7 +95,7 @@ class F44_Rules
 	//! fragment appended to each BattleResult player object
 	static string PlayerJson(int pid)
 	{
-		return F44_Maintenance.PlayerJson(pid);
+		return F44_Maintenance.PlayerJson(pid) + F44_Squads.PlayerJson(pid);
 	}
 
 	//------------------------------------------------------------------------------------------------
