@@ -486,6 +486,36 @@
       "label": "GER Driver",
       "cost": 1,
       "source": "FH GER Units"
+    },
+    "GER_STUKA": {
+      "prefab": "{E261FB4EB404F579}Prefabs/FMT/Stuka.et",
+      "label": "Junkers Ju 87 Stuka",
+      "type": "AIR",
+      "cost": 14,
+      "role": "dive_bomber",
+      "crew": "1 pilote + 1 mitrailleur arriere",
+      "source": "RMS WW2 WarBirds II",
+      "note": "pas encore assigne a un pool"
+    },
+    "GER_JU88": {
+      "prefab": "{9A258809D0F78EF8}Prefabs/FMT/Ju-88.et",
+      "label": "Junkers Ju 88",
+      "type": "AIR",
+      "cost": 16,
+      "role": "bomber",
+      "crew": "pilote + mitrailleurs",
+      "source": "RMS WW2 WarBirds II",
+      "note": "pas encore assigne a un pool"
+    },
+    "US_C47": {
+      "prefab": "{05419B384447B5A2}Prefabs/Vehicles/Aircrafts/C47/AeroplaneHaven-C47.et",
+      "label": "Douglas C-47 Skytrain",
+      "type": "AIR",
+      "cost": 10,
+      "role": "transport_para",
+      "crew": "2 pilotes + 30 paras",
+      "source": "AeroplaneHavens C47 Dakota",
+      "note": "pas encore assigne a un pool"
     }
   },
   "aiAppearance": {
@@ -1593,6 +1623,77 @@
       "weight": 1,
       "rankRequired": "Private First Class",
       "ribbon": null
+    },
+    "GER_PANZERFAUST60": {
+      "prefab": "{BDBEBE30EE835BA9}Prefabs/Weapons/Launchers/Panzerfaust/BC_Launcher_Panzerfaust_60.et",
+      "label": "Panzerfaust 60",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 500,
+      "weight": 3,
+      "rankRequired": "Private First Class",
+      "ribbon": null,
+      "source": "Chungus WW2 Launchers"
+    },
+    "US_M1928A1": {
+      "prefab": "{E3E9CB8B5D3A37AB}Prefabs/Weapons/Rifles/M1928A1/BC_SMG_M1928A1.et",
+      "label": "M1928A1 Thompson (chargeur camembert)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1100,
+      "weight": 4,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      },
+      "source": "Chungus SMGs"
+    },
+    "US_M1D_GARAND": {
+      "prefab": "{898B4433EED614A4}Prefabs/Weapons/Rifles/M1 Garand/BC_Rifle_M1D.et",
+      "label": "M1D Garand (scoped)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "sniper",
+      "classes": [
+        "REC"
+      ],
+      "price": 2600,
+      "weight": 4,
+      "rankRequired": "First Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      },
+      "source": "Chungus Rifles"
+    },
+    "US_BAR_M1918A2": {
+      "prefab": "{05D871A0CEE5026F}Prefabs/Weapons/MachineGuns/BAR/BC_BAR_M1918A2.et",
+      "label": "M1918A2 BAR (bipied)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF"
+      ],
+      "price": 2000,
+      "weight": 5,
+      "rankRequired": "Technical Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      },
+      "source": "Chungus LMGs"
     }
   }
 }

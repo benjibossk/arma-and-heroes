@@ -4653,6 +4653,462 @@
      "prefabs/weapons/core/ammo_bullet_base.et"
     ]
    }
+  },
+  "GER_PANZERFAUST60": {
+   "label": "Panzerfaust 60",
+   "category": "at",
+   "prefab": "{BDBEBE30EE835BA9}Prefabs/Weapons/Launchers/Panzerfaust/BC_Launcher_Panzerfaust_60.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 2.8,
+   "zeroing": {
+    "min": 30,
+    "max": 80,
+    "steps": [
+     30,
+     60,
+     80
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "Chungus-WW2Launchers:prefabs/weapons/launchers/panzerfaust/bc_launcher_panzerfaust_60.et",
+     "Reforger:prefabs/weapons/core/launcher_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/launcher_base.et",
+    "weight": "prefabs/weapons/launchers/panzerfaust/bc_launcher_panzerfaust_60.et",
+    "zeroing": "prefabs/weapons/launchers/panzerfaust/bc_launcher_panzerfaust_60.et"
+   }
+  },
+  "US_M1928A1": {
+   "label": "M1928A1 Thompson (chargeur camembert)",
+   "category": "smg",
+   "prefab": "{E3E9CB8B5D3A37AB}Prefabs/Weapons/Rifles/M1928A1/BC_SMG_M1928A1.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 800.0,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": 875.0,
+     "burst": null
+    }
+   ],
+   "rpm": 875.0,
+   "magazine": "{AFA22BD030DDBC13}Prefabs/Weapons/Magazines/M1928A1/BC_Magazine_45acp_M1928A1_50rnd_Drum.et",
+   "magazineSize": 50,
+   "caliber": "5.56x45mm",
+   "ammo": "{8F08B002CA114E03}Prefabs/Weapons/Ammo/BC_Ammo_45acp_Ball.et",
+   "muzzleVelocity": 285.0,
+   "damage": 50.0,
+   "bulletMass": 0.0149,
+   "airDrag": 2.45e-05,
+   "penetrationDepth": 17.0,
+   "weight": 4.9,
+   "zeroing": {
+    "min": 50,
+    "max": 500,
+    "steps": [
+     50,
+     100,
+     200,
+     300,
+     400,
+     500
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 285.0,
+     "dmg": 50.0
+    },
+    {
+     "m": 50,
+     "v": 262.5,
+     "dmg": 42.4
+    },
+    {
+     "m": 100,
+     "v": 241.8,
+     "dmg": 36.0
+    },
+    {
+     "m": 150,
+     "v": 222.7,
+     "dmg": 30.5
+    },
+    {
+     "m": 200,
+     "v": 205.1,
+     "dmg": 25.9
+    },
+    {
+     "m": 250,
+     "v": 188.9,
+     "dmg": 22.0
+    },
+    {
+     "m": 300,
+     "v": 174.0,
+     "dmg": 18.6
+    },
+    {
+     "m": 350,
+     "v": 160.3,
+     "dmg": 15.8
+    },
+    {
+     "m": 400,
+     "v": 147.6,
+     "dmg": 13.4
+    },
+    {
+     "m": 450,
+     "v": 136.0,
+     "dmg": 11.4
+    },
+    {
+     "m": 500,
+     "v": 125.3,
+     "dmg": 9.7
+    },
+    {
+     "m": 550,
+     "v": 115.4,
+     "dmg": 8.2
+    },
+    {
+     "m": 600,
+     "v": 106.3,
+     "dmg": 7.0
+    },
+    {
+     "m": 650,
+     "v": 97.9,
+     "dmg": 5.9
+    },
+    {
+     "m": 700,
+     "v": 90.2,
+     "dmg": 5.0
+    },
+    {
+     "m": 750,
+     "v": 83.0,
+     "dmg": 4.2
+    },
+    {
+     "m": 800,
+     "v": 76.5,
+     "dmg": 3.6
+    },
+    {
+     "m": 850,
+     "v": 70.4,
+     "dmg": 3.1
+    },
+    {
+     "m": 900,
+     "v": 64.9,
+     "dmg": 2.6
+    },
+    {
+     "m": 950,
+     "v": 59.8,
+     "dmg": 2.2
+    },
+    {
+     "m": 1000,
+     "v": 55.0,
+     "dmg": 1.9
+    }
+   ],
+   "source": {
+    "prefab": [
+     "Chungus-SMGs:prefabs/weapons/rifles/m1928a1/bc_smg_m1928a1.et",
+     "Reforger:prefabs/weapons/rifles/m16/rifle_m16a2_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1928a1/bc_smg_m1928a1.et",
+    "weight": "prefabs/weapons/rifles/m1928a1/bc_smg_m1928a1.et",
+    "zeroing": "prefabs/weapons/rifles/m1928a1/bc_smg_m1928a1.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1928a1/bc_magazine_45acp_m1928a1_50rnd_drum.et",
+     "prefabs/weapons/magazines/magazine_556x45_stanag_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/magazine_556x45_stanag_30rnd_m855_m856_last_5tracer.et",
+     "prefabs/weapons/magazines/magazine_556x45_stanag_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/bc_ammo_45acp.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/bc_ammo_45acp_ball.et",
+     "prefabs/weapons/core/ammo_bullet_base.et"
+    ]
+   }
+  },
+  "US_M1D_GARAND": {
+   "label": "M1D Garand (scoped)",
+   "category": "sniper",
+   "prefab": "{898B4433EED614A4}Prefabs/Weapons/Rifles/M1 Garand/BC_Rifle_M1D.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 4.33,
+   "zeroing": {
+    "min": 100,
+    "max": 1000,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "Chungus-Rifles:prefabs/weapons/rifles/m1 garand/bc_rifle_m1d.et",
+     "Chungus-Rifles:prefabs/weapons/rifles/m1 garand/bc_rifle_m1_garand.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/longrangerifle_base.et",
+    "weight": "prefabs/weapons/rifles/m1 garand/bc_rifle_m1d.et",
+    "zeroing": "prefabs/weapons/rifles/m1 garand/bc_rifle_m1_garand.et"
+   }
+  },
+  "US_BAR_M1918A2": {
+   "label": "M1918A2 BAR (bipied)",
+   "category": "mg",
+   "prefab": "{05D871A0CEE5026F}Prefabs/Weapons/MachineGuns/BAR/BC_BAR_M1918A2.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 620.0,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": 350.0,
+     "burst": null
+    }
+   ],
+   "rpm": 620.0,
+   "magazine": "{56B8E1007A30A1C3}Prefabs/Weapons/Magazines/BC_Magazine_30-06_BAR_20rnd_M2.et",
+   "magazineSize": 20,
+   "caliber": ".30-06",
+   "ammo": "{9DD79825ED58A9DF}Prefabs/Weapons/Ammo/BC_Ammo_762x51_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00972,
+   "airDrag": 8.1e-06,
+   "penetrationDepth": 4.06,
+   "weight": 8.6,
+   "zeroing": {
+    "min": 100,
+    "max": 1500,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200,
+     1300,
+     1400,
+     1500
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 820.1,
+     "dmg": 130.6
+    },
+    {
+     "m": 100,
+     "v": 786.6,
+     "dmg": 120.2
+    },
+    {
+     "m": 150,
+     "v": 754.5,
+     "dmg": 110.6
+    },
+    {
+     "m": 200,
+     "v": 723.7,
+     "dmg": 101.7
+    },
+    {
+     "m": 250,
+     "v": 694.2,
+     "dmg": 93.6
+    },
+    {
+     "m": 300,
+     "v": 665.9,
+     "dmg": 86.1
+    },
+    {
+     "m": 350,
+     "v": 638.7,
+     "dmg": 79.2
+    },
+    {
+     "m": 400,
+     "v": 612.6,
+     "dmg": 72.9
+    },
+    {
+     "m": 450,
+     "v": 587.6,
+     "dmg": 67.1
+    },
+    {
+     "m": 500,
+     "v": 563.7,
+     "dmg": 61.7
+    },
+    {
+     "m": 550,
+     "v": 540.6,
+     "dmg": 56.8
+    },
+    {
+     "m": 600,
+     "v": 518.6,
+     "dmg": 52.2
+    },
+    {
+     "m": 650,
+     "v": 497.4,
+     "dmg": 48.1
+    },
+    {
+     "m": 700,
+     "v": 477.1,
+     "dmg": 44.2
+    },
+    {
+     "m": 750,
+     "v": 457.6,
+     "dmg": 40.7
+    },
+    {
+     "m": 800,
+     "v": 439.0,
+     "dmg": 37.4
+    },
+    {
+     "m": 850,
+     "v": 421.1,
+     "dmg": 34.4
+    },
+    {
+     "m": 900,
+     "v": 403.9,
+     "dmg": 31.7
+    },
+    {
+     "m": 950,
+     "v": 387.4,
+     "dmg": 29.2
+    },
+    {
+     "m": 1000,
+     "v": 371.6,
+     "dmg": 26.8
+    }
+   ],
+   "source": {
+    "prefab": [
+     "Chungus-LMGs:prefabs/weapons/machineguns/bar/bc_bar_m1918a2.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/bar/bc_bar_m1918a2.et",
+    "weight": "prefabs/weapons/machineguns/bar/bc_bar_m1918a2.et",
+    "zeroing": "prefabs/weapons/machineguns/bar/bc_bar_m1918a2.et",
+    "magazine": [
+     "prefabs/weapons/magazines/bc_magazine_30-06_bar_20rnd_m2.et",
+     "prefabs/weapons/magazines/magazine_762x51_m14_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/bc_ammo_30-06.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/bc_ammo_762x51_ball_m2.et"
+    ]
+   }
   }
  }
 }

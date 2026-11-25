@@ -52,6 +52,9 @@ Battle results are now more reliable: the result POST to the website is retried 
 - US Medic, MG, AT, Engineer, Crew, Driver and GER Driver classes now have Finest Hour prefabs (catalog).
 - Beauregard: defender spawn moved off the harbour water; crates and civilian vehicles are never spawned below sea level.
 - Server logs: VEHSPAWN / VEHCRATE / CIVSPAWN / CRATE lines for every vehicle, crate and civilian vehicle spawn.
+- New server mods: Operation FUBAR Launchers, Chungus SMGs / Rifles / LMGs / WW2 Launchers, No Weapon Drop Unconscious, RMS WW2 WarBirds II (+ Fixed Wing Flight Core, WCS_Armaments).
+- Arsenal: Panzerfaust 60 (GER), M1928A1 Thompson, M1D Garand (scoped) and M1918A2 BAR (US); weapon stats regenerated.
+- Catalog: flyable aircraft Ju 87 Stuka, Ju 88 (GER) and C-47 (US) listed as AIR vehicles (not yet in vehicle pools).
 
 ## Changelog 1.2.0 (published 2026-11-25)
 - Mobile spawn: SdKfz 251 / M3A1 halftracks (8 uses) and cargo trucks (3 uses) become a team spawn point when stopped (< 2 km/h for 3 s) with a friendly driver, no enemy within 40 m and outside a contested sector; 20 s cooldown between spawns, +10 s deploy penalty, removed when destroyed or the driver is gone for 15 s. Shown as MOBILE in the deploy menu. Spawn timers (base 10 s, forward sector +10 s, mobile +10 s, aligned on H&G) configurable in the battle JSON (spawnTimes / mobileSpawn).

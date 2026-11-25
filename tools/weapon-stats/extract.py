@@ -20,10 +20,16 @@ ADDONS = 'D:/Serveur/arma-reforger-ww2/profile/addons'
 PAKX = 'C:/Users/benbo/tools/PakTools/pakextract.py'
 EXTRACT_DIR = 'C:/Users/benbo/tools/PakInspector/fh_extract'
 BASE_DIR = 'C:/Users/benbo/tools/PakInspector/base_et_conf_extract'
+CLIENT = 'C:/Users/benbo/Documents/My Games/ArmaReforger/addons/'  # client Workshop copies (absolute -> os.path.join ignores ADDONS)
 MODS = {  # extract folder -> addon folder
     'FinestHour-CoreMod': 'FinestHour-CoreMod_69392E57A68724BD',
     'FinestHour-GERGear': 'FinestHour-GERGear_693931E2091E57D1',
     'FinestHour-USGear': 'FinestHour-USGear_6939316200A674C4',
+    'Chungus-Core': CLIENT + 'ChungusCore_66D6340C1D565C98',
+    'Chungus-SMGs': CLIENT + 'ChungusSMGs_60E6F54E174C53C5',
+    'Chungus-Rifles': CLIENT + 'ChungusRifles_62A711001B8FDEEA',
+    'Chungus-LMGs': CLIENT + 'ChungusLMGs_61344BDC155A5A28',
+    'Chungus-WW2Launchers': CLIENT + 'ChungusWW2Launchers_65E86BF91D510331',
 }
 WEAPON_CATS = {'rifle', 'smg', 'mg', 'sniper', 'pistol', 'at', 'grenade', 'explosive', 'smoke'}
 RANGES = list(range(0, 1001, 50))

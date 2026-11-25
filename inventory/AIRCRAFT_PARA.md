@@ -109,3 +109,14 @@ Grey Mans 69EEAA01F4A11001 fait échouer le dédié (`Addon not found`) → reti
 | Prontos Parachutes 68996556700D5CA1 1.0.2 | 20 Mo | aucune | T-10 auto | Non retenu (pas d'ouverture manuelle) |
 
 Intégration : `F44_AirDrop.GiveChute()` (souple, type `ParachuteItemComponent` résolu par nom, sac chargé par ResourceName) donne le sac PF au para qui embarque s'il n'en a pas (équipement, sinon rangement). config.json WW2 : +65930CB4CD0237B2. Compilation vérifiée sur serveur isolé port 2013.
+
+## 11. Avions pilotables ajoutés (2026-11-25, RMS WW2 WarBirds II)
+Mods : `69E3578A86951C05` RMS WW2 WarBirds II → dépend de `6AAA520FE626344E` RMS-FIXEDWINGFLIGHTCORE + `629B2BA37EFFD577` WCS_Armaments (ajoutés à config.json). GUID lus dans resourceDatabase.rdb (octets inversés).
+
+| Camp | Avion | Prefab | Clé catalogue |
+|---|---|---|---|
+| GER | Ju 87 Stuka (bombardier en piqué, MG arrière) | `{E261FB4EB404F579}Prefabs/FMT/Stuka.et` (variante `{BDE0C18E4F592006}Prefabs/FMT/RMS_Fighter_Stuka.et`) | `GER_STUKA` |
+| GER | Ju 88 (bombardier, mitrailleurs MG-15) | `{9A258809D0F78EF8}Prefabs/FMT/Ju-88.et` | `GER_JU88` |
+| US | C-47 Skytrain (transport para, pas d'armement) | `{05419B384447B5A2}Prefabs/Vehicles/Aircrafts/C47/AeroplaneHaven-C47.et` | `US_C47` |
+
+Aucun chasseur allié dans WarBirds II : côté US seul le C-47 vole. Entrées `type: AIR`, non assignées à un pool.
