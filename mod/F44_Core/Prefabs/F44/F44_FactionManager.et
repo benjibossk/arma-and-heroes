@@ -1,11 +1,9 @@
 SCR_FactionManager : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
  ID "F44A00000000A002"
  Factions {
-  SCR_Faction "{F44A00000000C010}" : "{5EB46557DF2AA24F}Configs/Factions/US.conf" {
-   m_sFactionBackground "{F8AC305446D5D480}UI/Textures/DeployMenu/Loadout-BG/Loadout_US_BG.imageset"
+  SCR_Faction "{F44A00000000C010}" : "{9B7E80D183825E85}Configs/Factions/USA_WW2.conf" {
   }
-  SCR_Faction "{F44A00000000C011}" : "{09727032415AC39B}Configs/Factions/USSR.conf" {
-   m_sFactionBackground "{21533F2089005056}UI/Textures/DeployMenu/Loadout-BG/Loadout_BG_USSR.imageset"
+  SCR_Faction "{F44A00000000C011}" : "{CE39CF0CCC42D01D}Configs/Factions/HEER_WW2.conf" {
   }
  }
 }

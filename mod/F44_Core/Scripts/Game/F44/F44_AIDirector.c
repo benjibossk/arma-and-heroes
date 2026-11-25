@@ -315,6 +315,10 @@ class F44_AIDirector
 		}
 		gi.m_Group.AddWaypoint(wp);
 		gi.m_Waypoint = wp;
+		string wpKind = "attack";
+		if (ownSector)
+			wpKind = "defend";
+		PrintFormat("[F44] AI: side %1 group (team %2) -> %3 sector %4", gi.m_iSide, gi.m_sTeamId, wpKind, sector.m_sSectorName);
 		gi.m_iTargetSector = target;
 	}
 

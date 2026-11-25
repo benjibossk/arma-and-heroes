@@ -416,6 +416,14 @@
       "cost": 6,
       "role": "static_or_towed",
       "source": "FH GER Vehicles"
+    },
+    "US_AIGROUP": {
+      "prefab": "{766D107569871A6A}Prefabs/Groups/BLUFOR/Group_FH_USAWW2_Base.et",
+      "cost": 0
+    },
+    "GER_AIGROUP": {
+      "prefab": "{B50B7BF31273C2A6}Prefabs/Groups/OPFOR/Group_FH_HEERWW2_Base.et",
+      "cost": 0
     }
   }
 }

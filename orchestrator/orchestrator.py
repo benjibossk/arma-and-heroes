@@ -64,7 +64,7 @@ def cmdline(pid):
 
 def is_ours(pid, inst):
     cl = cmdline(pid).lower()
-    return "armareforgerserver.exe" in cl and os.path.join(inst["dir"], "config.json").lower() in cl
+    return "armareforgerserver.exe" in cl and os.path.join(inst["dir"], "profile").lower() in cl
 
 
 def stop_pid(pid, inst):
@@ -99,9 +99,23 @@ def build_config(cfg, inst, battle, api_url, key):
     g["visible"] = True
     city = battle.get("cityName") or battle.get("cityId") or battle["battleId"]
     g["name"] = f"Arma & Heroes - {city}"
-    g.setdefault("gameProperties", {})["missionHeader"] = {
-        "m_sBattleId": battle["battleId"], "m_sApiUrl": api_url, "m_sToken": key}
+    mh = {"m_sBattleId": battle["battleId"], "m_sApiUrl": api_url, "m_sToken": key}
+    if cfg.get("timeLimitOverrideMin"):
+        mh["m_iTimeLimitOverrideMin"] = int(cfg["timeLimitOverrideMin"])
+    g.setdefault("gameProperties", {})["missionHeader"] = mh
     return c
+
+
+def cli_args(cfg, inst, conf):
+    """Mode ligne de commande (-server/-addons, sans -config) : seul moyen de charger un addon
+    local NON publie (F44_Core). Avec -config, le serveur interroge le Workshop pour chaque mod
+    de game.mods et echoue ; -config et -addons sont incompatibles. Voir mod/README.md."""
+    prof = os.path.join(inst["dir"], "profile")
+    mods = [m["modId"] for m in cfg.get("localAddons", [])] + [m["modId"] for m in conf["game"].get("mods", [])]
+    dirs = [cfg["localAddonsDir"], os.path.join(prof, "addons")]
+    return ["-addr", f"0.0.0.0:{inst['bindPort']}", "-bindPort", str(inst["bindPort"]), "-a2sPort", str(inst["a2s"]),
+            "-profile", prof, "-addonsDir", ",".join(dirs), "-addons", ",".join(mods),
+            "-server", conf["game"]["scenarioId"]]
 
 
 # ---------- coeur ----------
@@ -181,22 +195,36 @@ class Orchestrator:
         cpath = os.path.join(inst["dir"], "config.json")
         bid = battle["battleId"]
         exe = self.cfg["serverExe"]
-        args = [exe, "-config", cpath, "-profile", prof] + self.cfg.get("serverArgs", [])
+        cli = bool(self.cfg.get("localAddons"))
+        if cli:
+            args = [exe] + cli_args(self.cfg, inst, conf) + self.cfg.get("serverArgs", [])
+        else:
+            args = [exe, "-config", cpath, "-profile", prof] + self.cfg.get("serverArgs", [])
         deadline = time.time() + (int(battle.get("timeLimitMin", 45)) + self.cfg.get("graceMin", 15)) * 60
         if self.dry:
             safe = copy.deepcopy(conf); safe["game"]["gameProperties"]["missionHeader"]["m_sToken"] = "***"
             out = os.path.join(HERE, f"dryrun-{inst['name']}-config.json")
             save_json(out, safe)
             log.info("[dry] config ecrite (token masque) : %s ; lancerait : %s", out, " ".join(args))
+            if cli:
+                log.info("[dry] ecrirait %s (battleId/apiUrl/token)", os.path.join(prof, "profile", "F44", "server.json"))
             return
         if inst["name"] == self.cfg["instances"][0]["name"]:
             # ww2-1 sert de modele : on garde l'original
             bak = cpath + ".template.bak"
             if not os.path.exists(bak) and os.path.exists(cpath):
                 import shutil; shutil.copy2(cpath, bak)
-        os.makedirs(os.path.join(prof, "F44"), exist_ok=True)
+        # $profile: du moteur = <-profile>\profile (et non <-profile>)
+        f44 = os.path.join(prof, "profile", "F44")
+        os.makedirs(f44, exist_ok=True)
         save_json(cpath, conf)
-        save_json(os.path.join(prof, "F44", "battle.json"), battle)
+        save_json(os.path.join(f44, "battle.json"), battle)
+        if self.cfg.get("catalog"):
+            import shutil; shutil.copy2(self.cfg["catalog"], os.path.join(f44, "catalog.json"))
+        if cli:  # pas de gameProperties en mode CLI : le mod lit $profile:F44/server.json
+            mh = conf["game"]["gameProperties"]["missionHeader"]
+            save_json(os.path.join(f44, "server.json"), {"battleId": mh["m_sBattleId"], "apiUrl": mh["m_sApiUrl"],
+                      "token": mh["m_sToken"], "timeLimitOverrideMin": mh.get("m_iTimeLimitOverrideMin", 0)})
         p = subprocess.Popen(args, cwd=os.path.dirname(exe), creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS)
         self.state[inst["name"]] = {"battleId": bid, "pid": p.pid, "started": time.time(), "deadline": deadline}
         self.save()

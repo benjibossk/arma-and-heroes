@@ -162,6 +162,12 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			return;
 		}
 		m_Config = cfg;
+		F44_MissionHeader hdr = F44_MissionHeader.Get();
+		if (hdr && hdr.m_iTimeLimitOverrideMin > 0)
+		{
+			Print("[F44] Time limit override: " + hdr.m_iTimeLimitOverrideMin + " min");
+			cfg.m_iTimeLimitMin = hdr.m_iTimeLimitOverrideMin;
+		}
 		m_sAttacker = cfg.m_sAttacker;
 		m_sDefender = cfg.m_sDefender;
 		m_iTicketsAtt = cfg.m_Attacker.GetTotalManpower();
@@ -418,6 +424,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			return;
 		m_AI.OnBotKilled(victim);
 		AddManpowerLoss(teamId, side, 1);
+		PrintFormat("[F44] Tickets: bot of side %1 (team %2) killed -> att %3 / def %4", side, teamId, m_iTicketsAtt, m_iTicketsDef);
 
 		int killerId = instigatorContextData.GetKillerPlayerID();
 		int killerSide;
@@ -480,6 +487,16 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
+	protected float m_fStatusAccu;
+
+	protected string SectorString()
+	{
+		string s;
+		for (int i = 0; i < m_aSectorOwners.Count(); i++)
+			s += m_aSectorOwners[i].ToString() + " ";
+		return s;
+	}
+
 	protected void ServerTick()
 	{
 		if (!m_bRunning || m_bEnded)
@@ -510,6 +527,13 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			GetStats(pid).m_iCaptures++;
 
 		UpdateVehicles();
+		m_fStatusAccu += m_fTickInterval;
+		if (m_fStatusAccu >= 30)
+		{
+			m_fStatusAccu = 0;
+			PrintFormat("[F44] Status t=%1s: tickets att %2 / def %3, bots alive att %4 / def %5, sectors %6, time left %7s",
+				Math.Round(m_fElapsed), m_iTicketsAtt, m_iTicketsDef, botsAtt.Count(), botsDef.Count(), SectorString(), m_iTimeLeft);
+		}
 		Replication.BumpMe();
 		CheckEnd();
 	}
