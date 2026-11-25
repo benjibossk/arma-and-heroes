@@ -26,6 +26,7 @@ func setupRouter() *gin.Engine {
 	a.GET("/battles", listBattles)
 	a.GET("/battles/:id", getBattleConfig)
 	a.GET("/battles/:id/detail", getBattleDetail)
+	a.GET("/battles/:id/live", getLive)
 	a.GET("/players", leaderboard)
 	a.GET("/players/:id", getPlayer)
 	// auth
@@ -60,6 +61,7 @@ func setupRouter() *gin.Engine {
 	s.POST("/claim", claimBattle)
 	s.POST("/heartbeat", heartbeat)
 	s.POST("/result", postResult)
+	s.POST("/live", postLive)
 	// admin
 	ad := a.Group("/admin", requireAdmin)
 	ad.POST("/war/reset", resetWar)

@@ -143,7 +143,7 @@ class Orchestrator:
                 self.release(name, "instance inconnue"); continue
             status = None
             try:
-                status = (self.api.req("GET", f"/battles/{bid}") or {}).get("status")
+                status = (self.api.req("GET", f"/battles/{bid}/detail") or {}).get("status")  # /battles/{id} = BattleConfig, no status
             except Exception as e:
                 log.warning("statut %s indisponible : %s", bid, e)
             if pid and not self.alive(pid):

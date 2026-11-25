@@ -93,7 +93,7 @@ function showSel() {
     d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
      Terrain: ${esc(c.terrain)} · mode ${esc(c.mode)} · garrison ${c.garrison}<br><span class="muted">Scenario: ${esc(c.scenarioId)}</span><br>
      Neighbours: ${neighbors(c.id).map(n => esc(cityById(n.id)?.name) + ' (' + n.km + ' km)').join(', ')}<br>
-     ${b ? `<b style="color:#F0A830">Battle ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">view</a>` : ''}`;
+     ${b ? `<b style="color:#F0A830">Battle ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">view</a> · <a href="/battle.html?id=${b.battleId}">Watch live</a>` : ''}`;
   } else d.innerHTML = 'Tap a city or a team.';
 }
 

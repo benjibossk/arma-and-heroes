@@ -6,7 +6,7 @@
 <div><div class="panel"><h2>Details</h2><div id="det" class="muted">Select a battle.</div></div></div></div></main>
 <script src="/common.js"></script><script>
 const row = b => `<tr style="cursor:pointer" onclick="detail('${b.battleId}')"><td>${b.battleId}</td><td>${esc(b.cityName)}</td><td><span class="${b.attacker}">${b.attacker}</span> ⟶ <span class="${b.defender}">${b.defender}</span></td>
- <td>${STLABEL[b.status]}${b.winner ? ' — <b class="' + b.winner + '">' + b.winner + '</b>' : ''}</td><td>${b.tickets[b.attacker] || 0} / ${b.tickets[b.defender] || 0}</td><td class="muted">${fmtDate(b.createdAt)}</td></tr>`;
+ <td>${STLABEL[b.status]}${b.winner ? ' — <b class="' + b.winner + '">' + b.winner + '</b>' : ''}</td><td>${b.tickets[b.attacker] || 0} / ${b.tickets[b.defender] || 0}</td><td class="muted">${fmtDate(b.createdAt)}</td><td>${['starting','running','finished'].includes(b.status) ? `<a href="/battle.html?id=${b.battleId}" onclick="event.stopPropagation()">Watch live</a>` : ''}</td></tr>`;
 const tbl = l => l.length ? '<table><tr><th>ID</th><th>City</th><th>Att. ⟶ Def.</th><th>Status</th><th>Tickets</th><th>Created</th></tr>' + l.map(row).join('') + '</table>' : '<p class="muted">None.</p>';
 async function load() {
   live.innerHTML = tbl(await api('/battles?status=pending,starting,running'));

@@ -488,6 +488,89 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 
 	//------------------------------------------------------------------------------------------------
 	protected float m_fStatusAccu;
+	protected float m_fLiveAccu;
+	protected ref RestCallback m_LiveCallback;
+	static const int LIVE_MAX_UNITS = 200;
+
+	//------------------------------------------------------------------------------------------------
+	//! Live snapshot for the website battle view (every 5 s, no identities, coords rounded to 1 m)
+	protected void PostLive(array<IEntity> botsAtt, array<IEntity> botsDef)
+	{
+		if (m_Loader.GetApiUrl().IsEmpty() || m_Loader.GetBattleId().IsEmpty())
+			return;
+		RestContext ctx = F44_BattleLoader.GetRestContext(m_Loader.GetApiUrl(), m_Loader.GetToken());
+		if (!ctx)
+			return;
+		string json = string.Format("{\"elapsed\":%1,\"timeLeft\":%2,\"tickets\":{\"%3\":%4,\"%5\":%6},\"sectors\":[",
+			Math.Round(m_fElapsed), m_iTimeLeft, m_sAttacker, m_iTicketsAtt, m_sDefender, m_iTicketsDef);
+		bool first = true;
+		for (int i = 0; i < m_aSectorOwners.Count(); i++)
+		{
+			F44_SectorComponent sc = F44_SectorManager.GetSector(i);
+			if (!sc)
+				continue;
+			vector c = sc.GetCenter();
+			string owner = "";
+			if (m_aSectorOwners[i] == F44_ESectorOwner.ATTACKER)
+				owner = m_sAttacker;
+			else if (m_aSectorOwners[i] == F44_ESectorOwner.DEFENDER)
+				owner = m_sDefender;
+			int prog;
+			if (i < m_aSectorProgress.Count())
+				prog = m_aSectorProgress[i];
+			if (!first)
+				json += ",";
+			first = false;
+			string s1 = string.Format("{\"id\":%1,\"name\":\"%2\",\"x\":%3,\"z\":%4,", i, Esc(sc.m_sSectorName), Math.Round(c[0]), Math.Round(c[2]));
+			string s2 = string.Format("\"r\":%1,\"owner\":\"%2\",\"captureProgress\":%3}", Math.Round(sc.m_fRadius), owner, prog);
+			json += s1 + s2;
+		}
+		json += "],\"units\":[";
+		int n;
+		n = AppendUnits(json, botsAtt, m_sAttacker, true, n);
+		n = AppendUnits(json, botsDef, m_sDefender, true, n);
+		array<int> players = {};
+		GetGame().GetPlayerManager().GetPlayers(players);
+		foreach (int pid : players)
+		{
+			int ps;
+			if (!m_mPlayerSide.Find(pid, ps))
+				continue;
+			IEntity pe = GetGame().GetPlayerManager().GetPlayerControlledEntity(pid);
+			if (!pe)
+				continue;
+			array<IEntity> one = {pe};
+			string sk = m_sDefender;
+			if (ps == F44_ESectorOwner.ATTACKER)
+				sk = m_sAttacker;
+			n = AppendUnits(json, one, sk, false, n);
+		}
+		json += "]}";
+		m_LiveCallback = new RestCallback();
+		ctx.POST(m_LiveCallback, "/api/v1/battles/" + m_Loader.GetBattleId() + "/live", json);
+	}
+
+	protected int AppendUnits(inout string json, array<IEntity> ents, string side, bool ai, int n)
+	{
+		string aiStr = "false";
+		if (ai)
+			aiStr = "true";
+		foreach (IEntity e : ents)
+		{
+			if (n >= LIVE_MAX_UNITS || !e || !F44_SectorManager.IsAlive(e))
+				continue;
+			vector o = e.GetOrigin();
+			string veh = "false";
+			ChimeraCharacter ch = ChimeraCharacter.Cast(e);
+			if (ch && ch.IsInVehicle())
+				veh = "true";
+			if (n > 0)
+				json += ",";
+			json += string.Format("{\"side\":\"%1\",\"isAI\":%2,\"x\":%3,\"z\":%4,\"vehicle\":%5}", side, aiStr, Math.Round(o[0]), Math.Round(o[2]), veh);
+			n++;
+		}
+		return n;
+	}
 
 	protected string SectorString()
 	{
@@ -533,6 +616,12 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			m_fStatusAccu = 0;
 			PrintFormat("[F44] Status t=%1s: tickets att %2 / def %3, bots alive att %4 / def %5, sectors %6, time left %7s",
 				Math.Round(m_fElapsed), m_iTicketsAtt, m_iTicketsDef, botsAtt.Count(), botsDef.Count(), SectorString(), m_iTimeLeft);
+		}
+		m_fLiveAccu += m_fTickInterval;
+		if (m_fLiveAccu >= 5)
+		{
+			m_fLiveAccu = 0;
+			PostLive(botsAtt, botsDef);
 		}
 		Replication.BumpMe();
 		CheckEnd();

@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Live battle</title><link rel="stylesheet" href="/style.css">
+<style>
+ #lv{width:100%;height:auto;background:#1c1e1f;border:1px solid var(--line);display:block}
+ .tk{height:14px;background:#222;border:1px solid var(--line);margin:4px 0 10px}
+ .tk>div{height:100%}
+ .lgd span{margin-right:14px}
+</style></head><body>
+<main><div class="grid">
+<div><div class="panel"><h2 id="ttl">Live battle</h2>
+ <svg id="lv" viewBox="0 0 1000 1000"></svg>
+ <div class="legend lgd muted" style="margin-top:6px"><span class="US">● player</span><span class="US">○ AI</span><span class="GER">● player</span><span class="GER">○ AI</span><span>◆ sector (colour = owner, bar = capture)</span><span>■ in vehicle</span></div>
+</div></div>
+<div><div class="panel"><h2>Situation</h2><div id="side" class="muted">Waiting for the server…</div></div></div>
+</div></main>
+<script src="/common.js"></script><script>
+const id = new URLSearchParams(location.search).get('id') || '';
+const COL = { US: 'var(--us-l)', GER: 'var(--ger-l)', '': '#9a9a94' };
+const NS = 'http://www.w3.org/2000/svg';
+function mk(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; }
+function fmtS(s) { s = Math.max(0, s | 0); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+let maxT = {};
+async function tick() {
+  let d;
+  try { d = await api('/battles/' + encodeURIComponent(id) + '/live'); } catch (e) { side.textContent = e.message; return; }
+  ttl.textContent = `Live — ${d.battleId} ${d.cityName || ''}`;
+  const s = d.snapshot, svg = document.getElementById('lv');
+  svg.innerHTML = '';
+  if (!s) { side.innerHTML = `Status: ${STLABEL[d.status] || d.status}. No live data yet.`; return; }
+  // bounds: sectors + units, square, 150 m margin
+  const pts = (s.sectors || []).concat(s.units || []);
+  let x0 = Math.min(...pts.map(p => p.x)), x1 = Math.max(...pts.map(p => p.x)), z0 = Math.min(...pts.map(p => p.z)), z1 = Math.max(...pts.map(p => p.z));
+  const span = Math.max(x1 - x0, z1 - z0, 400) + 300, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+  const bx = cx - span / 2, bz = cz - span / 2, k = 1000 / span;
+  const X = x => (x - bx) * k, Y = z => 1000 - (z - bz) * k;
+  // grid every 100 m, labels every 500 m
+  for (let g = Math.ceil(bx / 100) * 100; g < bx + span; g += 100) {
+    mk('line', { x1: X(g), x2: X(g), y1: 0, y2: 1000, stroke: g % 500 ? '#2a2d2e' : '#3a3e40', 'stroke-width': 1 }, svg);
+    if (g % 500 === 0) mk('text', { x: X(g) + 3, y: 994, fill: '#6d706d', 'font-size': 14 }, svg).textContent = g;
+  }
+  for (let g = Math.ceil(bz / 100) * 100; g < bz + span; g += 100) {
+    mk('line', { y1: Y(g), y2: Y(g), x1: 0, x2: 1000, stroke: g % 500 ? '#2a2d2e' : '#3a3e40', 'stroke-width': 1 }, svg);
+    if (g % 500 === 0) mk('text', { x: 4, y: Y(g) - 3, fill: '#6d706d', 'font-size': 14 }, svg).textContent = g;
+  }
+  for (const sc of s.sectors || []) {
+    const x = X(sc.x), y = Y(sc.z), r = Math.max(8, (sc.r || 50) * k);
+    mk('circle', { cx: x, cy: y, r, fill: 'none', stroke: COL[sc.owner] || COL[''], 'stroke-dasharray': '6 4', 'stroke-width': 1.5, opacity: .6 }, svg);
+    mk('rect', { x: x - 13, y: y - 13, width: 26, height: 26, transform: `rotate(45 ${x} ${y})`, fill: COL[sc.owner] || COL[''], stroke: '#111', 'stroke-width': 2 }, svg);
+    mk('text', { x, y: y + 6, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': 700, fill: '#111' }, svg).textContent = sc.name;
+    const p = Math.max(-100, Math.min(100, sc.captureProgress || 0));
+    mk('rect', { x: x - 30, y: y + 24, width: 60, height: 6, fill: '#111' }, svg);
+    if (p) mk('rect', { x: p > 0 ? x : x - 30 * (-p / 100), y: y + 24, width: 30 * Math.abs(p) / 100, height: 6, fill: p > 0 ? COL[d.attacker] : COL[d.defender] }, svg);
+  }
+  for (const u of s.units || []) {
+    const x = X(u.x), y = Y(u.z), c = COL[u.side] || COL[''];
+    if (u.vehicle) mk('rect', { x: x - 6, y: y - 6, width: 12, height: 12, fill: u.isAI ? 'none' : c, stroke: c, 'stroke-width': 2 }, svg);
+    else mk('circle', { cx: x, cy: y, r: 5, fill: u.isAI ? 'none' : c, stroke: c, 'stroke-width': 2 }, svg);
+  }
+  const t = s.tickets || {};
+  for (const f of [d.attacker, d.defender]) maxT[f] = Math.max(maxT[f] || 0, t[f] || 0);
+  const cnt = f => (s.units || []).filter(u => u.side === f).length;
+  side.innerHTML = `<b>${STLABEL[d.status] || d.status}</b>${d.winner ? ' — winner <b class="' + d.winner + '">' + d.winner + '</b>' : ''}<br>Elapsed ${fmtS(s.elapsed)} · left ${fmtS(s.timeLeft)}<br><br>` +
+    [d.attacker, d.defender].map(f => `<span class="${f}"><b>${FNAME[f] || f}</b> ${f === d.attacker ? '(attacking)' : '(defending)'} — ${t[f] ?? '?'} tickets · ${cnt(f)} units</span>
+     <div class="tk"><div style="width:${maxT[f] ? 100 * (t[f] || 0) / maxT[f] : 0}%;background:${COL[f]}"></div></div>`).join('') +
+    `<span class="muted">Sectors: ${(s.sectors || []).map(x => x.name + ' ' + (x.owner || 'neutral')).join(' · ')}<br>Updated ${fmtDate(d.at)} · refresh 5 s</span>`;
+}
+tick(); setInterval(tick, 5000);
+</script></body></html>
