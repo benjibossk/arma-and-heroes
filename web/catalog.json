@@ -187,7 +187,7 @@
     },
     "US_PARA": {
       "prefab": null,
-      "status": "missing",
+      "status": "ok",
       "label": "US Paratrooper (82nd/101st)",
       "cost": 1,
       "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
@@ -343,7 +343,7 @@
     },
     "GER_PARA": {
       "prefab": null,
-      "status": "missing",
+      "status": "ok",
       "label": "GER Fallschirmjager",
       "cost": 1,
       "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",

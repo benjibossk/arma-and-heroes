@@ -71,6 +71,7 @@ class F44_AirDropPlane
 	AIWaypoint m_Waypoint;
 	SCR_SpawnPoint m_Point;
 	float m_fRespawnIn;		// > 0: waiting to respawn
+	int m_iSlowTicks;		// consecutive 2 s ticks below flying speed
 
 	//! Free cargo seats (not occupied, not reserved)
 	int FreeSeats()
@@ -125,6 +126,16 @@ class F44_AirDropPlane
 			return false;
 		if (!m_Pilot)
 			return false;
+		// ditched / landed somewhere: a C-47 below ~30 kt is not flying any more
+		Physics ph = m_Plane.GetPhysics();
+		if (ph && ph.GetVelocity().Length() < 15)
+		{
+			m_iSlowTicks++;
+			if (m_iSlowTicks >= 5)
+				return false;
+		}
+		else
+			m_iSlowTicks = 0;
 		SCR_DamageManagerComponent pdm = SCR_DamageManagerComponent.GetDamageManager(m_Pilot);
 		if (pdm && pdm.GetState() == EDamageState.DESTROYED)
 			return false;
@@ -232,6 +243,7 @@ class F44_AirDrop
 		// pilot + spawn point a moment later (not in the plane's init frame)
 		GetGame().GetCallqueue().CallLater(SpawnCrew, 2000, false, pl.m_iIndex);
 		pl.m_fRespawnIn = 0;
+		pl.m_iSlowTicks = 0;
 		PrintFormat("[F44] AirDrop: C-47 #%1 (%2) spawned at %3", pl.m_iIndex, pl.m_sSideKey, pos);
 		if (m_Cfg.m_bTestSeatBot)
 			GetGame().GetCallqueue().CallLater(TestSeat, 10000, false, pl.m_iIndex);
@@ -295,7 +307,7 @@ class F44_AirDrop
 		if (ge)
 			groupPrefab = ge.m_sPrefab;
 		ResourceName charPrefab;
-		array<string> candidates = {"PILOT", "CREW", "PARA", "RIFLEMAN"};
+		array<string> candidates = {"PILOT", "CREW", "RIFLEMAN", "PARA"};
 		foreach (string c : candidates)
 		{
 			ResourceName rn = cat.GetClassPrefab(F44_Catalog.MakeClassKey(pl.m_sSideKey, c));

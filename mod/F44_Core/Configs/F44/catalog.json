@@ -147,8 +147,8 @@
       }
     },
     "US_PARA": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{F44A7A2A0E5A0001}Prefabs/Characters/F44/Character_F44_US_Para.et",
+      "status": "ok",
       "label": "US Paratrooper (82nd/101st)",
       "cost": 1,
       "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
@@ -253,8 +253,8 @@
       "source": "FH GER Units"
     },
     "GER_PARA": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{F44A7A2A0E5A0002}Prefabs/Characters/F44/Character_F44_GER_Para.et",
+      "status": "ok",
       "label": "GER Fallschirmjager",
       "cost": 1,
       "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",

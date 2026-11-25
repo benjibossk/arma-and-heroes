@@ -1,0 +1,12 @@
+SCR_ChimeraCharacter : "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et" {
+ ID "F44A0000000E0002"
+ components {
+  BaseLoadoutManagerComponent "{520EA1D2DB11821E}" {
+   Slots {
+    LoadoutSlotInfo Boots {
+     Prefab "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et"
+    }
+   }
+  }
+ }
+}

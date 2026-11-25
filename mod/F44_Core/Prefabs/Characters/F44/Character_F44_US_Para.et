@@ -1,0 +1,18 @@
+SCR_ChimeraCharacter : "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et" {
+ ID "F44A0000000E0001"
+ components {
+  BaseLoadoutManagerComponent "{520EA1D2DB11821E}" {
+   Slots {
+    LoadoutSlotInfo Jacket {
+     Prefab "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et"
+    }
+    LoadoutSlotInfo Pants {
+     Prefab "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et"
+    }
+    LoadoutSlotInfo Boots {
+     Prefab "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et"
+    }
+   }
+  }
+ }
+}

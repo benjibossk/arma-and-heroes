@@ -116,5 +116,15 @@ SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutMana
    m_sAffiliatedFaction "FH_HEERWW2"
    m_sLoadoutResource "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et"
   }
+  SCR_FactionPlayerLoadout "{F44A00000000D0A0}" {
+   m_sLoadoutName "US Paratrooper (M1A1 Thompson)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{F44A7A2A0E5A0001}Prefabs/Characters/F44/Character_F44_US_Para.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D0A1}" {
+   m_sLoadoutName "GER Fallschirmjager (MP40)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{F44A7A2A0E5A0002}Prefabs/Characters/F44/Character_F44_GER_Para.et"
+  }
  }
 }
