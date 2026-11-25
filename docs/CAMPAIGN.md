@@ -15,3 +15,11 @@ next to the code (one file per package) unless noted.
 - **Team cap per commander = 2 + rank / 2** live teams (admin uncapped), checked in `createTeam`.
 - API: `GET /api/v1/teams/:id/upgrades`, `POST /api/v1/teams/:id/upgrades/:key` (general, team idle).
 - UI: map team card → "Doctrines & command points" (`static/campaign.js`).
+
+## P2-B Road skirmishes (`web/skirmish.go`)
+- Two hostile teams moving on the same road in opposite directions meet: when the first
+  arrives while the other is still en route (they have crossed), `arrive()` starts a
+  `SKIRMISH` battle (`Battle.RoadID` set, 30 min, no garrison, no capture, no city-capture war funds).
+- Scenario = the city the arriving team was heading to (the foe's origin). If that city is
+  already under attack, no skirmish (the arrival proceeds normally).
+- Winner resumes its march and arrives on the next tick; loser falls back to its origin idle.

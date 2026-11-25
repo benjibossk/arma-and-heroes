@@ -108,6 +108,7 @@ type Battle struct {
 	Status         string     `gorm:"size:16;index" json:"status"` // pending | starting | running | finished | cancelled
 	CityID         string     `gorm:"size:64" json:"cityId"`
 	Mode           string     `gorm:"size:16" json:"mode"`
+	RoadID         uint       `json:"roadId,omitempty"` // != 0 : road skirmish (skirmish.go)
 	Attacker       string     `gorm:"size:8" json:"attacker"`
 	Defender       string     `gorm:"size:8" json:"defender"`
 	TimeLimitMin   int        `json:"timeLimitMin"`

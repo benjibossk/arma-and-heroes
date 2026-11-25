@@ -158,7 +158,7 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 ### P2 — next, mostly one hotspot each (run serially by hotspot)
 
 - **P2-A Team upgrade tree + command points [API]** — DONE 2026-11-26 (web/upgrades.go, docs/CAMPAIGN.md; deploy pending) — branching upgrades, CP budget by rank, team cap per commander. Files: `web/models.go` atSpecs, new `web/upgrades.go`, api.go routes, `web/static` HQ page. Effort M. Test: go tests on branch rules + curl. Deps: P1-B (team XP/levels).
-- **P2-B Road skirmishes [API]** — teams meeting on a road fight a skirmish battle. Files: `moveTeam` (api.go), `arrive` (game.go). Effort M. Deps: P1-A.
+- **P2-B Road skirmishes [API]** — DONE 2026-11-26 (web/skirmish.go, hook in arrive/applyResult; no moveTeam change needed) — teams meeting on a road fight a skirmish battle. Files: `moveTeam` (api.go), `arrive` (game.go). Effort M. Deps: P1-A.
 - **P2-C Strategic economy (web)** — per-unit production stockpile, capital-count victory, neutral capitals, war-end refund/bonus. Files: `applyIncome`, `checkVictory` (game.go), seed.go, progression.go. Effort M. Test: go tests. Deps: none (conflicts with P1-A/B in game.go only by function).
 - **P2-D Salary credits (web)** — credits = rank salary × time alive × stay-to-end bonus. Files: progression.go/json. Effort S. Deps: battle results already carry play time (verify).
 - **P2-E Per-kill war funds [GM][API]** — mod reports kills by victim type/team; web pays the commander. Effort M. Deps: none.
