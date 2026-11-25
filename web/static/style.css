@@ -68,3 +68,20 @@ details summary{cursor:pointer}
  .city text{font-size:18px}
  button{padding:10px 12px}
 }
+/* item cards */
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.icard{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+.icard.owned{border-color:var(--amber)}
+.ipic{aspect-ratio:2/1;background:radial-gradient(ellipse at center,#3d403f 0%,#26282a 80%);display:flex;align-items:center;justify-content:center}
+.ipic img{width:82%;height:82%;object-fit:contain}
+.ipic.photo img{width:100%;height:100%;object-fit:cover}
+.icard.locked .ipic img{filter:grayscale(1) brightness(.45)}
+.ibody{padding:8px 10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.iname{font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:15px}
+.imeta{color:var(--muted);font-size:12px}
+.ifoot{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.iprice{color:var(--amber);font-family:'Oswald',sans-serif;font-weight:600}
+.ifoot button{width:auto;margin:0;padding:4px 12px}
+.ilock{font-size:12px;color:var(--amber);border-top:1px solid var(--line);padding-top:4px}
+.loslot{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:center;margin:4px 0}
+.loslot .ipic{border-radius:3px}

@@ -32,3 +32,14 @@ async function initPage(active) {
   } else who.innerHTML = `<a href="/login.html?next=${encodeURIComponent(location.pathname + location.search)}">Log in with Discord</a>`;
   return ME;
 }
+// Item pictures (assets/items/manifest.json): real game previews where a mod ships one, Style B silhouettes otherwise
+let ITEMIMG = {};
+const itemImgsReady = fetch('/assets/items/manifest.json').then(r => r.json()).then(j => { ITEMIMG = j; }).catch(() => {});
+const itemSrc = k => '/assets/items/' + (ITEMIMG[k]?.img || '_sil_rifle.svg');
+const itemPic = (k, cls = '') => `<div class="ipic ${ITEMIMG[k]?.kind === 'photo' ? 'photo' : ''} ${cls}"><img src="${itemSrc(k)}" alt="" loading="lazy"></div>`;
+function itemCard(i, action = '') {
+  return `<div class="icard ${i.locked ? 'locked' : ''} ${i.owned ? 'owned' : ''}">${itemPic(i.key)}
+  <div class="ibody"><div class="iname">${esc(i.label)}</div><div class="imeta">${esc(i.slot)} · ${esc(i.category || '')} · ${i.weight} pt</div>
+  <div class="ifoot"><span class="iprice">${i.price ? i.price + ' cr.' : 'Free'}</span>${action}</div>
+  ${i.locked ? `<div class="ilock">🔒 ${esc(i.locked)}</div>` : ''}</div></div>`;
+}

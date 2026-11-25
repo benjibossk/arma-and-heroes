@@ -1,0 +1,174 @@
+{
+ "US_M1_GARAND": {
+  "img": "_sil_rifle.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_M1_CARBINE": {
+  "img": "_sil_rifle.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_THOMPSON": {
+  "img": "_sil_smg.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_M3_GREASE": {
+  "img": "_sil_smg.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_BAR": {
+  "img": "_sil_mg.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_M1903A4": {
+  "img": "_sil_scoped.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_M1911": {
+  "img": "_sil_pistol.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_BAZOOKA": {
+  "img": "_sil_launcher.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_MK2_GRENADE": {
+  "img": "_sil_grenade.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_SMOKE": {
+  "img": "_sil_smoke.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_MEDKIT": {
+  "img": "_sil_medkit.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_TNT": {
+  "img": "_sil_explosive.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_BINOCULARS": {
+  "img": "_sil_binoculars.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_OUTFIT_M41": {
+  "img": "_sil_uniform.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_OUTFIT_PARA": {
+  "img": "_sil_uniform.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_OUTFIT_CREW": {
+  "img": "_sil_uniform.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "US_OUTFIT_NETTING": {
+  "img": "_sil_helmet.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_KAR98K": {
+  "img": "_sil_rifle.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_G43": {
+  "img": "_sil_rifle.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_MP40": {
+  "img": "_sil_smg.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_MG42": {
+  "img": "_sil_mg.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_KAR98K_SCOPE": {
+  "img": "_sil_scoped.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_P38": {
+  "img": "_sil_pistol.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_PANZERFAUST": {
+  "img": "_sil_pfaust.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_PANZERSCHRECK": {
+  "img": "_sil_launcher.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_M24_GRENADE": {
+  "img": "_sil_stick.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_SMOKE": {
+  "img": "_sil_smoke.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_MEDKIT": {
+  "img": "_sil_medkit.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_MINES": {
+  "img": "_sil_mine.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_BINOCULARS": {
+  "img": "_sil_binoculars.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_OUTFIT_M40": {
+  "img": "GER_OUTFIT_M40.webp",
+  "kind": "photo",
+  "source": "FinestHour-GERUnits",
+  "path": "UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Infantry/Character_HEER_Rifleman_Kar98k_Infantry.edds"
+ },
+ "GER_OUTFIT_FJ": {
+  "img": "_sil_uniform.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ },
+ "GER_OUTFIT_PANZER": {
+  "img": "GER_OUTFIT_PANZER.webp",
+  "kind": "photo",
+  "source": "FinestHour-GERUnits",
+  "path": "UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Panzergrenadiers/Character_HEER_PanzerCrew_Panzergrenadiers.edds"
+ },
+ "GER_OUTFIT_SMOCK": {
+  "img": "_sil_uniform.svg",
+  "kind": "silhouette",
+  "source": "Arma & Heroes (original)"
+ }
+}

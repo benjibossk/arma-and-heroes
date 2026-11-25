@@ -27,9 +27,10 @@ async function pick(id) { cur = S.find(s => s.id === id); await load(); }
 async function createS() { try { await api('/me/soldiers', { method: 'POST', body: { faction: nf.value, class: nc.value } }); say('Soldier enlisted', 1); await load(); } catch (e) { say(e.message); } }
 const lbl = k => { const i = store.find(x => x.key === k); return i ? i.label : k; };
 async function show() {
+  await itemImgsReady;
   store = await api('/store?soldierId=' + cur.id);
   const own = slot => store.filter(i => i.owned && i.slot === slot);
-  const sel = (id, slot, val) => `<select id="${id}" style="width:100%" onchange="pts()"><option value="">— empty —</option>${own(slot).map(i => `<option value="${i.key}" ${i.key === val ? 'selected' : ''}>${esc(i.label)} (${i.weight} pt)</option>`).join('')}</select>`;
+  const sel = (id, slot, val) => `<div class="loslot"><div id="${id}_pic">${val ? itemPic(val) : '<div class="ipic"></div>'}</div><select id="${id}" style="width:100%" onchange="pts();slotPic(this)"><option value="">— empty —</option>${own(slot).map(i => `<option value="${i.key}" ${i.key === val ? 'selected' : ''}>${esc(i.label)} (${i.weight} pt)</option>`).join('')}</select></div>`;
   const L = cur.loadout, eq = L.equipment || [];
   lopanel.style.display = stpanel.style.display = nxpanel.style.display = '';
   lo.innerHTML = `<p><b class="${cur.faction}">${cur.faction}</b> ${CL[cur.class]} · ${esc(cur.rank)} · ${cur.credits} credits ${cur.active ? '' : `<button onclick="act()">Set active</button>`}</p>
@@ -39,10 +40,12 @@ async function show() {
    <label>Outfit</label>${sel('lo_', 'outfit', L.outfit)}
    <p id="ptsl"></p><button class="btn-big" onclick="saveLo()">Save loadout</button><p id="lmsg"></p>`;
   pts();
-  st.innerHTML = '<table>' + store.filter(i => !i.owned && !i.locked).map(i => `<tr><td>${esc(i.label)}<br><span class="muted">${i.slot} · ${i.category} · ${i.weight} pt</span></td><td>${i.price} cr.</td><td><button onclick="buy('${i.key}')" ${cur.credits < i.price ? 'disabled' : ''}>Buy</button></td></tr>`).join('') + '</table>' || '<p class="muted">Nothing new to buy.</p>';
+  const buyable = store.filter(i => !i.owned && !i.locked);
+  st.innerHTML = buyable.length ? '<div class="igrid">' + buyable.map(i => itemCard(i, `<button onclick="buy('${i.key}')" ${cur.credits < i.price ? 'disabled' : ''}>Buy</button>`)).join('') + '</div>' : '<p class="muted">Nothing new to buy.</p>';
   const locked = store.filter(i => !i.owned && i.locked).sort((a, b) => a.price - b.price);
-  nx.innerHTML = locked.map(i => `<div class="list-item">${esc(i.label)} — ${i.price} cr.<br><span class="muted">${esc(i.locked)}</span></div>`).join('') || '<p class="muted">Everything is unlocked.</p>';
+  nx.innerHTML = locked.length ? '<div class="igrid">' + locked.map(i => itemCard(i)).join('') + '</div>' : '<p class="muted">Everything is unlocked.</p>';
 }
+function slotPic(e) { document.getElementById(e.id + '_pic').innerHTML = e.value ? itemPic(e.value) : '<div class="ipic"></div>'; }
 function cur_lo() { return { primary: lp.value, secondary: ls.value, outfit: lo_.value, equipment: [le0, le1, le2, le3].map(e => e.value).filter(Boolean) }; }
 function pts() { const l = cur_lo(); const p = [l.primary, l.secondary, l.outfit, ...l.equipment].filter(Boolean).reduce((a, k) => a + (store.find(i => i.key === k)?.weight || 0), 0);
   ptsl.innerHTML = `Points: <b class="${p > cur.budget ? 'err' : ''}">${p} / ${cur.budget}</b>`; }
