@@ -42,6 +42,7 @@ func setupRouter() *gin.Engine {
 	a.GET("/me/soldiers", requireUser, listSoldiers)
 	a.POST("/me/soldiers", requireUser, createSoldier)
 	a.POST("/soldiers/:id/activate", requireUser, activateSoldier)
+	a.GET("/soldiers/:id/ribbons", getRibbons)
 	a.GET("/soldiers/:id/loadout", requireUser, getLoadout)
 	a.PUT("/soldiers/:id/loadout", requireUser, putLoadout)
 	a.POST("/soldiers/:id/buy", requireUser, buyItem)

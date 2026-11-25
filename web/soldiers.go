@@ -7,6 +7,7 @@ import (
 	"log"
 	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -157,10 +158,7 @@ func unlockState(it *Item, s *Soldier) string {
 	if it.RankRequired != nil && rankIdxFor(s.XP) < rankIndex(*it.RankRequired) {
 		return "requires rank " + *it.RankRequired
 	}
-	if it.Ribbon != nil && s.GetCatKills()[it.Ribbon.Category] < it.Ribbon.Kills {
-		return fmt.Sprintf("requires ribbon: %d %s kills", it.Ribbon.Kills, it.Ribbon.Category)
-	}
-	return ""
+	return ribbonLock(it, s)
 }
 
 // grantStarters : give free starter items and a default loadout
@@ -527,6 +525,11 @@ func creditSoldier(p *Player, b *Battle, rp *ResPlayer, xp, credits int) {
 		}
 	}
 	cb, _ := json.Marshal(ck)
+	rxp, rcr, aw := applyRibbons(s, b.ID, rp)
+	if len(aw) > 0 {
+		logEvent(b.WarID, "ribbon", s.Faction, fmt.Sprintf("%s earns %s", p.Name, strings.Join(aw, ", ")))
+	}
+	xp, credits = xp+rxp, credits+rcr
 	db.Model(s).Updates(map[string]interface{}{"xp": s.XP + xp, "credits": s.Credits + credits, "kills": s.Kills + rp.Kills,
 		"deaths": s.Deaths + rp.Deaths, "cat_kills": string(cb)})
 }

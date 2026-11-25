@@ -6,6 +6,7 @@
   <select id="nc"><option value="INF">Infantry</option><option value="PARA">Paratrooper</option><option value="REC">Recon</option><option value="CREW">Tank crew</option></select>
   <button class="cta" style="width:auto;margin:0;padding:8px 14px;font-size:14px" onclick="createS()">Enlist soldier</button></div><div id="msg" class="err"></div></div>
  <div class="panel" id="lopanel" style="display:none"><h2>Loadout</h2><div id="lo"></div></div>
+ <div class="panel" id="rbpanel" style="display:none"><h2>Ribbons</h2><div id="rb"></div></div>
 </div><div>
  <div class="panel" id="stpanel" style="display:none"><h2 id="depot">Quartermaster — depot</h2><div id="st"></div></div>
  <div class="panel" id="nxpanel" style="display:none"><h2>Next unlocks</h2><div id="nx"></div></div>
@@ -34,12 +35,12 @@ async function show() {
   const L = cur.loadout, eq = L.equipment || [];
   lopanel.style.display = stpanel.style.display = nxpanel.style.display = '';
   lo.innerHTML = `<p><b class="${cur.faction}">${cur.faction}</b> ${CL[cur.class]} · ${esc(cur.rank)} · ${cur.credits} credits ${cur.active ? '' : `<button onclick="act()">Set active</button>`}</p>
-   <div class="muted">Ribbons: ${Object.entries(cur.ribbons || {}).map(([k, v]) => k + ' ' + v).join(' · ') || 'none yet'}</div>
    <label>Primary</label>${sel('lp', 'primary', L.primary)}<label>Secondary</label>${sel('ls', 'secondary', L.secondary)}
    ${[0, 1, 2, 3].map(i => `<label>Equipment ${i + 1}</label>${sel('le' + i, 'equipment', eq[i])}`).join('')}
    <label>Outfit</label>${sel('lo_', 'outfit', L.outfit)}
    <p id="ptsl"></p><button class="btn-big" onclick="saveLo()">Save loadout</button><p id="lmsg"></p>`;
   pts();
+  showRibbons();
   const buyable = store.filter(i => !i.owned && !i.locked);
   st.innerHTML = buyable.length ? '<div class="igrid">' + buyable.map(i => itemCard(i, `<button onclick="buy('${i.key}')" ${cur.credits < i.price ? 'disabled' : ''}>Buy</button>`)).join('') + '</div>' : '<p class="muted">Nothing new to buy.</p>';
   const locked = store.filter(i => !i.owned && i.locked).sort((a, b) => a.price - b.price);
@@ -51,6 +52,9 @@ function pts() { const l = cur_lo(); const p = [l.primary, l.secondary, l.outfit
   ptsl.innerHTML = `Points: <b class="${p > cur.budget ? 'err' : ''}">${p} / ${cur.budget}</b>`; }
 async function saveLo() { try { await api(`/soldiers/${cur.id}/loadout`, { method: 'PUT', body: cur_lo() }); lmsg.className = 'ok'; lmsg.textContent = 'Loadout saved'; await load(); } catch (e) { lmsg.className = 'err'; lmsg.textContent = e.message; } }
 async function buy(k) { try { await api(`/soldiers/${cur.id}/buy`, { method: 'POST', body: { item: k } }); await load(); } catch (e) { alert(e.message); } }
+async function showRibbons() {
+  try { const R = await api(`/soldiers/${cur.id}/ribbons`); rbpanel.style.display = ''; rb.innerHTML = '<div class="rgrid">' + R.ribbons.map(ribbonCard).join('') + '</div>'; } catch (e) { rbpanel.style.display = 'none'; }
+}
 async function act() { await api(`/soldiers/${cur.id}/activate`, { method: 'POST' }); await load(); }
 initPage(location.hash === '#depot' ? 'quartermaster' : 'barracks.html').then(me => { if (!me) { document.querySelector('main').innerHTML = `<div class="panel"><p>Log in to manage your soldiers.</p><a href="/login.html?next=/barracks.html"><button class="btn-big">Log in with Discord</button></a></div>`; return; } load(); });
 </script></body></html>

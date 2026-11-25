@@ -313,6 +313,17 @@ type ResPlayer struct {
 	ObjectiveSec int `json:"objectiveSec,omitempty"`
 	PresenceSec  int `json:"presenceSec,omitempty"`
 	SquadSec     int `json:"squadSec,omitempty"`
+	// ribbon counters (docs/RIBBONS.md)
+	PlayerKillsByCategory map[string]int `json:"playerKillsByCategory,omitempty"`
+	Headshots             int            `json:"headshots,omitempty"`
+	MultiKills            int            `json:"multiKills,omitempty"`
+	ResupplyGiven         int            `json:"resupplyGiven,omitempty"`
+	HealGiven             int            `json:"healGiven,omitempty"`
+	Revives               int            `json:"revives,omitempty"`
+	Repairs               int            `json:"repairs,omitempty"`
+	Spots                 int            `json:"spots,omitempty"`
+	TransportPassengers   int            `json:"transportPassengers,omitempty"`
+	Stats                 map[string]int `json:"stats,omitempty"`
 }
 
 type WeaponStat struct {

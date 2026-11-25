@@ -91,10 +91,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := db.AutoMigrate(&War{}, &Faction{}, &City{}, &Road{}, &AssaultTeam{}, &Battle{}, &Player{}, &Session{}, &Event{}, &PlayerBattle{}, &LinkCode{}, &Setting{}, &Soldier{}, &SoldierItem{}); err != nil {
+	if err := db.AutoMigrate(&War{}, &Faction{}, &City{}, &Road{}, &AssaultTeam{}, &Battle{}, &Player{}, &Session{}, &Event{}, &PlayerBattle{}, &LinkCode{}, &Setting{}, &Soldier{}, &SoldierItem{}, &SoldierStat{}, &SoldierRibbon{}); err != nil {
 		log.Fatal(err)
 	}
 	loadItems()
+	loadRibbons()
 	loadProgression()
 	seedStarterKits()
 	ensureAdmin()
