@@ -1,0 +1,51 @@
+{
+  "_doc": "Per-world battle server settings (docs/MAPS.md). battle.world -> scenarioId + extra Workshop mods appended to the template's game.mods. enabled=false: the orchestrator refuses the battle (mods not approved / not downloaded on the battle servers). 'arland' = the current template, unchanged.",
+  "default": "arland",
+  "worlds": {
+    "arland": {
+      "enabled": true,
+      "scenarioId": "{F1F241FEA0522E73}Missions/F44_Test.conf",
+      "mods": []
+    },
+    "ww2arland": {
+      "enabled": false,
+      "scenarioId": "{A0E09C08D5AF1E4B}Missions/F44_WW2Arland.conf",
+      "downloadMB": 158,
+      "mods": [
+        {"modId": "6072D68D8DCD0C12", "name": "WW2 Arland Map", "version": "0.0.34"}
+      ]
+    },
+    "belleauwood": {
+      "enabled": false,
+      "scenarioId": "{B3CC636AF806DDB9}Missions/F44_BelleauWood.conf",
+      "downloadMB": 1222,
+      "mods": [
+        {"modId": "629EDC37CDE3AD35", "name": "Belleau Wood", "version": "2.3.43"},
+        {"modId": "5DE612963E4B005A", "name": "Rail Enfusion Redux", "version": "1.0.12"},
+        {"modId": "5F0D245931200FD1", "name": "Railway Generator", "version": "1.0.5"}
+      ]
+    },
+    "normandy": {
+      "enabled": false,
+      "scenarioId": "{9A084B2B12D440BB}Missions/F44_Normandy.conf",
+      "downloadMB": 2829,
+      "mods": [
+        {"modId": "616D67C41B1DF93D", "name": "Normandy", "version": "0.0.39"},
+        {"modId": "647804D31EC300F0", "name": "WW2 Assets", "version": "0.0.14"},
+        {"modId": "60A68ED7293C691A", "name": "iRON79 Compositions", "version": "1.0.31"}
+      ]
+    },
+    "utahbeach": {
+      "enabled": false,
+      "scenarioId": "{14EDFBCDE1D4718E}Missions/F44_UtahBeach.conf",
+      "downloadMB": 2594,
+      "mods": [
+        {"modId": "698C2A44E9972692", "name": "UTAHBeach", "version": "1.0.16"},
+        {"modId": "647804D31EC300F0", "name": "WW2 Assets", "version": "0.0.14"},
+        {"modId": "5DE612963E4B005A", "name": "Rail Enfusion Redux", "version": "1.0.12"},
+        {"modId": "5F0D245931200FD1", "name": "Railway Generator", "version": "1.0.5"},
+        {"modId": "60A68ED7293C691A", "name": "iRON79 Compositions", "version": "1.0.31"}
+      ]
+    }
+  }
+}

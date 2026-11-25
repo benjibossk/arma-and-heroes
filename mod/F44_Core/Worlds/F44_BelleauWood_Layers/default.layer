@@ -1,0 +1,72 @@
+SCR_AIWorld F44_AIWorld : "{CFDC9C151CAB3F8D}Prefabs/AI/SCR_AIWorld_BelleauWood.et" {
+ coords 0 0 0
+}
+RadioManagerEntity F44_RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+ coords 3660 0 4460
+}
+ScriptedChatEntity F44_Chat : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ coords 3660 0 4460
+}
+SCR_BaseGameMode F44_GameMode : "{097A1FE9CCC65548}Prefabs/F44/F44_GameMode.et" {
+ components {
+  F44_GameModeComponent "{F44A00000000C001}" {
+   m_sCatalogPath "Configs/F44/catalog.json"
+  }
+ }
+ coords 5660 0 6460
+}
+SCR_FactionManager F44_FactionManager : "{31B152F933B767AF}Prefabs/F44/F44_FactionManager.et" {
+ coords 5660 0 6465
+}
+SCR_LoadoutManager F44_LoadoutManager : "{7B0580D6DD898DDC}Prefabs/F44/F44_LoadoutManager.et" {
+ coords 5660 0 6470
+}
+SCR_SpawnPoint F44_Spawn_US : "{24CB71A50444882D}Prefabs/MP/Spawning/SpawnPoint_FH_USAWW2.et" {
+ coords 5060 0 6460
+}
+SCR_SpawnPoint F44_Spawn_GER : "{765E9383E57810D8}Prefabs/MP/Spawning/SpawnPoint_FH_HEERWW2.et" {
+ coords 6360 0 6460
+}
+GenericEntity F44_Sector_A : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "A"
+   m_iOrder 0
+  }
+ }
+ coords 5460 0 6460
+}
+GenericEntity F44_Sector_B : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "B"
+   m_iOrder 1
+  }
+ }
+ coords 5760 0 6460
+}
+GenericEntity F44_Sector_C : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "C"
+   m_iOrder 2
+  }
+ }
+ coords 6060 0 6460
+}
+GenericEntity F44_VehSpawn_US_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide ATTACKER
+  }
+ }
+ coords 5070 0 6475
+}
+GenericEntity F44_VehSpawn_GER_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide DEFENDER
+  }
+ }
+ coords 6350 0 6475
+}

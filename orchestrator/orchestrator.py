@@ -128,6 +128,31 @@ def ensure_instance_dirs(cfg, dry):
             log.info("jonction %s -> %s", link, base)
 
 
+MAPS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "maps.json")
+
+
+class MapDisabled(Exception):
+    pass
+
+
+def apply_world(cfg, c, battle):
+    """battle.world -> scenarioId + mods de la carte (maps.json, docs/MAPS.md). Sans world : inchange."""
+    maps = load_json(MAPS, {}) or {}
+    world = (battle.get("world") or "").lower()
+    if not world or world == maps.get("default", "arland"):
+        return c
+    m = (maps.get("worlds") or {}).get(world)
+    if not m:
+        raise MapDisabled(f"world inconnu '{world}' (maps.json)")
+    if not m.get("enabled") and not cfg.get("allowDisabledMaps"):
+        raise MapDisabled(f"carte '{world}' non activee (maps.json enabled=false, telechargement a approuver)")
+    g = c["game"]
+    g["scenarioId"] = m["scenarioId"]
+    have = {x.get("modId") for x in g.get("mods", [])}
+    g.setdefault("mods", []).extend(x for x in m.get("mods", []) if x["modId"] not in have)
+    return c
+
+
 def build_config(cfg, inst, battle, api_url, key):
     c = copy.deepcopy(load_json(cfg["templateConfig"]))
     c["bindPort"] = c["publicPort"] = inst["bindPort"]
@@ -144,7 +169,7 @@ def build_config(cfg, inst, battle, api_url, key):
     if cfg.get("testVehicles"):
         mh["m_sTestVehicles"] = ",".join(cfg["testVehicles"])
     g.setdefault("gameProperties", {})["missionHeader"] = mh
-    return c
+    return apply_world(cfg, c, battle)
 
 
 def cli_args(cfg, inst, conf):
@@ -234,7 +259,11 @@ class Orchestrator:
 
     def launch(self, inst, battle):
         key = self.api.key
-        conf = build_config(self.cfg, inst, battle, self.api.base, key)
+        try:
+            conf = build_config(self.cfg, inst, battle, self.api.base, key)
+        except MapDisabled as e:
+            log.error("bataille %s non lancee : %s", battle.get("battleId"), e)
+            return
         prof = os.path.join(inst["dir"], "profile")
         cpath = os.path.join(inst["dir"], "config.json")
         bid = battle["battleId"]

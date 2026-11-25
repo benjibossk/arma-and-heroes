@@ -112,6 +112,7 @@ class F44_CityLayout
 
 	string m_sId;
 	string m_sName;
+	string m_sWorld;	// optional world key (docs/MAPS.md): "arland", "ww2arland", "belleauwood", "normandy", "utahbeach"
 	ref array<ref F44_LayoutPoint> m_aSectors = {};
 	ref array<ref F44_LayoutPoint> m_aSpawnAtt = {};
 	ref array<ref F44_LayoutPoint> m_aSpawnDef = {};
@@ -144,6 +145,7 @@ class F44_CityLayout
 	void FromJson(LoadContext n)
 	{
 		n.ReadValue("name", m_sName);
+		n.ReadValue("world", m_sWorld);
 		ReadPoints(n, "sectors", m_aSectors);
 		ReadPoints(n, "attackerSpawns", m_aSpawnAtt);
 		ReadPoints(n, "defenderSpawns", m_aSpawnDef);
@@ -185,8 +187,39 @@ class F44_CityLayout
 		ctx.EndObject();
 		if (l.m_aSectors.IsEmpty())
 			return null;
+		if (!IsWorldLoaded(l.m_sWorld))
+		{
+			PrintFormat("[F44] Layout: '%1' is for world '%2' but the loaded world is %3, using the world sectors", id, l.m_sWorld, GetGame().GetWorldFile(), level: LogLevel.WARNING);
+			return null;
+		}
 		PrintFormat("[F44] Layout: '%1' (%2) for city '%3' from %4", id, l.m_sName, cityId, path);
 		return l;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! World key -> world file of the F44 mission (Missions/F44_<Map>.conf). Empty = any world (legacy).
+	static string WorldFileKey(string world)
+	{
+		world.ToLower();
+		if (world == "arland")
+			return "F44_Test";
+		if (world == "ww2arland")
+			return "F44_WW2Arland";
+		if (world == "belleauwood")
+			return "F44_BelleauWood";
+		if (world == "normandy")
+			return "F44_Normandy";
+		if (world == "utahbeach")
+			return "F44_UtahBeach";
+		return "";
+	}
+
+	static bool IsWorldLoaded(string world)
+	{
+		string key = WorldFileKey(world);
+		if (key.IsEmpty())
+			return true;
+		return GetGame().GetWorldFile().Contains(key);
 	}
 
 	//------------------------------------------------------------------------------------------------

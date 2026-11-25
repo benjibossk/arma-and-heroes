@@ -225,6 +225,8 @@ type BattleConfig struct {
 	CityID         string                   `json:"cityId"`
 	Mode           string                   `json:"mode"`
 	Scenario       string                   `json:"scenario"`
+	World          string                   `json:"world,omitempty"`  // maps.go / docs/MAPS.md
+	Layout         string                   `json:"layout,omitempty"` // mod layouts.json id
 	TimeLimitMin   int                      `json:"timeLimitMin"`
 	Attacker       string                   `json:"attacker"`
 	Defender       string                   `json:"defender"`
@@ -277,6 +279,9 @@ func buildConfig(b *Battle) BattleConfig {
 	}
 	out := BattleConfig{BattleID: b.BattleID(), WarID: b.WarID, CityID: b.CityID, Mode: b.Mode, Scenario: scen,
 		TimeLimitMin: b.TimeLimitMin, Attacker: b.Attacker, Defender: b.Defender, Sides: map[string]BCSide{}, PlayerUnlocks: map[string][]string{}, PlayerLoadouts: battleLoadouts(b), SpawnTimes: defaultSpawnTimes}
+	if cw, ok := cityWorld(b.CityID); ok {
+		out.World, out.Layout = cw.World, cw.Layout
+	}
 	for side, ids := range b.GetSides() {
 		s := BCSide{Teams: []BCTeam{}}
 		for _, id := range ids {

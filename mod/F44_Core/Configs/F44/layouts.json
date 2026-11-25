@@ -1,61 +1,300 @@
 {
-  "_doc": "City battle layouts on Arland (coords = Arland world X/Z, from the map descriptors / buildings of worlds/Arland). cityMap: website cityId -> layout id. Sectors in ASSAULT order (attacker takes them first to last). Vehicle anchors are snapped to the nearest road and get several slots lined up along it.",
-  "cityMap": {
-    "arland-ville": "arleville",
-    "arland-village": "beauregard",
-    "arland-ferme": "military-base",
-    "arland-airfield": "airfield"
+ "_doc": "City battle layouts per world (docs/MAPS.md; \"world\" = orchestrator/maps.json key, the layout is refused on another world) (coords = Arland world X/Z, from the map descriptors / buildings of worlds/Arland). cityMap: website cityId -> layout id. Sectors in ASSAULT order (attacker takes them first to last). Vehicle anchors are snapped to the nearest road and get several slots lined up along it.",
+ "cityMap": {
+   "arland-ville": "arleville",
+   "arland-village": "beauregard",
+   "arland-ferme": "military-base",
+   "arland-airfield": "airfield",
+   "ww2-arleville": "ww2-arleville",
+   "ww2-beauregard": "ww2-beauregard",
+   "ww2-military-base": "ww2-military-base",
+   "bw-belleau": "bw-belleau",
+   "bw-bouresches": "bw-bouresches",
+   "bw-lucy": "bw-lucy",
+   "bw-torcy": "bw-torcy",
+   "nor-sainte-mere": "nor-sainte-mere",
+   "nor-brecourt": "nor-brecourt",
+   "nor-hubert": "nor-hubert",
+   "utah-sainte-mere-eglise": "utah-sainte-mere-eglise",
+   "utah-carentan": "utah-carentan",
+   "utah-sainte-marie-du-mont": "utah-sainte-marie-du-mont",
+   "utah-montebourg": "utah-montebourg"
+ },
+ "layouts": {
+  "arleville": {
+   "name": "Arleville",
+   "sectors": [
+    {"name": "A Highfield crossroads", "x": 2614, "z": 1949, "radius": 40},
+    {"name": "B Arleville pub", "x": 2750, "z": 1640, "radius": 40},
+    {"name": "C Farmhouse", "x": 2869, "z": 1702, "radius": 35},
+    {"name": "D Chapel", "x": 3075, "z": 1583, "radius": 35}
+   ],
+   "attackerSpawns": [{"x": 2300, "z": 1760}, {"x": 2320, "z": 1800}],
+   "defenderSpawns": [{"x": 3010, "z": 1800}, {"x": 2990, "z": 1830}],
+   "attackerVehicles": [{"x": 2255, "z": 1817}],
+   "defenderVehicles": [{"x": 2999, "z": 1808}],
+   "world": "arland"
   },
-  "layouts": {
-    "arleville": {
-      "name": "Arleville",
-      "sectors": [
-        {"name": "A Highfield crossroads", "x": 2614, "z": 1949, "radius": 40},
-        {"name": "B Arleville pub", "x": 2750, "z": 1640, "radius": 40},
-        {"name": "C Farmhouse", "x": 2869, "z": 1702, "radius": 35},
-        {"name": "D Chapel", "x": 3075, "z": 1583, "radius": 35}
-      ],
-      "attackerSpawns": [{"x": 2300, "z": 1760}, {"x": 2320, "z": 1800}],
-      "defenderSpawns": [{"x": 3010, "z": 1800}, {"x": 2990, "z": 1830}],
-      "attackerVehicles": [{"x": 2255, "z": 1817}],
-      "defenderVehicles": [{"x": 2999, "z": 1808}]
-    },
-    "beauregard": {
-      "name": "Beauregard",
-      "sectors": [
-        {"name": "A West houses", "x": 3073, "z": 2742, "radius": 35},
-        {"name": "B Drugstore", "x": 3144, "z": 2784, "radius": 35},
-        {"name": "C Fuel station", "x": 3083, "z": 2882, "radius": 35},
-        {"name": "D Harbour warehouse", "x": 3237, "z": 2903, "radius": 40}
-      ],
-      "attackerSpawns": [{"x": 2870, "z": 2740}, {"x": 2880, "z": 2710}],
-      "defenderSpawns": [{"x": 3140, "z": 2995}, {"x": 3120, "z": 3010}],
-      "attackerVehicles": [{"x": 2906, "z": 2746}],
-      "defenderVehicles": [{"x": 3129, "z": 2983}]
-    },
-    "military-base": {
-      "name": "Arland military base",
-      "sectors": [
-        {"name": "A Water station", "x": 1446, "z": 2257, "radius": 40},
-        {"name": "B Medical barracks", "x": 1382, "z": 2434, "radius": 40},
-        {"name": "C Bunkers", "x": 1284, "z": 2418, "radius": 40}
-      ],
-      "attackerSpawns": [{"x": 1420, "z": 1900}],
-      "defenderSpawns": [{"x": 1440, "z": 2640}],
-      "attackerVehicles": [{"x": 1421, "z": 1865}],
-      "defenderVehicles": [{"x": 1450, "z": 2650}]
-    },
-    "airfield": {
-      "name": "Arland airfield",
-      "sectors": [
-        {"name": "A Workshop", "x": 1450, "z": 2664, "radius": 40},
-        {"name": "B Control tower", "x": 1365, "z": 2964, "radius": 40},
-        {"name": "C Hangars", "x": 1082, "z": 2867, "radius": 45}
-      ],
-      "attackerSpawns": [{"x": 1440, "z": 2400}],
-      "defenderSpawns": [{"x": 1030, "z": 2990}],
-      "attackerVehicles": [{"x": 1420, "z": 2420}],
-      "defenderVehicles": [{"x": 1100, "z": 2950}]
-    }
+  "beauregard": {
+   "name": "Beauregard",
+   "sectors": [
+    {"name": "A West houses", "x": 3073, "z": 2742, "radius": 35},
+    {"name": "B Drugstore", "x": 3144, "z": 2784, "radius": 35},
+    {"name": "C Fuel station", "x": 3083, "z": 2882, "radius": 35},
+    {"name": "D Harbour warehouse", "x": 3237, "z": 2903, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 2870, "z": 2740}, {"x": 2880, "z": 2710}],
+   "defenderSpawns": [{"x": 3140, "z": 2995}, {"x": 3120, "z": 3010}],
+   "attackerVehicles": [{"x": 2906, "z": 2746}],
+   "defenderVehicles": [{"x": 3129, "z": 2983}],
+   "world": "arland"
+  },
+  "military-base": {
+   "name": "Arland military base",
+   "sectors": [
+    {"name": "A Water station", "x": 1446, "z": 2257, "radius": 40},
+    {"name": "B Medical barracks", "x": 1382, "z": 2434, "radius": 40},
+    {"name": "C Bunkers", "x": 1284, "z": 2418, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 1420, "z": 1900}],
+   "defenderSpawns": [{"x": 1440, "z": 2640}],
+   "attackerVehicles": [{"x": 1421, "z": 1865}],
+   "defenderVehicles": [{"x": 1450, "z": 2650}],
+   "world": "arland"
+  },
+  "airfield": {
+   "name": "Arland airfield",
+   "sectors": [
+    {"name": "A Workshop", "x": 1450, "z": 2664, "radius": 40},
+    {"name": "B Control tower", "x": 1365, "z": 2964, "radius": 40},
+    {"name": "C Hangars", "x": 1082, "z": 2867, "radius": 45}
+   ],
+   "attackerSpawns": [{"x": 1440, "z": 2400}],
+   "defenderSpawns": [{"x": 1030, "z": 2990}],
+   "attackerVehicles": [{"x": 1420, "z": 2420}],
+   "defenderVehicles": [{"x": 1100, "z": 2950}],
+   "world": "arland"
+  },
+  "ww2-arleville": {
+   "name": "Arleville",
+   "world": "ww2arland",
+   "sectors": [
+    {"name": "A Highfield crossroads", "x": 2614, "z": 1949, "radius": 40},
+    {"name": "B Arleville pub", "x": 2743, "z": 1642, "radius": 40},
+    {"name": "C Farmhouse", "x": 2869, "z": 1702, "radius": 40},
+    {"name": "D Chapel", "x": 3075, "z": 1583, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 2300, "z": 1760}, {"x": 2305, "z": 1790}],
+   "defenderSpawns": [{"x": 3010, "z": 1800}, {"x": 3005, "z": 1770}],
+   "attackerVehicles": [{"x": 2261, "z": 1767}],
+   "defenderVehicles": [{"x": 3040, "z": 1795}],
+   "supplyCrates": [{"type": "AMMO", "x": 2806, "z": 1672}],
+   "civSpawns": [{"type": "BIKE", "x": 2303, "z": 1775}, {"type": "BIKE", "x": 3007, "z": 1785}]
+  },
+  "ww2-beauregard": {
+   "name": "Beauregard",
+   "world": "ww2arland",
+   "sectors": [
+    {"name": "A West houses", "x": 3073, "z": 2742, "radius": 40},
+    {"name": "B Drugstore", "x": 3140, "z": 2788, "radius": 40},
+    {"name": "C Workshop", "x": 3057, "z": 2864, "radius": 40},
+    {"name": "D Harbour warehouse", "x": 3241, "z": 2923, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 2870, "z": 2740}, {"x": 2849, "z": 2761}],
+   "defenderSpawns": [{"x": 3140, "z": 2995}, {"x": 3161, "z": 2974}],
+   "attackerVehicles": [{"x": 2842, "z": 2712}],
+   "defenderVehicles": [{"x": 3161, "z": 3016}],
+   "supplyCrates": [{"type": "AMMO", "x": 3098, "z": 2826}],
+   "civSpawns": [{"type": "BIKE", "x": 2859, "z": 2751}, {"type": "BIKE", "x": 3151, "z": 2984}]
+  },
+  "ww2-military-base": {
+   "name": "Military base",
+   "world": "ww2arland",
+   "sectors": [
+    {"name": "A Water station", "x": 1440, "z": 2286, "radius": 40},
+    {"name": "B Medical barracks", "x": 1382, "z": 2434, "radius": 40},
+    {"name": "C Bunkers", "x": 1258, "z": 2404, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 1420, "z": 1900}, {"x": 1420, "z": 1870}],
+   "defenderSpawns": [{"x": 1440, "z": 2640}, {"x": 1440, "z": 2670}],
+   "attackerVehicles": [{"x": 1460, "z": 1900}],
+   "defenderVehicles": [{"x": 1410, "z": 2640}],
+   "supplyCrates": [{"type": "AMMO", "x": 1320, "z": 2419}],
+   "civSpawns": [{"type": "BIKE", "x": 1420, "z": 1885}, {"type": "BIKE", "x": 1440, "z": 2655}]
+  },
+  "bw-belleau": {
+   "name": "Belleau",
+   "world": "belleauwood",
+   "sectors": [
+    {"name": "A Belleau west bunker", "x": 5545, "z": 6432, "radius": 35},
+    {"name": "B Belleau north houses", "x": 5638, "z": 6584, "radius": 35},
+    {"name": "C Belleau north town hall", "x": 5589, "z": 6669, "radius": 35},
+    {"name": "D Belleau north town hall", "x": 5578, "z": 6684, "radius": 35}
+   ],
+   "attackerSpawns": [{"x": 5545, "z": 5932}, {"x": 5515, "z": 5932}],
+   "defenderSpawns": [{"x": 5614, "z": 6830}, {"x": 5644, "z": 6830}],
+   "attackerVehicles": [{"x": 5545, "z": 5892}],
+   "defenderVehicles": [{"x": 5614, "z": 6860}],
+   "supplyCrates": [{"type": "AMMO", "x": 5614, "z": 6626}],
+   "civSpawns": [{"type": "BIKE", "x": 5530, "z": 5932}, {"type": "BIKE", "x": 5629, "z": 6830}]
+  },
+  "bw-bouresches": {
+   "name": "Bouresches",
+   "world": "belleauwood",
+   "sectors": [
+    {"name": "A Bouresches centre pub", "x": 6871, "z": 4214, "radius": 40},
+    {"name": "B Bouresches east houses", "x": 6913, "z": 4168, "radius": 40},
+    {"name": "C Bouresches east houses", "x": 6924, "z": 4186, "radius": 40},
+    {"name": "D Bouresches south-east houses", "x": 6976, "z": 4113, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 6526, "z": 4221}, {"x": 6526, "z": 4251}],
+   "defenderSpawns": [{"x": 7077, "z": 4025}, {"x": 7077, "z": 3995}],
+   "attackerVehicles": [{"x": 6486, "z": 4221}],
+   "defenderVehicles": [{"x": 7107, "z": 4025}],
+   "supplyCrates": [{"type": "AMMO", "x": 6918, "z": 4177}],
+   "civSpawns": [{"type": "BIKE", "x": 6526, "z": 4236}, {"type": "BIKE", "x": 7077, "z": 4010}]
+  },
+  "bw-lucy": {
+   "name": "Lucy-le-Bocage",
+   "world": "belleauwood",
+   "sectors": [
+    {"name": "A Lucy-le-Bocage west pub", "x": 4588, "z": 3525, "radius": 40},
+    {"name": "B Lucy-le-Bocage south-west houses", "x": 4722, "z": 3465, "radius": 40},
+    {"name": "C Lucy-le-Bocage south-west church", "x": 4723, "z": 3536, "radius": 40},
+    {"name": "D Lucy-le-Bocage centre barn", "x": 4843, "z": 3585, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 4791, "z": 3013}, {"x": 4769, "z": 3034}],
+   "defenderSpawns": [{"x": 5045, "z": 3787}, {"x": 5066, "z": 3765}],
+   "attackerVehicles": [{"x": 4762, "z": 2984}],
+   "defenderVehicles": [{"x": 5066, "z": 3808}],
+   "supplyCrates": [{"type": "AMMO", "x": 4722, "z": 3500}],
+   "civSpawns": [{"type": "BIKE", "x": 4780, "z": 3023}, {"type": "BIKE", "x": 5055, "z": 3776}]
+  },
+  "bw-torcy": {
+   "name": "Torcy-en-Valois",
+   "world": "belleauwood",
+   "sectors": [
+    {"name": "A Torcy-en-Valois south-east houses", "x": 4802, "z": 6728, "radius": 40},
+    {"name": "B Torcy-en-Valois south houses", "x": 4782, "z": 6737, "radius": 40},
+    {"name": "C Torcy-en-Valois centre houses", "x": 4729, "z": 6900, "radius": 40},
+    {"name": "D Torcy-en-Valois north-west houses", "x": 4635, "z": 7060, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 5149, "z": 6490}, {"x": 5128, "z": 6468}],
+   "defenderSpawns": [{"x": 4433, "z": 7262}, {"x": 4455, "z": 7283}],
+   "attackerVehicles": [{"x": 5178, "z": 6461}],
+   "defenderVehicles": [{"x": 4412, "z": 7283}],
+   "supplyCrates": [{"type": "AMMO", "x": 4756, "z": 6818}],
+   "civSpawns": [{"type": "BIKE", "x": 5139, "z": 6479}, {"type": "BIKE", "x": 4444, "z": 7272}]
+  },
+  "nor-sainte-mere": {
+   "name": "Sainte-Mere",
+   "world": "normandy",
+   "sectors": [
+    {"name": "A Sainte-Mere north houses", "x": 3469, "z": 1877, "radius": 40},
+    {"name": "B Sainte-Mere north houses", "x": 3517, "z": 1908, "radius": 40},
+    {"name": "C Sainte-Mere north-east houses", "x": 3551, "z": 1850, "radius": 40},
+    {"name": "D Sainte-Mere east houses", "x": 3593, "z": 1784, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 3056, "z": 2280}, {"x": 3056, "z": 2310}],
+   "defenderSpawns": [{"x": 3646, "z": 1601}, {"x": 3646, "z": 1571}],
+   "attackerVehicles": [{"x": 3016, "z": 2280}],
+   "defenderVehicles": [{"x": 3676, "z": 1601}],
+   "supplyCrates": [{"type": "AMMO", "x": 3534, "z": 1879}],
+   "civSpawns": [{"type": "BIKE", "x": 3056, "z": 2295}, {"type": "BIKE", "x": 3646, "z": 1586}]
+  },
+  "nor-brecourt": {
+   "name": "Brecourt Manor",
+   "world": "normandy",
+   "sectors": [
+    {"name": "A Brecourt Manor south-east bridge", "x": 3606, "z": 2881, "radius": 35},
+    {"name": "B Brecourt Manor north-east barn", "x": 3603, "z": 3222, "radius": 35},
+    {"name": "C Brecourt Manor north-east barn", "x": 3592, "z": 3195, "radius": 35}
+   ],
+   "attackerSpawns": [{"x": 4010, "z": 3009}, {"x": 4010, "z": 2979}],
+   "defenderSpawns": [{"x": 3307, "z": 3195}, {"x": 3307, "z": 3225}],
+   "attackerVehicles": [{"x": 4050, "z": 3009}],
+   "defenderVehicles": [{"x": 3277, "z": 3195}],
+   "supplyCrates": [{"type": "AMMO", "x": 3598, "z": 3208}],
+   "civSpawns": [{"type": "BIKE", "x": 4010, "z": 2994}, {"type": "BIKE", "x": 3307, "z": 3210}]
+  },
+  "nor-hubert": {
+   "name": "Hubert",
+   "world": "normandy",
+   "sectors": [
+    {"name": "A Hubert north-east houses", "x": 4073, "z": 4619, "radius": 40},
+    {"name": "B Hubert north-east houses", "x": 4056, "z": 4625, "radius": 40},
+    {"name": "C Hubert north-east houses", "x": 3860, "z": 4708, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 4274, "z": 4247}, {"x": 4244, "z": 4247}],
+   "defenderSpawns": [{"x": 3860, "z": 4993}, {"x": 3890, "z": 4993}],
+   "attackerVehicles": [{"x": 4274, "z": 4207}],
+   "defenderVehicles": [{"x": 3860, "z": 5023}],
+   "supplyCrates": [{"type": "AMMO", "x": 3958, "z": 4666}],
+   "civSpawns": [{"type": "BIKE", "x": 4259, "z": 4247}, {"type": "BIKE", "x": 3875, "z": 4993}]
+  },
+  "utah-sainte-mere-eglise": {
+   "name": "Ste-Mere-Eglise",
+   "world": "utahbeach",
+   "sectors": [
+    {"name": "A Ste-Mere-Eglise south-west houses", "x": 2202, "z": 3074, "radius": 40},
+    {"name": "B Ste-Mere-Eglise centre houses", "x": 2266, "z": 3155, "radius": 40},
+    {"name": "C Ste-Mere-Eglise north-east houses", "x": 2298, "z": 3175, "radius": 40},
+    {"name": "D Ste-Mere-Eglise north-east houses", "x": 2349, "z": 3189, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 1771, "z": 3135}, {"x": 1771, "z": 3165}],
+   "defenderSpawns": [{"x": 2514, "z": 3206}, {"x": 2514, "z": 3176}],
+   "attackerVehicles": [{"x": 1731, "z": 3135}],
+   "defenderVehicles": [{"x": 2544, "z": 3206}],
+   "supplyCrates": [{"type": "AMMO", "x": 2282, "z": 3165}],
+   "civSpawns": [{"type": "BIKE", "x": 1771, "z": 3150}, {"type": "BIKE", "x": 2514, "z": 3191}]
+  },
+  "utah-carentan": {
+   "name": "Carentan",
+   "world": "utahbeach",
+   "sectors": [
+    {"name": "A Carentan north barn", "x": 3820, "z": 772, "radius": 40},
+    {"name": "B Carentan north-east bridge", "x": 3898, "z": 692, "radius": 40},
+    {"name": "C Carentan west houses", "x": 3738, "z": 594, "radius": 40},
+    {"name": "D Carentan south houses", "x": 3814, "z": 486, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 3816, "z": 1391}, {"x": 3846, "z": 1391}],
+   "defenderSpawns": [{"x": 3704, "z": 418}, {"x": 3674, "z": 418}],
+   "attackerVehicles": [{"x": 3816, "z": 1431}],
+   "defenderVehicles": [{"x": 3704, "z": 388}],
+   "supplyCrates": [{"type": "AMMO", "x": 3818, "z": 643}],
+   "civSpawns": [{"type": "BIKE", "x": 3831, "z": 1391}, {"type": "BIKE", "x": 3689, "z": 418}]
+  },
+  "utah-sainte-marie-du-mont": {
+   "name": "Ste-Marie-du-Mont",
+   "world": "utahbeach",
+   "sectors": [
+    {"name": "A Ste-Marie-du-Mont centre houses", "x": 3789, "z": 2398, "radius": 40},
+    {"name": "B Ste-Marie-du-Mont centre houses", "x": 3723, "z": 2356, "radius": 40},
+    {"name": "C Ste-Marie-du-Mont north-west houses", "x": 3671, "z": 2446, "radius": 40},
+    {"name": "D Ste-Marie-du-Mont south-west houses", "x": 3634, "z": 2349, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 4166, "z": 2026}, {"x": 4166, "z": 1996}],
+   "defenderSpawns": [{"x": 3518, "z": 2294}, {"x": 3518, "z": 2324}],
+   "attackerVehicles": [{"x": 4206, "z": 2026}],
+   "defenderVehicles": [{"x": 3488, "z": 2294}],
+   "supplyCrates": [{"type": "AMMO", "x": 3697, "z": 2401}],
+   "civSpawns": [{"type": "BIKE", "x": 4166, "z": 2011}, {"type": "BIKE", "x": 3518, "z": 2309}]
+  },
+  "utah-montebourg": {
+   "name": "Montebourg",
+   "world": "utahbeach",
+   "sectors": [
+    {"name": "A Montebourg south houses", "x": 1222, "z": 4322, "radius": 40},
+    {"name": "B Montebourg south-west houses", "x": 1127, "z": 4374, "radius": 40},
+    {"name": "C Montebourg centre houses", "x": 1233, "z": 4458, "radius": 40},
+    {"name": "D Montebourg north houses", "x": 1273, "z": 4531, "radius": 40}
+   ],
+   "attackerSpawns": [{"x": 970, "z": 3959}, {"x": 940, "z": 3959}],
+   "defenderSpawns": [{"x": 1406, "z": 4590}, {"x": 1436, "z": 4590}],
+   "attackerVehicles": [{"x": 970, "z": 3919}],
+   "defenderVehicles": [{"x": 1406, "z": 4620}],
+   "supplyCrates": [{"type": "AMMO", "x": 1180, "z": 4416}],
+   "civSpawns": [{"type": "BIKE", "x": 955, "z": 3959}, {"type": "BIKE", "x": 1421, "z": 4590}]
   }
+ }
 }

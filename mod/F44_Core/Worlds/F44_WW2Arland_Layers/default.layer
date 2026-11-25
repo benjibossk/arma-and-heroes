@@ -1,0 +1,91 @@
+SCR_AIWorld F44_AIWorld : "{01DC74137CFDDB6A}Prefabs/AI/SCR_AIWorld_Arland.et" {
+ components {
+  NavmeshWorldComponent "{5584F30E67F617AD}" {
+   NavmeshSettings NavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{60B8A2995A7E8BC2}" {
+     NavmeshFile "{6E6BE0E84F5154EC}worlds/GameMaster/Navmeshes/GM_WW2Arland.nmn"
+    }
+   }
+  }
+  NavmeshWorldComponent "{5584F30EEFEE1223}" {
+   NavmeshSettings ChimeraNavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{60B8A299509CF377}" {
+     NavmeshFile "{9AECC426C3CD7DC3}worlds/GameMaster/Navmeshes/GM_WW2Arland_vehicles.nmn"
+    }
+   }
+  }
+ }
+ coords 0 0 0
+}
+PerceptionManager F44_PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 750 0 -360
+}
+RadioManagerEntity F44_RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+ coords 750 0 -360
+}
+ScriptedChatEntity F44_Chat : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ coords 750 0 -360
+}
+SCR_BaseGameMode F44_GameMode : "{097A1FE9CCC65548}Prefabs/F44/F44_GameMode.et" {
+ components {
+  F44_GameModeComponent "{F44A00000000C001}" {
+   m_sCatalogPath "Configs/F44/catalog.json"
+  }
+ }
+ coords 2750 0 1640
+}
+SCR_FactionManager F44_FactionManager : "{31B152F933B767AF}Prefabs/F44/F44_FactionManager.et" {
+ coords 2750 0 1645
+}
+SCR_LoadoutManager F44_LoadoutManager : "{7B0580D6DD898DDC}Prefabs/F44/F44_LoadoutManager.et" {
+ coords 2750 0 1650
+}
+SCR_SpawnPoint F44_Spawn_US : "{24CB71A50444882D}Prefabs/MP/Spawning/SpawnPoint_FH_USAWW2.et" {
+ coords 2150 0 1640
+}
+SCR_SpawnPoint F44_Spawn_GER : "{765E9383E57810D8}Prefabs/MP/Spawning/SpawnPoint_FH_HEERWW2.et" {
+ coords 3450 0 1640
+}
+GenericEntity F44_Sector_A : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "A"
+   m_iOrder 0
+  }
+ }
+ coords 2550 0 1640
+}
+GenericEntity F44_Sector_B : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "B"
+   m_iOrder 1
+  }
+ }
+ coords 2850 0 1640
+}
+GenericEntity F44_Sector_C : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "C"
+   m_iOrder 2
+  }
+ }
+ coords 3150 0 1640
+}
+GenericEntity F44_VehSpawn_US_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide ATTACKER
+  }
+ }
+ coords 2160 0 1655
+}
+GenericEntity F44_VehSpawn_GER_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide DEFENDER
+  }
+ }
+ coords 3440 0 1655
+}
