@@ -42,3 +42,12 @@ next to the code (one file per package) unless noted.
   capped at 60 min) **+25% if the player stayed to the end**. Not paid to idle players.
 - Contract (optional, backward compatible): `players[].aliveSec`, `players[].stayedToEnd`.
   Fallbacks: `presenceSec` for time alive; stayed = presence >= 90% of `durationSec`.
+
+## P3 Account careers + career lock (`web/careers.go`, web part)
+- Careers: `infantry` (INF, PARA), `armor` (INF, CREW), `pilot` (INF, PARA + pilot seat),
+  `recon` (INF, REC). Enlisting a soldier of a class outside the career is refused.
+- First pick free; then a change costs 500 credits (player credits) and is allowed once per
+  7 days. Accounts without a career are grandfathered (no restriction) until they pick.
+- Mod hook (seat enforcement [GM], not done): `GET /api/v1/careers/by-identity/:identityId`
+  (server key) -> `{linked, career, seats[]}` with seats `tank_driver|tank_gunner|tank_commander|pilot|recon_driver`.
+- UI: barracks -> "Service record" panel.

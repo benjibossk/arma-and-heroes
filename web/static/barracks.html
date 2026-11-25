@@ -5,13 +5,14 @@
   <div class="row" id="newrow"><select id="nf"><option value="US">Allies (US)</option><option value="GER">Axis (GER)</option></select>
   <select id="nc"><option value="INF">Infantry</option><option value="PARA">Paratrooper</option><option value="REC">Recon</option><option value="CREW">Tank crew</option></select>
   <button class="cta" style="width:auto;margin:0;padding:8px 14px;font-size:14px" onclick="createS()">Enlist soldier</button></div><div id="msg" class="err"></div></div>
+ <div class="panel" id="svcpanel"><h2>Service record</h2><div id="svc" class="muted">Loading…</div></div>
  <div class="panel" id="lopanel" style="display:none"><h2>Loadout</h2><div id="lo"></div></div>
  <div class="panel" id="rbpanel" style="display:none"><h2>Ribbons</h2><div id="rb"></div></div>
 </div><div>
  <div class="panel" id="stpanel" style="display:none"><h2 id="depot">Quartermaster — depot</h2><div id="st"></div></div>
  <div class="panel" id="nxpanel" style="display:none"><h2>Next unlocks</h2><div id="nx"></div></div>
 </div></div></main>
-<script src="/common.js"></script><script>
+<script src="/common.js"></script><script src="/campaign.js"></script><script>
 let S = [], cur = null, store = [];
 const CL = { INF: 'Infantry', PARA: 'Paratrooper', REC: 'Recon', CREW: 'Tank crew' };
 const say = (t, ok) => { msg.className = ok ? 'ok' : 'err'; msg.textContent = t; };

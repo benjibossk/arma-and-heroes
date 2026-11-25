@@ -322,6 +322,10 @@ func createSoldier(c *gin.Context) {
 		errJ(c, 400, "invalid class")
 		return
 	}
+	if msg := careerBlocksClass(u, in.Class); msg != "" { // P3 career lock (careers.go)
+		errJ(c, 400, msg)
+		return
+	}
 	var total, inFac int64
 	db.Model(&Soldier{}).Where("player_id = ?", u.ID).Count(&total)
 	db.Model(&Soldier{}).Where("player_id = ? AND faction = ?", u.ID, in.Faction).Count(&inFac)
