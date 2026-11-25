@@ -72,6 +72,9 @@ func applyIncome(w *War) {
 	for i := range cities {
 		inc[cities[i].Owner] += cityIncome(&cities[i])
 	}
+	for f, v := range produceStockpiles(cities) { // P2-C: factory share banked locally
+		inc[f] -= v
+	}
 	for f, v := range inc {
 		if f == "" {
 			continue
@@ -133,6 +136,10 @@ func arrive(w *War, t *AssaultTeam) {
 		t.CityID, t.DestCityID, t.Status = dest.ID, "", "idle"
 		db.Model(t).Updates(map[string]interface{}{"city_id": dest.ID, "dest_city_id": "", "status": "idle"})
 		mergeTeam(w, t, dest)
+		return
+	}
+	if dest.Owner == "" { // P2-C: neutral city rallies without a fight
+		rallyNeutral(w, t, dest)
 		return
 	}
 	// ville ennemie : création de bataille. L'attaquant garde city_id = ville d'origine.
@@ -426,6 +433,7 @@ func applyResult(b *Battle, r *BattleResult) error {
 	}
 	if r.Winner == b.Attacker && city != nil {
 		db.Model(&City{}).Where("war_id = ? AND id = ?", b.WarID, b.CityID).Update("owner", b.Attacker)
+		seizeStockpile(b.WarID, b.CityID, b.Attacker)
 		logEvent(b.WarID, "capture", b.Attacker, fmt.Sprintf("%s captures %s (%s)", b.Attacker, cname, r.Reason))
 	} else {
 		logEvent(b.WarID, "battle", b.Defender, fmt.Sprintf("%s holds %s against %s (%s)", b.Defender, cname, b.Attacker, r.Reason))
@@ -494,22 +502,16 @@ func checkVictory(w *War) {
 			winner = f
 		}
 	}
-	// capitale adverse prise : la faction détient les deux capitales
-	for _, f := range []string{"US", "GER"} {
-		n := 0
-		for _, o := range capOwner {
-			if o == f {
-				n++
-			}
-		}
-		if len(capOwner) >= 2 && n == len(capOwner) {
-			winner = f
-		}
+	// P2-C capital-count victory (economy.go): >= 3/4 of all capitals, incl. neutral ones
+	if cw := capitalWinner(capOwner); cw != "" {
+		winner = cw
 	}
 	if winner != "" {
 		now := time.Now().UTC()
 		db.Model(w).Updates(map[string]interface{}{"status": "finished", "winner": winner, "ended_at": now})
 		logEvent(w.ID, "war", winner, "VICTORY: "+winner+" wins the war ("+w.Name+")")
+		w.Status = "finished"
+		warEndPayout(w, winner)
 	}
 }
 

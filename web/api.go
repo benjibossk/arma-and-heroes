@@ -285,11 +285,10 @@ func createTeam(c *gin.Context) {
 		return
 	}
 	var f Faction
-	if db.Where("war_id = ? AND code = ?", w.ID, fac).First(&f).Error != nil || f.Resources < spec.Cost {
+	if db.Where("war_id = ? AND code = ?", w.ID, fac).First(&f).Error != nil || !payTeamCost(&f, city, spec.Cost) {
 		errJ(c, 400, "not enough resources")
 		return
 	}
-	db.Model(&f).Update("resources", f.Resources-spec.Cost)
 	t := newTeam(w.ID, in.Type, fac, u.ID, city.ID)
 	db.Create(&t)
 	t.DisplayName = teamDisplayName(t.Faction, t.Type, t.ID)

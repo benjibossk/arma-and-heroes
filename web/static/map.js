@@ -101,8 +101,8 @@ function showSel() {
       <br><button onclick="showUpgrades('${t.teamId}', ${canOrder(t) && t.status === 'idle'})">Doctrines &amp; command points</button><div id="upg"></div>`;
   } else if (selCity) {
     const c = cityById(selCity), b = M.battles.find(x => x.cityId === c.id);
-    d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
-     Terrain: ${esc(c.terrain)} · mode ${esc(c.mode)} · garrison ${c.garrison}<br><span class="muted">Scenario: ${esc(c.scenarioId)}</span><br>
+    d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || 'Neutral'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
+     Terrain: ${esc(c.terrain)} · mode ${esc(c.mode)} · garrison ${c.garrison}${c.isFactory ? ` · stockpile <b>${c.stockpile || 0}</b>/600` : ''}<br><span class="muted">Scenario: ${esc(c.scenarioId)}</span><br>
      Neighbours: ${neighbors(c.id).map(n => esc(cityById(n.id)?.name) + ' (' + n.km + ' km)').join(', ')}<br>
      ${b ? `<b style="color:#F0A830">Battle ${b.battleId} — ${STLABEL[b.status]}</b>${b.status === 'pending' && b.readyAt && new Date(b.readyAt) > Date.now() ? ` <span class="muted">(prep, opens in ${fmtLeft(b.readyAt)})</span>` : ''}${b.autoResolveAt ? ` <span class="muted">· auto-resolve in ${fmtLeft(b.autoResolveAt)} if unplayed</span>` : ''} <a href="/battles.html#${b.battleId}">view</a> · <a href="/battle.html?id=${b.battleId}">Watch live</a>` : ''}`;
   } else d.innerHTML = 'Tap a city or a team.';

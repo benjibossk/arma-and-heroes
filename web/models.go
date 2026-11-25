@@ -36,6 +36,7 @@ type City struct {
 	Terrain    string `gorm:"size:100" json:"terrain"`
 	Mode       string `gorm:"size:16" json:"mode"` // ASSAULT | SKIRMISH
 	Garrison   int    `json:"garrison"`            // manpower de la garnison si aucune AT ne défend
+	Stockpile  int    `json:"stockpile"`           // P2-C factory production banked locally (economy.go)
 }
 
 type Road struct {

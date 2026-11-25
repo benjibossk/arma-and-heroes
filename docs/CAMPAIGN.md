@@ -23,3 +23,16 @@ next to the code (one file per package) unless noted.
 - Scenario = the city the arriving team was heading to (the foe's origin). If that city is
   already under attack, no skirmish (the arrival proceeds normally).
 - Winner resumes its march and arrives on the next tick; loser falls back to its origin idle.
+
+## P2-C Strategic economy (`web/economy.go`)
+- **Factory stockpile**: the +30 factory bonus of each income tick is banked in
+  `City.Stockpile` (cap 600) instead of the national treasury. A team raised in that city is
+  paid from the stockpile first, then from faction funds (`payTeamCost`).
+- **Capture** seizes 50% of the city's stockpile into the captor's funds; the rest is lost.
+- **Neutral cities** (owner empty): the first team marching in rallies them, no battle.
+  Map shows them as "Neutral". Seeding neutral cities is left to the maps lane (`seed.go`).
+- **Capital-count victory**: a faction holding >= 3/4 of all capitals (rounded up, min 2)
+  wins. With only the two faction capitals this equals the old "hold both" rule. The 70%
+  city rule is unchanged.
+- **War-end payout**: every player who fought gets credits on his main side: winners 400,
+  losers 150 (refund), +20 per battle fought (max 20 battles). Paid to player + active soldier.
