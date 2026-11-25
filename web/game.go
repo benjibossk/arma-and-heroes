@@ -125,7 +125,7 @@ func arrive(w *War, t *AssaultTeam) {
 			t.CityID = dest.ID
 		}
 		addTeamToBattle(b, t, t.Faction)
-		logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("%s (%s) arrives as reinforcement at %s", t.TeamID(), t.Type, dest.Name))
+		logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("%s (%s) arrives as reinforcement at %s", t.Label(), t.Type, dest.Name))
 		return
 	}
 	if dest.Owner == t.Faction {
@@ -155,7 +155,7 @@ func mergeTeam(w *War, t *AssaultTeam, c *City) {
 	var o AssaultTeam
 	if db.Where("war_id = ? AND city_id = ? AND faction = ? AND type = ? AND owner_id = ? AND status = ? AND id <> ?",
 		w.ID, c.ID, t.Faction, t.Type, t.OwnerID, "idle", t.ID).First(&o).Error != nil {
-		logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s (%s) arrives at %s", t.TeamID(), t.Type, c.Name))
+		logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s (%s) arrives at %s", t.Label(), t.Type, c.Name))
 		return
 	}
 	o.Manpower += t.Manpower
@@ -176,7 +176,7 @@ func mergeTeam(w *War, t *AssaultTeam, c *City) {
 	}
 	db.Save(&o)
 	db.Model(t).Updates(map[string]interface{}{"status": "dissolved", "manpower": 0})
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s merges into %s at %s", t.TeamID(), o.TeamID(), c.Name))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s merges into %s at %s", t.Label(), o.Label(), c.Name))
 }
 
 func roadBetween(warID uint, a, b string) *Road {
@@ -195,6 +195,7 @@ func travelDuration(km int) time.Duration {
 
 type BCTeam struct {
 	TeamID     string         `json:"teamId"`
+	DisplayName string        `json:"displayName"`
 	Type       string         `json:"type"`
 	Manpower   int            `json:"manpower"`
 	EquipLevel int            `json:"equipLevel"`
@@ -233,6 +234,14 @@ func teamByTeamID(id string) *AssaultTeam {
 	return &t
 }
 
+func garrisonName(b *Battle) string {
+	name := b.CityID
+	if c := getCity(b.WarID, b.CityID); c != nil {
+		name = c.Name
+	}
+	return garrisonDisplayName(name, b.Defender)
+}
+
 func buildConfig(b *Battle) BattleConfig {
 	c := getCity(b.WarID, b.CityID)
 	scen := ""
@@ -248,14 +257,14 @@ func buildConfig(b *Battle) BattleConfig {
 			if t == nil {
 				continue
 			}
-			s.Teams = append(s.Teams, BCTeam{TeamID: id, Type: t.Type, Manpower: t.Manpower, EquipLevel: t.EquipLevel,
+			s.Teams = append(s.Teams, BCTeam{TeamID: id, DisplayName: t.DisplayName, Type: t.Type, Manpower: t.Manpower, EquipLevel: t.EquipLevel,
 				Classes: atSpecs[t.Type].Classes, Vehicles: t.GetVehicles()})
 		}
 		out.Sides[side] = s
 	}
 	if b.GarrisonMP > 0 {
 		s := out.Sides[b.Defender]
-		s.Teams = append(s.Teams, BCTeam{TeamID: "garrison_" + b.CityID, Type: "INF", Manpower: b.GarrisonMP, EquipLevel: 1,
+		s.Teams = append(s.Teams, BCTeam{TeamID: "garrison_" + b.CityID, DisplayName: garrisonName(b), Type: "INF", Manpower: b.GarrisonMP, EquipLevel: 1,
 			Classes: []string{"RIFLEMAN", "MG"}, Vehicles: []VehicleCount{}})
 		out.Sides[b.Defender] = s
 	}

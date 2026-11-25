@@ -272,7 +272,9 @@ func createTeam(c *gin.Context) {
 	db.Model(&f).Update("resources", f.Resources-spec.Cost)
 	t := newTeam(w.ID, in.Type, fac, u.ID, city.ID)
 	db.Create(&t)
-	logEvent(w.ID, "order", fac, fmt.Sprintf("%s raises %s (%s) at %s", u.Name, t.TeamID(), spec.Label, city.Name))
+	t.DisplayName = teamDisplayName(t.Faction, t.Type, t.ID)
+	db.Model(&AssaultTeam{}).Where("id = ?", t.ID).Update("display_name", t.DisplayName)
+	logEvent(w.ID, "order", fac, fmt.Sprintf("%s raises %s (%s) at %s", u.Name, t.DisplayName, spec.Label, city.Name))
 	c.JSON(200, teamView(&t, map[uint]string{u.ID: u.Name}, false))
 }
 
@@ -313,7 +315,7 @@ func moveTeam(c *gin.Context) {
 	arr := now.Add(dur)
 	db.Model(&t).Updates(map[string]interface{}{"status": "moving", "dest_city_id": in.DestCityID, "depart_at": now, "arrival_at": arr})
 	dest := getCity(w.ID, in.DestCityID)
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s orders %s to march on %s (arrival %s UTC)", u.Name, t.TeamID(), dest.Name, arr.Format("15:04")))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s orders %s to march on %s (arrival %s UTC)", u.Name, t.Label(), dest.Name, arr.Format("15:04")))
 	c.JSON(200, gin.H{"ok": true, "arrivalAt": arr})
 }
 
@@ -339,7 +341,7 @@ func dissolveTeam(c *gin.Context) {
 	refund := spec.Cost / 2 * t.Manpower / max(spec.Manpower, 1)
 	db.Model(&Faction{}).Where("war_id = ? AND code = ?", w.ID, t.Faction).Update("resources", gormExprAdd(refund))
 	db.Model(&t).Update("status", "dissolved")
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s disbands %s (+%d resources)", u.Name, t.TeamID(), refund))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s disbands %s (+%d resources)", u.Name, t.Label(), refund))
 	c.JSON(200, gin.H{"ok": true, "refund": refund})
 }
 

@@ -56,6 +56,7 @@ func getLive(c *gin.Context) {
 	out := gin.H{"battleId": b.BattleID(), "cityName": "", "status": b.Status, "attacker": b.Attacker, "defender": b.Defender, "winner": b.Winner}
 	if ci := getCity(b.WarID, b.CityID); ci != nil {
 		out["cityName"] = ci.Name
+		out["terrain"] = ci.Terrain
 	}
 	if ok {
 		out["snapshot"] = s.Data

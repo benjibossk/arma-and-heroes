@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Arma &amp; Heroes — Live battle</title><link rel="stylesheet" href="/style.css">
 <style>
- #lv{width:100%;height:auto;background:#1c1e1f;border:1px solid var(--line);display:block}
+ #lv{width:100%;height:auto;aspect-ratio:1;background:#1c1e1f;border:1px solid var(--line);display:block;touch-action:none;cursor:grab}
  .tk{height:14px;background:#222;border:1px solid var(--line);margin:4px 0 10px}
  .tk>div{height:100%}
  .lgd span{margin-right:14px}
@@ -9,60 +9,104 @@
 <main><div class="grid">
 <div><div class="panel"><h2 id="ttl">Live battle</h2>
  <svg id="lv" viewBox="0 0 1000 1000"></svg>
- <div class="legend lgd muted" style="margin-top:6px"><span class="US">● player</span><span class="US">○ AI</span><span class="GER">● player</span><span class="GER">○ AI</span><span>◆ sector (colour = owner, bar = capture)</span><span>■ in vehicle</span></div>
+ <div class="legend lgd muted" style="margin-top:6px"><span class="US">● player</span><span class="US">○ AI</span><span class="GER">● player</span><span class="GER">○ AI</span><span>◆ sector (colour = owner, bar = capture)</span><span>■ in vehicle</span><span>wheel/pinch = zoom · drag = pan · double-click = reframe</span></div>
 </div></div>
 <div><div class="panel"><h2>Situation</h2><div id="side" class="muted">Waiting for the server…</div></div></div>
 </div></main>
 <script src="/common.js"></script><script>
 const id = new URLSearchParams(location.search).get('id') || '';
-const COL = { US: 'var(--us-l)', GER: 'var(--ger-l)', '': '#9a9a94' };
+const COL = { US: '#7FA8E0', GER: '#E58C80', '': '#b0b0aa' };
 const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('lv');
 function mk(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; }
 function fmtS(s) { s = Math.max(0, s | 0); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
-let maxT = {};
+let maxT = {}, map = null, mapTried = false, view = null, userView = false, last = null;
+// world (x, z) -> svg (x, -z): north up
+async function loadMap(terrain) {
+  mapTried = true;
+  try {
+    const idx = await (await fetch('/maps/index.json')).json();
+    const m = idx.find(e => (terrain || '').toLowerCase().includes(e.match));
+    if (m) map = await (await fetch('/maps/' + m.map + '.json')).json();
+  } catch (e) { map = null; }
+}
+function frame(s) {
+  const pts = (s.sectors || []).map(p => ({ x: p.x, z: p.z, r: p.r || 50 })).concat((s.units || []).map(u => ({ x: u.x, z: u.z, r: 0 })));
+  if (!pts.length) return;
+  const x0 = Math.min(...pts.map(p => p.x - p.r)), x1 = Math.max(...pts.map(p => p.x + p.r));
+  const z0 = Math.min(...pts.map(p => p.z - p.r)), z1 = Math.max(...pts.map(p => p.z + p.r));
+  const w = Math.max(x1 - x0, z1 - z0, 300) * 1.25;
+  view = { x: (x0 + x1) / 2 - w / 2, y: -(z0 + z1) / 2 - w / 2, w };
+}
+function applyView() { if (view) svg.setAttribute('viewBox', `${view.x} ${view.y} ${view.w} ${view.w}`); }
+function draw(d) {
+  const s = d.snapshot;
+  svg.innerHTML = '';
+  if (!view || !userView) frame(s);
+  applyView();
+  const k = view.w / 1000; // svg units per screen-ish pixel
+  if (map) mk('image', { href: map.image, x: map.worldMinX, y: -map.worldMaxZ, width: map.worldMaxX - map.worldMinX, height: map.worldMaxZ - map.worldMinZ, preserveAspectRatio: 'none' }, svg);
+  // grid: 100 m (or 500 m when zoomed out)
+  const step = view.w > 3000 ? 500 : 100, gx0 = Math.floor(view.x / step) * step, gy0 = Math.floor(view.y / step) * step;
+  for (let g = gx0; g < view.x + view.w; g += step) mk('line', { x1: g, x2: g, y1: view.y, y2: view.y + view.w, stroke: '#000', 'stroke-opacity': map ? .18 : .5, 'stroke-width': k }, svg);
+  for (let g = gy0; g < view.y + view.w; g += step) mk('line', { y1: g, y2: g, x1: view.x, x2: view.x + view.w, stroke: '#000', 'stroke-opacity': map ? .18 : .5, 'stroke-width': k }, svg);
+  for (const sc of s.sectors || []) {
+    const x = sc.x, y = -sc.z, c = COL[sc.owner] || COL[''], h = 14 * k;
+    mk('circle', { cx: x, cy: y, r: sc.r || 50, fill: c, 'fill-opacity': .12, stroke: c, 'stroke-dasharray': `${6 * k} ${4 * k}`, 'stroke-width': 2 * k }, svg);
+    mk('rect', { x: x - h, y: y - h, width: 2 * h, height: 2 * h, transform: `rotate(45 ${x} ${y})`, fill: c, stroke: '#111', 'stroke-width': 2 * k }, svg);
+    mk('text', { x, y: y + 6 * k, 'text-anchor': 'middle', 'font-size': 17 * k, 'font-weight': 700, fill: '#111' }, svg).textContent = sc.name;
+    const p = Math.max(-100, Math.min(100, sc.captureProgress || 0)), bw = 30 * k, by = y + 24 * k;
+    mk('rect', { x: x - bw, y: by, width: 2 * bw, height: 6 * k, fill: '#111' }, svg);
+    if (p) mk('rect', { x: p > 0 ? x : x - bw * (-p / 100), y: by, width: bw * Math.abs(p) / 100, height: 6 * k, fill: p > 0 ? COL[d.attacker] : COL[d.defender] }, svg);
+  }
+  for (const u of s.units || []) {
+    const c = COL[u.side] || COL[''], f = u.isAI ? 'rgba(0,0,0,.45)' : c;
+    if (u.vehicle) mk('rect', { x: u.x - 6 * k, y: -u.z - 6 * k, width: 12 * k, height: 12 * k, fill: f, stroke: c, 'stroke-width': 2.5 * k }, svg);
+    else mk('circle', { cx: u.x, cy: -u.z, r: 5 * k, fill: f, stroke: c, 'stroke-width': 2.5 * k }, svg);
+  }
+}
 async function tick() {
   let d;
   try { d = await api('/battles/' + encodeURIComponent(id) + '/live'); } catch (e) { side.textContent = e.message; return; }
   ttl.textContent = `Live — ${d.battleId} ${d.cityName || ''}`;
-  const s = d.snapshot, svg = document.getElementById('lv');
-  svg.innerHTML = '';
-  if (!s) { side.innerHTML = `Status: ${STLABEL[d.status] || d.status}. No live data yet.`; return; }
-  // bounds: sectors + units, square, 150 m margin
-  const pts = (s.sectors || []).concat(s.units || []);
-  let x0 = Math.min(...pts.map(p => p.x)), x1 = Math.max(...pts.map(p => p.x)), z0 = Math.min(...pts.map(p => p.z)), z1 = Math.max(...pts.map(p => p.z));
-  const span = Math.max(x1 - x0, z1 - z0, 400) + 300, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
-  const bx = cx - span / 2, bz = cz - span / 2, k = 1000 / span;
-  const X = x => (x - bx) * k, Y = z => 1000 - (z - bz) * k;
-  // grid every 100 m, labels every 500 m
-  for (let g = Math.ceil(bx / 100) * 100; g < bx + span; g += 100) {
-    mk('line', { x1: X(g), x2: X(g), y1: 0, y2: 1000, stroke: g % 500 ? '#2a2d2e' : '#3a3e40', 'stroke-width': 1 }, svg);
-    if (g % 500 === 0) mk('text', { x: X(g) + 3, y: 994, fill: '#6d706d', 'font-size': 14 }, svg).textContent = g;
-  }
-  for (let g = Math.ceil(bz / 100) * 100; g < bz + span; g += 100) {
-    mk('line', { y1: Y(g), y2: Y(g), x1: 0, x2: 1000, stroke: g % 500 ? '#2a2d2e' : '#3a3e40', 'stroke-width': 1 }, svg);
-    if (g % 500 === 0) mk('text', { x: 4, y: Y(g) - 3, fill: '#6d706d', 'font-size': 14 }, svg).textContent = g;
-  }
-  for (const sc of s.sectors || []) {
-    const x = X(sc.x), y = Y(sc.z), r = Math.max(8, (sc.r || 50) * k);
-    mk('circle', { cx: x, cy: y, r, fill: 'none', stroke: COL[sc.owner] || COL[''], 'stroke-dasharray': '6 4', 'stroke-width': 1.5, opacity: .6 }, svg);
-    mk('rect', { x: x - 13, y: y - 13, width: 26, height: 26, transform: `rotate(45 ${x} ${y})`, fill: COL[sc.owner] || COL[''], stroke: '#111', 'stroke-width': 2 }, svg);
-    mk('text', { x, y: y + 6, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': 700, fill: '#111' }, svg).textContent = sc.name;
-    const p = Math.max(-100, Math.min(100, sc.captureProgress || 0));
-    mk('rect', { x: x - 30, y: y + 24, width: 60, height: 6, fill: '#111' }, svg);
-    if (p) mk('rect', { x: p > 0 ? x : x - 30 * (-p / 100), y: y + 24, width: 30 * Math.abs(p) / 100, height: 6, fill: p > 0 ? COL[d.attacker] : COL[d.defender] }, svg);
-  }
-  for (const u of s.units || []) {
-    const x = X(u.x), y = Y(u.z), c = COL[u.side] || COL[''];
-    if (u.vehicle) mk('rect', { x: x - 6, y: y - 6, width: 12, height: 12, fill: u.isAI ? 'none' : c, stroke: c, 'stroke-width': 2 }, svg);
-    else mk('circle', { cx: x, cy: y, r: 5, fill: u.isAI ? 'none' : c, stroke: c, 'stroke-width': 2 }, svg);
-  }
+  if (!mapTried) await loadMap(d.terrain);
+  const s = d.snapshot;
+  if (!s) { svg.innerHTML = ''; side.innerHTML = `Status: ${STLABEL[d.status] || d.status}. No live data yet.`; return; }
+  last = d; draw(d);
   const t = s.tickets || {};
   for (const f of [d.attacker, d.defender]) maxT[f] = Math.max(maxT[f] || 0, t[f] || 0);
   const cnt = f => (s.units || []).filter(u => u.side === f).length;
   side.innerHTML = `<b>${STLABEL[d.status] || d.status}</b>${d.winner ? ' — winner <b class="' + d.winner + '">' + d.winner + '</b>' : ''}<br>Elapsed ${fmtS(s.elapsed)} · left ${fmtS(s.timeLeft)}<br><br>` +
     [d.attacker, d.defender].map(f => `<span class="${f}"><b>${FNAME[f] || f}</b> ${f === d.attacker ? '(attacking)' : '(defending)'} — ${t[f] ?? '?'} tickets · ${cnt(f)} units</span>
      <div class="tk"><div style="width:${maxT[f] ? 100 * (t[f] || 0) / maxT[f] : 0}%;background:${COL[f]}"></div></div>`).join('') +
-    `<span class="muted">Sectors: ${(s.sectors || []).map(x => x.name + ' ' + (x.owner || 'neutral')).join(' · ')}<br>Updated ${fmtDate(d.at)} · refresh 5 s</span>`;
+    `<span class="muted">Sectors: ${(s.sectors || []).map(x => x.name + ' ' + (x.owner || 'neutral')).join(' · ')}<br>${map ? 'Map: ' + esc(map.name) + ' · ' : ''}Updated ${fmtDate(d.at)} · refresh 5 s</span>`;
 }
+// zoom / pan / pinch
+function toWorld(cx, cy) { const r = svg.getBoundingClientRect(); return { x: view.x + (cx - r.left) / r.width * view.w, y: view.y + (cy - r.top) / r.height * view.w }; }
+function zoomAt(cx, cy, f) {
+  if (!view) return;
+  const p = toWorld(cx, cy), w = Math.min(20000, Math.max(80, view.w * f));
+  view = { x: p.x - (p.x - view.x) * w / view.w, y: p.y - (p.y - view.y) * w / view.w, w };
+  userView = true; if (last) draw(last); else applyView();
+}
+svg.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.clientX, e.clientY, Math.exp(e.deltaY * 0.0015)); }, { passive: false });
+const ptr = new Map(); let pinch = 0;
+svg.addEventListener('pointerdown', e => { svg.setPointerCapture(e.pointerId); ptr.set(e.pointerId, { x: e.clientX, y: e.clientY }); });
+svg.addEventListener('pointermove', e => {
+  if (!ptr.has(e.pointerId) || !view) return;
+  const prev = ptr.get(e.pointerId); ptr.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (ptr.size === 1) {
+    const r = svg.getBoundingClientRect();
+    view.x -= (e.clientX - prev.x) / r.width * view.w; view.y -= (e.clientY - prev.y) / r.height * view.w;
+    userView = true; applyView();
+  } else if (ptr.size === 2) {
+    const [a, b] = [...ptr.values()], dd = Math.hypot(a.x - b.x, a.y - b.y);
+    if (pinch) zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, pinch / dd);
+    pinch = dd;
+  }
+});
+const up = e => { ptr.delete(e.pointerId); if (ptr.size < 2) pinch = 0; if (last && ptr.size === 0) draw(last); };
+svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
+svg.addEventListener('dblclick', () => { userView = false; if (last) draw(last); });
 tick(); setInterval(tick, 5000);
 </script></body></html>

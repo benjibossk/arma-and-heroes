@@ -101,6 +101,37 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected ref F44_AIDirector m_AI = new F44_AIDirector();
 	protected ref F44_LoadoutService m_Loadouts = new F44_LoadoutService();
 	protected int m_iBotKills;
+	protected ref map<string, int> m_mAIDeaths = new map<string, int>();	// side key -> bots lost
+	protected ref map<string, int> m_mAIKills = new map<string, int>();	// side key -> kills made by bots
+	protected ref map<string, int> m_mTeamAIKills = new map<string, int>();	// team id -> kills made by its bots
+
+	protected string SideKeyOf(int side)
+	{
+		if (side == F44_ESectorOwner.ATTACKER)
+			return m_sAttacker;
+		return m_sDefender;
+	}
+
+	protected static void MapAdd(map<string, int> m, string k, int v)
+	{
+		int cur;
+		m.Find(k, cur);
+		m.Set(k, cur + v);
+	}
+
+	protected static string MapJson(map<string, int> m)
+	{
+		string s = "{";
+		bool first = true;
+		foreach (string k, int v : m)
+		{
+			if (!first)
+				s += ",";
+			first = false;
+			s += string.Format("\"%1\":%2", k, v);
+		}
+		return s + "}";
+	}
 
 	// ---- client ----
 	protected ref F44_Hud m_Hud;
@@ -424,6 +455,15 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			return;
 		m_AI.OnBotKilled(victim);
 		AddManpowerLoss(teamId, side, 1);
+		MapAdd(m_mAIDeaths, SideKeyOf(side), 1);
+		int kSide;
+		string kTeam;
+		IEntity killerEnt = instigatorContextData.GetKillerEntity();
+		if (killerEnt && m_AI.IsBot(killerEnt, kSide, kTeam) && kSide != side)
+		{
+			MapAdd(m_mAIKills, SideKeyOf(kSide), 1);
+			MapAdd(m_mTeamAIKills, kTeam, 1);
+		}
 		PrintFormat("[F44] Tickets: bot of side %1 (team %2) killed -> att %3 / def %4", side, teamId, m_iTicketsAtt, m_iTicketsDef);
 
 		int killerId = instigatorContextData.GetKillerPlayerID();
@@ -802,6 +842,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		}
 		json += "}";
 
+		json += ",\"aiDeaths\":" + MapJson(m_mAIDeaths) + ",\"aiKills\":" + MapJson(m_mAIKills) + ",\"teamAiKills\":" + MapJson(m_mTeamAIKills);
 		json += "," + q + "players" + q + ":[";
 		first = true;
 		foreach (int pid, F44_PlayerStats st : m_mStats)

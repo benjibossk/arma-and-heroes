@@ -19,6 +19,7 @@ class F44_VehicleEntry
 class F44_Team
 {
 	string m_sTeamId;
+	string m_sDisplayName;	// roleplay unit name from the web ("Easy Company, 2nd Bn, 506th PIR")
 	string m_sType;
 	int m_iManpower;
 	int m_iEquipLevel;
@@ -28,6 +29,9 @@ class F44_Team
 	void FromJson(LoadContext n)
 	{
 		n.ReadValue("teamId", m_sTeamId);
+		n.ReadValue("displayName", m_sDisplayName);
+		if (m_sDisplayName.IsEmpty())
+			m_sDisplayName = m_sTeamId;
 		n.ReadValue("type", m_sType);
 		n.ReadValue("manpower", m_iManpower);
 		m_iEquipLevel = 1;
@@ -64,12 +68,25 @@ class F44_Side
 	bool m_bAIEnabled = true;
 	int m_iAIMaxAlive = 24;
 	float m_fAIPerPlayerScale = 1.0;
+	string m_sAISkill = "Regular";	// Recruit | Regular | Veteran | Elite
 
 	void FromJson(LoadContext n)
 	{
+		// legacy flat keys
 		n.ReadValue("aiEnabled", m_bAIEnabled);
 		n.ReadValue("aiMaxAlive", m_iAIMaxAlive);
 		n.ReadValue("aiPerPlayerScale", m_fAIPerPlayerScale);
+		// web BattleConfig: "ai": {enabled, maxAlive, perPlayerScale, skill}
+		if (n.StartObject("ai"))
+		{
+			n.ReadValue("enabled", m_bAIEnabled);
+			n.ReadValue("maxAlive", m_iAIMaxAlive);
+			n.ReadValue("perPlayerScale", m_fAIPerPlayerScale);
+			string sk;
+			if (n.ReadValue("skill", sk) && !sk.IsEmpty())
+				m_sAISkill = sk;
+			n.EndObject();
+		}
 		int count;
 		if (!n.StartArray("teams", count))
 			return;

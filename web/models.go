@@ -56,6 +56,7 @@ type AssaultTeam struct {
 	WarID      uint       `gorm:"index" json:"-"`
 	Type       string     `gorm:"size:8" json:"type"`
 	Faction    string     `gorm:"size:8" json:"faction"`
+	DisplayName string    `gorm:"size:120" json:"displayName"`
 	OwnerID    uint       `json:"ownerId"`
 	Manpower   int        `json:"manpower"`
 	EquipLevel int        `json:"equipLevel"`

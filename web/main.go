@@ -99,6 +99,8 @@ func main() {
 	if currentWar() == nil {
 		seedWar()
 	}
+	backfillTeamNames()
+
 	go tickLoop()
 	r := setupRouter()
 	log.Println("Arma & Heroes listening on :8080")

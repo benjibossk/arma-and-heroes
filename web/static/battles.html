@@ -18,8 +18,8 @@ async function detail(id) {
   let h = `<b>${b.battleId} — ${esc(b.cityName)}</b><br>Mode ${c.mode} · ${c.timeLimitMin} min · ${STLABEL[b.status]}<br><span class="muted">Scenario ${esc(c.scenario)}<br>Server: ${esc(b.serverInstance || '—')} · last heartbeat ${fmtDate(b.heartbeatAt)}</span>`;
   for (const f of [c.attacker, c.defender]) {
     const ai = c.sides[f].ai || {};
-    h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attacking)' : '(defending)'}</h3><div class="muted">AI bots: ${ai.enabled ? 'on, max ' + ai.maxAlive + ' alive, x' + ai.perPlayerScale + ' per player' : 'off'}</div><table>` + c.sides[f].teams.map(t =>
-      `<tr><td>${t.teamId}</td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
+    h += `<h3 class="${f}">${FNAME[f]} ${f === c.attacker ? '(attacking)' : '(defending)'}</h3><div class="muted">AI bots: ${ai.enabled ? 'on, max ' + ai.maxAlive + ' alive, x' + ai.perPlayerScale + ' per player' + (ai.skill ? ', skill ' + ai.skill : '') : 'off'}</div><table>` + c.sides[f].teams.map(t =>
+      `<tr><td>${esc(t.displayName || t.teamId)}<br><span class="muted">${t.teamId}</span></td><td>${TLABEL[t.type] || t.type}</td><td>${t.manpower} men</td><td class="muted">${t.vehicles.map(v => v.count + '× ' + v.key).join(', ')}</td></tr>`).join('') + '</table>';
   }
   if (b.result) {
     const r = b.result;

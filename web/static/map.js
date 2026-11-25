@@ -63,7 +63,7 @@ function draw() {
     const n = slots[key] = (slots[key] || 0) + 1;
     const g = el('g', { class: 'team' + (selTeam && selTeam.teamId === t.teamId ? ' sel' : '') }, s);
     teamIcon(g, t, x + 28 + (n - 1) * 30, y + 14);
-    const ti = el('title', {}, g); ti.textContent = `${t.teamId} ${TLABEL[t.type]} — ${t.manpower} men`;
+    const ti = el('title', {}, g); ti.textContent = `${t.displayName || t.teamId} ${TLABEL[t.type]} — ${t.manpower} men`;
     g.onclick = ev => { ev.stopPropagation(); clickTeam(t); };
   });
 }
@@ -72,7 +72,7 @@ function clickTeam(t) { selTeam = selTeam && selTeam.teamId === t.teamId ? null 
 
 async function clickCity(c) {
   if (selTeam && selTeam.status === 'idle' && canOrder(selTeam) && neighbors(selTeam.cityId).some(n => n.id === c.id)) {
-    if (confirm(`Order ${selTeam.teamId} to march on ${c.name}?`)) {
+    if (confirm(`Order ${selTeam.displayName || selTeam.teamId} to march on ${c.name}?`)) {
       try { await api(`/teams/${selTeam.teamId.slice(3)}/move`, { method: 'POST', body: { destCityId: c.id } }); selTeam = null; await load(); } catch (e) { alert(e.message); }
     }
     return;
@@ -84,7 +84,7 @@ function showSel() {
   const d = document.getElementById('sel');
   if (selTeam) {
     const t = selTeam, c = cityById(t.cityId);
-    d.innerHTML = `<b class="${t.faction}">${t.teamId}</b> — ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'none'}<br>
+    d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'none'}<br>
       Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
       ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
       ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}`;
@@ -113,7 +113,7 @@ function renderPanels() {
    <div class="row"><select id="bcity">${buyCities.map(c => `<option value="${c.id}">${esc(c.name)} [${c.owner}]</option>`).join('')}</select><button onclick="buy()">Raise team</button></div>`;
   const mine = M.teams.filter(t => canOrder(t));
   document.getElementById('myteams').innerHTML = '<table><tr><th>AT</th><th>Type</th><th>Men</th><th>Position</th></tr>' + mine.map(t =>
-    `<tr style="cursor:pointer" onclick="clickTeam(M.teams.find(x=>x.teamId==='${t.teamId}'))"><td class="${t.faction}">${t.teamId}</td><td>${t.type}</td><td>${t.manpower}</td><td>${esc(cityById(t.cityId)?.name)}${t.status === 'moving' ? ' → ' + esc(cityById(t.destCityId)?.name) : t.status === 'in_battle' ? ' ⚔' : ''}</td></tr>`).join('') + '</table>';
+    `<tr style="cursor:pointer" onclick="clickTeam(M.teams.find(x=>x.teamId==='${t.teamId}'))"><td class="${t.faction}">${esc(t.displayName || t.teamId)}</td><td>${t.type}</td><td>${t.manpower}</td><td>${esc(cityById(t.cityId)?.name)}${t.status === 'moving' ? ' → ' + esc(cityById(t.destCityId)?.name) : t.status === 'in_battle' ? ' ⚔' : ''}</td></tr>`).join('') + '</table>';
 }
 
 async function buy() {

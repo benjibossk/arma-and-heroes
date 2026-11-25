@@ -250,6 +250,9 @@ class F44_AIDirector
 			AIControlComponent ctrl = AIControlComponent.Cast(ch.FindComponent(AIControlComponent));
 			if (ctrl)
 				ctrl.ActivateAI();
+			SCR_AICombatComponent combat = SCR_AICombatComponent.Cast(ch.FindComponent(SCR_AICombatComponent));
+			if (combat)
+				combat.SetAISkill(SkillFromName(side.m_sAISkill));
 			group.AddAIEntityToGroup(ch);
 			m_mBotSide.Set(ch, sideId);
 			m_mBotTeam.Set(ch, team.m_sTeamId);
@@ -267,7 +270,19 @@ class F44_AIDirector
 		gi.m_sTeamId = team.m_sTeamId;
 		m_aGroups.Insert(gi);
 		Retarget(gi, cfg.GetMode(), m_GameMode.GetSectorOwners(), false);
-		PrintFormat("[F44] AI: %1 group of %2 spawned (team %3)", side.m_sSideKey, spawned, team.m_sTeamId);
+		PrintFormat("[F44] AI: %1 group of %2 spawned (team %3 \"%4\", skill %5)", side.m_sSideKey, spawned, team.m_sTeamId, team.m_sDisplayName, side.m_sAISkill);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static EAISkill SkillFromName(string s)
+	{
+		switch (s)
+		{
+			case "Recruit": return EAISkill.ROOKIE;
+			case "Veteran": return EAISkill.VETERAN;
+			case "Elite": return EAISkill.EXPERT;
+		}
+		return EAISkill.REGULAR;
 	}
 
 	//------------------------------------------------------------------------------------------------
