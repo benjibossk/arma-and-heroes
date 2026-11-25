@@ -111,12 +111,6 @@ To do:
 
 ## Screenshots
 
-| Battles | Profile & leaderboard |
-|---|---|
-| ![Battles](docs/screenshots/battles.png) | ![Profile](docs/screenshots/profile.png) |
-
-## Screenshots
-
 - **War map** — the Normandy front with cities, assault teams and supply.
   ![War map](docs/screenshots/warmap.png)
 - **Battles** — ongoing and finished battles.
@@ -127,6 +121,9 @@ To do:
   ![Link](docs/screenshots/link.png) ![Link mobile](docs/screenshots/link-mobile.png)
 - **Live battle view** — real-time snapshot of a running battle.
   ![Live battle view](docs/screenshots/live.png)
+
+- **Arsenal** — weapons, vehicles and uniforms rendered in-engine from the installed WW2 mods (transparent backgrounds, used on the item cards).
+  ![Arsenal renders](docs/screenshots/arsenal-renders.png)
 
 ## Contributing
 
