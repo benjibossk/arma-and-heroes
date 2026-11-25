@@ -62,6 +62,7 @@ func doTick(forceIncome bool) {
 	for i := range moving {
 		arrive(w, &moving[i])
 	}
+	runDirector(w, now)
 }
 
 func applyIncome(w *War) {
@@ -220,7 +221,23 @@ type BattleConfig struct {
 	Sides          map[string]BCSide        `json:"sides"`
 	PlayerUnlocks  map[string][]string      `json:"playerUnlocks"`
 	PlayerLoadouts map[string]PlayerLoadout `json:"playerLoadouts"`
+	SpawnTimes     BCSpawnTimes             `json:"spawnTimes"`
 }
+
+// BCSpawnTimes: respawn delay model read by the mod (F44_SpawnTimesConfig, P1-C).
+// Player delay = baseSec + min(points*perPointSec, maxEquipSec) - defenderBonusSec (>= minSec);
+// forward sector point adds forwardPenaltySec + links from own HQ * perLinkSec.
+type BCSpawnTimes struct {
+	BaseSec           float64 `json:"baseSec"`
+	ForwardPenaltySec float64 `json:"forwardPenaltySec"`
+	PerPointSec       float64 `json:"perPointSec"`
+	MaxEquipSec       float64 `json:"maxEquipSec"`
+	PerLinkSec        float64 `json:"perLinkSec"`
+	DefenderBonusSec  float64 `json:"defenderBonusSec"`
+	MinSec            float64 `json:"minSec"`
+}
+
+var defaultSpawnTimes = BCSpawnTimes{BaseSec: 10, ForwardPenaltySec: 10, PerPointSec: 0.5, MaxEquipSec: 20, PerLinkSec: 3, DefenderBonusSec: 3, MinSec: 3}
 
 func teamByTeamID(id string) *AssaultTeam {
 	var n int
@@ -249,7 +266,7 @@ func buildConfig(b *Battle) BattleConfig {
 		scen = c.ScenarioID
 	}
 	out := BattleConfig{BattleID: b.BattleID(), WarID: b.WarID, CityID: b.CityID, Mode: b.Mode, Scenario: scen,
-		TimeLimitMin: b.TimeLimitMin, Attacker: b.Attacker, Defender: b.Defender, Sides: map[string]BCSide{}, PlayerUnlocks: map[string][]string{}, PlayerLoadouts: battleLoadouts(b)}
+		TimeLimitMin: b.TimeLimitMin, Attacker: b.Attacker, Defender: b.Defender, Sides: map[string]BCSide{}, PlayerUnlocks: map[string][]string{}, PlayerLoadouts: battleLoadouts(b), SpawnTimes: defaultSpawnTimes}
 	for side, ids := range b.GetSides() {
 		s := BCSide{Teams: []BCTeam{}}
 		for _, id := range ids {

@@ -70,3 +70,9 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
   - `testSeatBot` (debug only): seats a PARA bot after each plane spawn and logs `AirDrop TEST/TRACK` lines.
 - Server mods required for the feature: AeroplaneHavens C47 Dakota `66A2A0B8531C9D2A` (+ Aviation-Toolkit `69B307004DF5C417`, USAAF Bomber Attire `64F8C1AB4CFD207A`), Grey Mans Chute Framework `69EEAA01F4A11001`. Not dependencies of F44_Core: without them the plane prefab does not load and the air drop is skipped with a warning.
 - **Web side (later, not implemented):** a team of type `PARA` should carry "transport plane" resources (H&G ratio 4 soldiers : 1 plane) and the battle payload should then fill `airDrop.planeCount[side]` from them; PARA teams list `classes: ["PARA"]`.
+
+## Battle director (web, `web/director.go`)
+
+- **Prep window**: a new battle stays `pending` for 5 min (`readyAt` in the battle summary). `POST /claim` before `readyAt` returns 409; servers retry later.
+- **Minimum size**: at `readyAt`, if attacker strength (manpower + 10 per vehicle) is under 20, the battle is `cancelled`; attacker teams fall back to their origin city with −10 % manpower, defenders return to `idle`.
+- **Auto-resolve** (`autoResolveAt` in the summary): an unclaimed battle 60 min after `readyAt`, or a claimed one 15 min without heartbeat, is resolved by the web with reason `auto-resolved`: the stronger side wins (tie → defender), winner loses 20 % manpower, loser 40 %. The mod must keep sending heartbeats while a battle runs.

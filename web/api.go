@@ -47,6 +47,7 @@ func setupRouter() *gin.Engine {
 	a.PUT("/soldiers/:id/loadout", requireUser, putLoadout)
 	a.POST("/soldiers/:id/buy", requireUser, buyItem)
 	a.GET("/weapons/stats", getWeaponStats)
+	a.GET("/vehicles/stats", getVehicleStats)
 	a.GET("/unlocks", getUnlocks)
 	a.POST("/unlocks/:key/buy", requireUser, buyUnlock)
 	a.GET("/battles/:id/loadout/:identityId", requireServer, getBattleLoadout)
@@ -398,7 +399,8 @@ func battleSummary(b *Battle, names map[string]string) gin.H {
 	}
 	return gin.H{"battleId": b.BattleID(), "warId": b.WarID, "status": b.Status, "cityId": b.CityID, "cityName": names[b.CityID],
 		"mode": b.Mode, "attacker": b.Attacker, "defender": b.Defender, "winner": b.Winner, "sides": sides, "tickets": mp,
-		"serverInstance": b.ServerInstance, "createdAt": b.CreatedAt, "claimedAt": b.ClaimedAt, "heartbeatAt": b.HeartbeatAt, "finishedAt": b.FinishedAt}
+		"serverInstance": b.ServerInstance, "createdAt": b.CreatedAt, "claimedAt": b.ClaimedAt, "heartbeatAt": b.HeartbeatAt, "finishedAt": b.FinishedAt,
+		"readyAt": battleReadyAt(b), "autoResolveAt": battleAutoResolveAt(b)}
 }
 
 func cityNames() map[string]string {
@@ -468,6 +470,10 @@ func claimBattle(c *gin.Context) {
 		return
 	}
 	now := time.Now().UTC()
+	if !battleClaimable(b, now) {
+		errJ(c, 409, "battle in prep window until "+battleReadyAt(b).Format(time.RFC3339))
+		return
+	}
 	res := db.Model(&Battle{}).Where("id = ? AND status = ?", b.ID, "pending").
 		Updates(map[string]interface{}{"status": "starting", "server_instance": in.ServerInstance, "claimed_at": now, "heartbeat_at": now})
 	if res.RowsAffected == 0 {

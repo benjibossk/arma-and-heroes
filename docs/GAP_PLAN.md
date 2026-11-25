@@ -141,6 +141,7 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 **P1-A Battle director (web)** — prep window, minimum-size "fun" check with retreat penalty, auto-resolve of idle battles.
 - Files: new `web/director.go` (+ `web/director_test.go`); one call added in `doTick` (game.go). Constants in `web/progression.json` or director.go.
 - Effort: M (3 h). Test: `go test ./web/...` with fake clock: pending battle → starting after prep; undersized battle cancelled, teams retreat; idle battle resolved after timeout, stronger side wins. `go vet`.
+- Status: **DONE 2026-11-26** — `web/director.go` (+ tests, pure decision function), call `runDirector` at end of `doTick`; claim gated by prep window (api.go `claimBattle`), `readyAt`/`autoResolveAt` in battle summary, shown on map city card; contract updated. Not deployed.
 - Deps: none. Shared file: game.go (only `doTick`).
 
 **P1-B Team morale + team XP (web)** — DONE 2026-11-26 (web/morale.go, lazy regen 5/h, rout <25 = 10% desertion, XP only if battle ≥300 s; deploy pending). — morale field (start 100, −per battle, +win, +regen per tick, rout under threshold), team XP/levels on win/loss with participation threshold, shown on the map card.
