@@ -9,13 +9,10 @@ RMS Ostfront Arms, Overlord US vehicles, tank mods) ships a 2D icon/preview for 
 equipment: Reforger renders inventory previews from the 3D model at runtime, and weapon prefabs have no
 UI icon path. The only usable 2D art is Finest Hour's editor previews of characters (HEER only, no US).
 
-## Real images (2)
-| Key | File | Source mod | Original resource |
-|---|---|---|---|
-| GER_OUTFIT_M40 | GER_OUTFIT_M40.webp | Finest Hour — GER Units (FinestHour-GERUnits) | UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Infantry/Character_HEER_Rifleman_Kar98k_Infantry.edds |
-| GER_OUTFIT_PANZER | GER_OUTFIT_PANZER.webp | Finest Hour — GER Units (FinestHour-GERUnits) | UI/Textures/EditorPreviews/Characters/OPFOR/HEER/Panzergrenadiers/Character_HEER_PanzerCrew_Panzergrenadiers.edds |
-
-All credit to the Finest Hour team. Extracted with PakTools/pakextract.py, EDDS (LZ4 mips) decoded to 400x300 WebP.
+## Mod-shipped images (0)
+The two Finest Hour editor previews used at first (GER_OUTFIT_M40, GER_OUTFIT_PANZER, from
+`UI/Textures/EditorPreviews/Characters/OPFOR/HEER/...`) were replaced by in-engine renders (below);
+no `kind: photo` entry remains in `manifest.json`.
 
 ## Silhouettes (32 items)
 `_sil_*.svg` — flat Style B silhouettes drawn for this project (rifle, scoped, smg, mg, pistol, launcher,
@@ -24,8 +21,13 @@ To upgrade later: render weapons in Workbench (EnforceCam / photo mode) and drop
 
 ## In-engine renders (119)
 Rendered in-engine from the mod named in each row (credit to each mod's authors) through Arma Reforger's inventory item
-preview (ItemPreviewWidget, dark HDRi backdrop) by `tools/icon-renderer` (AH_IconRenderer addon,
-`-ahStudio` CLI flag, `make_jobs.py` -> game -> `postprocess.py`). Weapons 512x256, others 512x384 WebP.
+preview (ItemPreviewWidget) by `tools/icon-renderer` (AH_IconRenderer addon, `-ahStudio` CLI flag,
+`make_jobs.py` -> game -> `postprocess.py`). The addon spawns its own ItemPreviewManager whose preview world
+(`Prefabs/AH/AH_ChromaPreviewWorld.et`) has a flat chroma-green sky (`UI/AH/AH_ChromaSky.emat`, probes desaturated
+and lowered so the green does not light the item); `postprocess.py` keys the green out (soft alpha, colour
+un-mixing, edge despill), trims to content with 5% padding. WebP with alpha: weapons 512x256, others 512x384.
+Not renderable through ItemPreviewWidget (prefab preview shows nothing, even with a fresh PreviewRenderAttributes
+or spawned in the world first): GER_GRW34, GER_SW36, GER_TRAILER_SDAH51, US_WC63, US_WC63_TRANSPORT (no manifest entry).
 `manifest.json` entries with `kind: render` take precedence over the SVG placeholders.
 Still on silhouettes (no prefab / no render): GER_G43, US_M3_GREASE, US_THOMPSON.
 

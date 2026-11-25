@@ -1,0 +1,7 @@
+MetaFileClass {
+ Name "{A4E1C0DE00000003}UI/AH/AH_ChromaSky.emat"
+ Configurations {
+  MaterialResourceClass PC {
+  }
+ }
+}

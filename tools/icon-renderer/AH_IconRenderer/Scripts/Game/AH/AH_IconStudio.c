@@ -1,8 +1,8 @@
 // AH Icon Renderer - DEV ONLY. Never a dependency of F44_Core, never published.
 // Launched with the CLI flag -ahStudio: reads $profile:ah_jobs.txt, renders every job through the
 // engine's inventory item preview (ItemPreviewManagerEntity + ItemPreviewWidget, the same renderer
-// as the inventory/arsenal), takes two screenshots per job (black clear colour, white clear colour,
-// so the post-process can rebuild a true alpha channel) and quits.
+// as the inventory/arsenal), takes one screenshot per job over a
+// chroma-green sky (custom preview world, Prefabs/AH) that postprocess.py keys out, and quits.
 // Job line:  KEY|item|<prefab>
 //            KEY|char|<character prefab>|<cloth prefab>,<cloth prefab>,...
 
@@ -98,23 +98,18 @@ class AH_IconStudio
 	}
 
 	//------------------------------------------------------------------------------------------------
+	protected ItemPreviewManagerEntity m_ChromaMgr;
+
+	//! our own preview manager whose preview world has a flat chroma-green sky (keyed out in postprocess.py)
 	protected ItemPreviewManagerEntity GetManager()
 	{
-		ChimeraWorld w = ChimeraWorld.CastFrom(GetGame().GetWorld());
-		ItemPreviewManagerEntity m;
-		if (w)
-			m = w.GetItemPreviewManager();
-		if (!m)
-		{
-			Resource r = Resource.Load("{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et");
-			if (!r || !r.IsValid())
-				r = Resource.Load("Prefabs/World/Game/ItemPreviewManager.et");
-			if (r && r.IsValid())
-				GetGame().SpawnEntityPrefab(r, GetGame().GetWorld());
-			if (w)
-				m = w.GetItemPreviewManager();
-		}
-		return m;
+		if (m_ChromaMgr)
+			return m_ChromaMgr;
+		Resource r = Resource.Load("{A4E1C0DE00000001}Prefabs/AH/AH_ChromaPreviewManager.et");
+		if (r && r.IsValid())
+			m_ChromaMgr = ItemPreviewManagerEntity.Cast(GetGame().SpawnEntityPrefab(r, GetGame().GetWorld()));
+		PrintFormat("[AHS] chroma manager %1", m_ChromaMgr);
+		return m_ChromaMgr;
 	}
 
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,135 @@
+GenericWorldEntity {
+ ID "5552C58483BF82C9"
+ coords 0 0 0
+ boundMins 0 0 0
+ boundMaxs 0 0 0
+ blockSize 200 1500 200
+ SkyPreset "{A4E1C0DE00000003}UI/AH/AH_ChromaSky.emat"
+ ShadowPreset Custom
+ CustomShadowPreset "ItemPreview"
+ DisableDistantShadows 1
+ {
+  $grp GenericWorldPPEffect {
+   PP_SSDO_0 {
+    ID "620C81DEBACF0C07"
+    coords 0 0 0
+    Camera 0
+    Priority 8
+    Material "{8CA9E4DEF1A3F1F6}Common/Postprocess/SSDO_inventory.emat"
+   }
+   PP_SSDO_1 {
+    ID "620C81DEBACF0C09"
+    Camera 1
+    Priority 9
+    Material "{8CA9E4DEF1A3F1F6}Common/Postprocess/SSDO_inventory.emat"
+   }
+   PP_HBAO_2 {
+    ID "620C81DEBACF0C13"
+    coords 0 0 0
+    Camera 2
+    Priority 7
+    Material "{39A761CAF2F80BB7}Common/Postprocess/HBAO_Inventory.emat"
+   }
+   PP_HDR_0 {
+    ID "620C81DEBACF0C22"
+    Camera 0
+    Priority 11
+    Material "{D743FAED167BF821}Common/Postprocess/HDR_inventory.emat"
+   }
+   PP_HDR_1 {
+    ID "620C81DEBACF0C28"
+    Camera 1
+    Priority 12
+    Material "{D743FAED167BF821}Common/Postprocess/HDR_inventory.emat"
+   }
+   PP_SSDO_2 {
+    ID "620C81DEBACF0C32"
+    Camera 2
+    Priority 10
+    Material "{8CA9E4DEF1A3F1F6}Common/Postprocess/SSDO_inventory.emat"
+   }
+   PP_HBAO_0 {
+    ID "620C81DEBACF0C60"
+    Camera 0
+    Priority 5
+    Material "{39A761CAF2F80BB7}Common/Postprocess/HBAO_Inventory.emat"
+   }
+   PP_HBAO_1 {
+    ID "620C81DEBACF0C6B"
+    Camera 1
+    Priority 6
+    Material "{39A761CAF2F80BB7}Common/Postprocess/HBAO_Inventory.emat"
+   }
+   PP_SMAA_0 {
+    ID "620C81DEBACF0CC7"
+    coords 0 0 0
+    Camera 0
+    Priority 18
+    Material "{CE543C0DB56915C8}Common/Postprocess/SMAAHigh.emat"
+   }
+   PP_SMAA_1 {
+    ID "620C81DEBACF0CCE"
+    Camera 1
+    Priority 15
+    Material "{CE543C0DB56915C8}Common/Postprocess/SMAAHigh.emat"
+   }
+   PP_HDR_2 {
+    ID "620C81DEBACF0CDC"
+    coords 0 0 0
+    Camera 2
+    Priority 13
+    Material "{D743FAED167BF821}Common/Postprocess/HDR_inventory.emat"
+   }
+   PP_SMAA_2 {
+    ID "620C81DEBACF0CF7"
+    Camera 2
+    Priority 16
+    Material "{CE543C0DB56915C8}Common/Postprocess/SMAAHigh.emat"
+   }
+   PP_SSDO_3 {
+    ID "692892358AB507D5"
+    coords 3.43 -2.055 0.018
+    Camera 3
+    Priority 1
+    Material "{8CA9E4DEF1A3F1F6}Common/Postprocess/SSDO_inventory.emat"
+   }
+   PP_HDR_3 {
+    ID "692892358AB5D94A"
+    coords 3.43 -2.055 0.018
+    Camera 3
+    Priority 2
+    Material "{D743FAED167BF821}Common/Postprocess/HDR_inventory.emat"
+   }
+   PP_SMAA_3 {
+    ID "692892358AB5F0ED"
+    coords 3.43 -2.055 0.018
+    Camera 3
+    Priority 3
+    Material "{CE543C0DB56915C8}Common/Postprocess/SMAAHigh.emat"
+   }
+   PP_HBAO_3 {
+    ID "692892358AB66406"
+    coords 3.43 -2.055 0.018
+    Camera 3
+    Priority 0
+    Material "{39A761CAF2F80BB7}Common/Postprocess/HBAO_Inventory.emat"
+   }
+  }
+  GenericWorldLightEntity {
+   ID "5552C58483A07792"
+   coords 3.974 4.836 1.45
+   angles -4.725 36.243 -100.059
+   SunAngularSize 1
+   DirectLightLV 3.5
+   IndirectLightLV 1
+   ProbeReflectionEV 3
+   ProbeReflectionDesaturation 1
+   ProbeDiffuseEV -0.5
+   ProbeDiffuseDesaturation 1
+   "GlobalAOPower " 1
+   TargetEV 0
+   ManualHDRBrightness always
+   ManualHDRBrightnessLV 1
+  }
+ }
+}

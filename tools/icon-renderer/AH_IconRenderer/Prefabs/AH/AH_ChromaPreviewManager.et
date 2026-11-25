@@ -1,0 +1,8 @@
+ItemPreviewManagerEntity {
+ ID "52E6E799FE91D5D5"
+ Flags 0 0x3
+ PreviewWorld "{A4E1C0DE00000002}Prefabs/AH/AH_ChromaPreviewWorld.et"
+ DefaultRenderAttributes PreviewRenderAttributes "{52C8B1E5E8DC358F}" {
+  CameraDistanceToItem 0.2
+ }
+}

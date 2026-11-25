@@ -1,0 +1,7 @@
+MetaFileClass {
+ Name "{A4E1C0DE00000001}Prefabs/AH/AH_ChromaPreviewManager.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+ }
+}
