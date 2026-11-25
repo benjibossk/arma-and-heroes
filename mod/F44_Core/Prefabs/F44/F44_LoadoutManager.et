@@ -1,21 +1,120 @@
 SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {
  ID "F44A00000000A003"
  m_aPlayerLoadouts {
-  SCR_FactionPlayerLoadout "{F44A00000000C020}" : "{7C7C65FD583E6612}Configs/Loadouts/US/Regular/Loadout_US_Rifleman.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D000}" {
+   m_sLoadoutName "US Rifleman (M1 Garand)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C021}" : "{AFA36BB8828E381A}Configs/Loadouts/US/Regular/Loadout_US_MG.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D001}" {
+   m_sLoadoutName "US SMG (M1A1 Thompson)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C022}" : "{121FC1ABB7FE098C}Configs/Loadouts/US/Regular/Loadout_US_LAT.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D002}" {
+   m_sLoadoutName "US Squad Leader"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C023}" : "{0EFB9B7C7EF8B247}Configs/Loadouts/US/Regular/Loadout_US_Sniper.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D003}" {
+   m_sLoadoutName "US Platoon Leader (M1 Carbine + ANM8)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C024}" : "{5F9034642E99437D}Configs/Loadouts/USSR/Regular/Loadout_USSR_Rifleman.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D004}" {
+   m_sLoadoutName "US Radio operator (SCR-300)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C025}" : "{E97C426E941D8FDC}Configs/Loadouts/USSR/Regular/Loadout_USSR_MG.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D005}" {
+   m_sLoadoutName "US Officer (M1911)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C026}" : "{C1C1DB68C6FC265B}Configs/Loadouts/USSR/Regular/Loadout_USSR_AT.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D006}" {
+   m_sLoadoutName "US Sniper (M1903A4)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et"
   }
-  SCR_FactionPlayerLoadout "{F44A00000000C027}" : "{FB56BAF9A1BBAB39}Configs/Loadouts/USSR/Regular/Loadout_USSR_Sharpshooter.conf" {
+  SCR_FactionPlayerLoadout "{F44A00000000D007}" {
+   m_sLoadoutName "US Scout/Recon rifleman (M1 + helmet netting)"
+   m_sAffiliatedFaction "FH_USAWW2"
+   m_sLoadoutResource "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D008}" {
+   m_sLoadoutName "GER Rifleman (Kar98k)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D009}" {
+   m_sLoadoutName "GER Rifleman (G43)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00A}" {
+   m_sLoadoutName "GER MG gunner (MG42)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00B}" {
+   m_sLoadoutName "GER Medic (Sanitater)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00C}" {
+   m_sLoadoutName "GER Anti-tank (Panzerschreck RPzB54)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00D}" {
+   m_sLoadoutName "GER Light AT (Panzerfaust 100)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00E}" {
+   m_sLoadoutName "GER Officer (P38)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D00F}" {
+   m_sLoadoutName "GER Sniper (Kar98k scope)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D010}" {
+   m_sLoadoutName "GER Pioneer/Engineer (mines)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D011}" {
+   m_sLoadoutName "GER SMG (MP40)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D012}" {
+   m_sLoadoutName "GER Squad Leader (MP40)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D013}" {
+   m_sLoadoutName "GER Platoon Leader (MP38)"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D014}" {
+   m_sLoadoutName "GER Radio operator"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D015}" {
+   m_sLoadoutName "GER Panzer crew"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et"
+  }
+  SCR_FactionPlayerLoadout "{F44A00000000D016}" {
+   m_sLoadoutName "GER Panzer commander"
+   m_sAffiliatedFaction "FH_HEERWW2"
+   m_sLoadoutResource "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et"
   }
  }
 }

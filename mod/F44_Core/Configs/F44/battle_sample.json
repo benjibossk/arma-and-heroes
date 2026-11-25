@@ -85,9 +85,35 @@
       "soldierId": "s_42",
       "class": "RIFLEMAN",
       "items": [
-        "US_M1_GARAND"
+        "US_M1_GARAND",
+        "US_M1911",
+        "US_MK2_GRENADE",
+        "US_MEDKIT",
+        "US_OUTFIT_M41"
       ],
       "points": 120
+    },
+    "EXAMPLE-GER-ID": {
+      "soldierId": "s_43",
+      "class": "AT",
+      "items": [
+        "GER_KAR98K",
+        "GER_PANZERSCHRECK",
+        "GER_M24_GRENADE",
+        "GER_MEDKIT",
+        "GER_OUTFIT_SMOCK"
+      ],
+      "points": 300
+    },
+    "EXAMPLE-US-SMG": {
+      "soldierId": "s_44",
+      "class": "SMG",
+      "items": [
+        "US_THOMPSON",
+        "US_SMOKE",
+        "US_BINOCULARS"
+      ],
+      "points": 50
     }
   }
 }

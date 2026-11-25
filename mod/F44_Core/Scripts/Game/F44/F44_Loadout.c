@@ -40,7 +40,43 @@ class F44_LoadoutService
 		m_sToken = token;
 		m_sBattleId = battleId;
 		foreach (string id, F44_PlayerLoadout l : cfg.m_mLoadouts)
+		{
 			m_mLoadouts.Set(id, l);
+			Print("[F44] Loadout " + id.Substring(0, Math.Min(8, id.Length())) + "..: " + Describe(l));
+		}
+		PrintFormat("[F44] Loadouts: %1 player loadouts from BattleConfig", m_mLoadouts.Count());
+		// self-test without players: resolve the sample loadouts against the catalog (log only)
+		if (m_mLoadouts.IsEmpty())
+		{
+			F44_BattleConfig sample = F44_BattleConfig.FromFile("Configs/F44/battle_sample.json");
+			if (sample)
+			{
+				foreach (string sid, F44_PlayerLoadout sl : sample.m_mLoadouts)
+					Print("[F44] Loadout selftest " + sid + ": " + Describe(sl));
+			}
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! "class RIFLEMAN, US_M1_GARAND=Rifle_M1.et, GER_X=UNRESOLVED" (unit-level check without a player)
+	static string Describe(F44_PlayerLoadout l)
+	{
+		string s = "class " + l.m_sClass;
+		F44_Catalog cat = F44_Catalog.Get();
+		foreach (string key : l.m_aItems)
+		{
+			F44_CatalogEntry e = cat.GetEntry(key);
+			string res = "UNRESOLVED";
+			if (e && !e.m_bIsClass)
+			{
+				res = e.m_sPrefab;
+				int slash = res.LastIndexOf("/");
+				if (slash >= 0)
+					res = res.Substring(slash + 1, res.Length() - slash - 1);
+			}
+			s += ", " + key + "=" + res;
+		}
+		return s;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -88,6 +124,7 @@ class F44_LoadoutService
 	{
 		if (!character || !l)
 			return;
+		Print("[F44] Loadout applied at spawn: " + Describe(l));
 		SCR_InventoryStorageManagerComponent inv = SCR_InventoryStorageManagerComponent.Cast(character.FindComponent(SCR_InventoryStorageManagerComponent));
 		if (!inv)
 			return;
