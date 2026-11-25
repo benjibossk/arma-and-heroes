@@ -95,6 +95,7 @@ func serveStatic(c *gin.Context) {
 	}
 	f := filepath.Join(cfg.StaticDir, p)
 	if st, err := os.Stat(f); err == nil && !st.IsDir() {
+		c.Header("Cache-Control", staticCache(p))
 		c.File(f)
 		return
 	}
@@ -673,4 +674,17 @@ func cancelBattle(c *gin.Context) {
 	db.Model(b).Update("status", "cancelled")
 	logEvent(b.WarID, "admin", "", "Battle cancelled: "+b.BattleID())
 	c.JSON(200, gin.H{"ok": true})
+}
+
+// staticCache: images/fonts are cached a week (revalidated after via Last-Modified),
+// css/js an hour, pages always revalidated.
+func staticCache(p string) string {
+	switch strings.ToLower(filepath.Ext(p)) {
+	case ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".woff", ".woff2", ".ttf":
+		return "public, max-age=604800, stale-while-revalidate=86400"
+	case ".css", ".js", ".json":
+		return "public, max-age=3600"
+	default:
+		return "no-cache"
+	}
 }

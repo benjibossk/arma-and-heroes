@@ -205,7 +205,7 @@
    "caliber": "7.62x33mm",
    "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
    "muzzleVelocity": 607.0,
-   "damage": 22000.0,
+   "damage": 220.0,
    "bulletMass": 0.002,
    "airDrag": 4e-06,
    "penetrationDepth": 3.6,
@@ -222,107 +222,107 @@
     {
      "m": 0,
      "v": 607.0,
-     "dmg": 22000.0
+     "dmg": 220.0
     },
     {
      "m": 50,
      "v": 549.2,
-     "dmg": 18012.1
+     "dmg": 180.1
     },
     {
      "m": 100,
      "v": 497.0,
-     "dmg": 14747.0
+     "dmg": 147.5
     },
     {
      "m": 150,
      "v": 449.7,
-     "dmg": 12073.9
+     "dmg": 120.7
     },
     {
      "m": 200,
      "v": 406.9,
-     "dmg": 9885.2
+     "dmg": 98.9
     },
     {
      "m": 250,
      "v": 368.2,
-     "dmg": 8093.3
+     "dmg": 80.9
     },
     {
      "m": 300,
      "v": 333.1,
-     "dmg": 6626.3
+     "dmg": 66.3
     },
     {
      "m": 350,
      "v": 301.4,
-     "dmg": 5425.1
+     "dmg": 54.3
     },
     {
      "m": 400,
      "v": 272.7,
-     "dmg": 4441.7
+     "dmg": 44.4
     },
     {
      "m": 450,
      "v": 246.8,
-     "dmg": 3636.6
+     "dmg": 36.4
     },
     {
      "m": 500,
      "v": 223.3,
-     "dmg": 2977.4
+     "dmg": 29.8
     },
     {
      "m": 550,
      "v": 202.1,
-     "dmg": 2437.7
+     "dmg": 24.4
     },
     {
      "m": 600,
      "v": 182.8,
-     "dmg": 1995.8
+     "dmg": 20.0
     },
     {
      "m": 650,
      "v": 165.4,
-     "dmg": 1634.0
+     "dmg": 16.3
     },
     {
      "m": 700,
      "v": 149.7,
-     "dmg": 1337.8
+     "dmg": 13.4
     },
     {
      "m": 750,
      "v": 135.4,
-     "dmg": 1095.3
+     "dmg": 11.0
     },
     {
      "m": 800,
      "v": 122.6,
-     "dmg": 896.8
+     "dmg": 9.0
     },
     {
      "m": 850,
      "v": 110.9,
-     "dmg": 734.2
+     "dmg": 7.3
     },
     {
      "m": 900,
      "v": 100.3,
-     "dmg": 601.1
+     "dmg": 6.0
     },
     {
      "m": 950,
      "v": 90.8,
-     "dmg": 492.2
+     "dmg": 4.9
     },
     {
      "m": 1000,
      "v": 82.1,
-     "dmg": 402.9
+     "dmg": 4.0
     }
    ],
    "source": {
@@ -348,7 +348,7 @@
     ]
    },
    "warnings": [
-    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+    "DamageValue 22000 dans le mod (faute de frappe probable), corrige en 220"
    ]
   },
   "US_THOMPSON": {
@@ -676,17 +676,17 @@
    "prefab": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "auto",
      "rpm": null,
      "burst": null
     },
     {
-     "mode": null,
-     "rpm": null,
-     "burst": null
-    },
-    {
-     "mode": null,
+     "mode": "auto",
      "rpm": 300.0,
      "burst": null
     }
@@ -861,7 +861,12 @@
    "prefab": "{4191E250FDEC2FBF}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A4.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
      "rpm": null,
      "burst": null
     }
@@ -1322,7 +1327,12 @@
    "prefab": "{3B460BBAF682C13D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
      "rpm": null,
      "burst": null
     }
@@ -1662,7 +1672,7 @@
    "prefab": "{6D18C148A668A0AB}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP40.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "auto",
      "rpm": 500.0,
      "burst": null
     }
@@ -1670,7 +1680,7 @@
    "rpm": 500.0,
    "magazine": "{20E4A0615C0ABC16}Prefabs/Weapons/Magazines/MP38/Magazine_9x19_MP38_32rnd.et",
    "magazineSize": 32,
-   "caliber": "9x18mm",
+   "caliber": "9x19mm",
    "ammo": "{FDBA4064AA9D60C3}Prefabs/Weapons/Ammo/Ammo_9x19_Ball_08.et",
    "muzzleVelocity": 317.3,
    "damage": 300.0,
@@ -1812,7 +1822,10 @@
      "prefabs/weapons/ammo/ammo_9x19/ammo_9x19_ball_08.et"
     ],
     "muzzleCoef": 0.835
-   }
+   },
+   "warnings": [
+    "calibre \"9x18mm\" dans le chargeur du mod, corrige en 9x19mm (config munition)"
+   ]
   },
   "GER_MG42": {
    "label": "MG42",
@@ -1820,7 +1833,12 @@
    "prefab": "{885A147293847F5C}Prefabs/Weapons/Machineguns/MG42/MG_MG42.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "auto",
      "rpm": 1200.0,
      "burst": null
     }
@@ -1996,7 +2014,12 @@
    "prefab": "{EB136040466EF11D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Sniper.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
      "rpm": null,
      "burst": null
     }
@@ -2510,7 +2533,12 @@
    "prefab": "{7CA5C7688880A688}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A3.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
      "rpm": null,
      "burst": null
     }
@@ -2687,7 +2715,7 @@
    "caliber": "7.62x33mm",
    "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
    "muzzleVelocity": 607.0,
-   "damage": 22000.0,
+   "damage": 220.0,
    "bulletMass": 0.002,
    "airDrag": 4e-06,
    "penetrationDepth": 3.6,
@@ -2704,107 +2732,107 @@
     {
      "m": 0,
      "v": 607.0,
-     "dmg": 22000.0
+     "dmg": 220.0
     },
     {
      "m": 50,
      "v": 549.2,
-     "dmg": 18012.1
+     "dmg": 180.1
     },
     {
      "m": 100,
      "v": 497.0,
-     "dmg": 14747.0
+     "dmg": 147.5
     },
     {
      "m": 150,
      "v": 449.7,
-     "dmg": 12073.9
+     "dmg": 120.7
     },
     {
      "m": 200,
      "v": 406.9,
-     "dmg": 9885.2
+     "dmg": 98.9
     },
     {
      "m": 250,
      "v": 368.2,
-     "dmg": 8093.3
+     "dmg": 80.9
     },
     {
      "m": 300,
      "v": 333.1,
-     "dmg": 6626.3
+     "dmg": 66.3
     },
     {
      "m": 350,
      "v": 301.4,
-     "dmg": 5425.1
+     "dmg": 54.3
     },
     {
      "m": 400,
      "v": 272.7,
-     "dmg": 4441.7
+     "dmg": 44.4
     },
     {
      "m": 450,
      "v": 246.8,
-     "dmg": 3636.6
+     "dmg": 36.4
     },
     {
      "m": 500,
      "v": 223.3,
-     "dmg": 2977.4
+     "dmg": 29.8
     },
     {
      "m": 550,
      "v": 202.1,
-     "dmg": 2437.7
+     "dmg": 24.4
     },
     {
      "m": 600,
      "v": 182.8,
-     "dmg": 1995.8
+     "dmg": 20.0
     },
     {
      "m": 650,
      "v": 165.4,
-     "dmg": 1634.0
+     "dmg": 16.3
     },
     {
      "m": 700,
      "v": 149.7,
-     "dmg": 1337.8
+     "dmg": 13.4
     },
     {
      "m": 750,
      "v": 135.4,
-     "dmg": 1095.3
+     "dmg": 11.0
     },
     {
      "m": 800,
      "v": 122.6,
-     "dmg": 896.8
+     "dmg": 9.0
     },
     {
      "m": 850,
      "v": 110.9,
-     "dmg": 734.2
+     "dmg": 7.3
     },
     {
      "m": 900,
      "v": 100.3,
-     "dmg": 601.1
+     "dmg": 6.0
     },
     {
      "m": 950,
      "v": 90.8,
-     "dmg": 492.2
+     "dmg": 4.9
     },
     {
      "m": 1000,
      "v": 82.1,
-     "dmg": 402.9
+     "dmg": 4.0
     }
    ],
    "source": {
@@ -2828,7 +2856,7 @@
     ]
    },
    "warnings": [
-    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+    "DamageValue 22000 dans le mod (faute de frappe probable), corrige en 220"
    ]
   },
   "US_M2_CARBINE": {
@@ -2837,18 +2865,23 @@
    "prefab": "{F34FA45A2DE16C2D}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M2_Carbine.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "single",
+     "rpm": 750.0,
+     "burst": null
+    },
+    {
+     "mode": "auto",
      "rpm": 725.0,
      "burst": null
     }
    ],
-   "rpm": 725.0,
+   "rpm": 750.0,
    "magazine": "{497BEFA61452A6B5}Prefabs/Weapons/Magazines/M1_Carbine/Magazine_762x33_M1_Carbine_15rnd_Ball_M1.et",
    "magazineSize": 15,
    "caliber": "7.62x33mm",
    "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
    "muzzleVelocity": 607.0,
-   "damage": 22000.0,
+   "damage": 220.0,
    "bulletMass": 0.002,
    "airDrag": 4e-06,
    "penetrationDepth": 3.6,
@@ -2865,107 +2898,107 @@
     {
      "m": 0,
      "v": 607.0,
-     "dmg": 22000.0
+     "dmg": 220.0
     },
     {
      "m": 50,
      "v": 549.2,
-     "dmg": 18012.1
+     "dmg": 180.1
     },
     {
      "m": 100,
      "v": 497.0,
-     "dmg": 14747.0
+     "dmg": 147.5
     },
     {
      "m": 150,
      "v": 449.7,
-     "dmg": 12073.9
+     "dmg": 120.7
     },
     {
      "m": 200,
      "v": 406.9,
-     "dmg": 9885.2
+     "dmg": 98.9
     },
     {
      "m": 250,
      "v": 368.2,
-     "dmg": 8093.3
+     "dmg": 80.9
     },
     {
      "m": 300,
      "v": 333.1,
-     "dmg": 6626.3
+     "dmg": 66.3
     },
     {
      "m": 350,
      "v": 301.4,
-     "dmg": 5425.1
+     "dmg": 54.3
     },
     {
      "m": 400,
      "v": 272.7,
-     "dmg": 4441.7
+     "dmg": 44.4
     },
     {
      "m": 450,
      "v": 246.8,
-     "dmg": 3636.6
+     "dmg": 36.4
     },
     {
      "m": 500,
      "v": 223.3,
-     "dmg": 2977.4
+     "dmg": 29.8
     },
     {
      "m": 550,
      "v": 202.1,
-     "dmg": 2437.7
+     "dmg": 24.4
     },
     {
      "m": 600,
      "v": 182.8,
-     "dmg": 1995.8
+     "dmg": 20.0
     },
     {
      "m": 650,
      "v": 165.4,
-     "dmg": 1634.0
+     "dmg": 16.3
     },
     {
      "m": 700,
      "v": 149.7,
-     "dmg": 1337.8
+     "dmg": 13.4
     },
     {
      "m": 750,
      "v": 135.4,
-     "dmg": 1095.3
+     "dmg": 11.0
     },
     {
      "m": 800,
      "v": 122.6,
-     "dmg": 896.8
+     "dmg": 9.0
     },
     {
      "m": 850,
      "v": 110.9,
-     "dmg": 734.2
+     "dmg": 7.3
     },
     {
      "m": 900,
      "v": 100.3,
-     "dmg": 601.1
+     "dmg": 6.0
     },
     {
      "m": 950,
      "v": 90.8,
-     "dmg": 492.2
+     "dmg": 4.9
     },
     {
      "m": 1000,
      "v": 82.1,
-     "dmg": 402.9
+     "dmg": 4.0
     }
    ],
    "source": {
@@ -2991,7 +3024,7 @@
     ]
    },
    "warnings": [
-    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+    "DamageValue 22000 dans le mod (faute de frappe probable), corrige en 220"
    ]
   },
   "US_M1919A4": {
@@ -2999,6 +3032,11 @@
    "category": "mg",
    "prefab": "{AB3A3ADC8CE3F848}Prefabs/Weapons/MachineGuns/M1919/MG_M1919A4.et",
    "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
     {
      "mode": "auto",
      "rpm": 500.0,
@@ -3172,7 +3210,12 @@
    "prefab": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "auto",
      "rpm": 500.0,
      "burst": null
     }
@@ -3407,12 +3450,12 @@
    "prefab": "{D9340572C7EF6CB7}Prefabs/Weapons/Rifles/STG44/Rifle_STG44.et",
    "fireModes": [
     {
-     "mode": "auto",
+     "mode": "single",
      "rpm": 540.0,
      "burst": null
     },
     {
-     "mode": "single",
+     "mode": "auto",
      "rpm": 540.0,
      "burst": null
     }
@@ -3751,17 +3794,17 @@
    "prefab": "{F6BD5104680D2991}Prefabs/Weapons/Machineguns/FG42G/Machinegun_FG42G.et",
    "fireModes": [
     {
-     "mode": null,
-     "rpm": null,
+     "mode": "safe",
+     "rpm": 0.0,
      "burst": null
     },
     {
-     "mode": null,
+     "mode": "single",
      "rpm": 750.0,
      "burst": null
     },
     {
-     "mode": null,
+     "mode": "auto",
      "rpm": 750.0,
      "burst": null
     }
@@ -3938,7 +3981,7 @@
    "prefab": "{C81F18A853BE165A}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP38.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "auto",
      "rpm": 500.0,
      "burst": null
     }
@@ -3946,7 +3989,7 @@
    "rpm": 500.0,
    "magazine": "{20E4A0615C0ABC16}Prefabs/Weapons/Magazines/MP38/Magazine_9x19_MP38_32rnd.et",
    "magazineSize": 32,
-   "caliber": "9x18mm",
+   "caliber": "9x19mm",
    "ammo": "{FDBA4064AA9D60C3}Prefabs/Weapons/Ammo/Ammo_9x19_Ball_08.et",
    "muzzleVelocity": 317.3,
    "damage": 300.0,
@@ -4088,7 +4131,10 @@
      "prefabs/weapons/ammo/ammo_9x19/ammo_9x19_ball_08.et"
     ],
     "muzzleCoef": 0.835
-   }
+   },
+   "warnings": [
+    "calibre \"9x18mm\" dans le chargeur du mod, corrige en 9x19mm (config munition)"
+   ]
   },
   "GER_MG34": {
    "label": "MG 34",
@@ -4096,8 +4142,8 @@
    "prefab": "{5D838074E66C006C}Prefabs/Weapons/MachineGuns/MG34/MG_MG34.et",
    "fireModes": [
     {
-     "mode": "single",
-     "rpm": null,
+     "mode": "safe",
+     "rpm": 0.0,
      "burst": null
     },
     {
@@ -4278,7 +4324,12 @@
    "prefab": "{AEE8B1A7356E943E}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Scheissbecher.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
      "rpm": null,
      "burst": null
     }
@@ -4709,13 +4760,13 @@
    "prefab": "{E3E9CB8B5D3A37AB}Prefabs/Weapons/Rifles/M1928A1/BC_SMG_M1928A1.et",
    "fireModes": [
     {
-     "mode": null,
-     "rpm": 800.0,
+     "mode": "single",
+     "rpm": 875.0,
      "burst": null
     },
     {
-     "mode": null,
-     "rpm": 875.0,
+     "mode": "auto",
+     "rpm": 800.0,
      "burst": null
     }
    ],
@@ -4939,12 +4990,17 @@
    "prefab": "{05D871A0CEE5026F}Prefabs/Weapons/MachineGuns/BAR/BC_BAR_M1918A2.et",
    "fireModes": [
     {
-     "mode": null,
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "auto",
      "rpm": 620.0,
      "burst": null
     },
     {
-     "mode": null,
+     "mode": "auto",
      "rpm": 350.0,
      "burst": null
     }

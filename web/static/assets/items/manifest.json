@@ -342,58 +342,64 @@
   "cat": "tank"
  },
  "GER_PZ4": {
-  "img": "GER_PZ4.webp",
-  "kind": "render",
+  "img": "GER_PZ4_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{E44C69F0A2538279}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_H_Base.et",
   "bg": "transparent",
   "icon": "GER_PZ4.svg",
-  "cat": "tank"
+  "cat": "tank",
+  "note": "SVG side view: in-engine preview draws the RMS turret detached"
  },
  "GER_PZ4_G": {
-  "img": "GER_PZ4_G.webp",
-  "kind": "render",
+  "img": "GER_PZ4_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{6E1EFC04B7356FE6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_G.et",
   "bg": "transparent",
   "icon": "GER_PZ4_G.svg",
-  "cat": "tank"
+  "cat": "tank",
+  "note": "SVG side view: in-engine preview draws the RMS turret detached"
  },
  "GER_PZ4_F2": {
-  "img": "GER_PZ4_F2.webp",
-  "kind": "render",
+  "img": "GER_PZ4_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{3C7E824E65A93FA9}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F2.et",
   "bg": "transparent",
   "icon": "GER_PZ4_F2.svg",
-  "cat": "tank"
+  "cat": "tank",
+  "note": "SVG side view: in-engine preview draws the RMS turret detached"
  },
  "GER_PZ4_F": {
-  "img": "GER_PZ4_F.webp",
-  "kind": "render",
+  "img": "GER_PZ4_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{70971D2B05042098}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F.et",
   "bg": "transparent",
   "icon": "GER_PZ4_F.svg",
-  "cat": "tank"
+  "cat": "tank",
+  "note": "SVG side view: in-engine preview draws the RMS turret detached"
  },
  "GER_PZ4_D": {
-  "img": "GER_PZ4_D.webp",
-  "kind": "render",
+  "img": "GER_PZ4_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{1CC329CBB9C0AFB6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_E.et",
   "bg": "transparent",
   "icon": "GER_PZ4_D.svg",
-  "cat": "tank"
+  "cat": "tank",
+  "note": "SVG side view: in-engine preview draws the RMS turret detached"
  },
  "GER_PZ4_WIRBELWIND": {
-  "img": "GER_PZ4_WIRBELWIND.webp",
-  "kind": "render",
+  "img": "GER_PZ4_WIRBELWIND_side.svg",
+  "kind": "icon",
   "source": "RMS WW2 PANZER IV",
   "path": "{7E7B98C2756C68DD}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_WW.et",
   "bg": "transparent",
   "icon": "GER_PZ4_WIRBELWIND.svg",
-  "cat": "aa"
+  "cat": "aa",
+  "note": "SVG side view: detached turret in preview"
  },
  "GER_JAGDPANZER4": {
   "img": "GER_JAGDPANZER4.webp",
@@ -1284,5 +1290,19 @@
   "bg": "transparent",
   "icon": "US_WC63_TRANSPORT.svg",
   "cat": "truck"
+ },
+ "GER_SW36": {
+  "img": "GER_SW36_side.svg",
+  "kind": "icon",
+  "source": "hand-drawn SVG (preview renders nothing)",
+  "icon": "GER_SW36.svg",
+  "cat": "static"
+ },
+ "GER_TRAILER_SDAH51": {
+  "img": "GER_TRAILER_SDAH51_side.svg",
+  "kind": "icon",
+  "source": "hand-drawn SVG (preview renders nothing)",
+  "icon": "GER_TRAILER_SDAH51.svg",
+  "cat": "trailer"
  }
 }

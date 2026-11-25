@@ -67,7 +67,7 @@ const CAT_RX = [[/TIGER|PZ|PANZER4|SHERMAN|TANK/, 'tank'], [/SDKFZ251|M3A1|HALFT
 const itemOf = k => ITEMIMG[k] || ITEMIMG[Object.keys(ITEMIMG).find(x => x.startsWith(k + '_')) || ''];
 const catOf = k => itemOf(k)?.cat || (CAT_RX.find(([r]) => r.test(k)) || [])[1];
 const iconFile = k => itemOf(k)?.icon || (catOf(k) ? 'cat-' + catOf(k) + '.svg' : 'cat-tank.svg');
-const renderOf = k => itemOf(k)?.kind === 'render' ? '/assets/items/' + itemOf(k).img : '';
+const renderOf = k => ['render', 'icon'].includes(itemOf(k)?.kind) ? '/assets/items/' + itemOf(k).img : '';
 // HTML: tinted by CSS color (mask-image)
 const icoHtml = (file, cls = '') => `<i class="ico ${cls}" style="--ico:url(/assets/icons/${file})"></i>`;
 const catBadge = k => catOf(k) ? icoHtml('cat-' + catOf(k) + '.svg', 'cbadge') : '';
@@ -125,7 +125,7 @@ async function openWeapon(i, list = []) {
   const others = list.filter(o => o.key !== i.key && S[o.key] && S[o.key].damageCurve);
   const draw = cmpKey => {
     const b = cmpKey ? S[cmpKey] : null, bi = list.find(o => o.key === cmpKey);
-    const modes = a && a.fireModes && a.fireModes.length ? a.fireModes.map(m => m.mode).filter(Boolean).join(' / ') : '—';
+    const modes = a && a.fireModes && a.fireModes.length ? [...new Set(a.fireModes.filter(m => m.mode && m.mode !== 'safe').map(m => m.mode[0].toUpperCase() + m.mode.slice(1) + (m.burst ? ' ' + m.burst : '') + (m.rpm ? ` (${m.rpm} rpm)` : '')))].join(' / ') || '—' : '—';
     box.innerHTML = `<div class="wcard"><button class="wx" onclick="document.getElementById('wdlg').remove()">✕</button>
      <div class="whead"><div class="wimg ${ITEMIMG[i.key]?.kind === 'photo' ? 'photo' : ''}"><img src="${itemSrc(i.key)}" alt=""></div>
       <div><div class="wcat">${esc(i.category || '')}${a && a.caliber ? ' · ' + esc(a.caliber) : ''}</div><h2>${esc(i.label)}</h2>

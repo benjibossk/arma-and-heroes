@@ -103,31 +103,62 @@ def first(ch, pattern, cast=float):
     return None, None
 
 
+def _mode_fields(conf, body):
+    f = {}
+    if conf:
+        f.update(_mode_fields(None, chr(10).join(t for *_, t in reversed(chain(conf)))))
+        n = re.search(r'FireMode_(\w+)\.conf', conf)
+        if n:
+            f['name'] = n.group(1).lower()
+    for key, pat in [('rpm', r'RoundsPerMinute ([\d.]+)'), ('maxBurst', r'MaxBurst (-?\d+)'),
+                     ('burst', r'BurstSize (\d+)'), ('ui', r'UIName "([^"]*)"')]:
+        for m in re.finditer(pat, body):
+            f[key] = m.group(1)
+    return f
+
+
 def fire_modes(ch):
-    for _, _, rel, t in ch:
+    """Merge FireModes across the prefab chain (root -> leaf); entries are keyed by their ID,
+    child prefabs override only the fields they set (MaxBurst, RoundsPerMinute, UIName...)."""
+    merged, order, src = {}, [], None
+    for _, _, rel, t in reversed(ch):
         m = re.search(r'^(\s*)FireModes \{\n(.*?)^\1\}', t, re.M | re.S)
         if not m:
             continue
-        modes = []
-        for bm in re.finditer(r'BaseFireMode "[^"]*"(?: : "([^"]+)")? \{(.*?)\n\s{6}\}', m.group(2), re.S):
-            conf, body = bm.group(1), bm.group(2)
-            name = re.search(r'FireMode_(\w+)\.conf', conf or '')
-            name = name.group(1).lower() if name else None
-            rpm = re.search(r'RoundsPerMinute ([\d.]+)', body)
-            burst = re.search(r'BurstSize (\d+)', body)
-            if conf and (not rpm or not name):
-                cc = chain(conf)
-                if not rpm:
-                    v, _ = first(cc, r'RoundsPerMinute ([\d.]+)')
-                    rpm = v
-                else:
-                    rpm = float(rpm.group(1))
-            else:
-                rpm = float(rpm.group(1)) if rpm else None
-            modes.append({'mode': name, 'rpm': rpm, 'burst': int(burst.group(1)) if burst else None})
-        if modes:
-            return modes, rel
-    return [], None
+        src = rel
+        for bm in re.finditer(r'^(\s*)BaseFireMode "([^"]*)"(?: : "([^"]+)")? \{\n(.*?)^\1\}', m.group(2), re.M | re.S):
+            key = bm.group(2) or str(len(order))
+            if key not in merged:
+                merged[key] = {}
+                order.append(key)
+            merged[key].update(_mode_fields(bm.group(3), bm.group(4)))
+    modes = []
+    for k in order:
+        f = merged[k]
+        ui = (f.get('ui') or '').lower()
+        mb = int(f['maxBurst']) if 'maxBurst' in f else None
+        if f.get('name') == 'safe' or 'safe' in ui or f.get('rpm') in ('0', '0.0'):
+            name = 'safe'
+        elif mb == -1:
+            name = 'auto'
+        elif mb == 1:
+            name = 'single'
+        elif mb and mb > 1:
+            name = 'burst'
+        elif 'auto' in ui:
+            name = 'auto'
+        elif 'burst' in ui:
+            name = 'burst'
+        else:
+            name = f.get('name') or 'single'
+        rpm = float(f['rpm']) if f.get('rpm') and name != 'safe' else (0.0 if name == 'safe' else None)
+        m = {'mode': name, 'rpm': rpm,
+             'burst': int(f['burst']) if f.get('burst') else (mb if mb and mb > 1 else None)}
+        if m not in modes:
+            modes.append(m)
+    modes.sort(key=lambda m: ['safe', 'single', 'burst', 'auto'].index(m['mode']) if m['mode'] in
+               ('safe', 'single', 'burst', 'auto') else 9)
+    return modes, src
 
 
 def caliber(s):
@@ -248,6 +279,34 @@ def weapon(key, item):
     return res
 
 
+# Known typos in the Finest Hour data (raw value kept in 'warnings'):
+#  - Ammo_762x33_Ball_M1.et: DamageValue 22000 (every other small-arms round is 76-300) -> 220
+#  - Magazine_9x19_MP38_32rnd.et: m_sAmmoCaliber "#FH-AmmunitionID_9x18mm" while magazine, ammo
+#    config and ammo are all 9x19 -> caliber taken from the ammo config name instead.
+DAMAGE_FIX = {'prefabs/weapons/ammo/ammo_763x33/ammo_762x33_ball_m1.et': (22000.0, 220.0)}
+
+
+def fix_anomalies(w):
+    warn = []
+    fx = DAMAGE_FIX.get((w['source'].get('ammo') or [None])[0])
+    if fx and w['damage'] == fx[0]:
+        w['damage'] = fx[1]
+        if w['damageCurve']:
+            w['damageCurve'] = [dict(p, dmg=round(p['dmg'] * fx[1] / fx[0], 1)) if isinstance(p, dict) else p
+                                for p in w['damageCurve']]
+        warn.append('DamageValue %g dans le mod (faute de frappe probable), corrige en %g' % fx)
+    elif (w['damage'] or 0) > 1000:
+        warn.append('DamageValue %g tel quel dans le mod (valeur aberrante, a verifier)' % w['damage'])
+    m = re.search(r'ammo_(\d+)x(\d+)', w['source'].get('ammoConfig') or '')
+    if m and w['caliber']:
+        c = caliber('AmmunitionID_%sx%smm' % m.groups())
+        if c != w['caliber'] and re.match(r'[\d.]+x\d+', w['caliber']):
+            warn.append('calibre "%s" dans le chargeur du mod, corrige en %s (config munition)' % (w['caliber'], c))
+            w['caliber'] = c
+    if warn:
+        w['warnings'] = warn
+
+
 def main():
     global IDX
     ensure_extract('--reextract' in sys.argv)
@@ -263,8 +322,7 @@ def main():
     for k, it in cat.items():
         if it.get('category') in WEAPON_CATS:
             w = weapon(k, it)
-            if (w['damage'] or 0) > 1000:
-                w['warnings'] = ['DamageValue %g tel quel dans le mod (valeur aberrante, a verifier)' % w['damage']]
+            fix_anomalies(w)
             out['weapons'][k] = w
     dst = os.path.join(REPO, 'web', 'weapon_stats.json')
     json.dump(out, open(dst, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

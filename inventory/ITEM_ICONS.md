@@ -29,7 +29,10 @@ un-mixing, edge despill), trims to content with 5% padding. WebP with alpha: wea
 Not renderable (preview shows nothing, from prefab or spawned): GER_SW36, GER_TRAILER_SDAH51 (no manifest entry).
 GER_GRW34 renders only spawned in the world (`spawn` job). US_WC63 / US_WC63_TRANSPORT reuse the US_WC63_COVERED /
 US_WC63_UNCOVERED pictures (same model). Panzer IV family (RMS mod): the preview draws the turret detached from the
-hull, from the prefab or spawned (even after 12 s) - still unsolved.
+hull, from the prefab or spawned (even after 12 s) - still unsolved in the Workbench preview, so the family now uses
+hand-drawn side views (`items/GER_PZ4_side.svg`, `items/GER_PZ4_WIRBELWIND_side.svg`, manifest `kind: icon`).
+GER_SW36 / GER_TRAILER_SDAH51 likewise use `items/*_side.svg` + `icons/*.svg`. Do not let `make_icons.py`
+overwrite `icons/GER_PZ4*.svg`, `icons/GER_SW36.svg`, `icons/GER_TRAILER_SDAH51.svg` (hand-drawn).
 Side-view pass: `make_jobs.py --side` emits `KEY|spawn|<prefab>||veh|10,-48,0` (entity spawned, prefab
 PreviewRenderAttributes camera rotated by that delta); outputs go to `tools/icon-silhouettes/side/` and
 `make_icons.py` traces those profiles for vehicle SVGs (cat-tank = Tiger side). PZ4 side renders dropped (detached
