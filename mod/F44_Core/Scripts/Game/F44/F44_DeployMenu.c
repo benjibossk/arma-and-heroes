@@ -34,7 +34,10 @@ modded class SCR_DeployMenuMain
 		if (m_ActiveRespawnTimer && sp)
 		{
 			remaining = m_ActiveRespawnTimer.GetPlayerRemainingTime(m_iPlayerId, sp.GetRespawnTime());
-			total = m_ActiveRespawnTimer.GetRespawnTime() + sp.GetRespawnTime();
+			float own = m_ActiveRespawnTimer.F44_GetPlayerDuration(m_iPlayerId);
+			if (own < 0)
+				own = m_ActiveRespawnTimer.GetRespawnTime();
+			total = own + sp.GetRespawnTime();
 		}
 		string loadout;
 		if (m_PlyLoadoutComp && m_PlyLoadoutComp.GetLoadout())
@@ -431,7 +434,7 @@ class F44_DeployOverlay
 		if (mobile)
 			info = "[TRUCK] " + info + string.Format("   MOBILE SPAWN - DEPLOY DELAY PENALTY +%1 S", Math.Round(sp.GetRespawnTime()));
 		else if (forward)
-			info += string.Format("   DEPLOY DELAY PENALTY +%1 S", Math.Round(sp.GetRespawnTime()));
+			info += string.Format("   DEPLOY DELAY PENALTY +%1 S (DISTANCE)", Math.Round(sp.GetRespawnTime()));
 
 		float f = 1;
 		if (total > 0 && remaining > 0)

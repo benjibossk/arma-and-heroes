@@ -49,6 +49,7 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Mobile spawn reworked to the H&G rules: you spawn directly inside a free seat of your team's half-track / truck / tank; no driver, stationary or enemy-distance condition. A vehicle is lost for mobile spawn if an enemy, or another assault team (while it was empty), gets in.
 - Mech infantry: one active half-track per team (a new one comes from the pool when none is left); Armor/TD teams: every tank is a mobile spawn, max 3 active per team. Mobile deploy delay 20 s total.
 - Air drop plane uses the same seat helper.
+- Respawn time model (H&G-like): your delay grows with your loadout equipment points, forward sector spawns cost more the further they are from your HQ, defenders get a small bonus; the deploy menu shows your own total. Values come from the battle config (spawnTimes).
 - US Medic, MG, AT, Engineer, Crew, Driver and GER Driver classes now have Finest Hour prefabs (catalog).
 - Beauregard: defender spawn moved off the harbour water; crates and civilian vehicles are never spawned below sea level.
 - Server logs: VEHSPAWN / VEHCRATE / CIVSPAWN / CRATE lines for every vehicle, crate and civilian vehicle spawn.

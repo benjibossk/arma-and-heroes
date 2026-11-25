@@ -27,6 +27,7 @@ class F44_LoadoutRequest
 //------------------------------------------------------------------------------------------------
 class F44_LoadoutService
 {
+	static F44_LoadoutService s_Instance;	// set on Init, read by the respawn timer (P1-C)
 	protected ref map<string, ref F44_PlayerLoadout> m_mLoadouts = new map<string, ref F44_PlayerLoadout>();
 	protected ref array<ref F44_LoadoutRequest> m_aPending = {};
 	protected string m_sApiUrl;
@@ -36,6 +37,7 @@ class F44_LoadoutService
 	//------------------------------------------------------------------------------------------------
 	void Init(F44_BattleConfig cfg, string apiUrl, string token, string battleId)
 	{
+		s_Instance = this;
 		m_sApiUrl = apiUrl;
 		m_sToken = token;
 		m_sBattleId = battleId;
