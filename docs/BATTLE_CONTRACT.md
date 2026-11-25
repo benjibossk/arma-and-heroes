@@ -131,4 +131,14 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - Catalog `type: "AIR"`: pilot seat only for the PILOT family; while the catalog has no `US_PILOT` / `GER_PILOT` class, CREW may fly. AI crews are never restricted.
 - The class is the one the player deployed with (account class lock itself is web side: web/models.go, soldiers.go).
 
+### P3 Air layer — battle JSON `air` (optional) — `F44_AirLayer.c`
+`{ "enabled": true, "respawnSec": 60, "maxActivePerTeam": 1, "airfields": [{ "side": "GER", "x": 1200, "z": 3400, "yaw": 90 }] }`
+- Air team = a team whose `vehicles[]` hold catalog `type: "AIR"` keys (e.g. `{"key": "GER_STUKA", "count": 2}`). Those keys never use the ground
+  vehicle slots: one plane per team (`maxActivePerTeam`) spawns parked on a free airfield of its side, an airfield waits `respawnSec` between spawns.
+- Plane tickets = the pool `count` (one sortie each). A destroyed plane costs its catalog `cost` in battle tickets, appears in `losses[team].vehicles`
+  and in `teamKills` (P2-E), and locks the key for `spawnRules.vehicleLockSec`. Pilot seat: PILOT family (seat rules). Log `[F44] AIRSPAWN`, `[F44] AIR`.
+- Aircraft available: GER Ju 87 Stuka `GER_STUKA`, Ju 88 `GER_JU88` (RMS WW2 WarBirds II, server mods 69E3578A86951C05 + Flight Core + WCS_Armaments).
+  **Gap: no US fighter** — only the C-47 `US_C47` (air drop transport, `airDrop`); RMS WarBirds II no longer ships the P-51.
+- **Web side not done:** no airfield data per city and no AIR team type in teams.json yet; the payload must add `air.airfields` and AIR teams.
+
 

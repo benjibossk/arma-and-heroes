@@ -8,6 +8,7 @@
 //  - P3 access points, multi-line layouts, pushed off the map: F44_AccessPoints.c
 //  - P3 vehicle spawn lock, mine cap, suicide / join penalties: F44_SpawnRules.c
 //  - P3 seat enforcement for the account classes: F44_SeatRules.c
+//  - P3 air layer (airfields, air teams, plane spawn): F44_AirLayer.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -37,6 +38,7 @@ class F44_Rules
 		F44_SpawnRules.s_Cfg.Read(root);
 		F44_SeatRules.s_Cfg = new F44_SeatRulesConfig();
 		F44_SeatRules.s_Cfg.Read(root);
+		F44_AirLayer.Read(root);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -49,6 +51,7 @@ class F44_Rules
 		F44_Squads.Reset();
 		F44_SpawnRules.Reset();
 		F44_SeatRules.Reset();
+		F44_AirLayer.Reset();
 	}
 
 	//------------------------------------------------------------------------------------------------

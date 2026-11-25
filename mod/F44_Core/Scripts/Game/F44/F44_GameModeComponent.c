@@ -1070,6 +1070,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 
 		// refill free slots from the pools
 		float now = GetGame().GetWorld().GetWorldTime() * 0.001;
+		SpawnAir(now);
 		foreach (F44_VehicleSpawnPointComponent sp : F44_VehicleSpawnPointComponent.GetAll())
 		{
 			if (!sp.IsFree())
@@ -1090,6 +1091,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 					continue;
 				if (!F44_Rules.CanSpawnVehicle(e.m_sTeamId, e.m_sKey))
 					continue;	// temporary lock after a loss (F44_SpawnRules.c)
+				if (F44_AirLayer.IsAirKey(e.m_sKey))
+					continue;	// planes spawn on airfields (SpawnAir)
 				string teamType = TeamTypeOf(e.m_sTeamId);
 				if (!m_MobileSpawns.CanSpawnForTeam(e.m_sTeamId, teamType, e.m_sKey))
 					continue;	// max active vehicles of the team (mobileSpawn.maxActive*)
@@ -1115,6 +1118,43 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				m_MobileSpawns.Register(veh, e.m_sKey, F44_Catalog.Get().GetFactionKey(SideKey(sp.m_eSide)), e.m_sTeamId, teamType);	// counted at once by CanSpawnForTeam
 				PrintFormat("[F44] VEHSPAWN side=%1 team=%2 key=%3 prefab=%4 armed=%5 crate=%6 slot=%7 pos=%8 left=%9", SideKey(sp.m_eSide), e.m_sTeamId, e.m_sKey, prefab.GetPath(), e.m_bArmed, e.m_sCrate, sp.GetOwner().GetName(), veh.GetOrigin(), e.m_iRemaining);
 				break;
+			}
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! P3 air layer: parked planes of the air teams on their side's airfields (F44_AirLayer.c)
+	protected void SpawnAir(float now)
+	{
+		F44_AirLayer.ClearActive();
+		foreach (F44_TrackedVehicle ta : m_aVehicles)
+		{
+			if (ta.m_Entity && F44_AirLayer.IsAirKey(ta.m_sKey))
+				F44_AirLayer.CountActive(ta.m_sTeamId);
+		}
+		for (int s = 0; s < 2; s++)
+		{
+			array<ref F44_PoolEntry> pool = m_aPoolDef;
+			int side = F44_ESectorOwner.DEFENDER;
+			if (s == 0)
+			{
+				pool = m_aPoolAtt;
+				side = F44_ESectorOwner.ATTACKER;
+			}
+			foreach (F44_PoolEntry e : pool)
+			{
+				if (!F44_AirLayer.IsAirKey(e.m_sKey) || !F44_Rules.CanSpawnVehicle(e.m_sTeamId, e.m_sKey))
+					continue;
+				IEntity plane = F44_AirLayer.TrySpawn(e, SideKey(side), now);
+				if (!plane)
+					continue;
+				F44_TrackedVehicle tv = new F44_TrackedVehicle();
+				tv.m_Entity = plane;
+				tv.m_sKey = e.m_sKey;
+				tv.m_sTeamId = e.m_sTeamId;
+				tv.m_iSide = side;
+				tv.m_fSpawnTime = now;
+				m_aVehicles.Insert(tv);
 			}
 		}
 	}

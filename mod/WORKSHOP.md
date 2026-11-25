@@ -53,6 +53,7 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Access points and multi-line maps: attack lines are captured independently; if defenders retake an access point, the teams attacking from it can no longer deploy, and losing every access point ends the battle (pushed off the map).
 - A lost vehicle cannot respawn for its team for a minute; armed mines are capped per side (oldest removed); suicides add maintenance time; leaving and rejoining a battle delays your next deploy.
 - Seat rules: only tank crew soldiers may drive or man a tank, only pilots (tank crew until a pilot class exists) may fly a plane.
+- Air layer: air teams get their planes (Ju 87 Stuka, Ju 88) parked on their side's airfield, one sortie per plane ticket. The US side has only the C-47 transport for now (no US fighter available).
 
 
 ## Changelog 1.2.1 (draft)
