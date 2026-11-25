@@ -122,6 +122,9 @@ func arrive(w *War, t *AssaultTeam) {
 		return
 	}
 	db.Model(t).Updates(map[string]interface{}{"arrival_at": nil, "depart_at": nil})
+	if startSkirmish(w, t) {
+		return
+	}
 	if b := activeBattleAt(w.ID, dest.ID); b != nil {
 		// renforts : l'AT rejoint son camp dans la bataille en cours
 		if t.Faction == b.Defender {
@@ -412,6 +415,8 @@ func applyResult(b *Battle, r *BattleResult) error {
 			switch {
 			case t.Manpower <= 0:
 				upd["status"] = "destroyed"
+			case b.RoadID != 0:
+				upd = skirmishExit(side == r.Winner, now)
 			case side == r.Winner && side == b.Attacker:
 				upd["status"], upd["city_id"] = "idle", b.CityID
 			case side == r.Winner:
@@ -433,7 +438,9 @@ func applyResult(b *Battle, r *BattleResult) error {
 	if city != nil {
 		cname = city.Name
 	}
-	if r.Winner == b.Attacker && city != nil {
+	if b.RoadID != 0 {
+		logEvent(b.WarID, "battle", r.Winner, fmt.Sprintf("%s wins the road skirmish near %s (%s)", r.Winner, cname, r.Reason))
+	} else if r.Winner == b.Attacker && city != nil {
 		db.Model(&City{}).Where("war_id = ? AND id = ?", b.WarID, b.CityID).Update("owner", b.Attacker)
 		seizeStockpile(b.WarID, b.CityID, b.Attacker)
 		logEvent(b.WarID, "capture", b.Attacker, fmt.Sprintf("%s captures %s (%s)", b.Attacker, cname, r.Reason))

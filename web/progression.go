@@ -250,7 +250,7 @@ func applyWarFunds(b *Battle, r *BattleResult) {
 		v := wf.Loss
 		if side == r.Winner {
 			v = wf.Win
-			if side == b.Attacker {
+			if side == b.Attacker && b.RoadID == 0 { // no city taken in a road skirmish
 				v += wf.CityCaptured
 			}
 		}
