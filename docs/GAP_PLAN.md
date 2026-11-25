@@ -173,5 +173,5 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 - Vehicle temporary spawn lock, mine cap, suicide/join penalties [GM] (S each).
 - Account classes tank/pilot/recon + career lock — WEB DONE 2026-11-26 (web/careers.go; seat enforcement [GM] still open) — (web/models.go, soldiers.go) and in-battle seat enforcement [GM].
 - Cosmetics (camo, face presets), weapon upgrades, cross-faction unlock surcharge — WEB DONE 2026-11-26 (web/cosmetics.go; mod-side visuals/effects open) — (web/progression.go, soldiers.go).
-- Daily reward cycle + seasonal track (web/progression.go, [API] routes).
+- Daily reward cycle + seasonal track — DONE 2026-11-26 (web/rewards.go, barracks Service record) — (web/progression.go, [API] routes).
 - Skip: premium currency, membership, bonds.

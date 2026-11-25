@@ -51,3 +51,21 @@ async function svcWUpg(id, item, price) {
   if (!confirm('Upgrade ' + item + ' for ' + price + ' credits ?')) return;
   try { await api('/soldiers/' + id + '/weapon-upgrades/' + item, { method: 'POST' }); svcSoldier({ id }); } catch (e) { alert(e.message); }
 }
+async function svcRewards() {
+  try {
+    const d = await api('/me/rewards'), dl = d.daily, se = d.season;
+    const days = dl.cycle.map((cr, i) => { const n = i + 1, done = dl.canClaim ? n < dl.nextDay : n <= dl.streak, next = dl.canClaim && n === dl.nextDay;
+      return `<span class="tag" style="${next ? 'background:var(--amber);color:var(--on-amber)' : done ? 'opacity:.55' : ''}">D${n} · ${cr}</span>`; }).join(' ');
+    const tiers = se.tiers.map(t => `<span class="tag" title="${t.points} pts" style="${t.claimed ? 'opacity:.55' : t.reached ? 'background:var(--amber);color:var(--on-amber)' : ''}">T${t.tier} · ${t.credits}</span>`).join(' ');
+    const pct = Math.min(100, Math.round(100 * se.points / (se.tiers[se.tiers.length - 1].points)));
+    svcSection('rew', `<h3 style="margin:10px 0 4px">Daily ration</h3><p style="margin:2px 0">${days}</p>
+      ${dl.canClaim ? `<button class="cta" onclick="svcClaim('daily')">Collect day ${dl.nextDay} — ${dl.nextCredits} credits</button>` : '<span class="muted">Collected today. Come back tomorrow to keep the streak.</span>'}
+      <h3 style="margin:10px 0 4px">Campaign season ${esc(se.id)}</h3><p class="muted" style="margin:2px 0">${se.points} season points (battle XP) · ends ${new Date(se.end).toLocaleDateString()}</p>
+      <div style="background:var(--card);height:8px;margin:4px 0"><div style="background:var(--amber);height:8px;width:${pct}%"></div></div><p style="margin:2px 0">${tiers}</p>
+      ${se.due > 0 ? `<button onclick="svcClaim('season')">Claim season rewards — ${se.due} credits</button>` : ''}`);
+  } catch (e) { svcSection('rew', ''); }
+}
+async function svcClaim(kind) {
+  try { const r = await api('/me/rewards/' + kind, { method: 'POST' }); alert('+' + r.credits + ' credits'); svcRewards(); if (typeof load === 'function') load(); } catch (e) { alert(e.message); }
+}
+if (document.getElementById('svc')) addEventListener('load', () => { svcRewards(); });

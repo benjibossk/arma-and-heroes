@@ -63,3 +63,13 @@ next to the code (one file per package) unless noted.
 - **Cross-faction**: enemy primary/secondary weapons become buyable from rank 3 at +50%
   (`itemUsable` / `unlockPrice`; depot, unlock tree and loadout validation use them).
 - UI: barracks "Service record" panel (appearance + armourer).
+
+## P3 Daily reward + seasonal track (`web/rewards.go`)
+- **Daily ration**: one claim per UTC day, 7-day cycle 50/75/100/150/200/250/500 credits.
+  Consecutive days advance the streak; a missed day (or after day 7) restarts at day 1.
+- **Season** = calendar quarter (`2026-Q4`). Points = battle XP earned since season start.
+  10 tiers every 1000 points; tier n pays 100 x n credits (+500 on tiers 5 and 10). Claim
+  pays every reached unclaimed tier at once; progress resets with the new quarter.
+- Credits go to the player and his active soldier of his faction (`grantCredits`).
+- API: `GET /api/v1/me/rewards`, `POST /api/v1/me/rewards/daily`, `POST /api/v1/me/rewards/season`.
+- Premium currency / membership / bonds: deliberately skipped.
