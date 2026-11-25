@@ -15,6 +15,9 @@ class F44_MissionHeader : SCR_MissionHeader
 	[Attribute("0", desc: "Test only: overrides the battle timeLimitMin when > 0 (set by the orchestrator)")]
 	int m_iTimeLimitOverrideMin;
 
+	[Attribute("", desc: "Test only: extra vehicle pool keys, comma separated (set by the orchestrator)")]
+	string m_sTestVehicles;
+
 	//------------------------------------------------------------------------------------------------
 	static const string PROFILE_SERVER = "$profile:F44/server.json";
 	protected bool m_bProfileApplied;
@@ -55,6 +58,9 @@ class F44_MissionHeader : SCR_MissionHeader
 			m_sToken = s;
 		if (ctx.ReadValue("timeLimitOverrideMin", n) && n > 0)
 			m_iTimeLimitOverrideMin = n;
+		s = "";
+		if (ctx.ReadValue("testVehicles", s))
+			m_sTestVehicles = s;
 		Print("[F44] Header: overridden from " + PROFILE_SERVER + " (battle " + m_sBattleId + ", api " + m_sApiUrl + ")");
 	}
 }

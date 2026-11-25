@@ -205,11 +205,11 @@ var atSpecs = map[string]ATSpec{
 	"INF": {300, 120, []string{"RIFLEMAN", "MG", "MEDIC", "AT", "OFFICER"}, map[string][]VehicleCount{}, "Infantry"},
 	"PARA": {450, 80, []string{"PARA_RIFLEMAN", "PARA_MG", "MEDIC", "OFFICER"}, map[string][]VehicleCount{}, "Paratroopers"},
 	"ARM": {800, 60, []string{"CREW", "RIFLEMAN"}, map[string][]VehicleCount{
-		"US": {{"US_M4A2", 3}}, "GER": {{"GER_PZIV", 2}, {"GER_SDKFZ222", 1}}}, "Armor"},
+		"US": {{"US_SHERMAN", 3}}, "GER": {{"GER_PZ4", 1}, {"GER_TIGER1", 1}, {"GER_SDKFZ222", 1}}}, "Armor"},
 	"REC": {250, 40, []string{"SNIPER", "SCOUT", "RIFLEMAN"}, map[string][]VehicleCount{
-		"US": {{"US_JEEP", 2}}, "GER": {{"GER_KUBELWAGEN", 2}}}, "Reconnaissance"},
+		"US": {{"US_JEEP", 2}}, "GER": {{"GER_KFZ", 2}}}, "Reconnaissance"},
 	"MOT": {400, 100, []string{"RIFLEMAN", "MG", "DRIVER"}, map[string][]VehicleCount{
-		"US": {{"US_GMC", 2}, {"US_JEEP", 1}}, "GER": {{"GER_OPEL_BLITZ", 2}, {"GER_SDKFZ251", 1}}}, "Motorized"},
+		"US": {{"US_TRUCK", 1}, {"US_M3A1", 1}, {"US_JEEP", 1}}, "GER": {{"GER_TRUCK", 1}, {"GER_SDKFZ251", 2}}}, "Motorized"},
 }
 
 // LinkCode : one-time code shown in game to link a Reforger identityId to a Discord account

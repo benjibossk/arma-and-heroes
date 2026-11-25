@@ -12,6 +12,12 @@ class F44_CatalogEntry
 	int m_iCost = 1;
 	bool m_bIsClass;
 	string m_sCategory; // optional: rifle, smg, lmg, sniper, at, explosive, vehicle...
+	string m_sRole;     // vehicles: light_utility, truck, halftrack, tank...
+	bool m_bIsItem;     // entry of the "items" section (player loadout)
+
+	bool IsVehicle() { return !m_bIsClass && !m_bIsItem; }
+	bool IsTank() { return m_sRole == "tank"; }
+	bool IsTransport() { return m_sRole == "truck" || m_sRole == "halftrack" || m_sRole == "light_utility"; }
 }
 
 class F44_Catalog
@@ -99,18 +105,21 @@ class F44_Catalog
 		}
 
 		ReadFactions(ctx);
-		ReadEntries(ctx);
+		ReadEntries(ctx, "catalog");
+		ReadEntries(ctx, "items");
 		ReadAppearance(ctx);
 
-		int classes, vehicles;
+		int classes, vehicles, items;
 		foreach (string k, F44_CatalogEntry e : m_mEntries)
 		{
 			if (e.m_bIsClass)
 				classes++;
+			else if (e.m_bIsItem)
+				items++;
 			else
 				vehicles++;
 		}
-		PrintFormat("[F44] Catalog loaded from %1: %2 classes, %3 vehicles, %4 unavailable", path, classes, vehicles, m_aUnavailable.Count());
+		PrintFormat("[F44] Catalog loaded from %1: %2 classes, %3 vehicles, %4 items, %5 unavailable", path, classes, vehicles, items, m_aUnavailable.Count());
 		foreach (string missing : m_aUnavailable)
 			Print("[F44] Catalog: key " + missing + " has no prefab (null) -> unavailable", LogLevel.WARNING);
 	}
@@ -133,10 +142,10 @@ class F44_Catalog
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void ReadEntries(LoadContext ctx)
+	protected void ReadEntries(LoadContext ctx, string section)
 	{
 		int count;
-		if (!ctx.StartMap("catalog", count))
+		if (!ctx.StartMap(section, count))
 			return;
 		string key;
 		for (int i = 0; i < count; i++)
@@ -151,6 +160,8 @@ class F44_Catalog
 			ctx.ReadValue("cost", cost);
 			string category;
 			ctx.ReadValue("category", category);
+			string role;
+			ctx.ReadValue("role", role);
 			ctx.EndObject();
 
 			if (prefab.IsEmpty() || prefab == "null")
@@ -162,8 +173,10 @@ class F44_Catalog
 			e.m_sKey = key;
 			e.m_sPrefab = prefab;
 			e.m_iCost = cost;
-			e.m_bIsClass = prefab.Contains("Prefabs/Characters/");
+			e.m_bIsItem = section == "items";
+			e.m_bIsClass = !e.m_bIsItem && prefab.Contains("Prefabs/Characters/");
 			e.m_sCategory = category;
+			e.m_sRole = role;
 			m_mEntries.Set(key, e);
 		}
 		ctx.EndMap();
@@ -216,7 +229,7 @@ class F44_Catalog
 	ResourceName GetVehiclePrefab(string vehicleKey)
 	{
 		F44_CatalogEntry e;
-		if (m_mEntries.Find(vehicleKey, e) && !e.m_bIsClass)
+		if (m_mEntries.Find(vehicleKey, e) && e.IsVehicle())
 			return e.m_sPrefab;
 		return ResourceName.Empty;
 	}
