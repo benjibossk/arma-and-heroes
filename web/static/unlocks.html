@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Unlocks</title><link rel="stylesheet" href="/style.css">
+<style>
+.ubar{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.ubar .rk{font-family:Oswald,sans-serif;font-size:22px;color:#F0A830;text-transform:uppercase}
+.ubar .cr{font-family:Oswald,sans-serif;font-size:20px;color:#E8E6E1}
+.xpbar{flex:1;min-width:220px}.xpbar .tr{height:10px;background:#2E3031;border:1px solid #555;border-radius:2px;overflow:hidden}
+.xpbar .fl{height:100%;background:#F0A830}.xpbar .lb{font-size:12px;color:#aaa;margin-top:3px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.tabs button{width:auto;margin:0;padding:6px 12px;background:#2E3031;color:#E8E6E1;border:1px solid #555;text-transform:uppercase;font-family:Oswald,sans-serif;font-size:14px}
+.tabs button.on{background:#F0A830;color:#1c1c1c;border-color:#F0A830}
+.ust{font-size:12px;margin-top:4px;font-family:'Roboto Condensed',sans-serif}.ust.owned{color:#6fbf5f}.ust.locked{color:#d0a060}
+.ifoot button.buy{background:#2F7A2C;color:#fff}
+.earn table td:last-child,.earn table th:last-child{text-align:right}.earn td{font-size:13px}
+</style></head><body>
+<main>
+ <div class="panel" id="top"><div class="ubar"><div><div class="muted" id="sname">—</div><div class="rk" id="rk">—</div></div>
+  <div class="xpbar"><div class="tr"><div class="fl" id="xpf" style="width:0"></div></div><div class="lb" id="xpl"></div></div>
+  <div class="cr" id="cr"></div></div><div id="msg" class="err"></div></div>
+ <div class="grid"><div>
+  <div class="panel"><h2>Unlocks</h2>
+   <div class="tabs" id="ftabs"></div><div class="tabs" id="ttabs"></div><div class="igrid" id="list"></div></div>
+ </div><div>
+  <div class="panel earn"><h2>How to earn</h2><div id="earn"></div></div>
+ </div></div>
+</main>
+<script src="/common.js"></script>
+<script>
+const TREES = { all: 'All', rifleman: 'Rifleman', assault: 'Assault', mg: 'Machine gun', medic: 'Medic', at: 'Anti-tank', recon: 'Recon', tanker: 'Tanker' };
+let D = null, FAC = 'US', TREE = 'all';
+const nf = n => Number(n).toLocaleString('en-US').replace(/,/g, ' ');
+function tabs(id, opts, cur, set) {
+  document.getElementById(id).innerHTML = opts.map(([k, l]) => `<button class="${k === cur ? 'on' : ''}" data-k="${k}">${esc(l)}</button>`).join('');
+  document.querySelectorAll('#' + id + ' button').forEach(b => b.onclick = () => { set(b.dataset.k); render(); earn(); });
+}
+function render() {
+  const s = D.soldier;
+  if (s) {
+    const span = s.nextXP > 0 ? s.nextXP - s.rankXP : 1, pct = s.nextXP > 0 ? Math.min(100, (s.xp - s.rankXP) / span * 100) : 100;
+    document.getElementById('sname').textContent = `${FNAME[s.faction]} · ${s.class} soldier #${s.id}`;
+    document.getElementById('rk').textContent = `Rank ${s.rank} · ${s.rankName}`;
+    document.getElementById('xpf').style.width = pct + '%';
+    document.getElementById('xpl').textContent = s.nextXP > 0 ? `${nf(s.xp)} / ${nf(s.nextXP)} XP to rank ${s.rank + 1}` : `${nf(s.xp)} XP · max rank`;
+    document.getElementById('cr').textContent = nf(s.credits) + ' cr';
+  } else document.getElementById('rk').textContent = ME ? 'No soldier yet — enlist one in the Barracks' : 'Log in to buy unlocks';
+  tabs('ftabs', [['US', FNAME.US], ['GER', FNAME.GER]], FAC, k => FAC = k);
+  tabs('ttabs', Object.entries(TREES), TREE, k => TREE = k);
+  const L = D.items.filter(i => i.faction === FAC && (TREE === 'all' || i.tree === TREE));
+  document.getElementById('list').innerHTML = L.map(i => {
+    const cond = `Rank ${i.rank} · ${i.price ? nf(i.price) + ' cr' : 'free'}`;
+    let act = '', st = '';
+    if (i.state === 'owned') st = `<div class="ust owned">✔ Owned</div>`;
+    else if (i.state === 'buyable') act = `<button class="buy" onclick="buy('${i.key}')">Buy</button>`;
+    else st = `<div class="ust locked">${esc(cond)}${i.reason && !/rank/.test(i.reason) ? ' — ' + esc(i.reason) : ''}</div>`;
+    const card = itemCard({ ...i, locked: '', category: (TREES[i.tree] || '') + ' · ' + (i.category || '') }, act);
+    return card.replace(/<\/div><\/div>$/, `<div class="muted" style="font-size:12px">${esc(cond)} · ${esc(i.rankName)}</div>${st}</div></div>`)
+      .replace('class="icard ', `class="icard ${i.state === 'locked' ? 'locked' : ''} ${i.state === 'owned' ? 'owned' : ''} `);
+  }).join('') || '<p class="muted">Nothing in this tree for this faction.</p>';
+}
+function earn() {
+  const x = D.earn.xp, c = D.earn.credits, a = D.earn.antiFarm;
+  const row = (l, k, u = '') => `<tr><td>${l}</td><td>${x[k]}${u}</td><td>${c[k]}${u}</td></tr>`;
+  document.getElementById('earn').innerHTML = `<table><tr><th>Action</th><th>XP</th><th>Credits</th></tr>
+  ${row('Kill (player)', 'playerKill')}${row('Kill (AI)*', 'aiKill')}${row('Assist', 'assist')}${row('Vehicle destroyed', 'vehicleKill')}
+  ${row('Sector captured', 'capture')}${row('Sector defended', 'defend')}${row('On objective / min', 'objectivePerMin')}
+  ${row('Victory', 'win')}${row('Defeat', 'loss')}${row('Participation', 'participation')}${row('First win of the day', 'firstWinOfDay')}
+  ${row('Squad play (≥50% in squad)', 'squadBonusPct', '%')}</table>
+  <p class="muted" style="font-size:12px">* AI kills: full value for the first ${a.aiKillTiers[0].upTo}, then ×${a.aiKillTiers[1].factor} up to ${a.aiKillTiers[1].upTo}, ×${a.aiKillTiers[2].factor} up to ${a.aiKillTiers[2].upTo}, then nothing.
+  Cap ${nf(a.xpCapPerBattle)} XP / ${a.creditsCapPerBattle} cr per battle (daily bonus excluded). No reward if idle or present under ${a.minPresenceSec / 60} min.</p>
+  <h3>Ranks</h3><table><tr><th>#</th><th>${FAC === 'GER' ? 'Rank (Wehrmacht)' : 'Rank (US Army)'}</th><th>XP</th></tr>
+  ${D.ranks.map(r => `<tr><td>${r.n}</td><td>${esc(FAC === 'GER' ? r.ger : r.us)}</td><td>${nf(r.xp)}</td></tr>`).join('')}</table>`;
+}
+async function buy(k) {
+  const i = D.items.find(x => x.key === k);
+  if (!confirm(`Buy ${i.label} for ${nf(i.price)} cr?`)) return;
+  try { await api('/unlocks/' + encodeURIComponent(k) + '/buy', { method: 'POST' }); await load(); }
+  catch (e) { document.getElementById('msg').textContent = e.message; }
+}
+async function load() { D = await api('/unlocks'); if (D.soldier && !load.done) { FAC = D.soldier.faction; load.done = 1; } render(); earn(); }
+initPage('unlocks.html').then(() => itemImgsReady).then(load).catch(e => document.getElementById('msg').textContent = e.message);
+</script></body></html>

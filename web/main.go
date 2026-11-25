@@ -95,6 +95,8 @@ func main() {
 		log.Fatal(err)
 	}
 	loadItems()
+	loadProgression()
+	seedStarterKits()
 	ensureAdmin()
 	if currentWar() == nil {
 		seedWar()

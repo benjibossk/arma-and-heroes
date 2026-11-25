@@ -45,6 +45,8 @@ func setupRouter() *gin.Engine {
 	a.GET("/soldiers/:id/loadout", requireUser, getLoadout)
 	a.PUT("/soldiers/:id/loadout", requireUser, putLoadout)
 	a.POST("/soldiers/:id/buy", requireUser, buyItem)
+	a.GET("/unlocks", getUnlocks)
+	a.POST("/unlocks/:key/buy", requireUser, buyUnlock)
 	a.GET("/battles/:id/loadout/:identityId", requireServer, getBattleLoadout)
 	// account linking
 	a.POST("/link/request", requireServer, linkRequest)

@@ -6,13 +6,13 @@ import (
 )
 
 type War struct {
-	ID           uint      `gorm:"primaryKey" json:"id"`
-	Name         string    `gorm:"size:100" json:"name"`
-	Status       string    `gorm:"size:20" json:"status"` // active | finished
-	Winner       string    `gorm:"size:8" json:"winner"`
-	StartedAt    time.Time `json:"startedAt"`
+	ID           uint       `gorm:"primaryKey" json:"id"`
+	Name         string     `gorm:"size:100" json:"name"`
+	Status       string     `gorm:"size:20" json:"status"` // active | finished
+	Winner       string     `gorm:"size:8" json:"winner"`
+	StartedAt    time.Time  `json:"startedAt"`
 	EndedAt      *time.Time `json:"endedAt"`
-	LastIncomeAt time.Time `json:"lastIncomeAt"`
+	LastIncomeAt time.Time  `json:"lastIncomeAt"`
 }
 
 type Faction struct {
@@ -35,7 +35,7 @@ type City struct {
 	ScenarioID string `gorm:"size:255" json:"scenarioId"`
 	Terrain    string `gorm:"size:100" json:"terrain"`
 	Mode       string `gorm:"size:16" json:"mode"` // ASSAULT | SKIRMISH
-	Garrison   int    `json:"garrison"`           // manpower de la garnison si aucune AT ne défend
+	Garrison   int    `json:"garrison"`            // manpower de la garnison si aucune AT ne défend
 }
 
 type Road struct {
@@ -52,22 +52,22 @@ type VehicleCount struct {
 }
 
 type AssaultTeam struct {
-	ID         uint       `gorm:"primaryKey" json:"-"`
-	WarID      uint       `gorm:"index" json:"-"`
-	Type       string     `gorm:"size:8" json:"type"`
-	Faction    string     `gorm:"size:8" json:"faction"`
-	DisplayName string    `gorm:"size:120" json:"displayName"`
-	OwnerID    uint       `json:"ownerId"`
-	Manpower   int        `json:"manpower"`
-	EquipLevel int        `json:"equipLevel"`
-	Vehicles   string     `gorm:"type:text" json:"-"`
-	CityID     string     `gorm:"size:64" json:"cityId"`
-	DestCityID string     `gorm:"size:64" json:"destCityId"`
-	DepartAt   *time.Time `json:"departAt"`
-	ArrivalAt  *time.Time `json:"arrivalAt"`
-	Status     string     `gorm:"size:16;index" json:"status"` // idle | moving | in_battle | destroyed | dissolved
-	BattleID   uint       `json:"-"`
-	CreatedAt  time.Time  `json:"createdAt"`
+	ID          uint       `gorm:"primaryKey" json:"-"`
+	WarID       uint       `gorm:"index" json:"-"`
+	Type        string     `gorm:"size:8" json:"type"`
+	Faction     string     `gorm:"size:8" json:"faction"`
+	DisplayName string     `gorm:"size:120" json:"displayName"`
+	OwnerID     uint       `json:"ownerId"`
+	Manpower    int        `json:"manpower"`
+	EquipLevel  int        `json:"equipLevel"`
+	Vehicles    string     `gorm:"type:text" json:"-"`
+	CityID      string     `gorm:"size:64" json:"cityId"`
+	DestCityID  string     `gorm:"size:64" json:"destCityId"`
+	DepartAt    *time.Time `json:"departAt"`
+	ArrivalAt   *time.Time `json:"arrivalAt"`
+	Status      string     `gorm:"size:16;index" json:"status"` // idle | moving | in_battle | destroyed | dissolved
+	BattleID    uint       `json:"-"`
+	CreatedAt   time.Time  `json:"createdAt"`
 }
 
 func (t *AssaultTeam) TeamID() string { return "at_" + itoa(int(t.ID)) }
@@ -130,21 +130,21 @@ func (b *Battle) SetSides(s SideTeams) {
 }
 
 type Player struct {
-	ID         uint      `gorm:"primaryKey" json:"id"`
-	Name       string    `gorm:"size:64;uniqueIndex" json:"name"`
-	IdentityID string    `gorm:"size:64;index" json:"identityId"`
-	DiscordID  string    `gorm:"size:32;index" json:"-"`
-	PassHash   string    `gorm:"size:100" json:"-"`
-	Role       string    `gorm:"size:16" json:"role"` // admin | general | soldier
-	Faction    string    `gorm:"size:8" json:"faction"`
-	XP         int       `json:"xp"`
-	Credits    int       `json:"credits"`
-	Kills      int       `json:"kills"`
-	Deaths     int       `json:"deaths"`
-	Captures   int       `json:"captures"`
-	Battles    int       `json:"battles"`
-	ActiveSoldierID uint `json:"activeSoldierId"`
-	CreatedAt  time.Time `json:"createdAt"`
+	ID              uint      `gorm:"primaryKey" json:"id"`
+	Name            string    `gorm:"size:64;uniqueIndex" json:"name"`
+	IdentityID      string    `gorm:"size:64;index" json:"identityId"`
+	DiscordID       string    `gorm:"size:32;index" json:"-"`
+	PassHash        string    `gorm:"size:100" json:"-"`
+	Role            string    `gorm:"size:16" json:"role"` // admin | general | soldier
+	Faction         string    `gorm:"size:8" json:"faction"`
+	XP              int       `json:"xp"`
+	Credits         int       `json:"credits"`
+	Kills           int       `json:"kills"`
+	Deaths          int       `json:"deaths"`
+	Captures        int       `json:"captures"`
+	Battles         int       `json:"battles"`
+	ActiveSoldierID uint      `json:"activeSoldierId"`
+	CreatedAt       time.Time `json:"createdAt"`
 }
 
 func (p *Player) IsGeneral() bool { return p.Role == "general" || p.Role == "admin" }
@@ -166,15 +166,18 @@ type Event struct {
 
 // PlayerBattle : participation d'un joueur à une bataille (historique profil)
 type PlayerBattle struct {
-	ID       uint   `gorm:"primaryKey" json:"-"`
-	PlayerID uint   `gorm:"index" json:"-"`
-	BattleID uint   `gorm:"index" json:"battleId"`
-	Side     string `gorm:"size:8" json:"side"`
-	TeamID   string `gorm:"size:16" json:"teamId"`
-	Kills    int    `json:"kills"`
-	Deaths   int    `json:"deaths"`
-	Captures int    `json:"captures"`
-	XP       int    `json:"xp"`
+	ID        uint      `gorm:"primaryKey" json:"-"`
+	PlayerID  uint      `gorm:"index" json:"-"`
+	BattleID  uint      `gorm:"index" json:"battleId"`
+	Side      string    `gorm:"size:8" json:"side"`
+	TeamID    string    `gorm:"size:16" json:"teamId"`
+	Kills     int       `json:"kills"`
+	Deaths    int       `json:"deaths"`
+	Captures  int       `json:"captures"`
+	XP        int       `json:"xp"`
+	Credits   int       `json:"credits"`
+	Won       bool      `json:"won"`
+	CreatedAt time.Time `gorm:"index" json:"createdAt"`
 }
 
 var ranks = []struct {
@@ -202,7 +205,7 @@ type ATSpec struct {
 }
 
 var atSpecs = map[string]ATSpec{
-	"INF": {300, 120, []string{"RIFLEMAN", "MG", "MEDIC", "AT", "OFFICER"}, map[string][]VehicleCount{}, "Infantry"},
+	"INF":  {300, 120, []string{"RIFLEMAN", "MG", "MEDIC", "AT", "OFFICER"}, map[string][]VehicleCount{}, "Infantry"},
 	"PARA": {450, 80, []string{"PARA_RIFLEMAN", "PARA_MG", "MEDIC", "OFFICER"}, map[string][]VehicleCount{}, "Paratroopers"},
 	"ARM": {800, 60, []string{"CREW", "RIFLEMAN"}, map[string][]VehicleCount{
 		"US": {{"US_SHERMAN", 3}}, "GER": {{"GER_PZ4", 1}, {"GER_TIGER1", 1}, {"GER_SDKFZ222", 1}}}, "Armor"},

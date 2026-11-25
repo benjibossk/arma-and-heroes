@@ -503,7 +503,7 @@ func getBattleLoadout(c *gin.Context) {
 }
 
 // creditSoldier : apply battle stats to the soldier used in the battle
-func creditSoldier(p *Player, b *Battle, rp *ResPlayer, xp int) {
+func creditSoldier(p *Player, b *Battle, rp *ResPlayer, xp, credits int) {
 	var s *Soldier
 	if rp.SoldierID != 0 {
 		var x Soldier
@@ -521,7 +521,12 @@ func creditSoldier(p *Player, b *Battle, rp *ResPlayer, xp int) {
 	for cat, st := range rp.WeaponStats {
 		ck[cat] += st.Kills
 	}
+	if len(rp.WeaponStats) == 0 {
+		for cat, n := range rp.KillsByCategory {
+			ck[cat] += n
+		}
+	}
 	cb, _ := json.Marshal(ck)
-	db.Model(s).Updates(map[string]interface{}{"xp": s.XP + xp, "credits": s.Credits + xp/10, "kills": s.Kills + rp.Kills,
+	db.Model(s).Updates(map[string]interface{}{"xp": s.XP + xp, "credits": s.Credits + credits, "kills": s.Kills + rp.Kills,
 		"deaths": s.Deaths + rp.Deaths, "cat_kills": string(cb)})
 }

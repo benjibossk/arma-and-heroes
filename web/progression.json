@@ -1,0 +1,93 @@
+{
+  "_note": "Arma & Heroes grind tuning. See docs/PROGRESSION.md. Loaded at startup (embedded; ./progression.json next to the binary overrides it).",
+  "xp": {
+    "playerKill": 40, "aiKill": 15, "assist": 15, "vehicleKill": 100,
+    "capture": 60, "defend": 40, "objectivePerMin": 6,
+    "win": 150, "loss": 50, "participation": 50,
+    "firstWinOfDay": 200, "squadBonusPct": 10
+  },
+  "credits": {
+    "playerKill": 10, "aiKill": 4, "assist": 4, "vehicleKill": 40,
+    "capture": 20, "defend": 15, "objectivePerMin": 2,
+    "win": 60, "loss": 25, "participation": 25,
+    "firstWinOfDay": 150, "squadBonusPct": 10
+  },
+  "antiFarm": {
+    "aiKillTiers": [ {"upTo": 10, "factor": 1.0}, {"upTo": 20, "factor": 0.5}, {"upTo": 30, "factor": 0.25} ],
+    "objectiveMaxMin": 30,
+    "xpCapPerBattle": 1500,
+    "creditsCapPerBattle": 600,
+    "minPresenceSec": 300,
+    "idleRequiresActivity": true
+  },
+  "ranks": [
+    {"xp": 0,         "us": "Private",             "ger": "Schütze"},
+    {"xp": 600,     "us": "Private First Class", "ger": "Oberschütze"},
+    {"xp": 1300,   "us": "Corporal",            "ger": "Gefreiter"},
+    {"xp": 2200,   "us": "Sergeant",            "ger": "Obergefreiter"},
+    {"xp": 3300,   "us": "Staff Sergeant",      "ger": "Unteroffizier"},
+    {"xp": 4600,   "us": "Technical Sergeant",  "ger": "Unterfeldwebel"},
+    {"xp": 6000,   "us": "Master Sergeant",     "ger": "Feldwebel"},
+    {"xp": 7600,  "us": "First Sergeant",      "ger": "Oberfeldwebel"},
+    {"xp": 9400,  "us": "Sergeant Major",      "ger": "Stabsfeldwebel"},
+    {"xp": 11400, "us": "Warrant Officer",     "ger": "Hauptfeldwebel"},
+    {"xp": 13600, "us": "Second Lieutenant",   "ger": "Leutnant"},
+    {"xp": 16000, "us": "First Lieutenant",    "ger": "Oberleutnant"},
+    {"xp": 18600, "us": "Captain",             "ger": "Hauptmann"},
+    {"xp": 21400, "us": "Major",               "ger": "Major"},
+    {"xp": 24400, "us": "Lieutenant Colonel",  "ger": "Oberstleutnant"}
+  ],
+  "trees": ["rifleman", "assault", "mg", "medic", "at", "recon", "tanker"],
+  "unlocks": {
+    "US_M1_GARAND":      {"tree": "rifleman", "rank": 1,  "price": 0},
+    "US_M1911":          {"tree": "rifleman", "rank": 1,  "price": 0},
+    "US_OUTFIT_M41":     {"tree": "rifleman", "rank": 1,  "price": 0},
+    "US_OUTFIT_PARA":    {"tree": "rifleman", "rank": 1,  "price": 0},
+    "US_OUTFIT_CREW":    {"tree": "tanker",   "rank": 1,  "price": 0},
+    "US_MK2_GRENADE":    {"tree": "rifleman", "rank": 1,  "price": 100},
+    "US_SMOKE":          {"tree": "rifleman", "rank": 1,  "price": 80},
+    "US_M1_CARBINE":     {"tree": "rifleman", "rank": 2,  "price": 300},
+    "US_M3_GREASE":      {"tree": "assault",  "rank": 2,  "price": 350},
+    "US_MEDKIT":         {"tree": "medic",    "rank": 1,  "price": 150},
+    "US_BINOCULARS":     {"tree": "recon",    "rank": 2,  "price": 200},
+    "US_OUTFIT_NETTING": {"tree": "recon",    "rank": 4,  "price": 600},
+    "US_THOMPSON":       {"tree": "assault",  "rank": 5,  "price": 1500},
+    "US_M1903A4":        {"tree": "recon",    "rank": 5,  "price": 1800},
+    "US_BAZOOKA":        {"tree": "at",       "rank": 6,  "price": 2000},
+    "US_BAR":            {"tree": "mg",       "rank": 7,  "price": 2400},
+    "US_TNT":            {"tree": "at",       "rank": 9,  "price": 2800},
+    "GER_KAR98K":        {"tree": "rifleman", "rank": 1,  "price": 0},
+    "GER_P38":           {"tree": "rifleman", "rank": 1,  "price": 0},
+    "GER_OUTFIT_M40":    {"tree": "rifleman", "rank": 1,  "price": 0},
+    "GER_OUTFIT_FJ":     {"tree": "rifleman", "rank": 1,  "price": 0},
+    "GER_OUTFIT_PANZER": {"tree": "tanker",   "rank": 1,  "price": 0},
+    "GER_M24_GRENADE":   {"tree": "rifleman", "rank": 1,  "price": 100},
+    "GER_SMOKE":         {"tree": "rifleman", "rank": 1,  "price": 80},
+    "GER_MEDKIT":        {"tree": "medic",    "rank": 1,  "price": 150},
+    "GER_BINOCULARS":    {"tree": "recon",    "rank": 2,  "price": 200},
+    "GER_PANZERFAUST":   {"tree": "at",       "rank": 2,  "price": 350},
+    "GER_OUTFIT_SMOCK":  {"tree": "recon",    "rank": 4,  "price": 600},
+    "GER_MP40":          {"tree": "assault",  "rank": 5,  "price": 1500},
+    "GER_KAR98K_SCOPE":  {"tree": "recon",    "rank": 5,  "price": 1800},
+    "GER_G43":           {"tree": "rifleman", "rank": 6,  "price": 2000},
+    "GER_MG42":          {"tree": "mg",       "rank": 8,  "price": 2600},
+    "GER_MINES":         {"tree": "at",       "rank": 9,  "price": 2800},
+    "GER_PANZERSCHRECK": {"tree": "at",       "rank": 11, "price": 3800}
+  },
+  "vehicles": {
+    "US_JEEP":      {"label": "Willys MB Jeep",          "faction": "US",  "tree": "recon",  "rank": 3,  "price": 500},
+    "US_TRUCK":     {"label": "GMC CCKW Truck",          "faction": "US",  "tree": "tanker", "rank": 3,  "price": 600},
+    "US_M3A1":      {"label": "M3A1 Half-track",         "faction": "US",  "tree": "tanker", "rank": 7,  "price": 2200},
+    "US_SHERMAN":   {"label": "M4 Sherman",              "faction": "US",  "tree": "tanker", "rank": 13, "price": 6000},
+    "GER_KFZ":      {"label": "Kfz. 1 Kübelwagen",       "faction": "GER", "tree": "recon",  "rank": 3,  "price": 500},
+    "GER_TRUCK":    {"label": "Opel Blitz Truck",        "faction": "GER", "tree": "tanker", "rank": 3,  "price": 600},
+    "GER_SDKFZ222": {"label": "Sd.Kfz. 222 Armoured Car","faction": "GER", "tree": "recon",  "rank": 6,  "price": 1800},
+    "GER_SDKFZ251": {"label": "Sd.Kfz. 251 Half-track",  "faction": "GER", "tree": "tanker", "rank": 7,  "price": 2200},
+    "GER_PZ4":      {"label": "Panzer IV",               "faction": "GER", "tree": "tanker", "rank": 12, "price": 5000},
+    "GER_TIGER1":   {"label": "Tiger I",                 "faction": "GER", "tree": "tanker", "rank": 15, "price": 8000}
+  },
+  "warFunds": {
+    "win": 250, "loss": 100, "perCapture": 10, "perPlayer": 15, "cityCaptured": 150,
+    "teamCost": {"INF": 300, "PARA": 450, "ARM": 800, "REC": 250, "MOT": 400}
+  }
+}

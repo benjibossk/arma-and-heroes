@@ -194,30 +194,30 @@ func travelDuration(km int) time.Duration {
 // ---------- BattleConfig §3 ----------
 
 type BCTeam struct {
-	TeamID     string         `json:"teamId"`
-	DisplayName string        `json:"displayName"`
-	Type       string         `json:"type"`
-	Manpower   int            `json:"manpower"`
-	EquipLevel int            `json:"equipLevel"`
-	Classes    []string       `json:"classes"`
-	Vehicles   []VehicleCount `json:"vehicles"`
+	TeamID      string         `json:"teamId"`
+	DisplayName string         `json:"displayName"`
+	Type        string         `json:"type"`
+	Manpower    int            `json:"manpower"`
+	EquipLevel  int            `json:"equipLevel"`
+	Classes     []string       `json:"classes"`
+	Vehicles    []VehicleCount `json:"vehicles"`
 }
 
 type BCSide struct {
-	Teams []BCTeam  `json:"teams"`
+	Teams []BCTeam `json:"teams"`
 	AI    AIConfig `json:"ai"`
 }
 
 type BattleConfig struct {
-	BattleID      string              `json:"battleId"`
-	WarID         uint                `json:"warId"`
-	CityID        string              `json:"cityId"`
-	Mode          string              `json:"mode"`
-	Scenario      string              `json:"scenario"`
-	TimeLimitMin  int                 `json:"timeLimitMin"`
-	Attacker      string              `json:"attacker"`
-	Defender      string              `json:"defender"`
-	Sides         map[string]BCSide   `json:"sides"`
+	BattleID       string                   `json:"battleId"`
+	WarID          uint                     `json:"warId"`
+	CityID         string                   `json:"cityId"`
+	Mode           string                   `json:"mode"`
+	Scenario       string                   `json:"scenario"`
+	TimeLimitMin   int                      `json:"timeLimitMin"`
+	Attacker       string                   `json:"attacker"`
+	Defender       string                   `json:"defender"`
+	Sides          map[string]BCSide        `json:"sides"`
 	PlayerUnlocks  map[string][]string      `json:"playerUnlocks"`
 	PlayerLoadouts map[string]PlayerLoadout `json:"playerLoadouts"`
 }
@@ -302,7 +302,17 @@ type ResPlayer struct {
 	XP         int    `json:"xp"`
 	SoldierID  uint   `json:"soldierId,omitempty"`
 	// per weapon category (rifle, smg, mg, sniper, at, grenade, explosive, pistol, vehicle...) for ribbons
-	WeaponStats map[string]WeaponStat `json:"weaponStats,omitempty"`
+	WeaponStats     map[string]WeaponStat `json:"weaponStats,omitempty"`
+	KillsByCategory map[string]int        `json:"killsByCategory,omitempty"` // what the mod actually sends
+	// optional finer stats (progression.json); absent -> kills counted as AI kills
+	PlayerKills  int `json:"playerKills,omitempty"`
+	AIKillCount  int `json:"aiKills,omitempty"`
+	Assists      int `json:"assists,omitempty"`
+	VehicleKills int `json:"vehicleKills,omitempty"`
+	Defends      int `json:"defends,omitempty"`
+	ObjectiveSec int `json:"objectiveSec,omitempty"`
+	PresenceSec  int `json:"presenceSec,omitempty"`
+	SquadSec     int `json:"squadSec,omitempty"`
 }
 
 type WeaponStat struct {
@@ -310,15 +320,15 @@ type WeaponStat struct {
 }
 
 type BattleResult struct {
-	BattleID    string             `json:"battleId"`
-	Winner      string             `json:"winner"`
-	Reason      string             `json:"reason"`
-	DurationSec int                `json:"durationSec"`
-	Losses      map[string]ResLoss `json:"losses"`
-	Players     []ResPlayer        `json:"players"`
-	AIKills     map[string]int     `json:"aiKills,omitempty"`  // per side, display only
-	AIDeaths    map[string]int     `json:"aiDeaths,omitempty"` // per side, display only (already included in losses.manpower)
-	TeamAIKills map[string]int     `json:"teamAiKills,omitempty"`
+	BattleID    string                       `json:"battleId"`
+	Winner      string                       `json:"winner"`
+	Reason      string                       `json:"reason"`
+	DurationSec int                          `json:"durationSec"`
+	Losses      map[string]ResLoss           `json:"losses"`
+	Players     []ResPlayer                  `json:"players"`
+	AIKills     map[string]int               `json:"aiKills,omitempty"`  // per side, display only
+	AIDeaths    map[string]int               `json:"aiDeaths,omitempty"` // per side, display only (already included in losses.manpower)
+	TeamAIKills map[string]int               `json:"teamAiKills,omitempty"`
 	AISkill     map[string]map[string]string `json:"aiSkill,omitempty"` // side -> {final, avg}
 }
 
@@ -400,20 +410,20 @@ func applyResult(b *Battle, r *BattleResult) error {
 		if db.Where("identity_id = ?", rp.IdentityID).First(&p).Error != nil {
 			continue
 		}
-		xp := rp.XP
-		if rp.Side == r.Winner {
-			xp += 100
-		}
+		won := rp.Side == r.Winner
+		rw := computeReward(&rp, won, won && !hasWonToday(p.ID))
+		xp := rw.XP
 		p.XP += xp
-		p.Credits += xp / 10
+		p.Credits += rw.Credits
 		p.Kills += rp.Kills
 		p.Deaths += rp.Deaths
 		p.Captures += rp.Captures
 		p.Battles++
 		db.Save(&p)
-		creditSoldier(&p, b, &rp, xp)
-		db.Create(&PlayerBattle{PlayerID: p.ID, BattleID: b.ID, Side: rp.Side, TeamID: rp.TeamID, Kills: rp.Kills, Deaths: rp.Deaths, Captures: rp.Captures, XP: xp})
+		creditSoldier(&p, b, &rp, xp, rw.Credits)
+		db.Create(&PlayerBattle{PlayerID: p.ID, BattleID: b.ID, Side: rp.Side, TeamID: rp.TeamID, Kills: rp.Kills, Deaths: rp.Deaths, Captures: rp.Captures, XP: xp, Credits: rw.Credits, Won: won, CreatedAt: now})
 	}
+	applyWarFunds(b, r)
 	db.Model(b).Updates(map[string]interface{}{"status": "finished", "winner": r.Winner, "result": string(raw), "finished_at": now})
 	checkVictory(&w)
 	return nil

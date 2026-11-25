@@ -17,7 +17,7 @@ function fmtLeft(d) { const s = Math.max(0, Math.round((new Date(d) - Date.now()
 const discordLogin = next => '/api/v1/auth/discord?next=' + encodeURIComponent(next || (location.pathname + location.search));
 let ME = null;
 async function initPage(active) {
-  const tabs = [['barracks.html', 'Barracks'], ['index.html', 'War map'], ['profile.html', 'Progression'], ['quartermaster', 'Quartermaster']];
+  const tabs = [['barracks.html', 'Barracks'], ['index.html', 'War map'], ['profile.html', 'Progression'], ['unlocks.html', 'Unlocks'], ['quartermaster', 'Quartermaster']];
   const sub = [['battles.html', 'Battles'], ['link.html', 'Link game'], ['admin.html', 'Admin']];
   const href = h => h === 'quartermaster' ? '/barracks.html#depot' : '/' + h;
   document.body.insertAdjacentHTML('afterbegin', `<header><div class="logo">A&amp;H</div><nav>${tabs.map(([h, l]) =>
