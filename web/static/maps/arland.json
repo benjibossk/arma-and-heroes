@@ -1,2 +1,11 @@
-{"name": "Arland", "image": "/maps/arland.webp", "worldMinX": 0, "worldMinZ": 0, "worldMaxX": 4096, "worldMaxZ": 4096,
- "source": "Arma Reforger base game UI/Textures/Map/worlds/Arland/Arland.edds (mip 2048, BC7 -> WebP)"}
+{
+ "name": "Arland",
+ "image": "/maps/arland.webp",
+ "worldMinX": 0,
+ "worldMinZ": 0,
+ "worldMaxX": 4096,
+ "worldMaxZ": 4096,
+ "source": "Arma Reforger base game UI/Textures/Map/worlds/Arland/Arland.edds (mip 2048, BC7 -> WebP)",
+ "liveBounds": true,
+ "measured": "2026-11-25: F44_Core probe on the dedicated server, Arland terrain 0..4096 m (last height change at 4094 m, 2 m grid); world bound box incl. off-terrain objects = -130..3913 x -162..3803"
+}

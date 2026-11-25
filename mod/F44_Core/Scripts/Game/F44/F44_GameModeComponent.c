@@ -315,19 +315,20 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	protected GenericTerrainEntity m_Terrain;
 	protected float ProbeTerrainEdge(bool alongX)
 	{
-		float last = -1;
-		for (float d = 8; d < 20480; d += 8)
+		// outside the terrain the height is clamped to the edge value: walk inward until it changes
+		BaseWorld w = GetGame().GetWorld();
+		float far = w.GetSurfaceY(16384, 1500);
+		if (!alongX)
+			far = w.GetSurfaceY(1500, 16384);
+		for (float d = 16384; d > 0; d -= 2)
 		{
-			vector p = Vector(d, 0, 64);
+			float y = w.GetSurfaceY(d, 1500);
 			if (!alongX)
-				p = Vector(64, 0, d);
-			vector tc = m_Terrain.WorldToTerrCoord(p);
-			float y;
-			if (!m_Terrain.TryGetHeightTC(tc[0], tc[2], y))
-				break;
-			last = d;
+				y = w.GetSurfaceY(1500, d);
+			if (Math.AbsFloat(y - far) > 0.001)
+				return Math.Round(d + 2);	// last vertex (2 m grid)
 		}
-		return last;
+		return -1;
 	}
 	protected string WorldJson()
 	{

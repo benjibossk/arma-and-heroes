@@ -45,6 +45,8 @@ function draw(d) {
   if (!view || !userView) frame(s);
   applyView();
   const k = view.w / 1000; // svg units per screen-ish pixel
+  // the mod reports the real terrain extent (snapshot.world): it wins over the static map JSON when the map allows it
+  if (map && map.liveBounds && s.world && s.world.maxX > s.world.minX) Object.assign(map, { worldMinX: s.world.minX, worldMinZ: s.world.minZ, worldMaxX: s.world.maxX, worldMaxZ: s.world.maxZ });
   if (map) mk('image', { href: map.image, x: map.worldMinX, y: -map.worldMaxZ, width: map.worldMaxX - map.worldMinX, height: map.worldMaxZ - map.worldMinZ, preserveAspectRatio: 'none' }, svg);
   // grid: 100 m (or 500 m when zoomed out)
   const step = view.w > 3000 ? 500 : 100, gx0 = Math.floor(view.x / step) * step, gy0 = Math.floor(view.y / step) * step;
