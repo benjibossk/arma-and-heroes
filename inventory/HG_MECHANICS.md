@@ -6,7 +6,7 @@ Complements `HG_CONTENT.md` (content list, assault-team cost table), `HG_RIBBONS
 Nothing here repeats those files; it links to them.
 
 **Confidence flags:** `[S]` = confirmed by a source listed at the end. `[M]` = community memory / consistent
-with several player accounts but not re-verified (the H&G fandom wiki returns HTTP 402 to automated fetches and
+with several player accounts but not re-verified (fandom wiki numbers were re-checked by hand in a browser on 2026-11-25, tagged `[W:Page]`;
 web.archive.org is blocked from this environment). `[?]` = uncertain, changed across patches, or a guess.
 H&G was patched heavily from 2016 to 2022 (closed 2022-11), so many values changed over time; treat numbers as orders of magnitude.
 
@@ -41,7 +41,9 @@ bandage/first-aid item for free; everything else bought with credits (or gold) a
 
 | Mechanic | H&G behaviour | Flag |
 |---|---|---|
-| Health pool | ~100 HP, location damage (head >> torso > limbs) | `[M]` |
+| Health pool | ~100 HP (derived: 36-dmg pistol = 3 body hits); multipliers **head x4, body x1, legs x0.8, arms x0.5** [W:Action_Rules] | `[S]` (mult.) / `[M]` (HP) |
+| Medkits | First Aid Kit 9 200 cr (Tactical ribbon gr.5); Medic Pouch "heals 3 kits" 30 000 cr (Medic ribbon gr.6) [W:Equipment, W:Medkits]; heal amount/speed not documented | `[S]` |
+| Medic badges | First Aid +40/60/80 % health recovery; Combat Medic +1/2/3 first-aid kits; Heavy Set damage taken 92/89/85 % [W:First_Aid_CB, W:Combat_Medic_CB, W:Combat_Badge] | `[S]` |
 | Natural regen | Regenerates automatically **up to 1/3 of max health** only | `[S]` |
 | Full heal | Medic/supply **crates** restore full health and refill ammo | `[S]` |
 | First-aid kits | Consumable item, heal over a few seconds, refilled at medic crates | `[S]` (refill) / `[M]` (timing) |
@@ -57,10 +59,11 @@ bandage/first-aid item for free; everything else bought with credits (or gold) a
 |---|---|---|---|
 | Ammunition crate | Refills magazines and throwables; hold-to-use interaction | Placed near capture points + vehicle-mounted | `[S]` |
 | Medic crate | Full health + refills first-aid kits / medic pouches | Same | `[S]` |
-| AT crate | Gives **one single-use rocket launcher**, regenerates after a delay | Map-placed, near objectives | `[S]` (regen) / `[?]` (delay ~1 min) |
+| AT crate | Gives **one single-use Panzerfaust 60** (only 1 carried at a time; armor dmg 650-950, sights 30/60/80 m) [W:Supply_Crates, W:Panzerfaust_60]; regenerates after a delay | Map-placed, near objectives | `[S]` (content) / `[?]` (delay and count per crate: not on wiki) |
 | Vehicle crate | A vehicle (e.g. truck, tank) can carry **one** supply crate at a time; it is a paid vehicle upgrade | Bought by the vehicle owner | `[S]` |
 
-Crate upgrade prices quoted by the wiki: ammunition crate **1 300 credits / 15 gold**, medic crate **4 400 credits / 52 gold** `[S]`.
+Crate upgrade prices quoted by the wiki: ammunition crate **1 300 credits / 15 gold** (spawn cost 12), medic crate **4 400 credits / 52 gold** (spawn cost 44), AT crate **7 500 cr / 90 gold** (spawn cost 68) `[S]` [W:Supply_Crates].
+Ammo crates at **every** capture point; medic crates near capture points `[S]`. Refill rate / hold time / crate XP: not documented `[?]`.
 Teammates using your vehicle crate gave you XP (logistics reward) `[M]`.
 
 **Pickup from the dead `[M]`:** you could pick up the weapon of a fallen soldier (it replaced yours for that life), and
@@ -93,7 +96,12 @@ take ammo from dropped kits. No full loot/inventory looting.
   lives (team-type dependent) `[S]`. One community post: a battle started once both sides had at least
   ~220 infantry spawns `[S, low confidence]`. A side at 0 tickets loses; ticket difference decides close battles `[S]`.
 - **Reinforcement**: generals can send more teams to an ongoing battle to add tickets `[M]`.
-- **Team size**: commonly quoted 16 vs 16 on most maps, more on large maps `[?]`. Timer ~ up to 1 h `[?]`.
+- **Team size**: no cap documented `[?]`; Battle Director "fun" threshold = **18 players/faction** (2 factions) or 12 (3 factions / Encounter) `[S]` [W:Battle_Director].
+- **Ticket sizing `[S]`** [W:Battle_Director]: spawns counted per player = infantry/para 12, tank/plane/recon 10; >=50 % of players need infantry tickets; "fun" Assault = **216 infantry spawns** (18x12) - confirms the ~220 Steam figure. Lives = AT resources, 1 spawn = 1 resource of a same-class AT [W:Assault_Team]. Per-death/per-vehicle ticket cost per mode: `[?]`.
+- **Timers `[S]`** [W:Action_Rules, W:Assault, W:Battle_System]: Assault defence timer **30 min** + capture bonus, then sudden death; attackers with no capture in 30 min are pushed back. Skirmish = first to **100 pts** (2x speed with +2 zones), hard cap 3 h. Prep 5 min; empty server closes after 2 min.
+- **Capture times `[S]`** [W:Action_Rules]: normal point 30 s + 30 s (neutral then own), objective 45 s + 45 s, access point 90 s. Contested if an owner died within 80 m in the last 10 s.
+- **Spawn delays `[S]`** [W:Action_Rules]: soldier 10 s + 0.5 s/link, tank 10 s + 2.5 s/link, other vehicles 10 s + 1.5 s/link, half-track mobile spawn 20 s, air spawn 15 s. Max active: 1 half-track (Mech Inf), 3 tanks (Armor/TD), 1 transport plane.
+- **Conflict**: earlier note "Capture & Hold" mode `[S]` (name) - the fandom wiki documents only **Assault** and **Skirmish** (+ "Encounter"); C&H probably came in a later patch not covered by the wiki.
 - **Bots**: no AI in normal infantry battles; AI infantry only in the late "Tank" variant `[S]`.
 
 ## 6. War map / strategy layer
@@ -109,7 +117,11 @@ take ammo from dropped kits. No full loot/inventory looting.
 | War funds | Third currency. Soldiers earn it by capturing/defending/raiding objectives; generals by team kills/vehicle kills | `[S]` |
 | Buy / resupply | Buy teams with war funds; resupply losses after a battle costs several times less than buying `[S]`. Cost table in `HG_CONTENT.md` §4 |
 | Resources | Factions get resource deliveries from controlled towns / factories; lines can be cut by capturing a town on the route | `[M]` |
-| War end | A war ends when one faction reaches victory conditions (cities/victory points), typically after ~1-3 weeks; then a new war starts | `[M]` |
+| War end | Capture **15 of 23 capitals** (3 starting capitals each), or hold most capitals when a faction loses all its own. Deploy cost refunded pro rata to remaining resources; winner +250 WF per active AT (1.27) | `[S]` [W:Strategy_Game, W:Victory_conditions] |
+| Resupply price | Full resupply ("Deploy") is far cheaper than buying: Infantry 14 000 buy / 3 601 deploy (0.26), Light Armor 44 500 / 3 540, Medium Armor 30 000 / 5 400 (0.18). Per resource: infantry 40, motorcycle 20, car 30, APC 40 WF | `[S]` [W:Assault_Team, W:Warfunds] |
+| WF per kill | Infantry 40, tank crew 45, para 110, recon 76, light/medium/heavy armor 165/250/350, TD 275; Veteran +75 % | `[S]` [W:Assault_Team] |
+| AT XP | 30 per win / 5 per loss; ranks at >350 / >3 450 / >9 200; Battle Director "not fun" penalty -25 % resources, -20 morale | `[S]` [W:Assault_Team, W:Battle_Director] |
+| Factories | **Conflict** with "Resources" row above: wiki has no factory mechanic; production = "Limited Supply" faction stockpile over time, ATs queue. Rates `[?]` | `[S]` [W:Limited_Supply] |
 | Faction balance | Population-dependent; underdog bonuses varied by patch | `[?]` |
 
 ## 7. Economy and progression
@@ -117,7 +129,9 @@ take ammo from dropped kits. No full loot/inventory looting.
 | Item | Behaviour | Flag |
 |---|---|---|
 | Currencies | **Credits** (earned in battle), **Gold** (paid), **War Funds** (strategy) | `[S]` |
-| XP | Objective play gives several times more XP than kills `[S]`; XP per soldier, ranks per soldier | `[S]` |
+| XP | Objective play gives several times more XP than kills `[S]`. Scoreboard: kill 5, objective capture 28 (5.6x a kill), point 5, TK -10; old Tactical XP: capture 5, kill-a-capturer 10 vs Combat kill 1 [W:Action_Rules] | `[S]` |
+| Ranks / salary | 22 ranks, total XP 10 -> 1 000 (r2) -> 101 000 (r12, command 1 AT) -> 29 M (r22); salary 8 500 -> 14 700 cr/h, x1.1 if staying to the end, >50 % presence required; ~4.2 credits per score point [W:Ranks, W:Soldier_salary, W:Credits] | `[S]` |
+| Ribbon XP | 12 levels, cumulative 500 / 1 500 / 3 500 / 7 500 / 15 500 ... 184 500; badges at ribbon levels ~4/8/12 (Bronze/Silver/Gold), 1 badge slot (2 Veteran) [W:Combat_Ribbons, W:Combat_Badge]. **Conflict**: booster +150/200 % vs +75 % on the same page | `[S]` |
 | Ranks | Soldier rank unlocks items and new soldier slots; reaching an officer rank allows becoming a General | `[S]` |
 | Unlock costs | Each item = rank requirement + credit (or gold) price | `[M]` |
 | Upgrades | Weapon/vehicle mods bought per item (see §1) | `[M]` |
@@ -149,10 +163,10 @@ ribbons, HUD + scoreboard. Arma already provides medical, stamina, weight, fall 
 | P1 | **Supply crates at sectors** (ammo + medic, hold-to-use, full refill) | Adopt | Core H&G loop; without them AI-heavy battles drain ammo. Arma arsenal/resupply entities at each sector spawn |
 | P1 | **AT crate with regenerating single-use launcher** | Adopt | Gives infantry a counter to tanks without unlocks; Panzerfaust/Bazooka prefab, respawn timer ~60-90 s |
 | P1 | **Vehicle spawn gated by team type + vehicle death costs tickets** | Adopt | We already have team types; enforce "no ARM team = no tank" and ticket cost per vehicle (e.g. tank = 5) |
-| P1 | **Resupply cost after battle** (cheaper than buying a new team) | Adapt | Already noted in `HG_CONTENT.md`; add `resupply = losses × unit cost × 0.3` to war funds |
+| P1 | **Resupply cost after battle** (cheaper than buying a new team) | Adapt | Already noted in `HG_CONTENT.md`; `resupplyFactor` now 0.3 (§10) |
 | P2 | Free light vehicles (bikes/kübel/jeep) at sector spawns | Adopt | Mobility on Arland; no ownership needed |
 | P2 | Vehicle-mounted crate as an owned upgrade + logistics XP | Adapt | Reward XP when others resupply from your truck/half-track |
-| P2 | Objective XP >> kill XP | Already done | `PROGRESSION.md` §1 (capture 60 vs kill 15-40) |
+| P2 | Objective XP >> kill XP | Already done | `PROGRESSION.md` §1 (capture 80 vs kill 15-40) |
 | P2 | Weapon mods per item (sights, mags) | Adapt later | Same rank+price model; Arma attachments exist on some WW2 weapons only |
 | P2 | Daily/weekly missions | Adopt | Cheap server-side; first-win-of-day exists already |
 | P3 | Resource lines / factories, cut by capturing towns | Adapt | Our city income can depend on connected roads to the capital |
@@ -163,7 +177,18 @@ ribbons, HUD + scoreboard. Arma already provides medical, stamina, weight, fall 
 | Skip | Planes / pilot class | Skip for now | Out of scope (`HG_CONTENT.md`) |
 | Skip | Weapon weight micro-tuning | Skip | Arma already simulates weight and stamina |
 
+## 10. Tuning changes from H&G research (2026-11-25)
+
+| Tunable | Old -> New | Why |
+|---|---|---|
+| `web/teams.json` `resupplyFactor` | 0.5 -> **0.3** | H&G full resupply costs 0.18-0.26 of buying a team (Assault_Team table); 0.3 keeps losses meaningful while matching "several times cheaper" |
+| `web/progression.json` `xp.capture` | 60 -> **80** | H&G objective capture = 5.6x a kill on the scoreboard; ours was 1.5x a player kill (40), now 2x |
+
+Checked, no change: medical defaults (wiki has no heal/bleed numbers; 2 bandages + medic extras already mirror First Aid Kit + Medic Pouch "3 kits"); field-supply AT crate (count per crate and refill delay undocumented; H&G "1 launcher carried" already matches single-use launchers); ribbons (H&G uses 12 XP levels, we use 3 kill-count tiers by design); war-fund team costs (H&G AT sizes differ too much from ours to transpose).
+
 ## Sources
+
+- **H&G fandom wiki** (read in a browser 2026-11-25, `[W:Page]` = `https://heroesandgenerals.fandom.com/wiki/Page`): Action_Rules, Action_Game, Assault, Battle_System, Battle_Director, Assault_Team, Warfunds, Strategy_Game, Victory_conditions, Limited_Supply, Supply_Crates, Panzerfaust_60, Equipment, Medkits, First_Aid_CB, Combat_Medic_CB, Combat_Badge, Combat_Ribbons, Ranks, Soldier_salary, Credits. Pages are undated and mix builds (2015-1.27).
 
 - GamePressure H&G guide, Assault Teams: https://www.gamepressure.com/heroesandgenerals/what-are-the-assault-teams/z37615
 - GamePressure H&G guide, Infantry tips (10 points, 1/3 regen, crates, vehicles): https://www.gamepressure.com/heroesandgenerals/infantry/za75f8
@@ -174,6 +199,5 @@ ribbons, HUD + scoreboard. Arma already provides medical, stamina, weight, fall 
 - Softpedia changelog (Capture & Hold Tank with AI infantry, 2019): https://games.softpedia.com/progChangelog/Heroes-and-Generals-Changelog-144847.html
 - Namu wiki (Korean) overview, ticket difference decides wars: https://namu.wiki/w/%ED%9E%88%EC%96%B4%EB%A1%9C%EC%A6%88%20%EC%95%A4%20%EC%A0%9C%EB%84%88%EB%9F%B4%EC%8A%A4
 
-**Gaps to re-check by hand (browser):** exact AT crate respawn timer, per-team ticket counts, battle timer and team sizes,
-war-end victory conditions, first-aid kit heal amount. The fandom wiki (Supply_Crates, Assault_Teams, Health, Battle pages)
-should answer them when opened in a normal browser.
+**Remaining gaps (not on the wiki):** AT crate respawn timer and launchers per crate, per-death/vehicle ticket cost,
+max team size, first-aid heal amount, bleeding, free-vehicle counts/respawn, factory production rates.

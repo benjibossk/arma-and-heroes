@@ -2,7 +2,7 @@
   "_note": "Arma & Heroes grind tuning. See docs/PROGRESSION.md. Loaded at startup (embedded; ./progression.json next to the binary overrides it).",
   "xp": {
     "playerKill": 40, "aiKill": 15, "assist": 15, "vehicleKill": 100,
-    "capture": 60, "defend": 40, "objectivePerMin": 6,
+    "capture": 80, "defend": 40, "objectivePerMin": 6,
     "win": 150, "loss": 50, "participation": 50,
     "firstWinOfDay": 200, "squadBonusPct": 10
   },

@@ -12,7 +12,7 @@ the player account also accumulates the same XP/credits as a career total.
 | Kill — AI (diminishing, see §2) | 15 | 4 |
 | Assist | 15 | 4 |
 | Vehicle destroyed | 100 | 40 |
-| Sector captured | 60 | 20 |
+| Sector captured | 80 | 20 |
 | Sector defended | 40 | 15 |
 | Time on objective, per minute (max 30 min) | 6 | 2 |
 | Victory / Defeat | 150 / 50 | 60 / 25 |

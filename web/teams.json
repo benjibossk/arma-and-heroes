@@ -1,6 +1,6 @@
 {
   "note": "Assault-team tuning. allowedRoles: vehicle roles a team type may field (anything else is stripped from the pool and the battle payload). vehicleRoles: vehicle key -> role. vehicleShare: part of the team cost that pays for its vehicles (rest = manpower). resupplyFactor: resupply price = factor x pro-rata cost of what is missing. minAttackPct: a team below this strength cannot attack an enemy city.",
-  "resupplyFactor": 0.5,
+  "resupplyFactor": 0.3,
   "minAttackPct": 50,
   "allowedRoles": {
     "INF": [],
