@@ -1,0 +1,530 @@
+{
+ "GER_TIGER1": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{67750217922403FC}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_Grey.et",
+  "mod": "Tiger_H1",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_TIGER1_DUNKELGELB": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{E5FD8C6B920C906B}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_DunkelGelb.et",
+  "mod": "Tiger_H1",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_TIGER1_KURSK": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{FD034D161D354E6B}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_KurskCamo.et",
+  "mod": "Tiger_H1",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_TIGER1_BASE": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{93C317E21908A7FE}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_BASE.et",
+  "mod": "Tiger_H1",
+  "seats": 5,
+  "crewable": false
+ },
+ "GER_TIGER1_SIMTEST": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{0BA8B33FA94D6966}Prefabs/Vehicles/Tracked/Tiger_1H/Tiger_H1_BASE_SIMTEST.et",
+  "mod": "Tiger_H1",
+  "seats": 5,
+  "crewable": false
+ },
+ "GER_PZ4": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{E44C69F0A2538279}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_H_Base.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_PZ4_G": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{6E1EFC04B7356FE6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_G.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_PZ4_F2": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{3C7E824E65A93FA9}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F2.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_PZ4_F": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{70971D2B05042098}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_F.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_PZ4_D": {
+  "faction": "GER",
+  "type": "tank",
+  "prefab": "{1CC329CBB9C0AFB6}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_E.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_PZ4_WIRBELWIND": {
+  "faction": "GER",
+  "type": "SPAAG",
+  "prefab": "{7E7B98C2756C68DD}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Ausf_WW.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 5,
+  "crewable": true
+ },
+ "GER_JAGDPANZER4": {
+  "faction": "GER",
+  "type": "tank destroyer",
+  "prefab": "{71F142BC3276CE44}Prefabs/Vehicles/Wheeled/M151A2/V2/Jagdpanzer.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 4,
+  "crewable": true
+ },
+ "GER_PZ4_CHASSIS": {
+  "faction": "GER",
+  "type": "chassis (base)",
+  "prefab": "{00889F6B072E47F5}Prefabs/Vehicles/Wheeled/M151A2/V2/Panzer_IV_Chassis_Base.et",
+  "mod": "RMS WW2 PANZER IV",
+  "seats": 1,
+  "crewable": false
+ },
+ "GER_STURMTIGER": {
+  "faction": "GER",
+  "type": "assault gun (heavy)",
+  "prefab": "{D49FFA19F12CA057}Prefabs/Vehicles/Wheeled/M151A2/Sturmtiger.et",
+  "mod": "RMS WW2 Sturmtiger",
+  "seats": 3,
+  "crewable": true
+ },
+ "GER_SDKFZ251": {
+  "faction": "GER",
+  "type": "halftrack (armed)",
+  "prefab": "{561C8A71E69790A1}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_MG.et",
+  "mod": "SDKFZ251",
+  "seats": 12,
+  "crewable": true
+ },
+ "GER_SDKFZ251_TRANSPORT": {
+  "faction": "GER",
+  "type": "halftrack",
+  "prefab": "{D253646DF96D27EA}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport.et",
+  "mod": "SDKFZ251",
+  "seats": 10,
+  "crewable": true
+ },
+ "GER_SDKFZ251_MG_CAMO": {
+  "faction": "GER",
+  "type": "halftrack (armed)",
+  "prefab": "{AB976FB2C94E3BF9}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_MG_camo.et",
+  "mod": "SDKFZ251",
+  "seats": 12,
+  "crewable": true
+ },
+ "GER_SDKFZ251_TRANSPORT_CAMO": {
+  "faction": "GER",
+  "type": "halftrack",
+  "prefab": "{FB19BB480885C8F8}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_Transport_Camo.et",
+  "mod": "SDKFZ251",
+  "seats": 10,
+  "crewable": true
+ },
+ "GER_SDKFZ251_BASE": {
+  "faction": "GER",
+  "type": "halftrack (base)",
+  "prefab": "{4E0A51F1E4013D06}Prefabs/Vehicles/Sdkfz.251/Sd.kfz_251_BASE.et",
+  "mod": "SDKFZ251",
+  "seats": 2,
+  "crewable": false
+ },
+ "GER_KFZ": {
+  "faction": "GER",
+  "type": "car",
+  "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
+  "mod": "FH GER Vehicles",
+  "seats": 4,
+  "crewable": true
+ },
+ "GER_KFZ_MG34": {
+  "faction": "GER",
+  "type": "car (armed)",
+  "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
+  "mod": "FH GER Vehicles",
+  "seats": 3,
+  "crewable": true
+ },
+ "GER_KFZ_CANVAS": {
+  "faction": "GER",
+  "type": "car",
+  "prefab": "{0373FCB583E39633}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_Canvas.et",
+  "mod": "FH GER Vehicles",
+  "seats": 4,
+  "crewable": true
+ },
+ "GER_TRUCK": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_OPEN": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_FLAK_TRUCK": {
+  "faction": "GER",
+  "type": "truck (AA)",
+  "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_FLAKVIERLING_TRUCK": {
+  "faction": "GER",
+  "type": "truck (AA)",
+  "prefab": "{EBA339690C35F864}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flakvierling.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_TRUCK_COMMAND": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{34E9C5F482B11D65}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_command.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_REPAIR": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{55CD8305C5032C21}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_repair.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_ENGINEER": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{FC9C7C7EFCF8C216}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_engineer.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_AMMO": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{6CD8B6D9848D7877}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_ammo.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_ARSENAL": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{1DA54D8491C30502}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Arsenal.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_TRUCK_TANKER": {
+  "faction": "GER",
+  "type": "truck",
+  "prefab": "{974E023D12A97DC7}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_tanker.et",
+  "mod": "FH GER Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "GER_SDKFZ222": {
+  "faction": "GER",
+  "type": "armored car",
+  "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 3,
+  "crewable": true
+ },
+ "GER_SDKFZ223": {
+  "faction": "GER",
+  "type": "armored car (radio)",
+  "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
+  "mod": "FH GER Vehicles",
+  "seats": 3,
+  "crewable": true
+ },
+ "GER_TRAILER_SDAH51": {
+  "faction": "GER",
+  "type": "trailer",
+  "prefab": "{6AC81C73AAA103DD}Prefabs/Vehicles/Wheeled/SdAh51_Trailer/Trailer_SdAh51_transport.et",
+  "mod": "FH GER Vehicles",
+  "seats": 0,
+  "crewable": false
+ },
+ "GER_PAK40": {
+  "faction": "GER",
+  "type": "static gun (AT)",
+  "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_PAK36": {
+  "faction": "GER",
+  "type": "static gun (AT)",
+  "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_FLAK36": {
+  "faction": "GER",
+  "type": "static gun (AA/AT)",
+  "prefab": "{5A9635F186D9ED7A}Prefabs/Weapons/Artillery/AntiAir/Flak36/AntiAir_Flak36_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_FLAK38": {
+  "faction": "GER",
+  "type": "static gun (AA)",
+  "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_FLAKVIERLING": {
+  "faction": "GER",
+  "type": "static gun (AA)",
+  "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_LEFH18": {
+  "faction": "GER",
+  "type": "static gun (howitzer)",
+  "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_LEIG18": {
+  "faction": "GER",
+  "type": "static gun",
+  "prefab": "{A3397E731682B0A1}Prefabs/Weapons/Artillery/Howitzer/Leig18/Howitzer_Leig18_Grey.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_SW36": {
+  "faction": "GER",
+  "type": "static (searchlight trailer)",
+  "prefab": "{6373075B929E4DC7}Prefabs/Weapons/Artillery/AntiAir/SW36/Trailer_SW36_transport.et",
+  "mod": "FH GER Vehicles",
+  "seats": 0,
+  "crewable": false
+ },
+ "GER_GRW34": {
+  "faction": "GER",
+  "type": "static gun (mortar)",
+  "prefab": "{8BE4C8A97C5FD444}Prefabs/Weapons/Mortars/Grw34/Mortar_Gwr34.et",
+  "mod": "FH GER Vehicles",
+  "seats": 1,
+  "crewable": true
+ },
+ "GER_MG34_TRIPOD": {
+  "faction": "GER",
+  "type": "static gun (MG)",
+  "prefab": "{CF539B000DA7B22D}Prefabs/Weapons/Tripods/Tripod_M122_MG_MG34.et",
+  "mod": "RMS Op Ostfront German Arms",
+  "seats": 1,
+  "crewable": true
+ },
+ "US_M3A1": {
+  "faction": "US",
+  "type": "halftrack (armed)",
+  "prefab": "{80C7FDE83DE6D000}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_MG.et",
+  "mod": "M3A1 HalfTrack",
+  "seats": 12,
+  "crewable": true
+ },
+ "US_M3A1_TRANSPORT": {
+  "faction": "US",
+  "type": "halftrack",
+  "prefab": "{EC62ED156FC6F05C}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_Transport.et",
+  "mod": "M3A1 HalfTrack",
+  "seats": 10,
+  "crewable": true
+ },
+ "US_M3A1_BASE": {
+  "faction": "US",
+  "type": "halftrack (base)",
+  "prefab": "{C47A236EC4547CEF}Prefabs/Vehicles/Tracked/M3A1 HalfTrack/M3A1 HalfTrack_BASE.et",
+  "mod": "M3A1 HalfTrack",
+  "seats": 2,
+  "crewable": false
+ },
+ "US_JEEP_WILLYS": {
+  "faction": "US",
+  "type": "car",
+  "prefab": "{0CFB9416659192D2}Prefabs/Vehicles/ww2 jeep/Willys Jeep_uncovered.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 4,
+  "crewable": true
+ },
+ "US_JEEP_WILLYS_COVERED": {
+  "faction": "US",
+  "type": "car",
+  "prefab": "{CC78138E645F75E7}Prefabs/Vehicles/ww2 jeep/Willys Jeep_covered.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 4,
+  "crewable": true
+ },
+ "US_JEEP_WILLYS_MG": {
+  "faction": "US",
+  "type": "car (armed)",
+  "prefab": "{10448D0351BF0979}Prefabs/Vehicles/ww2 jeep/Willys Jeep_MG.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 4,
+  "crewable": true
+ },
+ "US_JEEP_WILLYS_MEDICAL": {
+  "faction": "US",
+  "type": "car (medical)",
+  "prefab": "{2B6F31F0D50AB7CD}Prefabs/Vehicles/ww2 jeep/Willys_Jeep_Medical.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 5,
+  "crewable": true
+ },
+ "US_JEEP_WILLYS_BASE": {
+  "faction": "US",
+  "type": "car (base)",
+  "prefab": "{99FA6C1DFA682998}Prefabs/Vehicles/ww2 jeep/Willys Jeep_base.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": false
+ },
+ "US_WC63": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{1DF2AB34BE13692A}Prefabs/Vehicles/Wheeled/WC63/WC63.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_COVERED": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{884FF5DF74E94D7F}Prefabs/Vehicles/Wheeled/WC63/WC63_Covered.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_UNCOVERED": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{AF7DA63E2177F11E}Prefabs/Vehicles/Wheeled/WC63/WC63_Uncovered.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_MG": {
+  "faction": "US",
+  "type": "truck (armed)",
+  "prefab": "{B12E900E074349E4}Prefabs/Vehicles/Wheeled/WC63/WC63_covered_mg.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 3,
+  "crewable": true
+ },
+ "US_WC63_REPAIR": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{6FF58947033154D1}Prefabs/Vehicles/Wheeled/WC63/WC63_Repair.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_ENGINEER": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{CB6185DC2DA8C597}Prefabs/Vehicles/Wheeled/WC63/WC63_Engineer.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_ARSENAL": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{986F891F5DC8CFAB}Prefabs/Vehicles/Wheeled/WC63/WC63_Arsenal.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_WC63_TRANSPORT": {
+  "faction": "US",
+  "type": "truck",
+  "prefab": "{773E8E154D18321C}Prefabs/Vehicles/Wheeled/WC63/WC63_transport.et",
+  "mod": "Operation Overlord US Vehicles",
+  "seats": 2,
+  "crewable": true
+ },
+ "US_SHERMAN_M4A2": {
+  "faction": "US",
+  "type": "tank",
+  "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
+  "mod": "M4A2 Sherman",
+  "seats": 10,
+  "crewable": true
+ },
+ "OTHER_UH1H": {
+  "faction": "OTHER",
+  "type": "helicopter",
+  "prefab": "{D03C0F6044DB5208}Prefabs/Vehicles/Helicopters/UH1H/UH1H_base.et",
+  "mod": "WCS_Armaments",
+  "seats": 2,
+  "crewable": false
+ },
+ "OTHER_MI8": {
+  "faction": "OTHER",
+  "type": "helicopter",
+  "prefab": "{AFF6067A5CE8A852}Prefabs/Vehicles/Helicopters/Mi8MT/Mi8_base.et",
+  "mod": "WCS_Armaments",
+  "seats": 2,
+  "crewable": false
+ },
+ "OTHER_TRACKED_BASE": {
+  "faction": "OTHER",
+  "type": "base class",
+  "prefab": "{4EF4ED8055AB67FC}Prefabs/Vehicles/Tracked/LTM_Tracked_Vehicles_Base.et",
+  "mod": "CIE Tracked Core",
+  "seats": 1,
+  "crewable": false
+ },
+ "OTHER_TANK_BASE": {
+  "faction": "OTHER",
+  "type": "base class",
+  "prefab": "{C2272B5E8EDAB1E2}Prefabs/Vehicles/Core/Tank_Base.et",
+  "mod": "WCS_SpaceCore",
+  "seats": 0,
+  "crewable": false
+ }
+}
