@@ -235,3 +235,36 @@ loadout or soldier-rank rules. Those stay `[M]` (section 1 / AIRCRAFT_PARA.md) u
 
 **Adopt for A&H**: AIR team (fighters) and PARA team keep the "resources = soldiers + vehicles" model; transport is a team resource;
 planes owned by Pilot class, bought by rank, spawn price per sortie; 1 bomb per sortie, rearm on airfield with a timer.
+
+## 12. Vehicles and mobile spawn (wiki PDFs: SdKfz 251/1 page + Vehicles page, 2026-11-25)
+Paraphrased, numbers only. The pages are print exports with the right-hand "comments" column cut off, so some cells are partial.
+**Gap:** the wiki gives NO numeric rules for mobile-spawn conditions (stationary / engine off / enemy distance / cooldown / capacity /
+destruction penalty). Everything below marked `[M]` is our design, not H&G data.
+
+**Mobile spawn `[S]` (what the wiki states)**
+- Infantry-support vehicles act as a spawn point for the whole team: the SdKfz 251/1 (GER) and the M3 half-track (US, also lend-lease to USSR); the CCKW cargo truck (US) and the GAZ-AAA / Blitz truck rows are in the same "Infantry Support Vehicle" category (the CCKW row mentions a mobile spawn, text cut).
+- Driver-owned: class restriction Infantry; the driver needs a Chauffeur ribbon (rank 1 at grade 9 for the 251/1).
+- Players pick the vehicle as a spawn point on the map; the vehicle is a "spawn point for the rest of your team".
+- Locking matters: if a friendly APC is "unlocked" it stops being usable as a spawn point (spawn capability removed). So a vehicle must be in its locked/owned state to count.
+- Counterplay: enemies hunt and spawn-camp them; hide it (riverbanks, trees, hills), the MG is a last resort because firing reveals it; the driver's armour shield can be lowered by holding crouch.
+- Destroyed vehicle = spawn point gone `[M]` (implied; no number given).
+
+**SdKfz 251/1 stats `[S]`:** type Infantry Support, HP 900 (hull armour multiplier 1.5), 2x 7.92 mm MG 34 (front + rear), max speed 55 km/h, off-road minimum 34, reverse 19, passengers not listed (our 251 mod: 8 rear + 2 crew), price 79,000 credits or 950 gold, spawn (per-deployment repair) cost 386, maintenance load 3:07, ribbon Chauffeur / 9th grade. Camo skins: 130,000 cr / 520 gold and 40,000 cr / 160 gold.
+
+**Upgrades (supply crates) `[S]`:** crates are fitted to the rear for nearby infantry; trucks can carry 2. Three kinds: ammo (incl. grenades/mines), medical, anti-tank. Crate prices: ammo 1,300 cr / 15 gold (spawn 12), medical 4,400 / 52 (44), anti-tank 7,500 / 90 (68; Panzerfaust), each adds 2 s maintenance load; demolition kit and flamethrower crates are battle-pass items (spawn 44-46). Mounted MGs are for terrain vehicles only (own per-spawn repair cost); ammo types and paint for tanks/planes.
+
+**Category -> role `[S]`** (armour is "min-max mm", armament summarised)
+
+| Class | Germany | United States | USSR |
+|---|---|---|---|
+| Terrain vehicle (MG passenger) | Kubelwagen (MG34/42), Schwimmwagen (amphibious), SdKfz 7/1 Flakvierling | QMC-4 jeep (M1919/M2), M29 Weasel (amphibious), M16 MGMC | GAZ-67 (DShK/DT), lend-lease QMC-4 |
+| Motorcycle | R75, R75 sidecar (MG34), Kettenkrad | 42WLA, with sidecar | M72, with sidecar |
+| Infantry support (spawn) | Blitz truck, SdKfz 251/1 | CCKW truck, M3 half-track (12.7 mm) | GAZ-AAA, lend-lease M3 |
+| Armoured car / recon | SdKfz 250/3, 222 (20 mm), 234/2 Puma (50 mm L/60) | M20 (.50), T8E1, M8 Greyhound (37 mm) | BA-64B, BA-6, BA-11 (45 mm) |
+| Light tank | Pz I A (6-15 mm), Pz II C (20 mm), Pz 38(t) E (37 mm), Pz II L | M5A1 Stuart, M24 Chaffee (75 mm) | T-38, T-26, BT-7, T-70 |
+| Medium tank | Pz III J/1 (50 mm), Pz IV H (75 mm), Pz V Panther G (75 L/70) | M3 Lee, M4A1, M4A3E8 (76 mm) | T-34/76, T-34/85 |
+| Heavy tank | Tiger (88 mm, up to 110 mm armour), Tiger II (up to 180 mm) | M4A3E2 Jumbo, M26 Pershing (90 mm) | KV-85, IS-2 (122 mm) |
+| Tank destroyer | Hetzer (75 mm), StuG III G (75 mm), Jagdpanther (88 mm) | M10, M18 Hellcat (76 mm), M36 / M36B1 (90 mm) | SU-76M, SU-85, SU-100 |
+| Planes | see section 11 (Hs 126, Bf 109 D/E, Fw 190 D9, Me 410, Ju 52) | O-52, P-35A, P-40N, P-51D, P-38, C-47 | Polikarpov RZ, MiG-3, Yak-9B, La-7, Pe-3bis, C-47 |
+
+Civilian truck, Universal-1 and bicycle exist but are free/none. Tank ammo: 1 shell 100%; 2 shells 60/40; 3 shells 50/30/20. Vehicle credit/gold prices, seats and unlock ranks are not on the Vehicles overview page (only per vehicle page; only the 251/1 was exported).

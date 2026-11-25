@@ -61,3 +61,37 @@ Spawn point icons and selection are the vanilla `SCR_MapUISpawnPoint` ones. We d
 - **Overlap:** the cards (bottom corners, Y −372) may overlap the vanilla left/right deploy panels at some resolutions. Adjust in `F44_DeployOverlay.layout` after an in-game look.
 - **Verified:** compiles (dedicated server load of the addon, no `SCRIPT (E)` from F44 scripts).
 - **Not verified in play:** visual rendering in-game, and forward-point creation (the test battle never reached a sector capture).
+
+## Mobile spawn (design, not implemented)
+
+Source of the mechanic: `inventory/HG_MECHANICS.md` section 12 (paraphrased; the wiki gives no numbers for conditions, so the values below are ours and tunable).
+
+### Which of our vehicles
+Only the infantry-support class, driven by the owner and matching H&G's 251/1 / M3 / cargo truck. Keys from `inventory/VEHICLES.md`, `VEHICLE_VARIANTS.md`, `web/teams.json` (`vehicleRoles`):
+
+| Role | Prefab keys | Mobile spawn | Seats to count |
+|---|---|---|---|
+| `light_armored` halftrack | `GER_SDKFZ251` (+ `_TRANSPORT`, camo), `US_M3A1` (+ `_TRANSPORT`) | **yes**, main case | 8 rear cargo |
+| `truck` | `GER_TRUCK`, `GER_TRUCK_OPEN`, `US_TRUCK` (WC-63 transport/covered) | yes (cheaper, 3 uses) | cargo |
+| `light_utility`, bikes, armoured cars `GER_SDKFZ222`, tanks, planes | `GER_KFZ`, `US_JEEP`, `GER_PZ4`... | no (H&G: not spawn points) | n/a |
+
+Armed and unarmed variants (`variants` in teams.json) behave the same; firing the MG reveals the position (UI hint only).
+
+### Rules (server authoritative)
+1. The point is **enabled** only while: the vehicle is alive, has a driver of the same faction who is not dead, speed < 2 km/h for 3 s (stationary), engine off or idle, no enemy infantry/vehicle within 40 m (cheap `GetWorld().QueryEntitiesBySphere` scan every 1-2 s), and it is not in a contested sector's capture radius (avoid spawn-camping the flag).
+2. **Capacity:** 8 spawns per deployment (= rear seats); the counter refills only when the vehicle is resupplied at a friendly sector spawn. **Cooldown** 20 s between two spawns on the same vehicle (anti-chain-spawn).
+3. **Who:** any player of the owning faction, in the same group or not (H&G: whole team). Spawned soldiers appear next to the vehicle (SCR_SpawnPoint radius), not inside it.
+4. **Deploy penalty:** `SetRespawnTime(15)` (forward sector points use 10) enforced by the vanilla timer.
+5. **Destruction / abandon:** vehicle destroyed or driver leaves for more than 15 s: the point is disabled and deleted; passengers keep the usual vehicle rules. Optional: lose one ticket on destruction (H&G: vehicle death costs a ticket, `[M]`).
+6. Map label `<vehicle> - <driver name>`; if the driver leaves, the label is removed (the "unlocked APC" tip in H&G).
+
+### Implementation plan (vanilla `SCR_SpawnPoint` on the vehicle)
+No mod code edited here. Steps, in the order we would do them:
+1. New `Scripts/Game/F44/F44_MobileSpawn.c`: `class F44_MobileSpawns`, owned by `F44_GameModeComponent` next to `m_SectorSpawns` and ticked from `ServerTick` right after `F44_SectorSpawns.Tick` (same hook, same server-only pattern).
+2. Discovery: when a vehicle with role `light_armored`/`truck` is spawned by the F44 vehicle logic (or on `SCR_VehicleSpawnerComponent` / `F44_FieldSupply` loaded-box creation), register it. Resolve role from the prefab key via the same table as `web/teams.json` `vehicleRoles`.
+3. Create the point exactly like `F44_SectorSpawns.CreatePoint`: spawn the faction's HQ `SCR_SpawnPoint` prefab (`FindHqPrefab`), **parent it to the vehicle** (`vehicle.AddChild(sp, -1)`, offset behind the tailgate, 3 m) so it follows the hull; set `SetSpawnPointName("MOBILE <name>")`, `SetRespawnTime(15)`, `SetFactionKey`. Enable/disable with `SetSpawnPointEnabled_S` from the rules above; delete on vehicle death (`SCR_DamageManagerComponent` `OnStateChanged` DESTROYED) or abandon timer.
+4. Keep the point disabled by default; a per-vehicle record `{vehicle, point, uses, nextSpawnTime, abandonTimer}` lives in a `ref array`; `uses--` and cooldown set by hooking `SCR_SpawnPoint` spawn event (or `SCR_BaseGameMode.OnPlayerSpawned` + distance check to the point).
+5. Client: no new work. The vanilla `SCR_MapUISpawnPoint` already lists any enabled point; `F44_DeployMenu.c` line ~428 uses `NAME_PREFIX` to show the `+10 S` penalty, so add a second prefix `MOBILE ` (+15 S) and a distinct overlay colour. Show remaining uses in the name string (updated server side, replicated by vanilla).
+6. Test: Workbench MP with 2 clients, one driver; check enabled/disabled transitions, kill the vehicle, drive away, and a vehicle spawned by `F44_FieldSupply`.
+
+Open points: (a) vanilla RplProp replication of a moving child spawn point (verify it re-sends position; fallback: delete/recreate every 5 s only when moved > 20 m); (b) numbers 40 m / 8 uses / 20 s are untested guesses.
