@@ -1,0 +1,7 @@
+GenericEntity {
+ ID "F44A00000000A006"
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+  }
+ }
+}

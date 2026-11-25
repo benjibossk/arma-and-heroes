@@ -1,0 +1,48 @@
+FrameWidgetClass {
+ Name "F44_HudRoot"
+  {
+  ImageWidgetClass "{6A1F0C2B9D3E4A51}" {
+   Name "F44_HudBg"
+   Color 0.118 0.122 0.125 0.9
+   Slot FrameWidgetSlot "{6A1F0C2B9D3E4A52}" {
+    Anchor 0.5 0 0.5 0
+    PositionX -260
+    PositionY 4
+    SizeX 520
+    SizeY 72
+   }
+  }
+  VerticalLayoutWidgetClass "{8ABA1B6E9A6C1665}" {
+   Name "F44_Panel"
+   Slot FrameWidgetSlot "{B7F3283B8AD2E9CF}" {
+    Anchor 0.5 0 0.5 0
+    PositionX -250
+    PositionY 10
+    SizeX 500
+    SizeY 90
+   }
+    {
+    TextWidgetClass "{BBFE7535A0A89891}" {
+     Name "F44_Tickets"
+     Text "US 0 | 00:00 | GER 0"
+     Color 0.91 0.902 0.882 1
+     ExactFontSize 1
+     FontSize 24
+     Slot LayoutSlot "{85894586D674A755}" {
+      HorizontalAlign 1
+     }
+    }
+    TextWidgetClass "{597030C36316416C}" {
+     Name "F44_Sectors"
+     Text "[A] [B] [C]"
+     Color 0.941 0.659 0.188 1
+     ExactFontSize 1
+     FontSize 20
+     Slot LayoutSlot "{8987B1A9727CAF27}" {
+      HorizontalAlign 1
+     }
+    }
+   }
+  }
+ }
+}

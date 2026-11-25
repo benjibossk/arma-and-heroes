@@ -1,0 +1,7 @@
+SCR_SpawnPoint : "{E7F4D5562F48DDE4}Prefabs/MP/Spawning/SpawnPoint_Base.et" {
+ ID "F44A00000000A004"
+ m_sFaction "USSR"
+ m_Info SCR_UIInfo "{F44A00000000C030}" {
+  Name "GER Deploy"
+ }
+}

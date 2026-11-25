@@ -1,0 +1,75 @@
+SCR_AIWorld F44_AIWorld : "{01DC74137CFDDB6A}Prefabs/AI/SCR_AIWorld_Arland.et" {
+ coords 0 0 0
+}
+PerceptionManager F44_PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 0 0 0
+}
+RadioManagerEntity F44_RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+ coords 0 0 0
+}
+ScriptedChatEntity F44_Chat : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ coords 0 0 0
+}
+SCR_BaseGameMode F44_GameMode : "{097A1FE9CCC65548}Prefabs/F44/F44_GameMode.et" {
+ components {
+  F44_GameModeComponent "{F44A00000000C001}" {
+   m_sCatalogPath "Configs/F44/catalog_vanilla_test.json"
+  }
+ }
+ coords 2000 0 2000
+}
+SCR_FactionManager F44_FactionManager : "{31B152F933B767AF}Prefabs/F44/F44_FactionManager.et" {
+ coords 2000 0 2005
+}
+SCR_LoadoutManager F44_LoadoutManager : "{7B0580D6DD898DDC}Prefabs/F44/F44_LoadoutManager.et" {
+ coords 2000 0 2010
+}
+SCR_SpawnPoint F44_Spawn_US : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
+ coords 1400 38.9 2000
+}
+SCR_SpawnPoint F44_Spawn_GER : "{36C2CAABC0C03856}Prefabs/F44/F44_SpawnPoint_GER.et" {
+ coords 2700 75.6 2000
+}
+GenericEntity F44_Sector_A : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "A"
+   m_iOrder 0
+  }
+ }
+ coords 1800 26.2 2000
+}
+GenericEntity F44_Sector_B : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "B"
+   m_iOrder 1
+  }
+ }
+ coords 2100 33.3 2000
+}
+GenericEntity F44_Sector_C : "{82EE26039EE138EB}Prefabs/F44/F44_Sector.et" {
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+   m_sSectorName "C"
+   m_iOrder 2
+  }
+ }
+ coords 2400 81.9 2000
+}
+GenericEntity F44_VehSpawn_US_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide ATTACKER
+  }
+ }
+ coords 1410 37 2015
+}
+GenericEntity F44_VehSpawn_GER_1 : "{9CBA04DA3882CC02}Prefabs/F44/F44_VehicleSpawnPoint.et" {
+ components {
+  F44_VehicleSpawnPointComponent "{F44A00000000C050}" {
+   m_eSide DEFENDER
+  }
+ }
+ coords 2690 80 2015
+}

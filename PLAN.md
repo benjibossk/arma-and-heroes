@@ -53,9 +53,17 @@ Fallback hors-ligne : si l'API est injoignable, le mod lit `$profile:F44/battle.
                          "classes": ["CREW","RIFLEMAN"],
                          "vehicles": [ {"key":"GER_SDKFZ222","count":2} ] } ] }
   },
-  "playerUnlocks": { "<identityId>": ["US_THOMPSON"] }   // optionnel, V3
+  "playerUnlocks": { "<identityId>": ["US_THOMPSON"] },  // optionnel, V3
+  "aiLimit": 48,                  // optionnel : budget IA global (min avec l'attribut serveur)
+  // par camp, optionnels : "aiEnabled": true, "aiMaxAlive": 24, "aiPerPlayerScale": 1.0
+  //   -> bots vivants visés = max(0, aiMaxAlive - joueursCamp * aiPerPlayerScale)
+  "playerLoadouts": { "<identityId>": { "soldierId":"s_42", "class":"RIFLEMAN",
+                      "items":["US_M1_GARAND"], "points":120 } }   // optionnel
 }
 ```
+- Retardataires : `GET /api/v1/battles/{id}/loadout/{identityId}` -> même objet que `playerLoadouts[id]`.
+- Catalogue côté mod : clés `<SIDE>_AIGROUP` (prefab de groupe IA vide de la faction) ; champ
+  optionnel `category` par arme (rifle|smg|lmg|sniper|at|explosive) pour les rubans.
 - `tickets` d'un camp = somme des `manpower`. 1 mort = -1 ; 1 véhicule détruit = -coût véhicule.
 - `classes` / `vehicles.key` -> table de correspondance **Catalog** (`catalog.json`, issu de l'inventaire)
   qui mappe une clé logique vers prefab(s) Reforger. Le site ne connaît que les clés.
@@ -65,8 +73,10 @@ Fallback hors-ligne : si l'API est injoignable, le mod lit `$profile:F44/battle.
 { "battleId":"b_000123", "winner":"US", "reason":"SECTORS|TICKETS|TIME",
   "durationSec": 2140,
   "losses": { "at_17": {"manpower":64, "vehicles":{"US_JEEP":1}}, "at_9": {"manpower":60,"vehicles":{"GER_SDKFZ222":2}} },
-  "players": [ {"identityId":"...","name":"...","side":"US","teamId":"at_17","kills":7,"deaths":3,"captures":2,"xp":340} ] }
+  "players": [ {"identityId":"...","name":"...","side":"US","teamId":"at_17","kills":7,"deaths":3,"captures":2,"xp":340,
+       "killsByCategory":{"rifle":4,"smg":1,"at":2}} ] }
 ```
+- Les morts de bots comptent dans `losses.<teamId>.manpower` (1 ticket chacun).
 
 ## 5. Cartes / scénarios
 Chaque ville = 1 scénario (`.conf`) sur un terrain, avec 3-5 secteurs (SCR_* capture areas custom F44)

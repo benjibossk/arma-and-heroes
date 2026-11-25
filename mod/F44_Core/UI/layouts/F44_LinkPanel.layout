@@ -1,0 +1,56 @@
+FrameWidgetClass {
+ Name "F44_LinkRoot"
+  {
+  ImageWidgetClass "{23D9D0A1C044989D}" {
+   Name "F44_LinkBg"
+   Color 0.118 0.122 0.125 0.9
+   Slot FrameWidgetSlot "{3E3D6100EA9AC05D}" {
+    Anchor 1 0.3 1 0.3
+    PositionX -620
+    PositionY 0
+    SizeX 600
+    SizeY 230
+   }
+  }
+  VerticalLayoutWidgetClass "{C6F2F9F26978B979}" {
+   Name "F44_LinkPanel"
+   Slot FrameWidgetSlot "{8720ADCAD890D454}" {
+    Anchor 1 0.3 1 0.3
+    PositionX -600
+    PositionY 10
+    SizeX 560
+    SizeY 210
+   }
+    {
+    TextWidgetClass "{2F146EAF67D3EDF4}" {
+     Name "F44_LinkTitle"
+     Color 0.91 0.902 0.882 1
+     Text "LINK YOUR ARMA & HEROES ACCOUNT"
+     ExactFontSize 1
+     FontSize 28
+    }
+    TextWidgetClass "{554086DF1138A2A8}" {
+     Name "F44_LinkUrl"
+     Color 0.91 0.902 0.882 1
+     Text "Go to heroes.collectifxxl.fr/link"
+     ExactFontSize 1
+     FontSize 26
+    }
+    TextWidgetClass "{BA331172810C36FF}" {
+     Name "F44_LinkCode"
+     Color 0.941 0.659 0.188 1
+     Text "AH-XXXX"
+     ExactFontSize 1
+     FontSize 64
+    }
+    TextWidgetClass "{2E426BD6D8E7E4FD}" {
+     Name "F44_LinkHint"
+     Color 0.91 0.902 0.882 1
+     Text "Enter this code on your phone or PC"
+     ExactFontSize 1
+     FontSize 20
+    }
+   }
+  }
+ }
+}

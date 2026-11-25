@@ -1,19 +1,93 @@
 {
-  "battleId": "b_000123", "warId": 4, "cityId": "test-arland",
+  "battleId": "b_000123",
+  "warId": 4,
+  "cityId": "test-arland",
   "mode": "ASSAULT",
   "scenario": "{F1F241FEA0522E73}Missions/F44_Test.conf",
   "timeLimitMin": 45,
-  "attacker": "US", "defender": "GER",
+  "attacker": "US",
+  "defender": "GER",
   "sides": {
-    "US":  { "teams": [ { "teamId": "at_17", "type": "INF", "manpower": 120, "equipLevel": 1,
-                         "classes": ["RIFLEMAN","MG","MEDIC","AT","OFFICER","SNIPER"],
-                         "vehicles": [ {"key":"US_JEEP","count":2} ] },
-                       { "teamId": "at_18", "type": "ARM", "manpower": 30, "equipLevel": 1,
-                         "classes": ["CREW"],
-                         "vehicles": [ {"key":"US_SHERMAN","count":1} ] } ] },
-    "GER": { "teams": [ { "teamId": "at_9",  "type": "INF", "manpower": 100, "equipLevel": 1,
-                         "classes": ["RIFLEMAN","MG","MEDIC","AT","OFFICER","CREW"],
-                         "vehicles": [ {"key":"GER_SDKFZ222","count":2} ] } ] }
+    "US": {
+      "teams": [
+        {
+          "teamId": "at_17",
+          "type": "INF",
+          "manpower": 120,
+          "equipLevel": 1,
+          "classes": [
+            "RIFLEMAN",
+            "MG",
+            "MEDIC",
+            "AT",
+            "OFFICER",
+            "SNIPER"
+          ],
+          "vehicles": [
+            {
+              "key": "US_JEEP",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "teamId": "at_18",
+          "type": "ARM",
+          "manpower": 30,
+          "equipLevel": 1,
+          "classes": [
+            "CREW"
+          ],
+          "vehicles": [
+            {
+              "key": "US_SHERMAN",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "aiEnabled": true,
+      "aiMaxAlive": 12,
+      "aiPerPlayerScale": 1.0
+    },
+    "GER": {
+      "teams": [
+        {
+          "teamId": "at_9",
+          "type": "INF",
+          "manpower": 100,
+          "equipLevel": 1,
+          "classes": [
+            "RIFLEMAN",
+            "MG",
+            "MEDIC",
+            "AT",
+            "OFFICER",
+            "CREW"
+          ],
+          "vehicles": [
+            {
+              "key": "GER_SDKFZ222",
+              "count": 2
+            }
+          ]
+        }
+      ],
+      "aiEnabled": true,
+      "aiMaxAlive": 10,
+      "aiPerPlayerScale": 1.0
+    }
   },
-  "playerUnlocks": {}
+  "playerUnlocks": {},
+  "aiLimit": 48,
+  "playerLoadouts": {
+    "EXAMPLE-IDENTITY-ID": {
+      "soldierId": "s_42",
+      "class": "RIFLEMAN",
+      "items": [
+        "US_M1_GARAND"
+      ],
+      "points": 120
+    }
+  }
 }

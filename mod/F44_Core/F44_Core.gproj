@@ -1,0 +1,14 @@
+GameProject {
+ ID "F44_Core"
+ GUID "EAD65CE1E596E39C"
+ TITLE "Arma & Heroes - Core"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -1,0 +1,11 @@
+SCR_BaseGameMode : "{0F307326459A1395}Prefabs/MP/Modes/GameMode_Base.et" {
+ ID "F44A00000000A001"
+ components {
+  F44_GameModeComponent "{F44A00000000C001}" {
+  }
+  SCR_RespawnSystemComponent "{56B2B4793051E7C9}" {
+   m_SpawnLogic SCR_MenuSpawnLogic "{F44A00000000C002}" {
+   }
+  }
+ }
+}

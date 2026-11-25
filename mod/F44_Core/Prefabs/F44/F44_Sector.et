@@ -1,0 +1,7 @@
+GenericEntity {
+ ID "F44A00000000A005"
+ components {
+  F44_SectorComponent "{F44A00000000C040}" {
+  }
+ }
+}

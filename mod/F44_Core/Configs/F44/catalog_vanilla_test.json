@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "note": "Arma & Heroes - VANILLA test catalog (no Finest Hour needed). Used by Missions/F44_Test.conf"
+  },
+  "factions": {
+    "US": "US",
+    "GER": "USSR"
+  },
+  "catalog": {
+    "US_RIFLEMAN": {
+      "prefab": "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et",
+      "label": "US_RIFLEMAN",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_MG": {
+      "prefab": "{1623EA3AEFACA0E4}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_MG.et",
+      "label": "US_MG",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_MEDIC": {
+      "prefab": null,
+      "label": "US_MEDIC",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_AT": {
+      "prefab": "{27BF1FF235DD6036}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_LAT.et",
+      "label": "US_AT",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_OFFICER": {
+      "prefab": "{DE15FB5FAFC3E63F}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Officer.et",
+      "label": "US_OFFICER",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_CREW": {
+      "prefab": "{E1CB513B8B9B08F4}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Crew.et",
+      "label": "US_CREW",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_PARA": {
+      "prefab": null,
+      "label": "US_PARA",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_SNIPER": {
+      "prefab": "{0F6689B491641155}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Sniper.et",
+      "label": "US_SNIPER",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_RIFLEMAN": {
+      "prefab": "{DCB41B3746FDD1BE}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Rifleman.et",
+      "label": "GER_RIFLEMAN",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_MG": {
+      "prefab": "{96C784C502AC37DA}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_MG.et",
+      "label": "GER_MG",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_MEDIC": {
+      "prefab": "{AB9726163EC1BD81}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Medic.et",
+      "label": "GER_MEDIC",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_AT": {
+      "prefab": "{1C78331E156A3D65}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_AT.et",
+      "label": "GER_AT",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_OFFICER": {
+      "prefab": "{5117311FB822FD1F}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Officer.et",
+      "label": "GER_OFFICER",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_CREW": {
+      "prefab": "{9FFEF10757E742EB}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Crew.et",
+      "label": "GER_CREW",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_PARA": {
+      "prefab": null,
+      "label": "GER_PARA",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "GER_SNIPER": {
+      "prefab": "{976AC400219898FA}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Sharpshooter.et",
+      "label": "GER_SNIPER",
+      "cost": 1,
+      "status": "vanilla_placeholder"
+    },
+    "US_JEEP": {
+      "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
+      "label": "US_JEEP",
+      "cost": 2,
+      "status": "vanilla_placeholder"
+    },
+    "US_TRUCK": {
+      "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
+      "label": "US_TRUCK",
+      "cost": 3,
+      "status": "vanilla_placeholder"
+    },
+    "US_SHERMAN": {
+      "prefab": "{0A41E8DF1F680496}Prefabs/Vehicles/Tracked/M113/M113A2_APC.et",
+      "label": "US_SHERMAN",
+      "cost": 15,
+      "status": "vanilla_placeholder"
+    },
+    "GER_SDKFZ222": {
+      "prefab": "{254289B9C09904AB}Prefabs/Vehicles/Wheeled/BRDM2/BRDM2.et",
+      "label": "GER_SDKFZ222",
+      "cost": 6,
+      "status": "vanilla_placeholder"
+    },
+    "GER_TRUCK": {
+      "prefab": "{16C1F16C9B053801}Prefabs/Vehicles/Wheeled/Ural4320/Ural4320_transport.et",
+      "label": "GER_TRUCK",
+      "cost": 3,
+      "status": "vanilla_placeholder"
+    },
+    "GER_KUBEL": {
+      "prefab": "{259EE7B78C51B624}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469.et",
+      "label": "GER_KUBEL",
+      "cost": 2,
+      "status": "vanilla_placeholder"
+    },
+    "GER_PANZER4": {
+      "prefab": null,
+      "label": "GER_PANZER4",
+      "cost": 15,
+      "status": "vanilla_placeholder"
+    },
+    "US_AIGROUP": {
+      "prefab": "{EACD97CF4A702FAE}Prefabs/Groups/BLUFOR/Group_US_Base.et",
+      "cost": 0
+    },
+    "GER_AIGROUP": {
+      "prefab": "{8DE0C0830FE0C33D}Prefabs/Groups/OPFOR/Group_USSR_Base.et",
+      "cost": 0
+    }
+  }
+}
