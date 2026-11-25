@@ -75,6 +75,19 @@ Exact server mod list (Workshop IDs): [`docs/server-mods.json`](docs/server-mods
 |---|---|
 | ![Battles](docs/screenshots/battles.png) | ![Profile](docs/screenshots/profile.png) |
 
+## Screenshots
+
+- **War map** — the Normandy front with cities, assault teams and supply.
+  ![War map](docs/screenshots/warmap.png)
+- **Battles** — ongoing and finished battles.
+  ![Battles](docs/screenshots/battles.png)
+- **Progression** — leaderboard and service record.
+  ![Progression](docs/screenshots/profile.png)
+- **Link your game account** — one-time code flow (desktop and mobile).
+  ![Link](docs/screenshots/link.png) ![Link mobile](docs/screenshots/link-mobile.png)
+- **Live battle view** — real-time snapshot of a running battle.
+  ![Live battle view](docs/screenshots/live.png)
+
 ## Contributing
 
 Mod creators, mission makers and web devs welcome — open an issue or join the Collectif XXL Discord.
