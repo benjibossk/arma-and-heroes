@@ -36,3 +36,9 @@ next to the code (one file per package) unless noted.
   city rule is unchanged.
 - **War-end payout**: every player who fought gets credits on his main side: winners 400,
   losers 150 (refund), +20 per battle fought (max 20 battles). Paid to player + active soldier.
+
+## P2-D Rank salary (`web/salary.go`, `progression.json` "salary")
+- Battle credits += **minutes alive x rank pay** (2,3,4,5,6,7,8,10 per min for ranks 1..8,
+  capped at 60 min) **+25% if the player stayed to the end**. Not paid to idle players.
+- Contract (optional, backward compatible): `players[].aliveSec`, `players[].stayedToEnd`.
+  Fallbacks: `presenceSec` for time alive; stayed = presence >= 90% of `durationSec`.

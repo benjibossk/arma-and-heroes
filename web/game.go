@@ -336,6 +336,8 @@ type ResPlayer struct {
 	Defends      int `json:"defends,omitempty"`
 	ObjectiveSec int `json:"objectiveSec,omitempty"`
 	PresenceSec  int `json:"presenceSec,omitempty"`
+	AliveSec     int   `json:"aliveSec,omitempty"`    // P2-D: seconds spent alive (fallback presenceSec)
+	StayedToEnd  *bool `json:"stayedToEnd,omitempty"` // P2-D: still connected at battle end (fallback presence >= 90%)
 	SquadSec     int `json:"squadSec,omitempty"`
 	// ribbon counters (docs/RIBBONS.md)
 	PlayerKillsByCategory map[string]int `json:"playerKillsByCategory,omitempty"`
@@ -450,6 +452,9 @@ func applyResult(b *Battle, r *BattleResult) error {
 		}
 		won := rp.Side == r.Winner
 		rw := computeReward(&rp, won, won && !hasWonToday(p.ID))
+		if !rw.Idle { // P2-D rank salary (salary.go)
+			rw.Credits += salaryCredits(rankNum(p.XP), &rp, r.DurationSec)
+		}
 		xp := rw.XP
 		p.XP += xp
 		p.Credits += rw.Credits

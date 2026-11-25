@@ -61,6 +61,7 @@ type Progression struct {
 		GER string `json:"ger"`
 	} `json:"ranks"`
 	Trees    []string              `json:"trees"`
+	Salary   SalaryRule            `json:"salary"`
 	Unlocks  map[string]UnlockRule `json:"unlocks"`
 	Vehicles map[string]UnlockRule `json:"vehicles"`
 	WarFunds struct {
