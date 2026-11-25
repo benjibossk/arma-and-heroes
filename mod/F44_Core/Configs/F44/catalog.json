@@ -756,7 +756,7 @@
       "ribbon": null
     },
     "US_THOMPSON": {
-      "prefab": null,
+      "prefab": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
       "label": "M1A1 Thompson",
       "faction": "US",
       "slot": "primary",
@@ -774,7 +774,7 @@
       }
     },
     "US_M3_GREASE": {
-      "prefab": null,
+      "prefab": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
       "label": "M3 Grease Gun",
       "faction": "US",
       "slot": "primary",
@@ -1020,7 +1020,7 @@
       "starter": true
     },
     "GER_G43": {
-      "prefab": null,
+      "prefab": "{D0B2A68A3BD9085E}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43.et",
       "label": "Gewehr 43",
       "faction": "GER",
       "slot": "primary",
@@ -1281,6 +1281,303 @@
       "price": 400,
       "weight": 0,
       "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "US_M1903A3": {
+      "prefab": "{7CA5C7688880A688}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A3.et",
+      "label": "M1903A3 Springfield",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 500,
+      "weight": 4,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M1A1_CARBINE": {
+      "prefab": "{8D7E8742E9F08061}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1A1_Carbine.et",
+      "label": "M1A1 Carbine (crosse pliante)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "PARA"
+      ],
+      "price": 600,
+      "weight": 3,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M2_CARBINE": {
+      "prefab": "{F34FA45A2DE16C2D}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M2_Carbine.et",
+      "label": "M2 Carbine (select-fire)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 900,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M1919A4": {
+      "prefab": "{AB3A3ADC8CE3F848}Prefabs/Weapons/MachineGuns/M1919/MG_M1919A4.et",
+      "label": "M1919A4 Browning",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF"
+      ],
+      "price": 1800,
+      "weight": 7,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "US_M1919A6": {
+      "prefab": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
+      "label": "M1919A6 Browning",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1700,
+      "weight": 7,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "US_M7AT_GRENADE": {
+      "prefab": "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et",
+      "label": "Grenade AT M7",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 150,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_GAMMON": {
+      "prefab": "{3BB958D8E5152FED}Prefabs/Weapons/Grenades/No82/Grenade_No82_600g.et",
+      "label": "Gammon No.82 (600 g)",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "PARA"
+      ],
+      "price": 200,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_STG44": {
+      "prefab": "{D9340572C7EF6CB7}Prefabs/Weapons/Rifles/STG44/Rifle_STG44.et",
+      "label": "StG 44",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF"
+      ],
+      "price": 1200,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_G43_SCOPE": {
+      "prefab": "{75DDC146073EFD22}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43_Optic.et",
+      "label": "Gewehr 43 ZF4",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "sniper",
+      "classes": [
+        "REC"
+      ],
+      "price": 1300,
+      "weight": 4,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_FG42": {
+      "prefab": "{F6BD5104680D2991}Prefabs/Weapons/Machineguns/FG42G/Machinegun_FG42G.et",
+      "label": "FG 42",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "PARA"
+      ],
+      "price": 1500,
+      "weight": 5,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MP38": {
+      "prefab": "{C81F18A853BE165A}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP38.et",
+      "label": "MP 38",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 600,
+      "weight": 4,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MG34": {
+      "prefab": "{5D838074E66C006C}Prefabs/Weapons/MachineGuns/MG34/MG_MG34.et",
+      "label": "MG 34",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1600,
+      "weight": 6,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "GER_KAR98K_GL": {
+      "prefab": "{AEE8B1A7356E943E}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Scheissbecher.et",
+      "label": "Kar98k Schiessbecher (lance-grenade)",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF"
+      ],
+      "price": 900,
+      "weight": 5,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_LP34": {
+      "prefab": "{72B77F14D2073B5D}Prefabs/Weapons/Handguns/LP34/Handgun_Leichtpistole34.et",
+      "label": "Leuchtpistole 34",
+      "faction": "GER",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_PANZERFAUST100": {
+      "prefab": "{EADCBEFD2705B515}Prefabs/Weapons/Launchers/Panzerfaust/Launcher_Panzerfaust100.et",
+      "label": "Panzerfaust 100",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF"
+      ],
+      "price": 700,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "GER_M39_GRENADE": {
+      "prefab": "{BE26CD5EB5FF1374}Prefabs/Weapons/Grenades/M39_Eihandgranate/Grenade_M39.et",
+      "label": "Eihandgranate 39",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_GEBALLTE": {
+      "prefab": "{886DA8E3CFF0C54F}Prefabs/Weapons/Grenades/GeballteLadung/Grenade_GeballteLadung.et",
+      "label": "Geballte Ladung",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "explosive",
+      "classes": [
+        "INF"
+      ],
+      "price": 300,
+      "weight": 2,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "US_FLAREGUN": {
+      "prefab": "{DBD5C4E1C81D8363}Prefabs/Weapons/Handguns/ANM8/Handgun_ANM8.et",
+      "label": "Pistolet lance-fusees AN-M8",
+      "faction": "US",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
       "ribbon": null
     }
   }

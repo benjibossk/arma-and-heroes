@@ -1,1131 +1,1428 @@
 {
- "_meta": {
-  "generated": "2026-11-25",
-  "note": "Cles logiques Front 44 -> prefabs Reforger. cost classes = tickets/manpower unitaire indicatif ; cost vehicules = indicatif (jeep 2, camion 3, blinde leger 6, char 12). prefab null = manquant (voir note/compose/stub_base). status=proxy : substitut hors epoque.",
-  "mods_required": [
-   "FinestHour-CoreMod",
-   "FinestHour-USGear",
-   "FinestHour-USUniforms",
-   "FinestHour-USUnits",
-   "FinestHour-GERGear",
-   "FinestHour-GERUniforms",
-   "FinestHour-GERUnits",
-   "FinestHour-GERVehicles",
-   "M4A2Sherman"
-  ],
-  "items_note": "Soldier arsenal (web store, loadouts). price in soldier credits, weight in loadout points (budget INF 10, others 6), rankRequired = soldier rank name, ribbon = {category, kills} needed. prefab null = to map in the mod. Copied to web/catalog.json for the website.",
-  "medical_note": "medical = starter kit applied by F44_Medical at spawn (top-up, docs/MEDICAL.md); MEDKIT items = extra field dressing"
- },
- "catalog": {
-  "US_RIFLEMAN": {
-   "prefab": "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et",
-   "label": "US Rifleman (M1 Garand)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
+  "_meta": {
+    "generated": "2026-11-25",
+    "note": "Cles logiques Front 44 -> prefabs Reforger. cost classes = tickets/manpower unitaire indicatif ; cost vehicules = indicatif (jeep 2, camion 3, blinde leger 6, char 12). prefab null = manquant (voir note/compose/stub_base). status=proxy : substitut hors epoque.",
+    "mods_required": [
+      "FinestHour-CoreMod",
+      "FinestHour-USGear",
+      "FinestHour-USUniforms",
+      "FinestHour-USUnits",
+      "FinestHour-GERGear",
+      "FinestHour-GERUniforms",
+      "FinestHour-GERUnits",
+      "FinestHour-GERVehicles",
+      "M4A2Sherman"
+    ],
+    "items_note": "Soldier arsenal (web store, loadouts). price in soldier credits, weight in loadout points (budget INF 10, others 6), rankRequired = soldier rank name, ribbon = {category, kills} needed. prefab null = to map in the mod. Copied to web/catalog.json for the website.",
+    "medical_note": "medical = starter kit applied by F44_Medical at spawn (top-up, docs/MEDICAL.md); MEDKIT items = extra field dressing"
   },
-  "US_SMG": {
-   "prefab": "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et",
-   "label": "US SMG (M1A1 Thompson)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
+  "catalog": {
+    "US_RIFLEMAN": {
+      "prefab": "{77BA10429E70E72E}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Garand_Mid.et",
+      "label": "US Rifleman (M1 Garand)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_SMG": {
+      "prefab": "{EF4AACBDE214E0D9}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SMG_Mid.et",
+      "label": "US SMG (M1A1 Thompson)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_SL": {
+      "prefab": "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et",
+      "label": "US Squad Leader",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_PL": {
+      "prefab": "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et",
+      "label": "US Platoon Leader (M1 Carbine + ANM8)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_RTO": {
+      "prefab": "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et",
+      "label": "US Radio operator (SCR-300)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_OFFICER": {
+      "prefab": "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et",
+      "label": "US Officer (M1911)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_SNIPER": {
+      "prefab": "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et",
+      "label": "US Sniper (M1903A4)",
+      "cost": 2,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_SR": {
+      "prefab": "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et",
+      "label": "US Scout/Recon rifleman (M1 + helmet netting)",
+      "cost": 1,
+      "source": "FH US Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_MG": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Automatic Rifleman / MG",
+      "cost": 1,
+      "stub_base": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
+        "alt_weapon": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
+        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+        "vest": "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et",
+        "mags": "Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_*"
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_MEDIC": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Medic",
+      "cost": 1,
+      "stub_base": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et",
+        "hat": "{AC96B59D4F15AEC6}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Medic.et",
+        "vest": "{556BFE2077F40EDB}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Medic.et",
+        "items": [
+          "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
+          "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
+        ]
+      },
+      "medical": {
+        "bandages": 6,
+        "morphine": 2,
+        "saline": 1
+      }
+    },
+    "US_AT": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Anti-tank (Bazooka)",
+      "cost": 2,
+      "stub_base": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et",
+        "launcher": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et",
+        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
+        "extra": [
+          "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et"
+        ]
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_ENGINEER": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Engineer",
+      "cost": 1,
+      "stub_base": "{C93138F6731FC3CC}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Builder_Mid.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
+        "items": [
+          "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et",
+          "{23858F4966E84B94}Prefabs/Weapons/Explosives/Mine_M1A1/Mine_M1A1AT.et",
+          "{2A2F3A62EDD51EC7}Prefabs/Items/Equipment/Accessories/ETool_M1910/ETool_M1910.et"
+        ]
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_CREW": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Tank crew",
+      "cost": 1,
+      "stub_base": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
+        "hat": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
+        "jacket": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
+        "suit_alt": "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
+        "handgun": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_PARA": {
+      "prefab": null,
+      "status": "missing",
+      "label": "US Paratrooper (82nd/101st)",
+      "cost": 1,
+      "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
+      "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
+      "compose": {
+        "weapon": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et",
+        "jacket": "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
+        "pants": "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
+        "boots": "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
+        "vest": "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et",
+        "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et"
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_RIFLEMAN": {
+      "prefab": "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et",
+      "label": "GER Rifleman (Kar98k)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_RIFLEMAN_G43": {
+      "prefab": "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et",
+      "label": "GER Rifleman (G43)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_MG": {
+      "prefab": "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et",
+      "label": "GER MG gunner (MG42)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_MEDIC": {
+      "prefab": "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et",
+      "label": "GER Medic (Sanitater)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 6,
+        "morphine": 2,
+        "saline": 1
+      }
+    },
+    "GER_AT": {
+      "prefab": "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et",
+      "label": "GER Anti-tank (Panzerschreck RPzB54)",
+      "cost": 2,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_LAT": {
+      "prefab": "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et",
+      "label": "GER Light AT (Panzerfaust 100)",
+      "cost": 2,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_OFFICER": {
+      "prefab": "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et",
+      "label": "GER Officer (P38)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_SNIPER": {
+      "prefab": "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et",
+      "label": "GER Sniper (Kar98k scope)",
+      "cost": 2,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_ENGINEER": {
+      "prefab": "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et",
+      "label": "GER Pioneer/Engineer (mines)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_SMG": {
+      "prefab": "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et",
+      "label": "GER SMG (MP40)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_SL": {
+      "prefab": "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et",
+      "label": "GER Squad Leader (MP40)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_PL": {
+      "prefab": "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et",
+      "label": "GER Platoon Leader (MP38)",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_RTO": {
+      "prefab": "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et",
+      "label": "GER Radio operator",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_CREW": {
+      "prefab": "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et",
+      "label": "GER Panzer crew",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_PANZER_COMMANDER": {
+      "prefab": "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et",
+      "label": "GER Panzer commander",
+      "cost": 1,
+      "source": "FH GER Units",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_PARA": {
+      "prefab": null,
+      "status": "missing",
+      "label": "GER Fallschirmjager",
+      "cost": 1,
+      "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",
+      "note": "Pas de classe Fallschirmjager dediee (pas de casque M38 ni smock Splittertarn). Approximation Luftwaffe.",
+      "compose": {
+        "weapon": "Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et (voir INVENTAIRE)",
+        "boots": "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
+        "jacket": "{051E32E58B7C5853}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Luftwaffe.et",
+        "hat": "Helmet_Stahlhelm_M42_* (GER Uniforms)"
+      },
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_KFZ": {
+      "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
+      "label": "Volkswagen Kubelwagen",
+      "cost": 2,
+      "role": "light_utility",
+      "crew": "1 pilote + 3 passagers",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_KFZ_MG34": {
+      "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
+      "label": "Kubelwagen + MG34",
+      "cost": 2,
+      "role": "light_armed",
+      "crew": "1 pilote + passagers + tireur",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_TRUCK": {
+      "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
+      "label": "Opel Blitz bache (transport)",
+      "cost": 3,
+      "role": "truck",
+      "crew": "1 pilote + cargo",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_TRUCK_OPEN": {
+      "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
+      "label": "Opel Blitz plateau",
+      "cost": 3,
+      "role": "truck",
+      "crew": "1 pilote + cargo",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_FLAK_TRUCK": {
+      "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
+      "label": "Opel Blitz + Flak 38 (AA)",
+      "cost": 6,
+      "role": "light_armored_aa",
+      "crew": "1 pilote + 1-2 servants",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_SDKFZ222": {
+      "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
+      "label": "Sd.Kfz. 222 (gris)",
+      "cost": 6,
+      "role": "light_armored",
+      "crew": "3 (pilote, tireur, commandant)",
+      "source": "FH GER Vehicles",
+      "variants": [
+        "{C5BD2985070AABC2}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Camo.et",
+        "{EDC4DE87D69BACB7}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Desert.et"
+      ],
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_SDKFZ223": {
+      "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
+      "label": "Sd.Kfz. 223 (radio)",
+      "cost": 6,
+      "role": "light_armored",
+      "crew": "3",
+      "source": "FH GER Vehicles",
+      "note": "racine _base : prefab placable a verifier en Workbench",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_SHERMAN": {
+      "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
+      "label": "M4A2 Sherman (75 mm)",
+      "cost": 12,
+      "role": "tank",
+      "crew": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)",
+      "source": "M4A2 Sherman mod",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_JEEP": {
+      "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
+      "label": "Jeep M151A2 (SUBSTITUT vanilla, hors epoque)",
+      "cost": 2,
+      "role": "light_utility",
+      "crew": "1 pilote + 3",
+      "source": "Arma Reforger vanilla",
+      "status": "proxy",
+      "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys.",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_TRUCK": {
+      "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
+      "label": "Camion M923A1 (SUBSTITUT vanilla, hors epoque)",
+      "cost": 3,
+      "role": "truck",
+      "crew": "1 pilote + cargo",
+      "source": "Arma Reforger vanilla",
+      "status": "proxy",
+      "note": "Aucun camion WW2 US (GMC CCKW) installe.",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_TIGER": {
+      "prefab": null,
+      "label": "Tiger I (non fournissable)",
+      "cost": 12,
+      "role": "tank",
+      "crew": "5",
+      "status": "missing",
+      "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule.",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_HALFTRACK": {
+      "prefab": null,
+      "label": "M3 Halftrack",
+      "cost": 6,
+      "role": "light_armored",
+      "crew": "",
+      "status": "missing",
+      "note": "Absent.",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "US_STUART_OR_ARMORED_CAR": {
+      "prefab": null,
+      "label": "Blinde leger US (M8 Greyhound/M3 Stuart)",
+      "cost": 6,
+      "role": "light_armored",
+      "crew": "",
+      "status": "missing",
+      "note": "Absent : seul LAV-25 moderne (vanilla) existe.",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_PAK40": {
+      "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
+      "label": "Pak 40 75 mm AT (gris)",
+      "cost": 4,
+      "role": "static_or_towed",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_PAK36": {
+      "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
+      "label": "Pak 36 37 mm AT (gris)",
+      "cost": 3,
+      "role": "static_or_towed",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_FLAK38": {
+      "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
+      "label": "Flak 38 20 mm (gris)",
+      "cost": 4,
+      "role": "static_or_towed",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_FLAKVIERLING": {
+      "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
+      "label": "Flakvierling 38 (gris)",
+      "cost": 5,
+      "role": "static_or_towed",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    },
+    "GER_LEFH18": {
+      "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
+      "label": "leFH 18 obusier 105 mm (gris)",
+      "cost": 6,
+      "role": "static_or_towed",
+      "source": "FH GER Vehicles",
+      "medical": {
+        "bandages": 2
+      }
+    }
   },
-  "US_SL": {
-   "prefab": "{9A605C718FBB4543}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SL_Mid.et",
-   "label": "US Squad Leader",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_PL": {
-   "prefab": "{947E1839B24C4A99}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_PL_Mid.et",
-   "label": "US Platoon Leader (M1 Carbine + ANM8)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_RTO": {
-   "prefab": "{24F432ACD5E41826}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_RTO_Mid.et",
-   "label": "US Radio operator (SCR-300)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_OFFICER": {
-   "prefab": "{F41A3C2C2A5C7F3C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Officer_Mid.et",
-   "label": "US Officer (M1911)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_SNIPER": {
-   "prefab": "{6098169A3FE24216}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Sniper_Mid.et",
-   "label": "US Sniper (M1903A4)",
-   "cost": 2,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_SR": {
-   "prefab": "{2047A8B8C3AC526C}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_SR_Mid.et",
-   "label": "US Scout/Recon rifleman (M1 + helmet netting)",
-   "cost": 1,
-   "source": "FH US Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_MG": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Automatic Rifleman / MG",
-   "cost": 1,
-   "stub_base": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
-    "alt_weapon": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
-    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
-    "vest": "{B1E2EDDB5CBFB294}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_AutomaticRifleman.et",
-    "mags": "Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_*"
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_MEDIC": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Medic",
-   "cost": 1,
-   "stub_base": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et",
-    "hat": "{AC96B59D4F15AEC6}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_Medic.et",
-    "vest": "{556BFE2077F40EDB}Prefabs/Characters/Vests/Vest_M1936/Variants/Vest_M1936_Assembled_Medic.et",
-    "items": [
-     "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
-     "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
-    ]
-   },
-   "medical": {
-    "bandages": 6,
-    "morphine": 2,
-    "saline": 1
-   }
-  },
-  "US_AT": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Anti-tank (Bazooka)",
-   "cost": 2,
-   "stub_base": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et",
-    "launcher": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et",
-    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et",
-    "extra": [
-     "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et"
-    ]
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_ENGINEER": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Engineer",
-   "cost": 1,
-   "stub_base": "{C93138F6731FC3CC}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Builder_Mid.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
-    "items": [
-     "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et",
-     "{23858F4966E84B94}Prefabs/Weapons/Explosives/Mine_M1A1/Mine_M1A1AT.et",
-     "{2A2F3A62EDD51EC7}Prefabs/Items/Equipment/Accessories/ETool_M1910/ETool_M1910.et"
-    ]
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_CREW": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Tank crew",
-   "cost": 1,
-   "stub_base": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
-    "hat": "{A5A8AA43CE3F7D24}Prefabs/Characters/HeadGear/Helmet_M1938_01/Helmet_M1938_Tanker_01.et",
-    "jacket": "{E765AF7B18C6FD88}Prefabs/Characters/Uniforms/Tanker_Jacket/Jacket_USA_Tanker.et",
-    "suit_alt": "{1522AC27CAAFFC90}Prefabs/Characters/Uniforms/Suit_Tanker_US_01/Suit_Tanker_HBT_USA_01.et",
-    "handgun": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et"
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_PARA": {
-   "prefab": null,
-   "status": "missing",
-   "label": "US Paratrooper (82nd/101st)",
-   "cost": 1,
-   "stub_base": "{FB3F64B425AD80AD}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_FH_USAWW2_BaseLoadout_Paratrooper.et",
-   "note": "Prefab de classe US vide dans FH US Units 1.0.2 (coquille heritant de BaseLoadout, sans arme). A composer dans F44_Core par override/heritage du stub.",
-   "compose": {
-    "weapon": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et",
-    "jacket": "{441FBCB19F80AB3D}Prefabs/Characters/Uniforms/M42_Jacket/Jacket_USA_M42.et",
-    "pants": "{9DD4E9E9CBF92F4B}Prefabs/Characters/Uniforms/M42_Trousers/Pants_USA_M42.et",
-    "boots": "{C4C115CE1BBF2864}Prefabs/Characters/Footwear/JumpBoots_USA_M1942.et",
-    "vest": "{B6EA5F16BCDA1A7E}Prefabs/Characters/Vests/Vest_M1936/Airborne/Vest_M1936_Assembled_Rifleman_Airborne.et",
-    "hat": "{50058D39B81A5590}Prefabs/Characters/HeadGear/Helmet_M1_01/Helmet_M1_ww2_01.et"
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_RIFLEMAN": {
-   "prefab": "{3801E0D7B3EFC905}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_KAR98_Infantry_Late.et",
-   "label": "GER Rifleman (Kar98k)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_RIFLEMAN_G43": {
-   "prefab": "{5D44A49196700A8D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Rifleman_G43_Infantry_Late.et",
-   "label": "GER Rifleman (G43)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_MG": {
-   "prefab": "{D39E173D592F3223}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_MG_Infantry_Late.et",
-   "label": "GER MG gunner (MG42)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_MEDIC": {
-   "prefab": "{D99D706854F57520}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Medic_Infantry_Late.et",
-   "label": "GER Medic (Sanitater)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 6,
-    "morphine": 2,
-    "saline": 1
-   }
-  },
-  "GER_AT": {
-   "prefab": "{F6414E8CDD64E035}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_AT_Infantry_Late.et",
-   "label": "GER Anti-tank (Panzerschreck RPzB54)",
-   "cost": 2,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_LAT": {
-   "prefab": "{3D767AA5AF2846C2}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_LAT_Infantry_Late.et",
-   "label": "GER Light AT (Panzerfaust 100)",
-   "cost": 2,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_OFFICER": {
-   "prefab": "{CD86324ACD037638}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Officer_Infantry_Late.et",
-   "label": "GER Officer (P38)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_SNIPER": {
-   "prefab": "{9193B2F3BFC9F31D}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Sharpshooter_KAR98_Infantry_Late.et",
-   "label": "GER Sniper (Kar98k scope)",
-   "cost": 2,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_ENGINEER": {
-   "prefab": "{99FD7C3B816783F3}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Pioner_Infantry_Late.et",
-   "label": "GER Pioneer/Engineer (mines)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_SMG": {
-   "prefab": "{B50131FC180FDA65}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SMG_Infantry_Late.et",
-   "label": "GER SMG (MP40)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_SL": {
-   "prefab": "{CC7A9A2B95BAF0F1}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_SL_Infantry_Late.et",
-   "label": "GER Squad Leader (MP40)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_PL": {
-   "prefab": "{976F9E5BFBABF9AC}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_PL_Infantry_Late.et",
-   "label": "GER Platoon Leader (MP38)",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_RTO": {
-   "prefab": "{73BD8EC5572B257E}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_RTO_Infantry_Late.et",
-   "label": "GER Radio operator",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_CREW": {
-   "prefab": "{7A862398A7385FDA}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCrew_Late.et",
-   "label": "GER Panzer crew",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_PANZER_COMMANDER": {
-   "prefab": "{FFAB28E8CF03B9E5}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Panzergrenadiers/Late/Character_FH_HEERWW2_PanzerCommander_Late.et",
-   "label": "GER Panzer commander",
-   "cost": 1,
-   "source": "FH GER Units",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_PARA": {
-   "prefab": null,
-   "status": "missing",
-   "label": "GER Fallschirmjager",
-   "cost": 1,
-   "stub_base": "{9EC28B6A55FE4933}Prefabs/Characters/Factions/OPFOR/HEER/Character_FH_HEERWW2_BaseLoadoutLuftwaffe_Late.et",
-   "note": "Pas de classe Fallschirmjager dediee (pas de casque M38 ni smock Splittertarn). Approximation Luftwaffe.",
-   "compose": {
-    "weapon": "Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et (voir INVENTAIRE)",
-    "boots": "{D7BC415E8552E5F8}Prefabs/Characters/Footwear/Boots_Fallschirmjagerschuhe/Boots_HEER_JumpBoots_01.et",
-    "jacket": "{051E32E58B7C5853}Prefabs/Characters/Uniforms/Blouse_M40/Jacket_HEER_M40_Luftwaffe.et",
-    "hat": "Helmet_Stahlhelm_M42_* (GER Uniforms)"
-   },
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_KFZ": {
-   "prefab": "{1D3D9E6ED1DED30D}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen.et",
-   "label": "Volkswagen Kubelwagen",
-   "cost": 2,
-   "role": "light_utility",
-   "crew": "1 pilote + 3 passagers",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_KFZ_MG34": {
-   "prefab": "{2F09C97004CFD1B5}Prefabs/Vehicles/Wheeled/Kubelwagen/Kubelwagen_MG34.et",
-   "label": "Kubelwagen + MG34",
-   "cost": 2,
-   "role": "light_armed",
-   "crew": "1 pilote + passagers + tireur",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_TRUCK": {
-   "prefab": "{D0A6F804DFFE34A8}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport_covered.et",
-   "label": "Opel Blitz bache (transport)",
-   "cost": 3,
-   "role": "truck",
-   "crew": "1 pilote + cargo",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_TRUCK_OPEN": {
-   "prefab": "{AEA2E1BD58418A47}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_transport.et",
-   "label": "Opel Blitz plateau",
-   "cost": 3,
-   "role": "truck",
-   "crew": "1 pilote + cargo",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_FLAK_TRUCK": {
-   "prefab": "{6CFEE036B08596A6}Prefabs/Vehicles/Wheeled/Opil_Bletz/Variants/Opil_Bletz_Armed_Flak38.et",
-   "label": "Opel Blitz + Flak 38 (AA)",
-   "cost": 6,
-   "role": "light_armored_aa",
-   "crew": "1 pilote + 1-2 servants",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_SDKFZ222": {
-   "prefab": "{BF2C38CC0B258B42}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Grey.et",
-   "label": "Sd.Kfz. 222 (gris)",
-   "cost": 6,
-   "role": "light_armored",
-   "crew": "3 (pilote, tireur, commandant)",
-   "source": "FH GER Vehicles",
-   "variants": [
-    "{C5BD2985070AABC2}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Camo.et",
-    "{EDC4DE87D69BACB7}Prefabs/Vehicles/Wheeled/SDKFZ_222/SDKFZ_222_Desert.et"
-   ],
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_SDKFZ223": {
-   "prefab": "{DD871923492033E3}Prefabs/Vehicles/Wheeled/SDKFZ_223/SDKFZ_223_base.et",
-   "label": "Sd.Kfz. 223 (radio)",
-   "cost": 6,
-   "role": "light_armored",
-   "crew": "3",
-   "source": "FH GER Vehicles",
-   "note": "racine _base : prefab placable a verifier en Workbench",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_SHERMAN": {
-   "prefab": "{CFF64B0230B6BD3D}Prefabs/Vehicles/Core/M4A2_Sherman.et",
-   "label": "M4A2 Sherman (75 mm)",
-   "cost": 12,
-   "role": "tank",
-   "crew": "5 (pilote, tireur de caisse, commandant, tireur, chargeur)",
-   "source": "M4A2 Sherman mod",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_JEEP": {
-   "prefab": "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et",
-   "label": "Jeep M151A2 (SUBSTITUT vanilla, hors epoque)",
-   "cost": 2,
-   "role": "light_utility",
-   "crew": "1 pilote + 3",
-   "source": "Arma Reforger vanilla",
-   "status": "proxy",
-   "note": "Aucune jeep WW2 US installee. Substitut visuel annees 60. Remplacer par un mod Willys.",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_TRUCK": {
-   "prefab": "{F1FBD0972FA5FE09}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport.et",
-   "label": "Camion M923A1 (SUBSTITUT vanilla, hors epoque)",
-   "cost": 3,
-   "role": "truck",
-   "crew": "1 pilote + cargo",
-   "source": "Arma Reforger vanilla",
-   "status": "proxy",
-   "note": "Aucun camion WW2 US (GMC CCKW) installe.",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_TIGER": {
-   "prefab": null,
-   "label": "Tiger I (non fournissable)",
-   "cost": 12,
-   "role": "tank",
-   "crew": "5",
-   "status": "missing",
-   "note": "WW2TankCore ne contient que munitions/sons du Tiger I H ; pas de prefab vehicule.",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_HALFTRACK": {
-   "prefab": null,
-   "label": "M3 Halftrack",
-   "cost": 6,
-   "role": "light_armored",
-   "crew": "",
-   "status": "missing",
-   "note": "Absent.",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "US_STUART_OR_ARMORED_CAR": {
-   "prefab": null,
-   "label": "Blinde leger US (M8 Greyhound/M3 Stuart)",
-   "cost": 6,
-   "role": "light_armored",
-   "crew": "",
-   "status": "missing",
-   "note": "Absent : seul LAV-25 moderne (vanilla) existe.",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_PAK40": {
-   "prefab": "{FCF55AA8F7F1FECC}Prefabs/Weapons/Artillery/AntiTank/Pak40/AntiTank_Pak40_Grey.et",
-   "label": "Pak 40 75 mm AT (gris)",
-   "cost": 4,
-   "role": "static_or_towed",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_PAK36": {
-   "prefab": "{4E7ACC1579DF2772}Prefabs/Weapons/Artillery/AntiTank/Pak36/AntiTank_Pak36_Grey.et",
-   "label": "Pak 36 37 mm AT (gris)",
-   "cost": 3,
-   "role": "static_or_towed",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_FLAK38": {
-   "prefab": "{CEB82E16B98A70FE}Prefabs/Weapons/Artillery/AntiAir/Flak38/Autocannon_Flak38_Grey.et",
-   "label": "Flak 38 20 mm (gris)",
-   "cost": 4,
-   "role": "static_or_towed",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_FLAKVIERLING": {
-   "prefab": "{A1267B6EC31DE460}Prefabs/Weapons/Artillery/AntiAir/Flakvierling/Autocannon_Flakvierling_Shield_Grey.et",
-   "label": "Flakvierling 38 (gris)",
-   "cost": 5,
-   "role": "static_or_towed",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
-  },
-  "GER_LEFH18": {
-   "prefab": "{690579024C3EE645}Prefabs/Weapons/Artillery/Howitzer/LeFH18/Howitzer_LeFH18_Grey.et",
-   "label": "leFH 18 obusier 105 mm (gris)",
-   "cost": 6,
-   "role": "static_or_towed",
-   "source": "FH GER Vehicles",
-   "medical": {
-    "bandages": 2
-   }
+  "items": {
+    "US_M1_GARAND": {
+      "prefab": null,
+      "label": "M1 Garand",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 0,
+      "weight": 3,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "US_M1_CARBINE": {
+      "prefab": null,
+      "label": "M1 Carbine",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 300,
+      "weight": 2,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_THOMPSON": {
+      "prefab": null,
+      "label": "M1A1 Thompson",
+      "faction": "US",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 800,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M3_GREASE": {
+      "prefab": null,
+      "label": "M3 Grease Gun",
+      "faction": "US",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA",
+        "CREW"
+      ],
+      "price": 500,
+      "weight": 2,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_BAR": {
+      "prefab": null,
+      "label": "M1918 BAR",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF"
+      ],
+      "price": 1500,
+      "weight": 5,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "US_M1903A4": {
+      "prefab": null,
+      "label": "M1903A4 Springfield (scoped)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "sniper",
+      "classes": [
+        "REC"
+      ],
+      "price": 1800,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 40
+      }
+    },
+    "US_M1911": {
+      "prefab": null,
+      "label": "M1911 pistol",
+      "faction": "US",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 0,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "US_BAZOOKA": {
+      "prefab": null,
+      "label": "M1A1 Bazooka",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1200,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "US_MK2_GRENADE": {
+      "prefab": null,
+      "label": "Mk 2 grenade",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_SMOKE": {
+      "prefab": null,
+      "label": "M15 smoke grenade",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "smoke",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 80,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_MEDKIT": {
+      "prefab": "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
+      "label": "First aid pouch",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "medical",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 150,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_TNT": {
+      "prefab": null,
+      "label": "TNT charge",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "explosive",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 600,
+      "weight": 2,
+      "rankRequired": "Sergeant",
+      "ribbon": null
+    },
+    "US_BINOCULARS": {
+      "prefab": null,
+      "label": "M3 binoculars",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "tool",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 200,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_OUTFIT_M41": {
+      "prefab": null,
+      "label": "M41 field uniform",
+      "faction": "US",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "US_OUTFIT_PARA": {
+      "prefab": null,
+      "label": "M42 jump uniform",
+      "faction": "US",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "PARA"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "US_OUTFIT_CREW": {
+      "prefab": null,
+      "label": "Tanker uniform",
+      "faction": "US",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "CREW"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "US_OUTFIT_NETTING": {
+      "prefab": null,
+      "label": "M41 uniform + helmet netting",
+      "faction": "US",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "INF",
+        "REC",
+        "PARA"
+      ],
+      "price": 400,
+      "weight": 0,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "GER_KAR98K": {
+      "prefab": null,
+      "label": "Kar98k",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 0,
+      "weight": 3,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "GER_G43": {
+      "prefab": null,
+      "label": "Gewehr 43",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 900,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MP40": {
+      "prefab": null,
+      "label": "MP40",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA",
+        "CREW"
+      ],
+      "price": 800,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MG42": {
+      "prefab": null,
+      "label": "MG42",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF"
+      ],
+      "price": 1800,
+      "weight": 6,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "GER_KAR98K_SCOPE": {
+      "prefab": null,
+      "label": "Kar98k (scoped)",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "sniper",
+      "classes": [
+        "REC"
+      ],
+      "price": 1800,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 40
+      }
+    },
+    "GER_P38": {
+      "prefab": null,
+      "label": "Walther P38",
+      "faction": "GER",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 0,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "GER_PANZERFAUST": {
+      "prefab": null,
+      "label": "Panzerfaust 100",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 700,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "GER_PANZERSCHRECK": {
+      "prefab": null,
+      "label": "Panzerschreck RPzB 54",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF"
+      ],
+      "price": 1400,
+      "weight": 5,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "at",
+        "kills": 5
+      }
+    },
+    "GER_M24_GRENADE": {
+      "prefab": null,
+      "label": "Stielhandgranate 24",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_SMOKE": {
+      "prefab": null,
+      "label": "NbHgr 39 smoke grenade",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "smoke",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 80,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_MEDKIT": {
+      "prefab": "{4DC939F9FA9D5349}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_HEER_WW2.et",
+      "label": "Verbandpäckchen",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "medical",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 150,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_MINES": {
+      "prefab": null,
+      "label": "Teller mine",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "explosive",
+      "classes": [
+        "INF"
+      ],
+      "price": 600,
+      "weight": 2,
+      "rankRequired": "Sergeant",
+      "ribbon": null
+    },
+    "GER_BINOCULARS": {
+      "prefab": null,
+      "label": "Dienstglas 6x30",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "tool",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC",
+        "CREW"
+      ],
+      "price": 200,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_OUTFIT_M40": {
+      "prefab": null,
+      "label": "M40 field uniform",
+      "faction": "GER",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "GER_OUTFIT_FJ": {
+      "prefab": null,
+      "label": "Fallschirmjäger smock",
+      "faction": "GER",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "PARA"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "GER_OUTFIT_PANZER": {
+      "prefab": null,
+      "label": "Panzer wrap uniform",
+      "faction": "GER",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "CREW"
+      ],
+      "price": 0,
+      "weight": 0,
+      "rankRequired": null,
+      "ribbon": null,
+      "starter": true
+    },
+    "GER_OUTFIT_SMOCK": {
+      "prefab": null,
+      "label": "Splinter camo smock",
+      "faction": "GER",
+      "slot": "outfit",
+      "category": "outfit",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 400,
+      "weight": 0,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "US_M1903A3": {
+      "prefab": null,
+      "label": "M1903A3 Springfield",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "REC"
+      ],
+      "price": 500,
+      "weight": 4,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M1A1_CARBINE": {
+      "prefab": null,
+      "label": "M1A1 Carbine (crosse pliante)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "PARA"
+      ],
+      "price": 600,
+      "weight": 3,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M2_CARBINE": {
+      "prefab": null,
+      "label": "M2 Carbine (select-fire)",
+      "faction": "US",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 900,
+      "weight": 3,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "US_M1919A4": {
+      "prefab": null,
+      "label": "M1919A4 Browning",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF"
+      ],
+      "price": 1800,
+      "weight": 7,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "US_M1919A6": {
+      "prefab": null,
+      "label": "M1919A6 Browning",
+      "faction": "US",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1700,
+      "weight": 7,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "US_M7AT_GRENADE": {
+      "prefab": null,
+      "label": "Grenade AT M7",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 150,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "US_GAMMON": {
+      "prefab": null,
+      "label": "Gammon No.82 (600 g)",
+      "faction": "US",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "PARA"
+      ],
+      "price": 200,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_STG44": {
+      "prefab": null,
+      "label": "StG 44",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF"
+      ],
+      "price": 1200,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_G43_SCOPE": {
+      "prefab": null,
+      "label": "Gewehr 43 ZF4",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "sniper",
+      "classes": [
+        "REC"
+      ],
+      "price": 1300,
+      "weight": 4,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_FG42": {
+      "prefab": null,
+      "label": "FG 42",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "PARA"
+      ],
+      "price": 1500,
+      "weight": 5,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MP38": {
+      "prefab": null,
+      "label": "MP 38",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "smg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 600,
+      "weight": 4,
+      "rankRequired": null,
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_MG34": {
+      "prefab": null,
+      "label": "MG 34",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "mg",
+      "classes": [
+        "INF",
+        "PARA"
+      ],
+      "price": 1600,
+      "weight": 6,
+      "rankRequired": "Sergeant",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 50
+      }
+    },
+    "GER_KAR98K_GL": {
+      "prefab": null,
+      "label": "Kar98k Schiessbecher (lance-grenade)",
+      "faction": "GER",
+      "slot": "primary",
+      "category": "rifle",
+      "classes": [
+        "INF"
+      ],
+      "price": 900,
+      "weight": 5,
+      "rankRequired": "Corporal",
+      "ribbon": {
+        "category": "rifle",
+        "kills": 25
+      }
+    },
+    "GER_LP34": {
+      "prefab": null,
+      "label": "Leuchtpistole 34",
+      "faction": "GER",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_PANZERFAUST100": {
+      "prefab": null,
+      "label": "Panzerfaust 100",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "at",
+      "classes": [
+        "INF"
+      ],
+      "price": 700,
+      "weight": 4,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "GER_M39_GRENADE": {
+      "prefab": null,
+      "label": "Eihandgranate 39",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "grenade",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    },
+    "GER_GEBALLTE": {
+      "prefab": null,
+      "label": "Geballte Ladung",
+      "faction": "GER",
+      "slot": "equipment",
+      "category": "explosive",
+      "classes": [
+        "INF"
+      ],
+      "price": 300,
+      "weight": 2,
+      "rankRequired": "Corporal",
+      "ribbon": null
+    },
+    "US_FLAREGUN": {
+      "prefab": null,
+      "label": "Pistolet lance-fusees AN-M8",
+      "faction": "US",
+      "slot": "secondary",
+      "category": "pistol",
+      "classes": [
+        "INF",
+        "PARA",
+        "REC"
+      ],
+      "price": 100,
+      "weight": 1,
+      "rankRequired": null,
+      "ribbon": null
+    }
   }
- },
- "items": {
-  "US_M1_GARAND": {
-   "prefab": null,
-   "label": "M1 Garand",
-   "faction": "US",
-   "slot": "primary",
-   "category": "rifle",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC"
-   ],
-   "price": 0,
-   "weight": 3,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "US_M1_CARBINE": {
-   "prefab": null,
-   "label": "M1 Carbine",
-   "faction": "US",
-   "slot": "primary",
-   "category": "rifle",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 300,
-   "weight": 2,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_THOMPSON": {
-   "prefab": null,
-   "label": "M1A1 Thompson",
-   "faction": "US",
-   "slot": "primary",
-   "category": "smg",
-   "classes": [
-    "INF",
-    "PARA"
-   ],
-   "price": 800,
-   "weight": 3,
-   "rankRequired": "Corporal",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 25
-   }
-  },
-  "US_M3_GREASE": {
-   "prefab": null,
-   "label": "M3 Grease Gun",
-   "faction": "US",
-   "slot": "primary",
-   "category": "smg",
-   "classes": [
-    "INF",
-    "PARA",
-    "CREW"
-   ],
-   "price": 500,
-   "weight": 2,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_BAR": {
-   "prefab": null,
-   "label": "M1918 BAR",
-   "faction": "US",
-   "slot": "primary",
-   "category": "mg",
-   "classes": [
-    "INF"
-   ],
-   "price": 1500,
-   "weight": 5,
-   "rankRequired": "Sergeant",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 50
-   }
-  },
-  "US_M1903A4": {
-   "prefab": null,
-   "label": "M1903A4 Springfield (scoped)",
-   "faction": "US",
-   "slot": "primary",
-   "category": "sniper",
-   "classes": [
-    "REC"
-   ],
-   "price": 1800,
-   "weight": 4,
-   "rankRequired": "Corporal",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 40
-   }
-  },
-  "US_M1911": {
-   "prefab": null,
-   "label": "M1911 pistol",
-   "faction": "US",
-   "slot": "secondary",
-   "category": "pistol",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 0,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "US_BAZOOKA": {
-   "prefab": null,
-   "label": "M1A1 Bazooka",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "at",
-   "classes": [
-    "INF",
-    "PARA"
-   ],
-   "price": 1200,
-   "weight": 4,
-   "rankRequired": "Corporal",
-   "ribbon": null
-  },
-  "US_MK2_GRENADE": {
-   "prefab": null,
-   "label": "Mk 2 grenade",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "grenade",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 100,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_SMOKE": {
-   "prefab": null,
-   "label": "M15 smoke grenade",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "smoke",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 80,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_MEDKIT": {
-   "prefab": "{9070F5AB358FE739}Prefabs/Items/Medicine/FieldDressing_01/CarlisleFieldDressing_US_WW2.et",
-   "label": "First aid pouch",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "medical",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 150,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_TNT": {
-   "prefab": null,
-   "label": "TNT charge",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "explosive",
-   "classes": [
-    "INF",
-    "PARA"
-   ],
-   "price": 600,
-   "weight": 2,
-   "rankRequired": "Sergeant",
-   "ribbon": null
-  },
-  "US_BINOCULARS": {
-   "prefab": null,
-   "label": "M3 binoculars",
-   "faction": "US",
-   "slot": "equipment",
-   "category": "tool",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 200,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "US_OUTFIT_M41": {
-   "prefab": null,
-   "label": "M41 field uniform",
-   "faction": "US",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "INF",
-    "REC"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "US_OUTFIT_PARA": {
-   "prefab": null,
-   "label": "M42 jump uniform",
-   "faction": "US",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "PARA"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "US_OUTFIT_CREW": {
-   "prefab": null,
-   "label": "Tanker uniform",
-   "faction": "US",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "CREW"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "US_OUTFIT_NETTING": {
-   "prefab": null,
-   "label": "M41 uniform + helmet netting",
-   "faction": "US",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "INF",
-    "REC",
-    "PARA"
-   ],
-   "price": 400,
-   "weight": 0,
-   "rankRequired": "Corporal",
-   "ribbon": null
-  },
-  "GER_KAR98K": {
-   "prefab": null,
-   "label": "Kar98k",
-   "faction": "GER",
-   "slot": "primary",
-   "category": "rifle",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 0,
-   "weight": 3,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "GER_G43": {
-   "prefab": null,
-   "label": "Gewehr 43",
-   "faction": "GER",
-   "slot": "primary",
-   "category": "rifle",
-   "classes": [
-    "INF",
-    "REC"
-   ],
-   "price": 900,
-   "weight": 3,
-   "rankRequired": "Corporal",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 25
-   }
-  },
-  "GER_MP40": {
-   "prefab": null,
-   "label": "MP40",
-   "faction": "GER",
-   "slot": "primary",
-   "category": "smg",
-   "classes": [
-    "INF",
-    "PARA",
-    "CREW"
-   ],
-   "price": 800,
-   "weight": 3,
-   "rankRequired": "Corporal",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 25
-   }
-  },
-  "GER_MG42": {
-   "prefab": null,
-   "label": "MG42",
-   "faction": "GER",
-   "slot": "primary",
-   "category": "mg",
-   "classes": [
-    "INF"
-   ],
-   "price": 1800,
-   "weight": 6,
-   "rankRequired": "Sergeant",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 50
-   }
-  },
-  "GER_KAR98K_SCOPE": {
-   "prefab": null,
-   "label": "Kar98k (scoped)",
-   "faction": "GER",
-   "slot": "primary",
-   "category": "sniper",
-   "classes": [
-    "REC"
-   ],
-   "price": 1800,
-   "weight": 4,
-   "rankRequired": "Corporal",
-   "ribbon": {
-    "category": "rifle",
-    "kills": 40
-   }
-  },
-  "GER_P38": {
-   "prefab": null,
-   "label": "Walther P38",
-   "faction": "GER",
-   "slot": "secondary",
-   "category": "pistol",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 0,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "GER_PANZERFAUST": {
-   "prefab": null,
-   "label": "Panzerfaust 100",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "at",
-   "classes": [
-    "INF",
-    "PARA"
-   ],
-   "price": 700,
-   "weight": 3,
-   "rankRequired": "Corporal",
-   "ribbon": null
-  },
-  "GER_PANZERSCHRECK": {
-   "prefab": null,
-   "label": "Panzerschreck RPzB 54",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "at",
-   "classes": [
-    "INF"
-   ],
-   "price": 1400,
-   "weight": 5,
-   "rankRequired": "Sergeant",
-   "ribbon": {
-    "category": "at",
-    "kills": 5
-   }
-  },
-  "GER_M24_GRENADE": {
-   "prefab": null,
-   "label": "Stielhandgranate 24",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "grenade",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 100,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "GER_SMOKE": {
-   "prefab": null,
-   "label": "NbHgr 39 smoke grenade",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "smoke",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 80,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "GER_MEDKIT": {
-   "prefab": "{4DC939F9FA9D5349}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_HEER_WW2.et",
-   "label": "Verbandpäckchen",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "medical",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 150,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "GER_MINES": {
-   "prefab": null,
-   "label": "Teller mine",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "explosive",
-   "classes": [
-    "INF"
-   ],
-   "price": 600,
-   "weight": 2,
-   "rankRequired": "Sergeant",
-   "ribbon": null
-  },
-  "GER_BINOCULARS": {
-   "prefab": null,
-   "label": "Dienstglas 6x30",
-   "faction": "GER",
-   "slot": "equipment",
-   "category": "tool",
-   "classes": [
-    "INF",
-    "PARA",
-    "REC",
-    "CREW"
-   ],
-   "price": 200,
-   "weight": 1,
-   "rankRequired": null,
-   "ribbon": null
-  },
-  "GER_OUTFIT_M40": {
-   "prefab": null,
-   "label": "M40 field uniform",
-   "faction": "GER",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "INF",
-    "REC"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "GER_OUTFIT_FJ": {
-   "prefab": null,
-   "label": "Fallschirmjäger smock",
-   "faction": "GER",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "PARA"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "GER_OUTFIT_PANZER": {
-   "prefab": null,
-   "label": "Panzer wrap uniform",
-   "faction": "GER",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "CREW"
-   ],
-   "price": 0,
-   "weight": 0,
-   "rankRequired": null,
-   "ribbon": null,
-   "starter": true
-  },
-  "GER_OUTFIT_SMOCK": {
-   "prefab": null,
-   "label": "Splinter camo smock",
-   "faction": "GER",
-   "slot": "outfit",
-   "category": "outfit",
-   "classes": [
-    "INF",
-    "REC"
-   ],
-   "price": 400,
-   "weight": 0,
-   "rankRequired": "Corporal",
-   "ribbon": null
-  }
- }
 }
