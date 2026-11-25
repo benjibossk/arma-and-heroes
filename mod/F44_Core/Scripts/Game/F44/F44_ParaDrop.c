@@ -6,9 +6,11 @@
 // TK_AIPilotComponent (a Move waypoint outside any airport = fly there and orbit it).
 // Each plane carries an "AIR DROP" SCR_SpawnPoint. Only PARA class soldiers may use it: the
 // spawned character is seated in a free cargo seat. The player jumps when he wants (C-47 cargo
-// door action) and opens the chute manually (Grey Mans Chute Framework, GMS_FreeFallComponent,
-// added to every character by that mod). No class of those mods is referenced here: without the
-// mods, the prefab fails to load and the air drop is just disabled.
+// door action), free-falls and opens the chute manually with the Jump key (Parachute Framework
+// 65930CB4CD0237B2: ParachuteComponent on the player controller, deploys from any inventory item
+// carrying a ParachuteItemComponent). The seated paratrooper is given the framework's chute pack if
+// he has none. No class of those mods is referenced here (resource names + type lookup by name):
+// without the mods, the prefabs fail to load and the air drop / chute is just disabled.
 //
 // Battle JSON: "airDrop": { "enabled", "altitude", "radius", "speed", "planeCount": { "<SIDE>": n } }
 //------------------------------------------------------------------------------------------------
@@ -115,6 +117,41 @@ class F44_AirDropPlane
 class F44_AirDrop
 {
 	static const ResourceName C47_PREFAB = "{A2B54744389B4105}Prefabs/Vehicles/Aircrafts/C47/AeroplaneHaven-C47.et";
+	// Parachute Framework pack (soft dependency, manual opening with Jump in free fall)
+	static const ResourceName CHUTE_PREFAB = "{23DA0939B0158024}Prefabs/Items/Equipment/Backpacks/Backpack_Kolobok_Parachute.et";
+	static const string CHUTE_ITEM_TYPE = "ParachuteItemComponent";
+
+	//! Give the character a Parachute Framework pack unless he already carries a chute item
+	static bool GiveChute(IEntity character)
+	{
+		typename t = CHUTE_ITEM_TYPE.ToType();
+		if (!t || !character)
+			return false;	// framework not loaded
+		SCR_InventoryStorageManagerComponent inv = SCR_InventoryStorageManagerComponent.Cast(character.FindComponent(SCR_InventoryStorageManagerComponent));
+		if (!inv)
+			return false;
+		array<IEntity> items = {};
+		inv.GetItems(items);
+		foreach (IEntity it : items)
+		{
+			if (it && it.FindComponent(t))
+				return true;
+		}
+		Resource res = Resource.Load(CHUTE_PREFAB);
+		if (!res || !res.IsValid())
+			return false;
+		EntitySpawnParams params = new EntitySpawnParams();
+		params.TransformMode = ETransformMode.WORLD;
+		params.Transform[3] = character.GetOrigin();
+		IEntity pack = GetGame().SpawnEntityPrefab(res, GetGame().GetWorld(), params);
+		if (!pack)
+			return false;
+		if (inv.TryInsertItem(pack, EStoragePurpose.PURPOSE_EQUIPMENT_ATTACHMENT) || inv.TryInsertItem(pack))
+			return true;
+		Print("[F44] AirDrop: could not give the chute pack (inventory full?)", LogLevel.WARNING);
+		SCR_EntityHelper.DeleteEntityAndChildren(pack);
+		return false;
+	}
 	static const string POINT_NAME = "AIR DROP";
 	static const float RESPAWN_SEC = 90;
 	static const float DESPAWN_WRECK_SEC = 60;
@@ -237,7 +274,9 @@ class F44_AirDrop
 		params.TransformMode = ETransformMode.WORLD;
 		params.Transform[3] = pl.m_Plane.GetOrigin();
 		IEntity ch = GetGame().SpawnEntityPrefab(Resource.Load(prefab), GetGame().GetWorld(), params);
+		bool chute = GiveChute(ch);
 		bool seated = ch && IsAllowedClass(cls) && pl.SeatCharacter(ch);
+		PrintFormat("[F44] AirDrop TEST: chute pack given=%1", chute);
 		PrintFormat("[F44] AirDrop TEST: bot class '%1' allowed=%2 seated=%3 free seats=%4 plane pos=%5 speed=%6 m/s",
 			cls, IsAllowedClass(cls), seated, pl.FreeSeats(), pl.m_Plane.GetOrigin(), pl.m_Plane.GetPhysics().GetVelocity().Length());
 		GetGame().GetCallqueue().CallLater(TestTrack, 20000, true, index);
@@ -538,6 +577,7 @@ modded class SCR_SpawnPoint
 			PrintFormat("[F44] AirDrop: spawn refused, class '%1' is not a paratrooper", cls, level: LogLevel.WARNING);
 			return false;
 		}
+		F44_AirDrop.GiveChute(entity);
 		return m_F44AirPlane.SeatCharacter(entity);
 	}
 

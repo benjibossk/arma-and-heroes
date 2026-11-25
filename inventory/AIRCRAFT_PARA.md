@@ -99,3 +99,13 @@ progression.json :
 - Intégration **souple** : aucun lien gproj vers C47/Aviation-Toolkit/Grey Chute ; prefab C-47 `{A2B54744389B4105}` chargé par nom, pilote IA vanilla + waypoint Move → `TK_AIPilotComponent` orbite le centre du layout. Mods ajoutés au serveur WW2 (config.json + template).
 - Test serveur isolé (port 2010, F44_Test) : C-47 spawné à 350 m AGL, pilote assis, point « AIR DROP » enregistré, bot assis en cargo (siège 2, 29 libres), avion en orbite ~1200 m autour du centre à 72 m/s.
 - Reste à tester avec client : apparition du point dans le menu, spawn joueur en siège, saut porte cargo, chute libre + ouverture Espace, refus classe non-PARA. Catalogue : `US_PARA`/`GER_PARA` sans prefab → à remplir (sinon personne n'est PARA).
+
+## 10. Remplacement de Grey Mans Chute (2026-11-25)
+Grey Mans 69EEAA01F4A11001 fait échouer le dédié (`Addon not found`) → retiré. Inspection des scripts (pak extrait) :
+| Mod | Taille | Dépendances | Ouverture | Verdict |
+|---|---|---|---|---|
+| **Parachute Framework 65930CB4CD0237B2** 1.2.0 | 7 Mo | aucune | **manuelle** : `ParachuteComponent` (sur `DefaultPlayerController`) écoute `CharacterJump` → RPC serveur `RpcAskDeployParachute` ; exige un objet à `ParachuteItemComponent` n'importe où dans l'inventaire (sac `{23DA0939B0158024}Backpack_Kolobok_Parachute.et`), hors véhicule, rien dans 8 m, altitude ≥ 10 m. Chute libre = physique perso vanilla. Atterrissage dur 12 m/s (jambes), mort 18 m/s. | **Retenu** |
+| BUSHWAR Parachutes 66027627A36B8623 1.0.3 | 29 Mo | Parachute Framework + ZeliksCharacter 5D0551624969C92E | idem PF (skin WW2 du sac/voile) | Non retenu (dépendance de plus) ; possible plus tard pour le look |
+| Prontos Parachutes 68996556700D5CA1 1.0.2 | 20 Mo | aucune | T-10 auto | Non retenu (pas d'ouverture manuelle) |
+
+Intégration : `F44_AirDrop.GiveChute()` (souple, type `ParachuteItemComponent` résolu par nom, sac chargé par ResourceName) donne le sac PF au para qui embarque s'il n'en a pas (équipement, sinon rangement). config.json WW2 : +65930CB4CD0237B2. Compilation vérifiée sur serveur isolé port 2013.
