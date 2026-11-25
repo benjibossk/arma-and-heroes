@@ -195,6 +195,9 @@ class Orchestrator:
             if status in ("finished", "cancelled"):
                 if pid: stop_pid(pid, inst)
                 self.release(name, "bataille " + status); continue
+            if pid and status in ("starting", "running") and time.time() - run.get("hb", 0) > 300:
+                self.heartbeat(bid, {"orchestrator": "alive", "instance": name})  # keeps the web director from auto-resolving
+                run["hb"] = time.time()
             if time.time() > run["deadline"]:
                 log.warning("timeout bataille %s sur %s", bid, name)
                 self.heartbeat(bid, {"orchestrator": "timeout", "instance": name})
