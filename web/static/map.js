@@ -97,7 +97,8 @@ function showSel() {
       ${vehFitHtml(t)}
       ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}
       ${t.strengthPct != null ? `<br>Readiness: <b style="color:${t.canAttack ? '#7BC67B' : '#E05A4F'}">${t.strengthPct}%</b>${t.canAttack ? '' : ' <span class="muted">(too weak to attack)</span>'}
-      ${canOrder(t) && t.status === 'idle' && t.resupplyCost > 0 ? `<br><button onclick="resupply('${t.teamId}', ${t.resupplyCost})">Resupply to 100% — ${t.resupplyCost} war funds</button>` : ''}` : ''}`;
+      ${canOrder(t) && t.status === 'idle' && t.resupplyCost > 0 ? `<br><button onclick="resupply('${t.teamId}', ${t.resupplyCost})">Resupply to 100% — ${t.resupplyCost} war funds</button>` : ''}` : ''}
+      <br><button onclick="showUpgrades('${t.teamId}', ${canOrder(t) && t.status === 'idle'})">Doctrines &amp; command points</button><div id="upg"></div>`;
   } else if (selCity) {
     const c = cityById(selCity), b = M.battles.find(x => x.cityId === c.id);
     d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>

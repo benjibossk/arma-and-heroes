@@ -58,6 +58,7 @@ func setupRouter() *gin.Engine {
 	a.GET("/players/by-identity/:identityId", requireServer, playerByIdentity)
 	// général
 	a.GET("/teams/options", vehicleOptions)
+	registerCampaignRoutes(a)
 	g := a.Group("/teams", requireGeneral)
 	g.POST("/:id/vehicle", configureVehicle)
 	g.POST("", createTeam)
@@ -260,6 +261,10 @@ func createTeam(c *gin.Context) {
 	w := currentWar()
 	if w == nil || w.Status != "active" {
 		errJ(c, 400, "no active war")
+		return
+	}
+	if msg := teamCapReached(u, w.ID); msg != "" {
+		errJ(c, 400, msg)
 		return
 	}
 	fac := u.Faction

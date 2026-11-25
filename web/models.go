@@ -73,6 +73,7 @@ type AssaultTeam struct {
 	Routed      bool       `json:"routed"`
 	TeamXP      int        `json:"teamXp"`
 	TeamLevel   int        `gorm:"default:1" json:"teamLevel"`
+	Upgrades    string     `gorm:"type:text" json:"-"` // []string doctrine upgrades (upgrades.go)
 	CreatedAt   time.Time  `json:"createdAt"`
 }
 

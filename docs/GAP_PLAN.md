@@ -153,10 +153,11 @@ Conflict hotspots: **[GM]** = touches `F44_GameModeComponent.c`, **[API]** = tou
 - Files: `F44_SectorSpawn.c`, `F44_SpawnTimesConfig` (its .c), `F44_DeployMenu.c` (display); web side only adds fields in `buildConfig` (game.go) and loadout points from `loadoutPoints` (soldiers.go).
 - Effort: M (3 h). Test: Workbench compile (wb_compile) with zero errors; config JSON round-trip unit test in Go; local headless server log shows computed delays.
 - Deps: none. Shared file: game.go (only `buildConfig`).
+- Status: **DONE 2026-11-26** — `F44_SpawnTimesConfig` gains perPointSec/maxEquipSec/perLinkSec/defenderBonusSec/minSec; modded `SCR_RespawnTimerComponent.OnPlayerKilled` sets the per-player delay (base + equipment points − defender bonus), forward sector points get forward penalty + links from own HQ × perLinkSec; deploy menu shows the per-player total. Web `buildConfig` sends `spawnTimes` (defaults, `spawntimes_test.go`). Server compile-checked, not deployed.
 
 ### P2 — next, mostly one hotspot each (run serially by hotspot)
 
-- **P2-A Team upgrade tree + command points [API]** — branching upgrades, CP budget by rank, team cap per commander. Files: `web/models.go` atSpecs, new `web/upgrades.go`, api.go routes, `web/static` HQ page. Effort M. Test: go tests on branch rules + curl. Deps: P1-B (team XP/levels).
+- **P2-A Team upgrade tree + command points [API]** — DONE 2026-11-26 (web/upgrades.go, docs/CAMPAIGN.md; deploy pending) — branching upgrades, CP budget by rank, team cap per commander. Files: `web/models.go` atSpecs, new `web/upgrades.go`, api.go routes, `web/static` HQ page. Effort M. Test: go tests on branch rules + curl. Deps: P1-B (team XP/levels).
 - **P2-B Road skirmishes [API]** — teams meeting on a road fight a skirmish battle. Files: `moveTeam` (api.go), `arrive` (game.go). Effort M. Deps: P1-A.
 - **P2-C Strategic economy (web)** — per-unit production stockpile, capital-count victory, neutral capitals, war-end refund/bonus. Files: `applyIncome`, `checkVictory` (game.go), seed.go, progression.go. Effort M. Test: go tests. Deps: none (conflicts with P1-A/B in game.go only by function).
 - **P2-D Salary credits (web)** — credits = rank salary × time alive × stay-to-end bonus. Files: progression.go/json. Effort S. Deps: battle results already carry play time (verify).

@@ -97,8 +97,8 @@ func teamStrength(t *AssaultTeam) TeamStrength {
 	}
 	cost := float64(spec.Cost)
 	missing := 0.0
-	if spec.Manpower > 0 && t.Manpower < spec.Manpower {
-		missing += cost * (1 - vshare) * float64(spec.Manpower-t.Manpower) / float64(spec.Manpower)
+	if maxMP := teamMaxManpower(t); maxMP > 0 && t.Manpower < maxMP {
+		missing += cost * (1 - vshare) * float64(maxMP-t.Manpower) / float64(maxMP)
 	}
 	have := map[string]int{}
 	for _, v := range t.GetVehicles() {
@@ -113,7 +113,8 @@ func teamStrength(t *AssaultTeam) TeamStrength {
 	if cost > 0 {
 		pct = int(math.Round(100 * (1 - missing/cost)))
 	}
-	return TeamStrength{Pct: pct, ResupplyCost: int(math.Ceil(missing * teamRules.ResupplyFactor)), CanAttack: pct >= teamRules.MinAttackPct}
+	_, disc := upgradeTotals(t.GetUpgrades())
+	return TeamStrength{Pct: pct, ResupplyCost: int(math.Ceil(missing * teamRules.ResupplyFactor * float64(100-disc) / 100)), CanAttack: pct >= teamRules.MinAttackPct}
 }
 
 // resupplyTeam : POST /api/teams/:id/resupply — refill manpower and vehicles to the type's full strength
@@ -165,7 +166,7 @@ func resupplyTeam(c *gin.Context) {
 		vs = append(vs, VehicleCount{k, n})
 	}
 	t.SetVehicles(filterVehicles(t.Type, vs))
-	t.Manpower = max(t.Manpower, spec.Manpower)
+	t.Manpower = max(t.Manpower, teamMaxManpower(&t))
 	db.Model(&f).Update("resources", f.Resources-st.ResupplyCost)
 	db.Model(&t).Updates(map[string]interface{}{"manpower": t.Manpower, "vehicles": t.Vehicles})
 	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s resupplies %s (-%d resources)", u.Name, t.Label(), st.ResupplyCost))
