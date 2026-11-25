@@ -97,3 +97,10 @@ details summary{cursor:pointer}
 .rtier{font-size:11px;padding:1px 5px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
 .rtier.on{color:var(--on-amber);border-color:transparent}.rtier.t1{background:#B87333}.rtier.t2{background:#C0C0C0}.rtier.t3{background:var(--amber)}
 .runl{font-size:12px;color:var(--muted)}.runl.ok{color:var(--text)}
+/* flat silhouette icons */
+.ico { display: inline-block; width: 1.4em; height: 1.4em; vertical-align: -.35em; background: currentColor; -webkit-mask: var(--ico) center/contain no-repeat; mask: var(--ico) center/contain no-repeat; }
+.cbadge { color: #F0A830; margin-right: 4px; }
+.vchip { position: relative; display: inline-flex; align-items: center; gap: 3px; padding: 1px 6px; border-radius: 3px; background: #2E3031; cursor: default; }
+.vchip.US .ico { color: #7FA8E0; } .vchip.GER .ico { color: #E58C80; }
+.vchip .vthumb { display: none; position: absolute; left: 0; bottom: 120%; width: 180px; background: #2E3031; border: 1px solid #555; border-radius: 4px; z-index: 20; }
+.vchip:hover .vthumb, .vchip:focus .vthumb { display: block; }

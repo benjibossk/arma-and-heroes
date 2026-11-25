@@ -1,6 +1,9 @@
 // Arma & Heroes — interactive war map
 let M = null, selCity = null, selTeam = null;
 const COL = { US: '#3B6FB6', GER: '#B3302B', '': '#888' };
+const COLL = { US: '#7FA8E0', GER: '#E58C80' };
+const TYPE_CAT = { INF: 'infantry', PARA: 'para', ARM: 'tank', REC: 'recon', MOT: 'truck' };
+const teamIconFile = t => 'cat-' + (TYPE_CAT[t.type] || 'infantry') + '.svg';
 const svgNS = 'http://www.w3.org/2000/svg';
 const cityById = id => M.cities.find(c => c.id === id);
 const neighbors = id => M.roads.filter(r => r.cityA === id || r.cityB === id).map(r => ({ id: r.cityA === id ? r.cityB : r.cityA, km: r.distance }));
@@ -19,6 +22,10 @@ function teamIcon(g, t, x, y) {
   if (t.type === 'ARM') el('ellipse', { cx: x, cy: y, rx: 9, ry: 5, ...s }, g);
   if (t.type === 'REC') el('line', { x1: x - 13, y1: y + 9, x2: x + 13, y2: y - 9, ...s }, g);
   if (t.type === 'MOT') { el('line', { x1: x - 13, y1: y - 9, x2: x + 13, y2: y + 9, ...s }, g); el('line', { x1: x + 13, y1: y - 9, x2: x - 13, y2: y + 9, ...s }, g); el('line', { x1: x, y1: y - 9, x2: x, y2: y + 9, ...s }, g); }
+  // flat silhouette of the team type (+ vehicle count) above the NATO box
+  const vn = (t.vehicles || []).reduce((a, v) => a + v.count, 0);
+  svgIcon(g, teamIconFile(t), x - (vn ? 5 : 0), y - 18, 18, { fill: COLL[t.faction] || '#E8E6E1', stroke: '#000', 'stroke-width': 4, 'paint-order': 'stroke', 'stroke-opacity': .6 });
+  if (vn) { const vt = el('text', { x: x + 6, y: y - 12, fill: '#E8E6E1', style: 'fill:#E8E6E1;font-size:9px' }, g); vt.textContent = '×' + vn; }
   const tx = el('text', { x: x, y: y + 21, 'text-anchor': 'middle', fill: '#E8E6E1', style: 'fill:#E8E6E1;font-size:10px' }, g); tx.textContent = t.manpower;
 }
 
@@ -84,7 +91,7 @@ function showSel() {
   const d = document.getElementById('sel');
   if (selTeam) {
     const t = selTeam, c = cityById(t.cityId);
-    d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'none'}<br>
+    d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — <span class="${t.faction}">${icoHtml(teamIconFile(t))}</span> ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${vehChips(t.vehicles, t.faction)}<br>
       Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
       ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
       ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}
@@ -132,6 +139,7 @@ async function loadEvents() {
 
 async function load() {
   M = await api('/map');
+  await itemImgsReady; await loadIcons([...Object.values(TYPE_CAT).map(c => 'cat-' + c + '.svg')]);
   if (selTeam) selTeam = M.teams.find(t => t.teamId === selTeam.teamId) || null;
   renderPanels(); draw(); showSel(); loadEvents();
 }

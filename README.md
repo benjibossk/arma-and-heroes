@@ -124,6 +124,8 @@ To do:
 
 - **Arsenal** — weapons, vehicles and uniforms rendered in-engine from the installed WW2 mods (transparent backgrounds, used on the item cards).
   ![Arsenal renders](docs/screenshots/arsenal-renders.png)
+- **Icons** — flat silhouettes traced from those renders (`tools/icon-silhouettes/make_icons.py`, SVG with `currentColor`), per item and per category, tinted by faction on the war map and live battle view.
+  ![Icons](docs/screenshots/icons.png)
 
 ## Contributing
 

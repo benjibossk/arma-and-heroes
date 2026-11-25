@@ -63,7 +63,8 @@ function draw(d) {
   }
   for (const u of s.units || []) {
     const c = COL[u.side] || COL[''], f = u.isAI ? 'rgba(0,0,0,.45)' : c;
-    if (u.vehicle) mk('rect', { x: u.x - 6 * k, y: -u.z - 6 * k, width: 12 * k, height: 12 * k, fill: f, stroke: c, 'stroke-width': 2.5 * k }, svg);
+    // vehicles: flat silhouette tinted by side (u.vehicle may be a bool or an item key)
+    if (u.vehicle) svgIcon(svg, typeof u.vehicle === 'string' ? iconFile(u.vehicle) : 'cat-tank.svg', u.x, -u.z, 30 * k, { fill: u.isAI ? f : c, stroke: c, 'stroke-width': 6, 'paint-order': 'stroke' });
     else mk('circle', { cx: u.x, cy: -u.z, r: 5 * k, fill: f, stroke: c, 'stroke-width': 2.5 * k }, svg);
   }
 }
@@ -71,7 +72,8 @@ async function tick() {
   let d;
   try { d = await api('/battles/' + encodeURIComponent(id) + '/live'); } catch (e) { side.textContent = e.message; return; }
   ttl.textContent = `Live — ${d.battleId} ${d.cityName || ''}`;
-  if (!mapTried) await loadMap(d.terrain);
+  if (!mapTried) { await loadMap(d.terrain); await itemImgsReady; }
+  await loadIcons(['cat-tank.svg', ...((d.snapshot || {}).units || []).filter(u => typeof u.vehicle === 'string').map(u => iconFile(u.vehicle))]);
   const s = d.snapshot;
   if (!s) { svg.innerHTML = ''; side.innerHTML = `Status: ${STLABEL[d.status] || d.status}. No live data yet.`; return; }
   last = d; draw(d);

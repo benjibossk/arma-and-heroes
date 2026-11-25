@@ -39,7 +39,7 @@ const itemSrc = k => '/assets/items/' + (ITEMIMG[k]?.img || '_sil_rifle.svg');
 const itemPic = (k, cls = '') => `<div class="ipic ${ITEMIMG[k]?.kind === 'photo' ? 'photo' : ''} ${cls}"><img src="${itemSrc(k)}" alt="" loading="lazy"></div>`;
 function itemCard(i, action = '') {
   return `<div class="icard ${i.locked ? 'locked' : ''} ${i.owned ? 'owned' : ''}">${itemPic(i.key)}
-  <div class="ibody"><div class="iname">${esc(i.label)}</div><div class="imeta">${esc(i.slot)} · ${esc(i.category || '')} · ${i.weight} pt</div>
+  <div class="ibody"><div class="iname">${catBadge(i.key)}${esc(i.label)}</div><div class="imeta">${esc(i.slot)} · ${esc(i.category || '')} · ${i.weight} pt</div>
   <div class="ifoot"><span class="iprice">${i.price ? i.price + ' cr.' : 'Free'}</span>${action}</div>
   ${i.locked ? `<div class="ilock">🔒 ${esc(i.locked)}</div>` : ''}</div></div>`;
 }
@@ -59,4 +59,29 @@ function ribbonCard(r) {
   return `<div class="rcard">${ribbonSvg(r)}<div class="rbody"><div class="rname">${esc(r.name)}</div>
   <div class="rbar"><i style="width:${pct}%"></i></div><div class="rmeta">${r.value} / ${r.next || top} ${r.next ? '' : '· max'}</div>
   <div class="rtiers">${badges}</div>${unl}</div></div>`;
+}
+
+// ---------- flat silhouette icons (assets/icons, traced from our renders; fill=currentColor) ----------
+const CAT_RX = [[/TIGER|PZ|PANZER4|SHERMAN|TANK/, 'tank'], [/SDKFZ251|M3A1|HALFTRACK/, 'halftrack'], [/SDKFZ22|ARMORED/, 'armoredcar'], [/KFZ|JEEP/, 'jeep'],
+  [/TRUCK|WC63|GMC/, 'truck'], [/FLAK/, 'aa'], [/PAK|ATGUN/, 'atgun'], [/LEFH|LEIG|HOWITZER/, 'artillery']];
+const itemOf = k => ITEMIMG[k] || ITEMIMG[Object.keys(ITEMIMG).find(x => x.startsWith(k + '_')) || ''];
+const catOf = k => itemOf(k)?.cat || (CAT_RX.find(([r]) => r.test(k)) || [])[1];
+const iconFile = k => itemOf(k)?.icon || (catOf(k) ? 'cat-' + catOf(k) + '.svg' : 'cat-tank.svg');
+const renderOf = k => itemOf(k)?.kind === 'render' ? '/assets/items/' + itemOf(k).img : '';
+// HTML: tinted by CSS color (mask-image)
+const icoHtml = (file, cls = '') => `<i class="ico ${cls}" style="--ico:url(/assets/icons/${file})"></i>`;
+const catBadge = k => catOf(k) ? icoHtml('cat-' + catOf(k) + '.svg', 'cbadge') : '';
+function vehChips(vs, fac = '') {
+  return (vs || []).map(v => `<span class="vchip ${fac}">${icoHtml(iconFile(v.key))}${v.count}×<span class="muted"> ${esc(v.key)}</span>${renderOf(v.key) ? `<img class="vthumb" src="${renderOf(v.key)}" alt="" loading="lazy">` : ''}</span>`).join(' ') || 'none';
+}
+// SVG: inline the path so it can be filled with any colour
+const ICOD = {};
+const loadIcons = files => Promise.all([...new Set(files)].filter(f => !(f in ICOD)).map(f => fetch('/assets/icons/' + f).then(r => r.text())
+  .then(t => { ICOD[f] = (t.match(/ d="([^"]+)"/) || [])[1] || ''; }).catch(() => { ICOD[f] = ''; })));
+function svgIcon(parent, file, cx, cy, size, attrs = {}) {
+  const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'), s = size / 100;
+  p.setAttribute('d', ICOD[file] || 'M10 10H90V90H10Z'); p.setAttribute('fill-rule', 'evenodd');
+  p.setAttribute('transform', `translate(${cx - size / 2} ${cy - size / 2}) scale(${s})`);
+  for (const k in attrs) p.setAttribute(k, attrs[k]);
+  parent.appendChild(p); return p;
 }
