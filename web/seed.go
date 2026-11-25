@@ -17,7 +17,7 @@ func ensureAdmin() {
 	}
 	h, _ := bcrypt.GenerateFromPassword([]byte(cfg.AdminPass), bcrypt.DefaultCost)
 	db.Create(&Player{Name: cfg.AdminUser, PassHash: string(h), Role: "admin"})
-	log.Println("compte admin créé :", cfg.AdminUser)
+	log.Println("admin account created:", cfg.AdminUser)
 }
 
 func currentWar() *War {
@@ -33,9 +33,9 @@ const arlandPlaceholder = "{0000000000000000}Missions/F44_Arland_"
 // seedWar crée une guerre de démonstration (12 villes, 2 AT)
 func seedWar() *War {
 	now := time.Now().UTC()
-	w := War{Name: "Guerre n°" + itoa(int(countWars()+1)) + " — Front de Normandie", Status: "active", StartedAt: now, LastIncomeAt: now}
+	w := War{Name: "War #" + itoa(int(countWars()+1)) + " — Normandy Front", Status: "active", StartedAt: now, LastIncomeAt: now}
 	db.Create(&w)
-	db.Create(&Faction{WarID: w.ID, Code: "US", Name: "Armée américaine", Resources: 1500})
+	db.Create(&Faction{WarID: w.ID, Code: "US", Name: "US Army", Resources: 1500})
 	db.Create(&Faction{WarID: w.ID, Code: "GER", Name: "Wehrmacht", Resources: 1500})
 	type c = City
 	cities := []c{
@@ -89,7 +89,7 @@ func seedWar() *War {
 	ger := newTeam(w.ID, "INF", "GER", owner, "arland-ferme")
 	db.Create(&us)
 	db.Create(&ger)
-	logEvent(w.ID, "war", "", "Début de la guerre : "+w.Name)
+	logEvent(w.ID, "war", "", "War begins: "+w.Name)
 	return &w
 }
 

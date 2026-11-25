@@ -41,3 +41,19 @@ svg#map{width:100%;height:auto;display:block}
 .list-item{border-bottom:1px solid var(--paper2);padding:6px 0}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
 .legend span{margin-right:12px;font-size:12px}
+/* mobile-first adjustments */
+@media(max-width:700px){
+ header{padding:8px 10px;gap:8px}header h1{font-size:19px}
+ header nav{width:100%;display:flex;overflow-x:auto;gap:4px}
+ header nav a{margin-right:10px;white-space:nowrap;padding:6px 0;font-size:12px}
+ #who{margin-left:0;width:100%}
+ main{padding:8px}.panel{padding:10px}
+ table{font-size:13px}th,td{padding:4px 3px}
+ .city text{font-size:18px}
+ button{padding:10px 12px}
+ .scroll{overflow-x:auto}
+}
+.big-input{font-size:28px;letter-spacing:4px;text-transform:uppercase;width:100%;padding:12px;text-align:center;font-family:'Special Elite',monospace}
+.btn-big{width:100%;padding:14px;font-size:16px;margin-top:8px}
+.ok{color:#2f5d2a;font-weight:600}
+ol.steps{padding-left:20px}ol.steps li{margin:6px 0}

@@ -1,14 +1,18 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Arma &amp; Heroes — Connexion</title><link rel="stylesheet" href="/style.css"></head><body>
-<main style="max-width:420px">
-<div class="panel"><h2>Rapport au QG — identification</h2>
-<form id="f"><div class="row"><input id="n" placeholder="Pseudo" required style="flex:1"></div>
-<div class="row"><input id="p" type="password" placeholder="Mot de passe" required style="flex:1"></div>
-<div class="row"><button>Entrer</button><span id="e" class="err"></span></div></form>
-<div id="disc" style="display:none" class="row"><a href="/api/v1/auth/discord"><button type="button">Connexion via Discord</button></a></div>
-<p class="muted">Les comptes sont créés par un administrateur (ou via Discord si activé).</p></div></main>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Log in</title><link rel="stylesheet" href="/style.css"></head><body>
+<main style="max-width:460px">
+<div class="panel"><h2>Report to HQ</h2>
+<p>Players log in with their Discord account.</p>
+<a id="dl" href="#"><button type="button" class="btn-big">Log in with Discord</button></a>
+<p id="derr" class="err"></p></div>
+<details class="panel"><summary class="muted">Administrator login</summary>
+<form id="f"><div class="row"><input id="n" placeholder="Admin name" required style="flex:1" autocomplete="username"></div>
+<div class="row"><input id="p" type="password" placeholder="Password" required style="flex:1" autocomplete="current-password"></div>
+<div class="row"><button>Log in</button><span id="e" class="err"></span></div></form></details></main>
 <script src="/common.js"></script><script>
 initPage('');
-api('/auth/config').then(c => { if (c.discord) disc.style.display = ''; });
-f.onsubmit = async ev => { ev.preventDefault(); try { await api('/auth/login', { method: 'POST', body: { name: n.value, password: p.value } }); location.href = '/'; } catch (x) { e.textContent = x.message; } };
+const next = new URLSearchParams(location.search).get('next') || '/';
+dl.href = discordLogin(next);
+api('/auth/config').then(c => { if (!c.discord) { derr.textContent = 'Discord login is not configured on this server yet.'; dl.style.pointerEvents = 'none'; dl.style.opacity = .5; } });
+f.onsubmit = async ev => { ev.preventDefault(); try { await api('/auth/login', { method: 'POST', body: { name: n.value, password: p.value } }); location.href = next; } catch (x) { e.textContent = x.message; } };
 </script></body></html>

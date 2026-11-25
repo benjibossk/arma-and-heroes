@@ -1,4 +1,4 @@
-// Arma & Heroes — carte de guerre interactive
+// Arma & Heroes — interactive war map
 let M = null, selCity = null, selTeam = null;
 const COL = { US: '#3d5a80', GER: '#7a2e2a', '': '#888' };
 const svgNS = 'http://www.w3.org/2000/svg';
@@ -12,7 +12,7 @@ function el(tag, attrs, parent) { const e = document.createElementNS(svgNS, tag)
 function teamIcon(g, t, x, y) {
   const c = COL[t.faction];
   el('rect', { x: x - 13, y: y - 9, width: 26, height: 18, fill: c }, g);
-  // symbologie OTAN simplifiée
+  // simplified NATO symbology
   const s = { stroke: '#fff', 'stroke-width': 1.6, fill: 'none' };
   if (t.type === 'INF' || t.type === 'PARA') { el('line', { x1: x - 13, y1: y - 9, x2: x + 13, y2: y + 9, ...s }, g); el('line', { x1: x + 13, y1: y - 9, x2: x - 13, y2: y + 9, ...s }, g); }
   if (t.type === 'PARA') el('path', { d: `M${x - 6} ${y + 6} q6 -8 12 0`, ...s }, g);
@@ -36,7 +36,7 @@ function draw() {
     el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'road' + (tg ? ' target' : '') }, s);
     const t = el('text', { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 - 4, 'font-size': 10, fill: '#5d5340', 'text-anchor': 'middle' }, s); t.textContent = r.distance + ' km';
   });
-  // flèches de mouvement
+  // movement arrows
   M.teams.filter(t => t.status === 'moving' && t.destCityId).forEach(t => {
     const a = cityById(t.cityId), b = cityById(t.destCityId); if (!a || !b) return;
     const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1;
@@ -51,7 +51,7 @@ function draw() {
     const t = el('text', { x: c.x, y: c.y - 20, 'text-anchor': 'middle' }, g); t.textContent = c.name;
     g.onclick = () => clickCity(c);
   });
-  // AT : regroupées par ville (moving : à mi-chemin)
+  // teams grouped by city (moving: along the road)
   const slots = {};
   M.teams.forEach(t => {
     let a = cityById(t.cityId); if (!a) return;
@@ -63,7 +63,7 @@ function draw() {
     const n = slots[key] = (slots[key] || 0) + 1;
     const g = el('g', { class: 'team' + (selTeam && selTeam.teamId === t.teamId ? ' sel' : '') }, s);
     teamIcon(g, t, x + 28 + (n - 1) * 30, y + 14);
-    const ti = el('title', {}, g); ti.textContent = `${t.teamId} ${TLABEL[t.type]} — ${t.manpower} hommes`;
+    const ti = el('title', {}, g); ti.textContent = `${t.teamId} ${TLABEL[t.type]} — ${t.manpower} men`;
     g.onclick = ev => { ev.stopPropagation(); clickTeam(t); };
   });
 }
@@ -72,7 +72,7 @@ function clickTeam(t) { selTeam = selTeam && selTeam.teamId === t.teamId ? null 
 
 async function clickCity(c) {
   if (selTeam && selTeam.status === 'idle' && canOrder(selTeam) && neighbors(selTeam.cityId).some(n => n.id === c.id)) {
-    if (confirm(`Ordonner à ${selTeam.teamId} de marcher sur ${c.name} ?`)) {
+    if (confirm(`Order ${selTeam.teamId} to march on ${c.name}?`)) {
       try { await api(`/teams/${selTeam.teamId.slice(3)}/move`, { method: 'POST', body: { destCityId: c.id } }); selTeam = null; await load(); } catch (e) { alert(e.message); }
     }
     return;
@@ -84,35 +84,35 @@ function showSel() {
   const d = document.getElementById('sel');
   if (selTeam) {
     const t = selTeam, c = cityById(t.cityId);
-    d.innerHTML = `<b class="${t.faction}">${t.teamId}</b> — ${TLABEL[t.type]} · niv. ${t.equipLevel}<br>Effectif : <b>${t.manpower}</b> · Véhicules : ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'aucun'}<br>
-      Position : ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route vers <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrivée dans ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">au combat (${t.battleId})</a>` : 'au repos'}<br>
-      ${t.ownerName ? 'Général : ' + esc(t.ownerName) : ''}
-      ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Cliquez une ville adjacente (route surlignée) pour ordonner le mouvement.</p><button class="danger" onclick="dissolve('${t.teamId}')">Dissoudre (remb. 50 %)</button>` : ''}`;
+    d.innerHTML = `<b class="${t.faction}">${t.teamId}</b> — ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'none'}<br>
+      Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
+      ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
+      ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}`;
   } else if (selCity) {
     const c = cityById(selCity), b = M.battles.find(x => x.cityId === c.id);
-    d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capitale</span>' : ''} ${c.isFactory ? '<span class="tag">usine</span>' : ''}<br>
-     Terrain : ${esc(c.terrain)} · mode ${esc(c.mode)} · garnison ${c.garrison}<br><span class="muted">Scénario : ${esc(c.scenarioId)}</span><br>
-     Voisines : ${neighbors(c.id).map(n => esc(cityById(n.id)?.name) + ' (' + n.km + ' km)').join(', ')}<br>
-     ${b ? `<b style="color:#c22">Bataille ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">voir</a>` : ''}`;
-  } else d.innerHTML = 'Cliquez une ville ou une escouade.';
+    d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
+     Terrain: ${esc(c.terrain)} · mode ${esc(c.mode)} · garrison ${c.garrison}<br><span class="muted">Scenario: ${esc(c.scenarioId)}</span><br>
+     Neighbours: ${neighbors(c.id).map(n => esc(cityById(n.id)?.name) + ' (' + n.km + ' km)').join(', ')}<br>
+     ${b ? `<b style="color:#c22">Battle ${b.battleId} — ${STLABEL[b.status]}</b> <a href="/battles.html#${b.battleId}">view</a>` : ''}`;
+  } else d.innerHTML = 'Tap a city or a team.';
 }
 
-async function dissolve(id) { if (!confirm('Dissoudre ' + id + ' ?')) return; try { await api('/teams/' + id.slice(3), { method: 'DELETE' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
+async function dissolve(id) { if (!confirm('Disband ' + id + ' ?')) return; try { await api('/teams/' + id.slice(3), { method: 'DELETE' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
 
 function renderPanels() {
-  document.getElementById('wartitle').textContent = M.war.name + (M.war.status !== 'active' ? ` — TERMINÉE (vainqueur ${M.war.winner})` : '');
+  document.getElementById('wartitle').textContent = M.war.name + (M.war.status !== 'active' ? ` — OVER (winner ${M.war.winner})` : '');
   document.getElementById('res').innerHTML = ['US', 'GER'].map(f => { const x = M.factions[f] || {}; const n = M.cities.filter(c => c.owner === f).length;
-    return `<div class="row"><b class="${f}" style="width:110px">${FNAME[f]}</b><span class="res">${x.resources ?? '?'}</span><span class="muted">+${M.income[f] || 0}/tick · ${n} villes</span></div>`; }).join('') +
-    `<div class="muted">Prochain ravitaillement : ${fmtDate(M.nextIncomeAt)}</div>`;
+    return `<div class="row"><b class="${f}" style="width:110px">${FNAME[f]}</b><span class="res">${x.resources ?? '?'}</span><span class="muted">+${M.income[f] || 0}/tick · ${n} cities</span></div>`; }).join('') +
+    `<div class="muted">Next supply: ${fmtDate(M.nextIncomeAt)}</div>`;
   const gp = document.getElementById('genpanel');
   if (!(ME && ME.isGeneral)) { gp.style.display = 'none'; return; }
   gp.style.display = '';
   const facs = ME.role === 'admin' ? ['US', 'GER'] : [ME.faction];
   const buyCities = M.cities.filter(c => facs.includes(c.owner) && (c.isFactory || c.isCapital));
-  document.getElementById('buy').innerHTML = `<div class="row"><select id="btype">${Object.entries(M.catalog).map(([k, s]) => `<option value="${k}">${s.Label} — ${s.Cost} res. (${s.Manpower} h.)</option>`).join('')}</select></div>
-   <div class="row"><select id="bcity">${buyCities.map(c => `<option value="${c.id}">${esc(c.name)} [${c.owner}]</option>`).join('')}</select><button onclick="buy()">Lever l'escouade</button></div>`;
+  document.getElementById('buy').innerHTML = `<div class="row"><select id="btype">${Object.entries(M.catalog).map(([k, s]) => `<option value="${k}">${s.Label} — ${s.Cost} res. (${s.Manpower} men)</option>`).join('')}</select></div>
+   <div class="row"><select id="bcity">${buyCities.map(c => `<option value="${c.id}">${esc(c.name)} [${c.owner}]</option>`).join('')}</select><button onclick="buy()">Raise team</button></div>`;
   const mine = M.teams.filter(t => canOrder(t));
-  document.getElementById('myteams').innerHTML = '<table><tr><th>AT</th><th>Type</th><th>Eff.</th><th>Position</th></tr>' + mine.map(t =>
+  document.getElementById('myteams').innerHTML = '<table><tr><th>AT</th><th>Type</th><th>Men</th><th>Position</th></tr>' + mine.map(t =>
     `<tr style="cursor:pointer" onclick="clickTeam(M.teams.find(x=>x.teamId==='${t.teamId}'))"><td class="${t.faction}">${t.teamId}</td><td>${t.type}</td><td>${t.manpower}</td><td>${esc(cityById(t.cityId)?.name)}${t.status === 'moving' ? ' → ' + esc(cityById(t.destCityId)?.name) : t.status === 'in_battle' ? ' ⚔' : ''}</td></tr>`).join('') + '</table>';
 }
 
@@ -124,7 +124,7 @@ async function buy() {
 
 async function loadEvents() {
   const ev = await api('/events?limit=30');
-  document.getElementById('events').innerHTML = ev.map(e => `<div class="list-item"><span class="muted">${fmtDate(e.createdAt)}</span> <span class="${e.faction}">${esc(e.message)}</span></div>`).join('') || 'Rien à signaler.';
+  document.getElementById('events').innerHTML = ev.map(e => `<div class="list-item"><span class="muted">${fmtDate(e.createdAt)}</span> <span class="${e.faction}">${esc(e.message)}</span></div>`).join('') || 'Nothing to report.';
 }
 
 async function load() {

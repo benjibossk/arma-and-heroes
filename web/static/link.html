@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Link your game account</title><link rel="stylesheet" href="/style.css"></head><body>
+<main style="max-width:520px">
+<div class="panel"><h2>Link your game account</h2>
+<ol class="steps">
+ <li>Join any <b>Arma &amp; Heroes</b> server in Arma Reforger (PC, Xbox or PlayStation).</li>
+ <li>A link code like <b>AH-7KQ9XM</b> appears on screen (with a QR code). It is valid for 10 minutes.</li>
+ <li>Scan the QR code with your phone, or open this page and type the code below.</li>
+</ol>
+<p class="muted">Your battle XP and stats are only recorded once your game profile is linked. One game profile per Discord account.</p></div>
+<div class="panel" id="box"></div></main>
+<script src="/common.js"></script><script>
+const code0 = new URLSearchParams(location.search).get('code') || '';
+initPage('link.html').then(me => {
+  if (!me) {
+    box.innerHTML = `<p>First, log in with Discord${code0 ? ' — your code <b>' + esc(code0.toUpperCase()) + '</b> will be kept' : ''}.</p>
+      <a href="${discordLogin(location.pathname + location.search)}"><button class="btn-big">Log in with Discord</button></a><p id="derr" class="err"></p>`;
+    api('/auth/config').then(c => { if (!c.discord) derr.textContent = 'Discord login is not configured on this server yet.'; });
+    return;
+  }
+  if (me.linked) { box.innerHTML = `<p class="ok">Your account is linked to a game profile.</p><p class="muted">To change it, ask an administrator.</p>`; return; }
+  box.innerHTML = `<label for="c">Link code</label>
+    <input id="c" class="big-input" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="12" placeholder="AH-XXXXXX" value="${esc(code0.toUpperCase())}">
+    <button id="go" class="btn-big">Link my account</button><p id="msg"></p>`;
+  go.onclick = async () => {
+    msg.className = ''; msg.textContent = 'Checking…';
+    try { const r = await api('/link/confirm', { method: 'POST', body: { code: c.value } });
+      box.innerHTML = `<p class="ok">Linked! Game profile: ${esc(r.playerName || '')}</p><p>Rejoin or keep playing — your stats now count.</p>`;
+    } catch (e) { msg.className = 'err'; msg.textContent = e.message; }
+  };
+  c.onkeydown = e => { if (e.key === 'Enter') go.click(); };
+});
+</script></body></html>

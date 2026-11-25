@@ -76,7 +76,7 @@ func applyIncome(w *War) {
 			continue
 		}
 		db.Model(&Faction{}).Where("war_id = ? AND code = ?", w.ID, f).Update("resources", gorm.Expr("resources + ?", v))
-		logEvent(w.ID, "income", f, fmt.Sprintf("Ravitaillement : +%d ressources", v))
+		logEvent(w.ID, "income", f, fmt.Sprintf("Supply: +%d resources", v))
 	}
 }
 
@@ -125,7 +125,7 @@ func arrive(w *War, t *AssaultTeam) {
 			t.CityID = dest.ID
 		}
 		addTeamToBattle(b, t, t.Faction)
-		logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("%s (%s) arrive en renfort à %s", t.TeamID(), t.Type, dest.Name))
+		logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("%s (%s) arrives as reinforcement at %s", t.TeamID(), t.Type, dest.Name))
 		return
 	}
 	if dest.Owner == t.Faction {
@@ -147,7 +147,7 @@ func arrive(w *War, t *AssaultTeam) {
 	for i := range defenders {
 		addTeamToBattle(&b, &defenders[i], dest.Owner)
 	}
-	logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("Bataille %s : %s attaque %s (%s)", b.BattleID(), t.Faction, dest.Name, dest.Owner))
+	logEvent(w.ID, "battle", t.Faction, fmt.Sprintf("Battle %s: %s attacks %s (%s)", b.BattleID(), t.Faction, dest.Name, dest.Owner))
 }
 
 // mergeTeam : fusionne une AT arrivée avec une AT alliée de même type et même général dans la ville
@@ -155,7 +155,7 @@ func mergeTeam(w *War, t *AssaultTeam, c *City) {
 	var o AssaultTeam
 	if db.Where("war_id = ? AND city_id = ? AND faction = ? AND type = ? AND owner_id = ? AND status = ? AND id <> ?",
 		w.ID, c.ID, t.Faction, t.Type, t.OwnerID, "idle", t.ID).First(&o).Error != nil {
-		logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s (%s) arrive à %s", t.TeamID(), t.Type, c.Name))
+		logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s (%s) arrives at %s", t.TeamID(), t.Type, c.Name))
 		return
 	}
 	o.Manpower += t.Manpower
@@ -176,7 +176,7 @@ func mergeTeam(w *War, t *AssaultTeam, c *City) {
 	}
 	db.Save(&o)
 	db.Model(t).Updates(map[string]interface{}{"status": "dissolved", "manpower": 0})
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s fusionne avec %s à %s", t.TeamID(), o.TeamID(), c.Name))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s merges into %s at %s", t.TeamID(), o.TeamID(), c.Name))
 }
 
 func roadBetween(warID uint, a, b string) *Road {
@@ -203,7 +203,8 @@ type BCTeam struct {
 }
 
 type BCSide struct {
-	Teams []BCTeam `json:"teams"`
+	Teams []BCTeam  `json:"teams"`
+	AI    AIConfig `json:"ai"`
 }
 
 type BattleConfig struct {
@@ -257,10 +258,18 @@ func buildConfig(b *Battle) BattleConfig {
 			Classes: []string{"RIFLEMAN", "MG"}, Vehicles: []VehicleCount{}})
 		out.Sides[b.Defender] = s
 	}
+	ai := loadAI()
 	for _, f := range []string{"US", "GER"} {
-		if _, ok := out.Sides[f]; !ok {
-			out.Sides[f] = BCSide{Teams: []BCTeam{}}
+		s, ok := out.Sides[f]
+		if !ok {
+			s = BCSide{Teams: []BCTeam{}}
 		}
+		var types []string
+		for _, t := range s.Teams {
+			types = append(types, t.Type)
+		}
+		s.AI = sideAI(ai, types)
+		out.Sides[f] = s
 	}
 	return out
 }
@@ -290,15 +299,17 @@ type BattleResult struct {
 	DurationSec int                `json:"durationSec"`
 	Losses      map[string]ResLoss `json:"losses"`
 	Players     []ResPlayer        `json:"players"`
+	AIKills     map[string]int     `json:"aiKills,omitempty"`  // per side, display only
+	AIDeaths    map[string]int     `json:"aiDeaths,omitempty"` // per side, display only (already included in losses.manpower)
 }
 
 // applyResult : appelant tient gameMu
 func applyResult(b *Battle, r *BattleResult) error {
 	if b.Status == "finished" || b.Status == "cancelled" {
-		return errors.New("bataille déjà terminée")
+		return errors.New("battle already finished")
 	}
 	if r.Winner != b.Attacker && r.Winner != b.Defender {
-		return errors.New("winner invalide")
+		return errors.New("invalid winner")
 	}
 	raw, _ := json.Marshal(r)
 	now := time.Now().UTC()
@@ -356,9 +367,9 @@ func applyResult(b *Battle, r *BattleResult) error {
 	}
 	if r.Winner == b.Attacker && city != nil {
 		db.Model(&City{}).Where("war_id = ? AND id = ?", b.WarID, b.CityID).Update("owner", b.Attacker)
-		logEvent(b.WarID, "capture", b.Attacker, fmt.Sprintf("%s prend %s (%s)", b.Attacker, cname, r.Reason))
+		logEvent(b.WarID, "capture", b.Attacker, fmt.Sprintf("%s captures %s (%s)", b.Attacker, cname, r.Reason))
 	} else {
-		logEvent(b.WarID, "battle", b.Defender, fmt.Sprintf("%s tient %s face à %s (%s)", b.Defender, cname, b.Attacker, r.Reason))
+		logEvent(b.WarID, "battle", b.Defender, fmt.Sprintf("%s holds %s against %s (%s)", b.Defender, cname, b.Attacker, r.Reason))
 	}
 	// joueurs
 	for _, rp := range r.Players {
@@ -366,18 +377,9 @@ func applyResult(b *Battle, r *BattleResult) error {
 			continue
 		}
 		var p Player
+		// only linked accounts are credited; unlinked identities still count in team losses
 		if db.Where("identity_id = ?", rp.IdentityID).First(&p).Error != nil {
-			name := rp.Name
-			if name == "" {
-				name = "joueur-" + rp.IdentityID[:min(8, len(rp.IdentityID))]
-			}
-			var cnt int64
-			db.Model(&Player{}).Where("name = ?", name).Count(&cnt)
-			if cnt > 0 {
-				name = name + "#" + rp.IdentityID[:min(4, len(rp.IdentityID))]
-			}
-			p = Player{Name: name, IdentityID: rp.IdentityID, Role: "soldier", Faction: rp.Side}
-			db.Create(&p)
+			continue
 		}
 		xp := rp.XP
 		if rp.Side == r.Winner {
@@ -447,7 +449,7 @@ func checkVictory(w *War) {
 	if winner != "" {
 		now := time.Now().UTC()
 		db.Model(w).Updates(map[string]interface{}{"status": "finished", "winner": winner, "ended_at": now})
-		logEvent(w.ID, "war", winner, "VICTOIRE : "+winner+" remporte la guerre ("+w.Name+")")
+		logEvent(w.ID, "war", winner, "VICTORY: "+winner+" wins the war ("+w.Name+")")
 	}
 }
 

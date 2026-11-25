@@ -1,18 +1,17 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Arma &amp; Heroes — Admin</title><link rel="stylesheet" href="/style.css"></head><body>
-<main><div class="panel"><h2>Commandement suprême</h2>
-<div class="row"><button class="danger" onclick="reset()">Réinitialiser la guerre</button><button onclick="post('/admin/tick')">Forcer un ravitaillement</button><button onclick="post('/admin/arrive-now')">Arrivée immédiate des AT</button>
- US <input id="rUS" size="6"> GER <input id="rGER" size="6"><button onclick="setRes()">Fixer ressources</button><span id="m" class="muted"></span></div></div>
-<div class="panel"><h2>Villes & scénarios</h2><div id="cities"></div></div>
-<div class="panel"><h2>Batailles actives</h2><div id="bats"></div></div>
-<div class="panel"><h2>Joueurs</h2>
-<div class="row"><input id="pn" placeholder="pseudo"><input id="pp" placeholder="mot de passe"><select id="pr"><option>soldier</option><option>general</option><option>admin</option></select>
-<select id="pf"><option value="">—</option><option>US</option><option>GER</option></select><button onclick="addP()">Créer</button></div><div id="players"></div></div></main>
+<main><div class="panel"><h2>Supreme command</h2>
+<div class="row"><button class="danger" onclick="reset()">Reset the war</button><button onclick="post('/admin/tick')">Force a supply tick</button><button onclick="post('/admin/arrive-now')">Instant team arrival</button>
+ US <input id="rUS" size="6"> GER <input id="rGER" size="6"><button onclick="setRes()">Set resources</button><span id="m" class="muted"></span></div></div>
+<div class="panel"><h2>Cities &amp; scenarios</h2><div id="cities" class="scroll"></div></div>
+<div class="panel"><h2>AI bots (BattleConfig defaults)</h2><textarea id="aij" rows="6" style="width:100%;font-family:monospace"></textarea><div class="row"><button onclick="saveAI()">Save AI settings</button></div></div>
+<div class="panel"><h2>Active battles</h2><div id="bats"></div></div>
+<div class="panel"><h2>Players</h2><p class="muted">Players sign up with Discord. Promote them here (general / admin). Unlinking a game profile is logged.</p><div id="players" class="scroll"></div></div></main>
 <script src="/common.js"></script><script>
 const say = t => m.textContent = t;
 async function post(p, body) { try { await api(p, { method: 'POST', body }); say('OK ' + new Date().toLocaleTimeString()); load(); } catch (e) { say(e.message); } }
-async function reset() { if (confirm('Clore la guerre actuelle et en démarrer une nouvelle ?')) post('/admin/war/reset'); }
-async function setRes() { for (const f of ['US', 'GER']) { const v = document.getElementById('r' + f).value; if (v !== '') await api('/admin/factions/' + f, { method: 'PUT', body: { resources: +v } }); } say('Ressources fixées'); }
+async function reset() { if (confirm('End the current war and start a new one?')) post('/admin/war/reset'); }
+async function setRes() { for (const f of ['US', 'GER']) { const v = document.getElementById('r' + f).value; if (v !== '') await api('/admin/factions/' + f, { method: 'PUT', body: { resources: +v } }); } say('Resources set'); }
 const F = ['name', 'x', 'y', 'owner', 'isCapital', 'isFactory', 'mode', 'garrison', 'terrain', 'scenarioId'];
 async function load() {
   const M = await api('/map');
@@ -20,25 +19,28 @@ async function load() {
     typeof c[k] === 'boolean' ? `<td><input type="checkbox" data-k="${k}" ${c[k] ? 'checked' : ''}></td>` :
     k === 'owner' ? `<td><select data-k="owner"><option ${c.owner === 'US' ? 'selected' : ''}>US</option><option ${c.owner === 'GER' ? 'selected' : ''}>GER</option></select></td>` :
     k === 'mode' ? `<td><select data-k="mode"><option ${c.mode === 'ASSAULT' ? 'selected' : ''}>ASSAULT</option><option ${c.mode === 'SKIRMISH' ? 'selected' : ''}>SKIRMISH</option></select></td>` :
-    `<td><input data-k="${k}" value="${esc(c[k])}" size="${k === 'scenarioId' ? 40 : ['x', 'y', 'garrison'].includes(k) ? 4 : 14}"></td>`).join('') + `<td><button onclick="saveCity('${c.id}')">Enreg.</button></td></tr>`).join('') + '</table>';
+    `<td><input data-k="${k}" value="${esc(c[k])}" size="${k === 'scenarioId' ? 40 : ['x', 'y', 'garrison'].includes(k) ? 4 : 14}"></td>`).join('') + `<td><button onclick="saveCity('${c.id}')">Save</button></td></tr>`).join('') + '</table>';
   const bs = await api('/battles?status=pending,starting,running');
-  bats.innerHTML = bs.map(b => `<div class="row">${b.battleId} ${esc(b.cityName)} — ${STLABEL[b.status]} <button class="danger" onclick="post('/admin/battles/${b.battleId}/cancel')">Annuler</button></div>`).join('') || '<span class="muted">Aucune</span>';
+  bats.innerHTML = bs.map(b => `<div class="row">${b.battleId} ${esc(b.cityName)} — ${STLABEL[b.status]} <button class="danger" onclick="post('/admin/battles/${b.battleId}/cancel')">Cancel</button></div>`).join('') || '<span class="muted">None</span>';
+  aij.value = JSON.stringify(await api('/admin/ai'), null, 1);
   const ps = await api('/admin/players');
-  players.innerHTML = '<table><tr><th>Nom</th><th>Rôle</th><th>Camp</th><th>identityId</th><th>XP</th><th></th></tr>' + ps.map(p => `<tr data-pid="${p.id}"><td>${esc(p.name)}</td>
+  players.innerHTML = '<table><tr><th>Name</th><th>Role</th><th>Side</th><th>Game profile</th><th>XP</th><th></th></tr>' + ps.map(p => `<tr data-pid="${p.id}"><td>${esc(p.name)}</td>
    <td><select data-k="role">${['soldier', 'general', 'admin'].map(r => `<option ${p.role === r ? 'selected' : ''}>${r}</option>`).join('')}</select></td>
    <td><select data-k="faction">${['', 'US', 'GER'].map(r => `<option ${p.faction === r ? 'selected' : ''}>${r}</option>`).join('')}</select></td>
-   <td><input data-k="identityId" value="${esc(p.identityId)}"></td><td>${p.xp}</td><td><input data-k="password" placeholder="nouveau mdp" size="10"><button onclick="saveP(${p.id})">Enreg.</button></td></tr>`).join('') + '</table>';
+   <td>${p.identityId ? `<span class="muted">${esc(p.identityId.slice(0, 8))}…</span> <button class="danger" onclick="unlink(${p.id})">Unlink</button>` : '—'}</td><td>${p.xp}</td>
+   <td><button onclick="saveP(${p.id})">Save</button></td></tr>`).join('') + '</table>';
 }
+async function saveAI() { try { await api('/admin/ai', { method: 'PUT', body: JSON.parse(aij.value) }); say('AI settings saved'); } catch (e) { say(e.message); } }
 async function saveCity(id) {
   const tr = document.querySelector(`tr[data-id="${id}"]`), body = {};
   tr.querySelectorAll('[data-k]').forEach(i => { const k = i.dataset.k; body[k] = i.type === 'checkbox' ? i.checked : ['x', 'y', 'garrison'].includes(k) ? +i.value : i.value; });
-  try { await api('/admin/cities/' + id, { method: 'PUT', body }); say('Ville ' + id + ' enregistrée'); } catch (e) { say(e.message); }
+  try { await api('/admin/cities/' + id, { method: 'PUT', body }); say('City ' + id + ' saved'); } catch (e) { say(e.message); }
 }
 async function saveP(id) {
   const tr = document.querySelector(`tr[data-pid="${id}"]`), body = {};
-  tr.querySelectorAll('[data-k]').forEach(i => { if (i.dataset.k !== 'password' || i.value) body[i.dataset.k] = i.value; });
-  try { await api('/admin/players/' + id, { method: 'PUT', body }); say('Joueur enregistré'); load(); } catch (e) { say(e.message); }
+  tr.querySelectorAll('[data-k]').forEach(i => body[i.dataset.k] = i.value);
+  try { await api('/admin/players/' + id, { method: 'PUT', body }); say('Player saved'); load(); } catch (e) { say(e.message); }
 }
-async function addP() { try { await api('/admin/players', { method: 'POST', body: { name: pn.value, password: pp.value, role: pr.value, faction: pf.value } }); say('Créé'); load(); } catch (e) { say(e.message); } }
-initPage('admin.html').then(me => { if (!me || me.role !== 'admin') { document.querySelector('main').innerHTML = '<div class="panel">Accès réservé aux administrateurs.</div>'; return; } load(); });
+async function unlink(id) { if (confirm('Unlink this game profile? (logged)')) post('/admin/players/' + id + '/unlink'); }
+initPage('admin.html').then(me => { if (!me || me.role !== 'admin') { document.querySelector('main').innerHTML = '<div class="panel">Administrators only.</div>'; return; } load(); });
 </script></body></html>

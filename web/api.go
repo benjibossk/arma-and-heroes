@@ -3,8 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -12,7 +10,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
 func setupRouter() *gin.Engine {
@@ -35,13 +32,15 @@ func setupRouter() *gin.Engine {
 	a.POST("/auth/login", login)
 	a.POST("/auth/logout", logout)
 	a.GET("/auth/me", me)
-	a.GET("/auth/config", func(c *gin.Context) { c.JSON(200, gin.H{"discord": cfg.DiscordID != ""}) })
+	a.GET("/auth/config", func(c *gin.Context) { c.JSON(200, gin.H{"discord": discordConfigured()}) })
 	a.GET("/auth/discord", discordStart)
 	a.GET("/auth/discord/callback", discordCallback)
-	u := a.Group("/me", requireUser)
-	u.POST("/faction", setFaction)
-	u.POST("/identity", setIdentity)
-	u.POST("/password", setPassword)
+	a.POST("/me/faction", requireUser, setFaction)
+	// account linking
+	a.POST("/link/request", requireServer, linkRequest)
+	a.POST("/link/confirm", requireUser, linkConfirm)
+	a.GET("/link/qr", linkQR)
+	a.GET("/players/by-identity/:identityId", requireServer, playerByIdentity)
 	// général
 	g := a.Group("/teams", requireGeneral)
 	g.POST("", createTeam)
@@ -55,12 +54,14 @@ func setupRouter() *gin.Engine {
 	// admin
 	ad := a.Group("/admin", requireAdmin)
 	ad.POST("/war/reset", resetWar)
+	ad.GET("/ai", adminGetAI)
+	ad.PUT("/ai", adminPutAI)
 	ad.POST("/tick", func(c *gin.Context) { gameMu.Lock(); doTick(true); gameMu.Unlock(); c.JSON(200, gin.H{"ok": true}) })
 	ad.POST("/arrive-now", arriveNow)
 	ad.PUT("/cities/:id", editCity)
 	ad.PUT("/factions/:code", editFaction)
 	ad.GET("/players", adminPlayers)
-	ad.POST("/players", adminCreatePlayer)
+	ad.POST("/players/:id/unlink", adminUnlink)
 	ad.PUT("/players/:id", adminEditPlayer)
 	ad.POST("/battles/:id/cancel", cancelBattle)
 
@@ -71,7 +72,7 @@ func setupRouter() *gin.Engine {
 func serveStatic(c *gin.Context) {
 	p := filepath.Clean(c.Request.URL.Path)
 	if strings.HasPrefix(p, "/api/") {
-		c.JSON(404, gin.H{"error": "introuvable"})
+		c.JSON(404, gin.H{"error": "not found"})
 		return
 	}
 	f := filepath.Join(cfg.StaticDir, p)
@@ -87,220 +88,6 @@ func serveStatic(c *gin.Context) {
 }
 
 func errJ(c *gin.Context, code int, msg string) { c.AbortWithStatusJSON(code, gin.H{"error": msg}) }
-
-// ---------- auth ----------
-
-func loadUser(c *gin.Context) {
-	tok, _ := c.Cookie("f44_session")
-	if tok != "" {
-		var s Session
-		if db.Where("token = ? AND expires > ?", tok, time.Now().UTC()).First(&s).Error == nil {
-			var p Player
-			if db.First(&p, s.PlayerID).Error == nil {
-				c.Set("user", &p)
-			}
-		}
-	}
-	c.Next()
-}
-
-func user(c *gin.Context) *Player {
-	if v, ok := c.Get("user"); ok {
-		return v.(*Player)
-	}
-	return nil
-}
-
-func requireUser(c *gin.Context) {
-	if user(c) == nil {
-		errJ(c, 401, "connexion requise")
-	}
-}
-
-func requireGeneral(c *gin.Context) {
-	if u := user(c); u == nil || !u.IsGeneral() {
-		errJ(c, 403, "réservé aux généraux")
-	}
-}
-
-func requireAdmin(c *gin.Context) {
-	if u := user(c); u == nil || u.Role != "admin" {
-		errJ(c, 403, "réservé aux administrateurs")
-	}
-}
-
-func requireServer(c *gin.Context) {
-	h := c.GetHeader("Authorization")
-	if cfg.ServerKey == "" || h != "Bearer "+cfg.ServerKey {
-		errJ(c, 401, "clé serveur invalide")
-	}
-}
-
-func startSession(c *gin.Context, p *Player) {
-	tok := randToken(24)
-	db.Create(&Session{Token: tok, PlayerID: p.ID, Expires: time.Now().UTC().Add(30 * 24 * time.Hour)})
-	secure := strings.HasPrefix(cfg.PublicURL, "https")
-	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("f44_session", tok, 30*24*3600, "/", "", secure, true)
-}
-
-func login(c *gin.Context) {
-	var in struct{ Name, Password string }
-	if c.ShouldBindJSON(&in) != nil {
-		errJ(c, 400, "requête invalide")
-		return
-	}
-	var p Player
-	if db.Where("name = ?", in.Name).First(&p).Error != nil || p.PassHash == "" ||
-		bcrypt.CompareHashAndPassword([]byte(p.PassHash), []byte(in.Password)) != nil {
-		errJ(c, 401, "identifiants incorrects")
-		return
-	}
-	startSession(c, &p)
-	c.JSON(200, p)
-}
-
-func logout(c *gin.Context) {
-	if tok, _ := c.Cookie("f44_session"); tok != "" {
-		db.Where("token = ?", tok).Delete(&Session{})
-	}
-	c.SetCookie("f44_session", "", -1, "/", "", false, true)
-	c.JSON(200, gin.H{"ok": true})
-}
-
-func me(c *gin.Context) {
-	u := user(c)
-	if u == nil {
-		c.JSON(200, gin.H{"user": nil})
-		return
-	}
-	c.JSON(200, gin.H{"user": u, "rank": rankFor(u.XP), "isGeneral": u.IsGeneral()})
-}
-
-func setFaction(c *gin.Context) {
-	u := user(c)
-	var in struct{ Faction string }
-	_ = c.ShouldBindJSON(&in)
-	if in.Faction != "US" && in.Faction != "GER" {
-		errJ(c, 400, "faction invalide")
-		return
-	}
-	if u.Faction != "" && u.Role != "admin" {
-		errJ(c, 400, "faction déjà choisie (contactez un admin)")
-		return
-	}
-	db.Model(u).Update("faction", in.Faction)
-	c.JSON(200, gin.H{"ok": true})
-}
-
-func setIdentity(c *gin.Context) {
-	u := user(c)
-	var in struct{ IdentityID string }
-	_ = c.ShouldBindJSON(&in)
-	in.IdentityID = strings.TrimSpace(in.IdentityID)
-	if len(in.IdentityID) < 8 {
-		errJ(c, 400, "identityId invalide")
-		return
-	}
-	var other Player
-	if db.Where("identity_id = ? AND id <> ?", in.IdentityID, u.ID).First(&other).Error == nil {
-		if other.PassHash != "" || other.DiscordID != "" {
-			errJ(c, 409, "identityId déjà lié à un autre compte")
-			return
-		}
-		// compte créé automatiquement par un résultat de bataille : on fusionne ses stats
-		db.Model(u).Updates(map[string]interface{}{"xp": u.XP + other.XP, "credits": u.Credits + other.Credits, "kills": u.Kills + other.Kills,
-			"deaths": u.Deaths + other.Deaths, "captures": u.Captures + other.Captures, "battles": u.Battles + other.Battles})
-		db.Model(&PlayerBattle{}).Where("player_id = ?", other.ID).Update("player_id", u.ID)
-		db.Delete(&other)
-	}
-	db.Model(u).Update("identity_id", in.IdentityID)
-	c.JSON(200, gin.H{"ok": true})
-}
-
-func setPassword(c *gin.Context) {
-	u := user(c)
-	var in struct{ Password string }
-	_ = c.ShouldBindJSON(&in)
-	if len(in.Password) < 6 {
-		errJ(c, 400, "mot de passe trop court")
-		return
-	}
-	h, _ := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
-	db.Model(u).Update("pass_hash", string(h))
-	c.JSON(200, gin.H{"ok": true})
-}
-
-func discordRedirect() string { return strings.TrimRight(cfg.PublicURL, "/") + "/api/v1/auth/discord/callback" }
-
-func discordStart(c *gin.Context) {
-	if cfg.DiscordID == "" {
-		errJ(c, 404, "Discord non configuré")
-		return
-	}
-	st := randToken(12)
-	c.SetCookie("f44_oauth", st, 600, "/", "", false, true)
-	q := url.Values{"client_id": {cfg.DiscordID}, "redirect_uri": {discordRedirect()}, "response_type": {"code"}, "scope": {"identify"}, "state": {st}}
-	c.Redirect(302, "https://discord.com/oauth2/authorize?"+q.Encode())
-}
-
-func discordCallback(c *gin.Context) {
-	st, _ := c.Cookie("f44_oauth")
-	if cfg.DiscordID == "" || st == "" || st != c.Query("state") {
-		errJ(c, 400, "état OAuth invalide")
-		return
-	}
-	form := url.Values{"client_id": {cfg.DiscordID}, "client_secret": {cfg.DiscordSecret}, "grant_type": {"authorization_code"},
-		"code": {c.Query("code")}, "redirect_uri": {discordRedirect()}}
-	resp, err := http.PostForm("https://discord.com/api/oauth2/token", form)
-	if err != nil {
-		errJ(c, 502, "Discord injoignable")
-		return
-	}
-	var tk struct {
-		AccessToken string `json:"access_token"`
-	}
-	_ = json.NewDecoder(resp.Body).Decode(&tk)
-	resp.Body.Close()
-	if tk.AccessToken == "" {
-		errJ(c, 401, "échec OAuth Discord")
-		return
-	}
-	req, _ := http.NewRequest("GET", "https://discord.com/api/users/@me", nil)
-	req.Header.Set("Authorization", "Bearer "+tk.AccessToken)
-	resp, err = http.DefaultClient.Do(req)
-	if err != nil {
-		errJ(c, 502, "Discord injoignable")
-		return
-	}
-	var du struct {
-		ID         string `json:"id"`
-		Username   string `json:"username"`
-		GlobalName string `json:"global_name"`
-	}
-	_ = json.NewDecoder(resp.Body).Decode(&du)
-	resp.Body.Close()
-	if du.ID == "" {
-		errJ(c, 401, "profil Discord introuvable")
-		return
-	}
-	var p Player
-	if db.Where("discord_id = ?", du.ID).First(&p).Error != nil {
-		name := du.GlobalName
-		if name == "" {
-			name = du.Username
-		}
-		var n int64
-		db.Model(&Player{}).Where("name = ?", name).Count(&n)
-		if n > 0 {
-			name = name + "#" + du.ID[len(du.ID)-4:]
-		}
-		p = Player{Name: name, DiscordID: du.ID, Role: "soldier"}
-		db.Create(&p)
-	}
-	startSession(c, &p)
-	c.Redirect(302, "/profile.html")
-}
 
 // ---------- carte ----------
 
@@ -327,7 +114,7 @@ func teamView(t *AssaultTeam, names map[uint]string, hideDest bool) TeamView {
 func getMap(c *gin.Context) {
 	w := currentWar()
 	if w == nil {
-		errJ(c, 404, "aucune guerre")
+		errJ(c, 404, "no war")
 		return
 	}
 	var factions []Faction
@@ -434,19 +221,19 @@ func createTeam(c *gin.Context) {
 		Faction string `json:"faction"`
 	}
 	if c.ShouldBindJSON(&in) != nil {
-		errJ(c, 400, "requête invalide")
+		errJ(c, 400, "invalid request")
 		return
 	}
 	spec, ok := atSpecs[in.Type]
 	if !ok {
-		errJ(c, 400, "type d'AT inconnu")
+		errJ(c, 400, "unknown assault team type")
 		return
 	}
 	gameMu.Lock()
 	defer gameMu.Unlock()
 	w := currentWar()
 	if w == nil || w.Status != "active" {
-		errJ(c, 400, "aucune guerre active")
+		errJ(c, 400, "no active war")
 		return
 	}
 	fac := u.Faction
@@ -455,26 +242,26 @@ func createTeam(c *gin.Context) {
 	}
 	city := getCity(w.ID, in.CityID)
 	if city == nil || city.Owner != fac {
-		errJ(c, 400, "la ville doit appartenir à votre faction")
+		errJ(c, 400, "the city must belong to your faction")
 		return
 	}
 	if !city.IsFactory && !city.IsCapital {
-		errJ(c, 400, "achat possible uniquement dans une capitale ou une ville-usine")
+		errJ(c, 400, "teams can only be raised in a capital or factory city")
 		return
 	}
 	if activeBattleAt(w.ID, city.ID) != nil {
-		errJ(c, 400, "ville en cours de bataille")
+		errJ(c, 400, "city is under attack")
 		return
 	}
 	var f Faction
 	if db.Where("war_id = ? AND code = ?", w.ID, fac).First(&f).Error != nil || f.Resources < spec.Cost {
-		errJ(c, 400, "ressources insuffisantes")
+		errJ(c, 400, "not enough resources")
 		return
 	}
 	db.Model(&f).Update("resources", f.Resources-spec.Cost)
 	t := newTeam(w.ID, in.Type, fac, u.ID, city.ID)
 	db.Create(&t)
-	logEvent(w.ID, "order", fac, fmt.Sprintf("%s lève %s (%s) à %s", u.Name, t.TeamID(), spec.Label, city.Name))
+	logEvent(w.ID, "order", fac, fmt.Sprintf("%s raises %s (%s) at %s", u.Name, t.TeamID(), spec.Label, city.Name))
 	c.JSON(200, teamView(&t, map[uint]string{u.ID: u.Name}, false))
 }
 
@@ -489,20 +276,20 @@ func moveTeam(c *gin.Context) {
 	w := currentWar()
 	var t AssaultTeam
 	if w == nil || db.Where("war_id = ?", w.ID).First(&t, c.Param("id")).Error != nil {
-		errJ(c, 404, "AT introuvable")
+		errJ(c, 404, "assault team not found")
 		return
 	}
 	if !ownsTeam(u, &t) {
-		errJ(c, 403, "cette AT ne vous appartient pas")
+		errJ(c, 403, "this assault team is not yours")
 		return
 	}
 	if t.Status != "idle" {
-		errJ(c, 400, "l'AT n'est pas disponible ("+t.Status+")")
+		errJ(c, 400, "assault team not available ("+t.Status+")")
 		return
 	}
 	rd := roadBetween(w.ID, t.CityID, in.DestCityID)
 	if rd == nil {
-		errJ(c, 400, "aucune route directe vers cette ville")
+		errJ(c, 400, "no direct road to this city")
 		return
 	}
 	dur := travelDuration(rd.Distance)
@@ -515,7 +302,7 @@ func moveTeam(c *gin.Context) {
 	arr := now.Add(dur)
 	db.Model(&t).Updates(map[string]interface{}{"status": "moving", "dest_city_id": in.DestCityID, "depart_at": now, "arrival_at": arr})
 	dest := getCity(w.ID, in.DestCityID)
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s ordonne à %s de rejoindre %s (arrivée %s UTC)", u.Name, t.TeamID(), dest.Name, arr.Format("15:04")))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s orders %s to march on %s (arrival %s UTC)", u.Name, t.TeamID(), dest.Name, arr.Format("15:04")))
 	c.JSON(200, gin.H{"ok": true, "arrivalAt": arr})
 }
 
@@ -526,22 +313,22 @@ func dissolveTeam(c *gin.Context) {
 	w := currentWar()
 	var t AssaultTeam
 	if w == nil || db.Where("war_id = ?", w.ID).First(&t, c.Param("id")).Error != nil {
-		errJ(c, 404, "AT introuvable")
+		errJ(c, 404, "assault team not found")
 		return
 	}
 	if !ownsTeam(u, &t) {
-		errJ(c, 403, "cette AT ne vous appartient pas")
+		errJ(c, 403, "this assault team is not yours")
 		return
 	}
 	if t.Status != "idle" {
-		errJ(c, 400, "seule une AT au repos peut être dissoute")
+		errJ(c, 400, "only an idle assault team can be disbanded")
 		return
 	}
 	spec := atSpecs[t.Type]
 	refund := spec.Cost / 2 * t.Manpower / max(spec.Manpower, 1)
 	db.Model(&Faction{}).Where("war_id = ? AND code = ?", w.ID, t.Faction).Update("resources", gormExprAdd(refund))
 	db.Model(&t).Update("status", "dissolved")
-	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s dissout %s (+%d ressources)", u.Name, t.TeamID(), refund))
+	logEvent(w.ID, "order", t.Faction, fmt.Sprintf("%s disbands %s (+%d resources)", u.Name, t.TeamID(), refund))
 	c.JSON(200, gin.H{"ok": true, "refund": refund})
 }
 
@@ -557,7 +344,7 @@ func loadBattle(c *gin.Context) *Battle {
 	var b Battle
 	id := parseBattleID(c.Param("id"))
 	if id == 0 || db.First(&b, id).Error != nil {
-		errJ(c, 404, "bataille introuvable")
+		errJ(c, 404, "battle not found")
 		return nil
 	}
 	return &b
@@ -644,14 +431,14 @@ func claimBattle(c *gin.Context) {
 		return
 	}
 	if b.Status != "pending" {
-		errJ(c, 409, "bataille déjà prise ("+b.Status+")")
+		errJ(c, 409, "battle already claimed ("+b.Status+")")
 		return
 	}
 	now := time.Now().UTC()
 	res := db.Model(&Battle{}).Where("id = ? AND status = ?", b.ID, "pending").
 		Updates(map[string]interface{}{"status": "starting", "server_instance": in.ServerInstance, "claimed_at": now, "heartbeat_at": now})
 	if res.RowsAffected == 0 {
-		errJ(c, 409, "bataille déjà prise")
+		errJ(c, 409, "battle already claimed")
 		return
 	}
 	b.Status, b.ServerInstance = "starting", in.ServerInstance
@@ -664,7 +451,7 @@ func heartbeat(c *gin.Context) {
 		return
 	}
 	if b.Status != "starting" && b.Status != "running" {
-		errJ(c, 409, "bataille non active ("+b.Status+")")
+		errJ(c, 409, "battle not active ("+b.Status+")")
 		return
 	}
 	body, _ := c.GetRawData()
@@ -679,7 +466,7 @@ func heartbeat(c *gin.Context) {
 func postResult(c *gin.Context) {
 	var r BattleResult
 	if err := c.ShouldBindJSON(&r); err != nil {
-		errJ(c, 400, "JSON invalide : "+err.Error())
+		errJ(c, 400, "invalid JSON: "+err.Error())
 		return
 	}
 	gameMu.Lock()
@@ -689,7 +476,7 @@ func postResult(c *gin.Context) {
 		return
 	}
 	if r.BattleID != "" && parseBattleID(r.BattleID) != b.ID {
-		errJ(c, 400, "battleId ne correspond pas")
+		errJ(c, 400, "battleId mismatch")
 		return
 	}
 	if err := applyResult(b, &r); err != nil {
@@ -719,12 +506,16 @@ func leaderboard(c *gin.Context) {
 func getPlayer(c *gin.Context) {
 	var p Player
 	if db.First(&p, c.Param("id")).Error != nil {
-		errJ(c, 404, "joueur introuvable")
+		errJ(c, 404, "player not found")
 		return
 	}
 	var hist []PlayerBattle
 	db.Where("player_id = ?", p.ID).Order("id desc").Limit(50).Find(&hist)
-	c.JSON(200, gin.H{"player": p, "rank": rankFor(p.XP), "history": hist})
+	linked := p.IdentityID != ""
+	if linked {
+		p.IdentityID = "linked"
+	}
+	c.JSON(200, gin.H{"player": p, "rank": rankFor(p.XP), "history": hist, "linked": linked})
 }
 
 // ---------- admin ----------
@@ -757,12 +548,12 @@ func editCity(c *gin.Context) {
 	w := currentWar()
 	var ci City
 	if w == nil || db.Where("war_id = ? AND id = ?", w.ID, c.Param("id")).First(&ci).Error != nil {
-		errJ(c, 404, "ville introuvable")
+		errJ(c, 404, "city not found")
 		return
 	}
 	var in map[string]interface{}
 	if c.ShouldBindJSON(&in) != nil {
-		errJ(c, 400, "requête invalide")
+		errJ(c, 400, "invalid request")
 		return
 	}
 	allowed := map[string]string{"name": "name", "x": "x", "y": "y", "owner": "owner", "isCapital": "is_capital", "isFactory": "is_factory",
@@ -776,7 +567,7 @@ func editCity(c *gin.Context) {
 	gameMu.Lock()
 	db.Model(&City{}).Where("war_id = ? AND id = ?", w.ID, ci.ID).Updates(upd)
 	gameMu.Unlock()
-	logEvent(w.ID, "admin", "", "Ville modifiée par l'admin : "+ci.Name)
+	logEvent(w.ID, "admin", "", "City edited by admin: "+ci.Name)
 	db.Where("war_id = ? AND id = ?", w.ID, ci.ID).First(&ci)
 	c.JSON(200, ci)
 }
@@ -787,7 +578,7 @@ func editFaction(c *gin.Context) {
 		Resources int `json:"resources"`
 	}
 	if w == nil || c.ShouldBindJSON(&in) != nil {
-		errJ(c, 400, "requête invalide")
+		errJ(c, 400, "invalid request")
 		return
 	}
 	db.Model(&Faction{}).Where("war_id = ? AND code = ?", w.ID, c.Param("code")).Update("resources", in.Resources)
@@ -800,44 +591,27 @@ func adminPlayers(c *gin.Context) {
 	c.JSON(200, ps)
 }
 
-func adminCreatePlayer(c *gin.Context) {
-	var in struct{ Name, Password, Role, Faction, IdentityID string }
-	if c.ShouldBindJSON(&in) != nil || in.Name == "" || len(in.Password) < 6 {
-		errJ(c, 400, "nom et mot de passe (6+) requis")
-		return
-	}
-	if in.Role == "" {
-		in.Role = "soldier"
-	}
-	h, _ := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
-	p := Player{Name: in.Name, PassHash: string(h), Role: in.Role, Faction: in.Faction, IdentityID: in.IdentityID}
-	if err := db.Create(&p).Error; err != nil {
-		errJ(c, 409, "nom déjà pris")
-		return
-	}
-	c.JSON(200, p)
-}
-
 func adminEditPlayer(c *gin.Context) {
 	var p Player
 	if db.First(&p, c.Param("id")).Error != nil {
-		errJ(c, 404, "joueur introuvable")
+		errJ(c, 404, "player not found")
 		return
 	}
 	var in struct {
-		Role, Faction, IdentityID, Password *string
-		XP, Credits                         *int
+		Role, Faction *string
+		XP, Credits   *int
 	}
 	_ = c.ShouldBindJSON(&in)
 	upd := map[string]interface{}{}
 	if in.Role != nil {
+		if *in.Role != "admin" && *in.Role != "general" && *in.Role != "soldier" {
+			errJ(c, 400, "invalid role")
+			return
+		}
 		upd["role"] = *in.Role
 	}
 	if in.Faction != nil {
 		upd["faction"] = *in.Faction
-	}
-	if in.IdentityID != nil {
-		upd["identity_id"] = *in.IdentityID
 	}
 	if in.XP != nil {
 		upd["xp"] = *in.XP
@@ -845,11 +619,10 @@ func adminEditPlayer(c *gin.Context) {
 	if in.Credits != nil {
 		upd["credits"] = *in.Credits
 	}
-	if in.Password != nil && len(*in.Password) >= 6 {
-		h, _ := bcrypt.GenerateFromPassword([]byte(*in.Password), bcrypt.DefaultCost)
-		upd["pass_hash"] = string(h)
-	}
 	db.Model(&p).Updates(upd)
+	if w := currentWar(); w != nil {
+		logEvent(w.ID, "admin", "", fmt.Sprintf("Admin %s updated player %s", user(c).Name, p.Name))
+	}
 	c.JSON(200, gin.H{"ok": true})
 }
 
@@ -861,11 +634,11 @@ func cancelBattle(c *gin.Context) {
 		return
 	}
 	if b.Status == "finished" || b.Status == "cancelled" {
-		errJ(c, 400, "bataille déjà close")
+		errJ(c, 400, "battle already closed")
 		return
 	}
 	db.Model(&AssaultTeam{}).Where("battle_id = ?", b.ID).Updates(map[string]interface{}{"status": "idle", "battle_id": 0, "dest_city_id": ""})
 	db.Model(b).Update("status", "cancelled")
-	logEvent(b.WarID, "admin", "", "Bataille annulée : "+b.BattleID())
+	logEvent(b.WarID, "admin", "", "Battle cancelled: "+b.BattleID())
 	c.JSON(200, gin.H{"ok": true})
 }

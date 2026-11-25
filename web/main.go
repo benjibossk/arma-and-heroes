@@ -32,6 +32,7 @@ type Config struct {
 	TravelMinPerKm float64
 	DiscordID      string
 	DiscordSecret  string
+	DiscordRedir   string
 	AdminUser      string
 	AdminPass      string
 }
@@ -71,11 +72,12 @@ func main() {
 		TravelMinPerKm: tpk,
 		DiscordID:      os.Getenv("DISCORD_CLIENT_ID"),
 		DiscordSecret:  os.Getenv("DISCORD_CLIENT_SECRET"),
+		DiscordRedir:   os.Getenv("DISCORD_REDIRECT_URI"),
 		AdminUser:      env("F44_ADMIN_USER", "admin"),
 		AdminPass:      os.Getenv("F44_ADMIN_PASSWORD"),
 	}
 	if cfg.ServerKey == "" {
-		log.Println("ATTENTION : F44_SERVER_KEY vide, les endpoints serveur sont désactivés")
+		log.Println("WARNING: F44_SERVER_KEY empty, server endpoints disabled")
 	}
 	var err error
 	for i := 0; i < 30; i++ {
@@ -83,13 +85,13 @@ func main() {
 		if err == nil {
 			break
 		}
-		log.Println("DB indisponible, nouvel essai…", err)
+		log.Println("DB unavailable, retrying...", err)
 		time.Sleep(2 * time.Second)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := db.AutoMigrate(&War{}, &Faction{}, &City{}, &Road{}, &AssaultTeam{}, &Battle{}, &Player{}, &Session{}, &Event{}, &PlayerBattle{}); err != nil {
+	if err := db.AutoMigrate(&War{}, &Faction{}, &City{}, &Road{}, &AssaultTeam{}, &Battle{}, &Player{}, &Session{}, &Event{}, &PlayerBattle{}, &LinkCode{}, &Setting{}); err != nil {
 		log.Fatal(err)
 	}
 	ensureAdmin()
@@ -98,6 +100,6 @@ func main() {
 	}
 	go tickLoop()
 	r := setupRouter()
-	log.Println("Arma & Heroes écoute sur :8080")
+	log.Println("Arma & Heroes listening on :8080")
 	log.Fatal(r.Run(":8080"))
 }

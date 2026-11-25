@@ -178,7 +178,7 @@ type PlayerBattle struct {
 var ranks = []struct {
 	XP   int
 	Name string
-}{{0, "Soldat"}, {500, "Caporal"}, {1500, "Sergent"}, {4000, "Sergent-chef"}, {8000, "Adjudant"}, {15000, "Sous-lieutenant"}, {25000, "Lieutenant"}, {40000, "Capitaine"}}
+}{{0, "Private"}, {500, "Corporal"}, {1500, "Sergeant"}, {4000, "Staff Sergeant"}, {8000, "Warrant Officer"}, {15000, "Second Lieutenant"}, {25000, "Lieutenant"}, {40000, "Captain"}}
 
 func rankFor(xp int) string {
 	r := ranks[0].Name
@@ -200,12 +200,23 @@ type ATSpec struct {
 }
 
 var atSpecs = map[string]ATSpec{
-	"INF": {300, 120, []string{"RIFLEMAN", "MG", "MEDIC", "AT", "OFFICER"}, map[string][]VehicleCount{}, "Infanterie"},
-	"PARA": {450, 80, []string{"PARA_RIFLEMAN", "PARA_MG", "MEDIC", "OFFICER"}, map[string][]VehicleCount{}, "Parachutistes"},
+	"INF": {300, 120, []string{"RIFLEMAN", "MG", "MEDIC", "AT", "OFFICER"}, map[string][]VehicleCount{}, "Infantry"},
+	"PARA": {450, 80, []string{"PARA_RIFLEMAN", "PARA_MG", "MEDIC", "OFFICER"}, map[string][]VehicleCount{}, "Paratroopers"},
 	"ARM": {800, 60, []string{"CREW", "RIFLEMAN"}, map[string][]VehicleCount{
-		"US": {{"US_M4A2", 3}}, "GER": {{"GER_PZIV", 2}, {"GER_SDKFZ222", 1}}}, "Blindés"},
+		"US": {{"US_M4A2", 3}}, "GER": {{"GER_PZIV", 2}, {"GER_SDKFZ222", 1}}}, "Armor"},
 	"REC": {250, 40, []string{"SNIPER", "SCOUT", "RIFLEMAN"}, map[string][]VehicleCount{
 		"US": {{"US_JEEP", 2}}, "GER": {{"GER_KUBELWAGEN", 2}}}, "Reconnaissance"},
 	"MOT": {400, 100, []string{"RIFLEMAN", "MG", "DRIVER"}, map[string][]VehicleCount{
-		"US": {{"US_GMC", 2}, {"US_JEEP", 1}}, "GER": {{"GER_OPEL_BLITZ", 2}, {"GER_SDKFZ251", 1}}}, "Motorisée"},
+		"US": {{"US_GMC", 2}, {"US_JEEP", 1}}, "GER": {{"GER_OPEL_BLITZ", 2}, {"GER_SDKFZ251", 1}}}, "Motorized"},
+}
+
+// LinkCode : one-time code shown in game to link a Reforger identityId to a Discord account
+type LinkCode struct {
+	ID         uint   `gorm:"primaryKey"`
+	CodeHash   string `gorm:"size:64;uniqueIndex"`
+	IdentityID string `gorm:"size:64;index"`
+	PlayerName string `gorm:"size:64"`
+	ExpiresAt  time.Time
+	UsedAt     *time.Time
+	CreatedAt  time.Time
 }
