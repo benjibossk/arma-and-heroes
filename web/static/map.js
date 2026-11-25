@@ -87,7 +87,9 @@ function showSel() {
     d.innerHTML = `<b class="${t.faction}">${esc(t.displayName || t.teamId)}</b> <span class="muted">${t.teamId}</span> — ${TLABEL[t.type]} · lvl ${t.equipLevel}<br>Strength: <b>${t.manpower}</b> · Vehicles: ${(t.vehicles || []).map(v => v.count + '× ' + v.key).join(', ') || 'none'}<br>
       Position: ${esc(c ? c.name : t.cityId)} · ${t.status === 'moving' ? `en route to <b>${esc(cityById(t.destCityId)?.name || '?')}</b> (arrives in ${fmtLeft(t.arrivalAt)})` : t.status === 'in_battle' ? `<a href="/battles.html#${t.battleId}">in combat (${t.battleId})</a>` : 'idle'}<br>
       ${t.ownerName ? 'General: ' + esc(t.ownerName) : ''}
-      ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}`;
+      ${canOrder(t) && t.status === 'idle' ? `<p class="muted">Tap an adjacent city (highlighted road) to order the move.</p><button class="danger" onclick="dissolve('${t.teamId}')">Disband (50% refund)</button>` : ''}
+      ${t.strengthPct != null ? `<br>Readiness: <b style="color:${t.canAttack ? '#7BC67B' : '#E05A4F'}">${t.strengthPct}%</b>${t.canAttack ? '' : ' <span class="muted">(too weak to attack)</span>'}
+      ${canOrder(t) && t.status === 'idle' && t.resupplyCost > 0 ? `<br><button onclick="resupply('${t.teamId}', ${t.resupplyCost})">Resupply to 100% — ${t.resupplyCost} war funds</button>` : ''}` : ''}`;
   } else if (selCity) {
     const c = cityById(selCity), b = M.battles.find(x => x.cityId === c.id);
     d.innerHTML = `<b>${esc(c.name)}</b> <span class="tag ${c.owner}">${FNAME[c.owner] || '?'}</span> ${c.isCapital ? '<span class="tag">capital</span>' : ''} ${c.isFactory ? '<span class="tag">factory</span>' : ''}<br>
@@ -97,6 +99,7 @@ function showSel() {
   } else d.innerHTML = 'Tap a city or a team.';
 }
 
+async function resupply(id, cost) { if (!confirm('Resupply ' + id + ' for ' + cost + ' war funds ?')) return; try { await api('/teams/' + id.slice(3) + '/resupply', { method: 'POST' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
 async function dissolve(id) { if (!confirm('Disband ' + id + ' ?')) return; try { await api('/teams/' + id.slice(3), { method: 'DELETE' }); selTeam = null; await load(); } catch (e) { alert(e.message); } }
 
 function renderPanels() {
