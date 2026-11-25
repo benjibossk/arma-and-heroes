@@ -58,8 +58,9 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 
 ## Spawn timers and mobile spawn (battle JSON, optional, mod 1.2.0)
 - `spawnTimes`: `{ "baseSec": 10, "forwardPenaltySec": 10 }` — base respawn timer and the extra delay on forward sector points.
-- `mobileSpawn`: `{ "enabled": true, "usesHalftrack": 8, "usesTruck": 3, "cooldownSec": 20, "penaltySec": 10, "maxSpeedKmh": 2, "stopSec": 3, "enemyRadius": 40, "driverAbsentSec": 15, "backOffset": 3, "requireDriver": true, "halftrackKeys": ["GER_SDKFZ251*", "US_M3A1*"], "truckKeys": ["GER_TRUCK", "GER_TRUCK_OPEN", "US_TRUCK*"] }`.
-  Applies to the team pool vehicles whose key matches; rules and defaults in docs/SPAWN_UI.md "Mobile spawn". Absent = defaults.
+- `mobileSpawn` (mod 1.2.1): `{ "enabled": true, "usesHalftrack": 8, "usesTruck": 3, "usesTank": 99, "cooldownSec": 0, "penaltySec": 10, "maxActiveMech": 1, "maxActiveArmor": 3, "moveRefresh": 30, "halftrackKeys": ["GER_SDKFZ251*", "US_M3A1*"], "truckKeys": ["GER_TRUCK", "GER_TRUCK_OPEN", "US_TRUCK*"], "mechTypes": ["MECH", "MOT"], "armorTypes": ["ARM", "TD"] }`.
+  The player spawns inside a free seat of the team vehicle (no driver / stationary / enemy-distance rule). Team `type` drives the caps (1 half-track per Mech team, 3 tanks per Armor/TD team, the pool respawns one when the team has none = spawn with vehicle). `requireDriver`, `maxSpeedKmh`, `stopSec`, `enemyRadius`, `driverAbsentSec`, `backOffset` are obsolete (ignored). Rules in docs/SPAWN_UI.md "Mobile spawn". Absent = defaults.
+- Server log lines to verify a battle: `[F44] VEHSPAWN side= team= key= prefab= armed= crate= slot= pos=`, `[F44] VEHCRATE crate= ... ok|fail`, `[F44] CIVSPAWN kind= side= prefab= pos=`, `[F44] CRATE type= side= prefab= pos=` (points below sea level are rejected and logged).
 
 ## Air drop (battle JSON, optional, mod 1.2.0) — `F44_ParaDrop.c`
 - `airDrop`: `{ "enabled": true, "altitude": 350, "radius": 1200, "speed": 65, "planeCount": { "US": 1, "GER": 0 }, "classes": ["PARA"] }`.

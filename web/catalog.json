@@ -90,8 +90,7 @@
       }
     },
     "US_MG": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
       "label": "US Automatic Rifleman / MG",
       "cost": 1,
       "stub_base": "{F10164BE157E384A}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_MG_Mid.et",
@@ -105,11 +104,11 @@
       },
       "medical": {
         "bandages": 2
-      }
+      },
+      "source": "FH US Units"
     },
     "US_MEDIC": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
       "label": "US Medic",
       "cost": 1,
       "stub_base": "{81644C727A8443CE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Medic_Mid.et",
@@ -127,11 +126,11 @@
         "bandages": 6,
         "morphine": 2,
         "saline": 1
-      }
+      },
+      "source": "FH US Units"
     },
     "US_AT": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
       "label": "US Anti-tank (Bazooka)",
       "cost": 2,
       "stub_base": "{53AE7774B6885DC3}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_AT_Mid.et",
@@ -146,11 +145,11 @@
       },
       "medical": {
         "bandages": 2
-      }
+      },
+      "source": "FH US Units"
     },
     "US_ENGINEER": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{417D4E5F13F4AE14}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Rifleman_Carbine_Mid.et",
       "label": "US Engineer",
       "cost": 1,
       "stub_base": "{C93138F6731FC3CC}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Builder_Mid.et",
@@ -165,11 +164,11 @@
       },
       "medical": {
         "bandages": 2
-      }
+      },
+      "source": "FH US Units"
     },
     "US_CREW": {
-      "prefab": null,
-      "status": "missing",
+      "prefab": "{4760BE6073A7B69F}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_ArmoredInfantry/Character_FH_USAWW2_ArmoredInfantry_Driver_Mid.et",
       "label": "US Tank crew",
       "cost": 1,
       "stub_base": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
@@ -183,7 +182,8 @@
       },
       "medical": {
         "bandages": 2
-      }
+      },
+      "source": "FH US Units"
     },
     "US_PARA": {
       "prefab": null,
@@ -562,6 +562,18 @@
       "medical": {
         "bandages": 2
       }
+    },
+    "US_DRIVER": {
+      "prefab": "{C7CB58BC68D294BE}Prefabs/Characters/Factions/BLUFOR/US_Army/USA_Infantry/Character_FH_USAWW2_Infantry_Driver_Mid.et",
+      "label": "US Driver",
+      "cost": 1,
+      "source": "FH US Units"
+    },
+    "GER_DRIVER": {
+      "prefab": "{FFE78E448CE7ED37}Prefabs/Characters/Factions/OPFOR/HEER/HEER_Infantry/Late/Character_FH_HEERWW2_Driver_Infantry_Late.et",
+      "label": "GER Driver",
+      "cost": 1,
+      "source": "FH GER Units"
     }
   },
   "items": {

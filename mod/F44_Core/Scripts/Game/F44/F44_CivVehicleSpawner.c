@@ -108,6 +108,12 @@ class F44_CivVehicleSpawner
 		ResourceName rn = BIKE;
 		if (s.m_sKind == "CAR")
 			rn = CARS[(m_aSlots.Find(s) + s.m_iSpawns) % CARS.Count()];
+		if (s.m_vPos[1] < 0.2)
+		{
+			PrintFormat("[F44] CIVSPAWN rejected kind=%1 side=%2 pos=%3 (below sea level)", s.m_sKind, s.m_sSide, s.m_vPos, level: LogLevel.WARNING);
+			s.m_fNextSpawn = m_fTime + 600;
+			return null;
+		}
 		Resource res = Resource.Load(rn);
 		if (!res || !res.IsValid())
 		{
@@ -124,7 +130,7 @@ class F44_CivVehicleSpawner
 		{
 			s.m_iSpawns++;
 			F44_VehicleStorageLock.Apply(v);
-			PrintFormat("[F44] CivVehicles: spawned %1 for %2 at %3 (spawn #%4)", rn.GetPath(), s.m_sSide, s.m_vPos, s.m_iSpawns);
+			PrintFormat("[F44] CIVSPAWN kind=%1 side=%2 prefab=%3 pos=%4 spawn=%5", s.m_sKind, s.m_sSide, rn.GetPath(), s.m_vPos, s.m_iSpawns);
 		}
 		return v;
 	}

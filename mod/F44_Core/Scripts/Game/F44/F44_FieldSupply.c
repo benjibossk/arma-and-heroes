@@ -162,6 +162,7 @@ class F44_FreeLauncher
 //------------------------------------------------------------------------------------------------
 class F44_FieldSupply
 {
+	static const float SEA_MIN_Y = 0.2;	// ground below this = sea / harbour water (Arland sea level 0)
 	static const ResourceName PREFAB_AT = "{6F44A7C2E1B30001}Prefabs/F44/Supply/F44_Crate_AT.et";
 	static const ResourceName PREFAB_AMMO = "{6F44A7C2E1B30002}Prefabs/F44/Supply/F44_SupplyBox_Ammo.et";
 	static const ResourceName PREFAB_MED = "{6F44A7C2E1B30003}Prefabs/F44/Supply/F44_SupplyBox_Med.et";
@@ -205,7 +206,10 @@ class F44_FieldSupply
 	bool AttachToVehicle(IEntity veh, string crate, string side)
 	{
 		if (!veh || !m_Cfg)
+		{
+			PrintFormat("[F44] VEHCRATE crate=%1 side=%2 fail (no vehicle / supply not ready)", crate, side, level: LogLevel.WARNING);
 			return false;
+		}
 		F44_ESupplyBoxType type;
 		if (crate == "AMMO")
 			type = F44_ESupplyBoxType.AMMO;
@@ -214,10 +218,16 @@ class F44_FieldSupply
 		else if (crate == "AT")
 			type = F44_ESupplyBoxType.AT;
 		else
+		{
+			PrintFormat("[F44] VEHCRATE crate=%1 side=%2 fail (unknown crate type)", crate, side, level: LogLevel.WARNING);
 			return false;
+		}
 		F44_SupplyBox b = SpawnBox(type, veh.GetOrigin() + Vector(0, 3, 0), 0, side);
 		if (!b)
+		{
+			PrintFormat("[F44] VEHCRATE crate=%1 side=%2 veh=%3 fail (box spawn)", crate, side, PrefabOf(veh).GetPath(), level: LogLevel.WARNING);
 			return false;
+		}
 		b.m_bVehicleCrate = true;
 		vector mins, maxs;
 		veh.GetBounds(mins, maxs);
@@ -226,7 +236,7 @@ class F44_FieldSupply
 		local[3] = Vector(0, maxs[1] * 0.5, mins[2] * 0.6);
 		veh.AddChild(b.m_Ent, -1, EAddChildFlags.AUTO_TRANSFORM);
 		b.m_Ent.SetLocalTransform(local);
-		PrintFormat("[F44] FieldSupply: %1 crate fitted on %2 (team config)", crate, PrefabOf(veh).GetPath());
+		PrintFormat("[F44] VEHCRATE crate=%1 side=%2 veh=%3 pos=%4 ok (attached)", crate, side, PrefabOf(veh).GetPath(), veh.GetOrigin());
 		return true;
 	}
 
@@ -349,6 +359,11 @@ class F44_FieldSupply
 			rn = PREFAB_AMMO;
 		else if (type == F44_ESupplyBoxType.MED)
 			rn = PREFAB_MED;
+		if (pos[1] < SEA_MIN_Y)
+		{
+			PrintFormat("[F44] CRATE rejected type=%1 side=%2 pos=%3 (below sea level)", typename.EnumToString(F44_ESupplyBoxType, type), side, pos, level: LogLevel.WARNING);
+			return null;
+		}
 		Resource res = Resource.Load(rn);
 		if (!res || !res.IsValid())
 		{
@@ -360,6 +375,7 @@ class F44_FieldSupply
 		Math3D.AnglesToMatrix(Vector(yaw, 0, 0), params.Transform);
 		params.Transform[3] = pos;
 		IEntity e = GetGame().SpawnEntityPrefab(res, GetGame().GetWorld(), params);
+		PrintFormat("[F44] CRATE type=%1 side=%2 prefab=%3 pos=%4 -> %5", typename.EnumToString(F44_ESupplyBoxType, type), side, rn.GetPath(), pos, e != null);
 		if (!e)
 			return null;
 		F44_SupplyBox b = new F44_SupplyBox();

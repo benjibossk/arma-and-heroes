@@ -242,6 +242,8 @@ Paraphrased, numbers only. The pages are print exports with the right-hand "comm
 **Gap:** the wiki gives NO numeric rules for mobile-spawn conditions (stationary / engine off / enemy distance / cooldown / capacity /
 destruction penalty). Everything below marked `[M]` is our design, not H&G data.
 
+**Mobile spawn `[S]` [W:Action_Rules] (implemented 1.2.1, docs/SPAWN_UI.md)**: the player spawns directly inside an active team vehicle, in a free seat; no driver / stationary / enemy-distance condition; disabled when destroyed; lost when an enemy entered it, or a member of another assault team entered it while empty. Mech inf: max 1 active half-track per team, a player can spawn with a new one from the pool when the team has none. Armor/TD: mobile spawn only, max 3 active tanks per team. Para plane: same rules, max 1 active plane per team. Mobile spawn delay 20 s total (base 10 + 10).
+
 **Mobile spawn `[S]` (what the wiki states)**
 - Infantry-support vehicles act as a spawn point for the whole team: the SdKfz 251/1 (GER) and the M3 half-track (US, also lend-lease to USSR); the CCKW cargo truck (US) and the GAZ-AAA / Blitz truck rows are in the same "Infantry Support Vehicle" category (the CCKW row mentions a mobile spawn, text cut).
 - Driver-owned: class restriction Infantry; the driver needs a Chauffeur ribbon (rank 1 at grade 9 for the 251/1).

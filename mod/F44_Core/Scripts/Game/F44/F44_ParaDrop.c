@@ -73,48 +73,16 @@ class F44_AirDropPlane
 	float m_fRespawnIn;		// > 0: waiting to respawn
 	int m_iSlowTicks;		// consecutive 2 s ticks below flying speed
 
-	//! Free cargo seats (not occupied, not reserved)
+	//! Free cargo seats (not occupied, not reserved) - F44_VehicleSeats (F44_MobileSpawn.c)
 	int FreeSeats()
 	{
-		if (!m_Plane)
-			return 0;
-		BaseCompartmentManagerComponent cm = BaseCompartmentManagerComponent.Cast(m_Plane.FindComponent(BaseCompartmentManagerComponent));
-		if (!cm)
-			return 0;
-		array<BaseCompartmentSlot> slots = {};
-		cm.GetCompartments(slots);
-		int n;
-		foreach (BaseCompartmentSlot s : slots)
-		{
-			if (s.GetType() == ECompartmentType.CARGO && !s.IsOccupied() && !s.IsReserved())
-				n++;
-		}
-		return n;
+		return F44_VehicleSeats.Free(m_Plane, true);
 	}
 
 	//! Teleport a freshly spawned character into the first free cargo seat
 	bool SeatCharacter(IEntity character)
 	{
-		if (!m_Plane || !character)
-			return false;
-		SCR_CompartmentAccessComponent ca = SCR_CompartmentAccessComponent.Cast(character.FindComponent(SCR_CompartmentAccessComponent));
-		BaseCompartmentManagerComponent cm = BaseCompartmentManagerComponent.Cast(m_Plane.FindComponent(BaseCompartmentManagerComponent));
-		if (!ca || !cm)
-			return false;
-		character.SetOrigin(m_Plane.GetOrigin());
-		array<BaseCompartmentSlot> slots = {};
-		cm.GetCompartments(slots);
-		ChimeraWorld world = GetGame().GetWorld();
-		foreach (BaseCompartmentSlot s : slots)
-		{
-			if (s.GetType() != ECompartmentType.CARGO || s.IsOccupied() || (s.IsReserved() && !s.IsReservedBy(character)))
-				continue;
-			bool ok = ca.GetInVehicle(m_Plane, s, true, -1, ECloseDoorAfterActions.INVALID, world.IsGameTimePaused());
-			PrintFormat("[F44] AirDrop: seat %1 in plane %2 (%3) -> %4", slots.Find(s), m_iIndex, m_sSideKey, ok);
-			return ok;
-		}
-		Print("[F44] AirDrop: plane full", LogLevel.WARNING);
-		return false;
+		return F44_VehicleSeats.Seat(m_Plane, character, true, string.Format("AirDrop plane %1 (%2)", m_iIndex, m_sSideKey));
 	}
 
 	bool IsAlive()

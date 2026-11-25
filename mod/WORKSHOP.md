@@ -45,6 +45,14 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Free light vehicles (F44_CivVehicleSpawner.c): WW2 bicycles (new dependency WW2_Bicycle 62B4A8E40D31F94B by Modest23 + Modest VehicleCore 6A7D4E7B69969355) and civilian cars/vans (S1203, S105, UAZ452) by the roads near each side spawn, capped per side, respawn after destruction or when abandoned far away.
 - All counts/timers in the battle JSON "fieldSupply" object (cratesPerSector, cratesPerSpawn, launchersPerCrate, grenadesPerCrate, crateRefillMin, ammo/medBoxesPerSpawn, ammo/medBoxCharges, boxRegenPerMin, healStep, looseLauncherSec, civVehicles, bikesPerSide, carsPerSide, vehRespawnSec, vehAbandonDist, vehAbandonSec); explicit points via "supplyCrates"/"civSpawns" [{type: AT|AMMO|MED|BIKE|CAR, side, x, z, yaw}] in fieldSupply or in layouts.json; else fallback around spawns/sectors.
 
+## Changelog 1.2.1 (draft)
+- Mobile spawn reworked to the H&G rules: you spawn directly inside a free seat of your team's half-track / truck / tank; no driver, stationary or enemy-distance condition. A vehicle is lost for mobile spawn if an enemy, or another assault team (while it was empty), gets in.
+- Mech infantry: one active half-track per team (a new one comes from the pool when none is left); Armor/TD teams: every tank is a mobile spawn, max 3 active per team. Mobile deploy delay 20 s total.
+- Air drop plane uses the same seat helper.
+- US Medic, MG, AT, Engineer, Crew, Driver and GER Driver classes now have Finest Hour prefabs (catalog).
+- Beauregard: defender spawn moved off the harbour water; crates and civilian vehicles are never spawned below sea level.
+- Server logs: VEHSPAWN / VEHCRATE / CIVSPAWN / CRATE lines for every vehicle, crate and civilian vehicle spawn.
+
 ## Changelog 1.2.0 (published 2026-11-25)
 - Mobile spawn: SdKfz 251 / M3A1 halftracks (8 uses) and cargo trucks (3 uses) become a team spawn point when stopped (< 2 km/h for 3 s) with a friendly driver, no enemy within 40 m and outside a contested sector; 20 s cooldown between spawns, +10 s deploy penalty, removed when destroyed or the driver is gone for 15 s. Shown as MOBILE in the deploy menu. Spawn timers (base 10 s, forward sector +10 s, mobile +10 s, aligned on H&G) configurable in the battle JSON (spawnTimes / mobileSpawn).
 - Paratrooper air drop (optional, battle JSON `airDrop`): an AI-flown C-47 circles the battle area; PARA soldiers deploy on the "AIR DROP" spawn point straight into a cargo seat (30 seats, unavailable when full), jump through the cargo door when they want and open the chute manually (Space). Respawns 90 s after being lost. Uses AeroplaneHavens C47 Dakota + Aviation-Toolkit + USAAF Bomber Attire and Grey Mans Chute Framework when loaded on the server (soft integration, not hard dependencies).

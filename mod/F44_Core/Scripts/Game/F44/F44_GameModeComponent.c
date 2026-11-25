@@ -33,6 +33,7 @@ class F44_PoolEntry
 	int m_iRemaining;
 	string m_sCrate;	// web team config, fitted again on every respawn
 	ResourceName m_sPrefab;	// "" = catalog prefab
+	bool m_bArmed;	// web armed variant (log only)
 }
 
 //------------------------------------------------------------------------------------------------
@@ -497,6 +498,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			e.m_iRemaining = v.m_iCount;
 			e.m_sCrate = v.m_sCrate;
 			e.m_sPrefab = v.m_sPrefab;
+			e.m_bArmed = v.m_bArmed;
 			pool.Insert(e);
 		}
 	}
@@ -647,6 +649,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 
 		st.m_sSide = cfgSide.m_sSideKey;
 		st.m_sTeamId = team.m_sTeamId;
+		m_MobileSpawns.SetPlayerTeam(playerId, team.m_sTeamId);
 		m_mPlayerSide.Set(playerId, side);
 		F44_Medical.SetPlayerClass(playerId, classKey);	// medical (F44_Medical.c)
 		return true;
@@ -965,8 +968,31 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		foreach (F44_TrackedVehicle tv : m_aVehicles)
 		{
 			if (tv.m_Entity)
-				m_MobileSpawns.Register(tv.m_Entity, tv.m_sKey, cat.GetFactionKey(SideKey(tv.m_iSide)));
+				m_MobileSpawns.Register(tv.m_Entity, tv.m_sKey, cat.GetFactionKey(SideKey(tv.m_iSide)), tv.m_sTeamId, TeamTypeOf(tv.m_sTeamId));
 		}
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Web team type (INF, MECH, MOT, ARM, TD, PARA...) of a team id, "" if unknown
+	protected string TeamTypeOf(string teamId)
+	{
+		if (!m_Config)
+			return string.Empty;
+		for (int s = 0; s < 2; s++)
+		{
+			string sk = m_sAttacker;
+			if (s == 1)
+				sk = m_sDefender;
+			F44_Side side = m_Config.GetSide(sk);
+			if (!side)
+				continue;
+			foreach (F44_Team t : side.m_aTeams)
+			{
+				if (t.m_sTeamId == teamId)
+					return t.m_sType;
+			}
+		}
+		return string.Empty;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -1029,6 +1055,9 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			{
 				if (e.m_iRemaining <= 0 || !sp.AcceptsKey(e.m_sKey))
 					continue;
+				string teamType = TeamTypeOf(e.m_sTeamId);
+				if (!m_MobileSpawns.CanSpawnForTeam(e.m_sTeamId, teamType, e.m_sKey))
+					continue;	// max active vehicles of the team (mobileSpawn.maxActive*)
 				ResourceName prefab = e.m_sPrefab;
 				if (prefab.IsEmpty())
 					prefab = F44_Catalog.Get().GetVehiclePrefab(e.m_sKey);
@@ -1048,7 +1077,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 				tv2.m_fSpawnTime = now;
 				tv2.m_sCrate = e.m_sCrate;
 				m_aVehicles.Insert(tv2);
-				PrintFormat("[F44] Spawned %1 for %2 (%3 left)", e.m_sKey, e.m_sTeamId, e.m_iRemaining);
+				m_MobileSpawns.Register(veh, e.m_sKey, F44_Catalog.Get().GetFactionKey(SideKey(sp.m_eSide)), e.m_sTeamId, teamType);	// counted at once by CanSpawnForTeam
+				PrintFormat("[F44] VEHSPAWN side=%1 team=%2 key=%3 prefab=%4 armed=%5 crate=%6 slot=%7 pos=%8 left=%9", SideKey(sp.m_eSide), e.m_sTeamId, e.m_sKey, prefab.GetPath(), e.m_bArmed, e.m_sCrate, sp.GetOwner().GetName(), veh.GetOrigin(), e.m_iRemaining);
 				break;
 			}
 		}

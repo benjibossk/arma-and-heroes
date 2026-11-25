@@ -77,19 +77,21 @@ Only the infantry-support class, driven by the owner and matching H&G's 251/1 / 
 
 Armed and unarmed variants (`variants` in teams.json) behave the same; firing the MG reveals the position (UI hint only).
 
-### Rules (server authoritative)
-1. The point is **enabled** only while: the vehicle is alive, has a driver of the same faction who is not dead, speed < 2 km/h for 3 s (stationary), engine off or idle, no enemy infantry/vehicle within 40 m (cheap `GetWorld().QueryEntitiesBySphere` scan every 1-2 s), and it is not in a contested sector's capture radius (avoid spawn-camping the flag).
-2. **Capacity:** 8 spawns per deployment (= rear seats); the counter refills only when the vehicle is resupplied at a friendly sector spawn. **Cooldown** 20 s between two spawns on the same vehicle (anti-chain-spawn).
-3. **Who:** any player of the owning faction, in the same group or not (H&G: whole team). Spawned soldiers appear next to the vehicle (SCR_SpawnPoint radius), not inside it.
-4. **Deploy penalty:** `SetRespawnTime(15)` (forward sector points use 10) enforced by the vanilla timer.
-5. **Destruction / abandon:** vehicle destroyed or driver leaves for more than 15 s: the point is disabled and deleted; passengers keep the usual vehicle rules. Optional: lose one ticket on destruction (H&G: vehicle death costs a ticket, `[M]`).
-6. Map label `<vehicle> - <driver name>`; if the driver leaves, the label is removed (the "unlocked APC" tip in H&G).
+### Rules (server authoritative, 1.2.1 — H&G wiki "Action Rules")
+1. The player spawns **directly inside** an active team vehicle, in a free seat (cargo first, then the other seats), not next to it. **No driver required, no stationary rule, no enemy-distance rule** (the 1.2.0 conditions were removed).
+2. The point is **disabled** while the vehicle is full, out of uses (`usesHalftrack` 8 / `usesTruck` 3 / `usesTank` 99 per vehicle life) or in an optional `cooldownSec` (default 0). It is **removed** when the vehicle is destroyed.
+3. **Lost for mobile spawn** (never registered again): an enemy-faction soldier entered it, or a member of **another assault team** entered it while it was empty.
+4. **Mech infantry** (team types `mechTypes`, default `MECH`, `MOT`): at most `maxActiveMech` (1) active half-track per team. The pool refill (`CanSpawnForTeam`) only spawns a new half-track when the team has none on the map; it appears at the team's vehicle slot with its MOBILE point at once, so the player **spawns with the new vehicle** (inside it).
+5. **Armor / TD teams** (`armorTypes`, default `ARM`, `TD`): every team vehicle is a mobile spawn, max `maxActiveArmor` (3) active tanks per team. H&G: these teams spawn only on their tanks — the infantry spawn is not blocked by the mod yet (web side gives them crew classes only).
+6. **Paratroopers**: the C-47 follows the same seat logic (`F44_VehicleSeats`, cargo seats only); one plane per side via `airDrop.planeCount` (H&G: max one active plane per team).
+7. **Deploy delay:** `penaltySec` 10 on the point = **20 s total** with the base 10 s.
 
-### As implemented (1.2.0)
-- `F44_MobileSpawns` (server) ticked in `ServerTick` after `F44_SectorSpawns.Tick`; vehicles come from the game mode's tracked list (`RegisterMobileSpawns`, idempotent `Register(veh, key, faction)` API), so the vehicle spawning code is untouched.
-- **Not parented to the hull**: a moving child spawn point is not guaranteed to re-send its position to clients. The point is only usable when the vehicle is stopped, so it is created 3 m behind the vehicle when the rules pass and deleted/re-created when the stopped vehicle is more than 5 m away from it (creation replicates the transform). Removed on destruction or driver absent > 15 s.
-- Uses consumed in `PreparePlayerEntity_S` (`SCR_SpawnPointSpawnData.GetSpawnPoint()`); cooldown disables the point. Name `MOBILE <key> - <driver> (<uses left>)`; the deploy menu shows `[TRUCK] ... MOBILE SPAWN - DEPLOY DELAY PENALTY +N S`.
-- Battle JSON `mobileSpawn` (all optional): `enabled`, `usesHalftrack` 8, `usesTruck` 3, `cooldownSec` 20, `penaltySec` 10, `maxSpeedKmh` 2, `stopSec` 3, `enemyRadius` 40, `driverAbsentSec` 15, `backOffset` 3, `requireDriver` true, `halftrackKeys` [`GER_SDKFZ251*`, `US_M3A1*`], `truckKeys` [`GER_TRUCK`, `GER_TRUCK_OPEN`, `US_TRUCK*`] (`*` = prefix).
+### As implemented (1.2.1)
+- `F44_MobileSpawns` (server) ticked in `ServerTick`; vehicles come from the tracked list (`Register(veh, key, faction, teamId, teamType)`, idempotent, also called right after each pool spawn so the cap counts it immediately).
+- Seating: `modded SCR_SpawnPoint` (`F44_SetMobileVehicle`) → `CanReserveFor_S` (vehicle full = `NOT_ALLOWED_VEHICLE_FULL`), `PrepareSpawnedEntity_S` → `F44_VehicleSeats.Seat` (`SCR_CompartmentAccessComponent.GetInVehicle`, same as the C-47), `CanFinalizeSpawn_S` waits for the get-in.
+- The menu point is created at the vehicle and re-created when the vehicle moved more than `moveRefresh` (30 m). Name `MOBILE <key> - <driver> (<uses left>)`.
+- Battle JSON `mobileSpawn` (all optional): `enabled`, `usesHalftrack` 8, `usesTruck` 3, `usesTank` 99, `cooldownSec` 0, `penaltySec` 10, `maxActiveMech` 1, `maxActiveArmor` 3, `moveRefresh` 30, `halftrackKeys`, `truckKeys`, `mechTypes`, `armorTypes`. Obsolete 1.2.0 keys ignored: `requireDriver`, `maxSpeedKmh`, `stopSec`, `enemyRadius`, `driverAbsentSec`, `backOffset`.
+- Logs: `Mobile spawn registered/created/ENABLED/DISABLED (reason)/removed (lost: ...)`, `Mobile spawn: seat N (CARGO) -> 1`.
 
 ### Spawn timers: H&G source vs ours
 | Timer | H&G (wiki Action_Rules + Spawn_Time) | Arma & Heroes default | JSON |

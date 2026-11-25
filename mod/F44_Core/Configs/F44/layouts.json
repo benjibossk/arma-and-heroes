@@ -29,7 +29,7 @@
         {"name": "D Harbour warehouse", "x": 3237, "z": 2903, "radius": 40}
       ],
       "attackerSpawns": [{"x": 2870, "z": 2740}, {"x": 2880, "z": 2710}],
-      "defenderSpawns": [{"x": 3300, "z": 2930}],
+      "defenderSpawns": [{"x": 3140, "z": 2995}, {"x": 3120, "z": 3010}],
       "attackerVehicles": [{"x": 2906, "z": 2746}],
       "defenderVehicles": [{"x": 3129, "z": 2983}]
     },
