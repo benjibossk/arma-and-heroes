@@ -1,0 +1,75 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arma &amp; Heroes — Le projet</title><meta name="description" content="Une guerre WW2 persistante : les généraux font bouger le front sur le web, les soldats le combattent dans Arma Reforger.">
+<link rel="stylesheet" href="/style.css"><style>
+.hero{position:relative;min-height:300px;background:#1e1f20 url(/assets/about/warmap.png) center/cover;border:1px solid var(--line);margin-bottom:14px;display:flex;align-items:flex-end}
+.hero>div{background:linear-gradient(0deg,rgba(20,21,22,.95),rgba(20,21,22,.6) 70%,transparent);padding:60px 18px 18px;width:100%}
+.hero h1{margin:0;font-size:38px;color:var(--amber)}.hero p{font-size:17px;max-width:760px;margin:6px 0 12px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.shot{margin:0}.shot img{width:100%;display:block;border:1px solid var(--line)}.shot figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+.st{display:inline-block;min-width:78px;text-align:center;padding:1px 6px;font-size:11px;font-family:'Oswald',sans-serif;text-transform:uppercase}
+.st.done{background:#2f7d32;color:#fff}.st.test{background:var(--amber);color:var(--on-amber)}.st.planned{background:#555;color:#fff}
+.ver h3{display:flex;gap:8px;align-items:center}.ver ul{margin:4px 0 12px;padding-left:20px}.ver li{margin:3px 0}
+.stab td:first-child{white-space:nowrap}.tabs button.on{background:var(--amber);color:var(--on-amber)}
+.anchors a{margin-right:14px;font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px}
+</style></head><body>
+<main style="max-width:1200px">
+<section class="hero"><div><h1>Arma &amp; Heroes</h1>
+<p>Une guerre mondiale persistante. Les généraux font bouger le front sur une carte de guerre web, les soldats le combattent dans Arma Reforger. Chaque bataille compte, chaque soldat se souvient.</p>
+<div class="row"><a href="/login.html?next=/barracks.html"><button class="cta" style="width:auto;padding:10px 22px">Rejoindre avec Discord</button></a><a href="/index.html"><button>Voir la carte de guerre</button></a></div>
+<p class="anchors"><a href="#pitch">Le projet</a><a href="#etat">État</a><a href="#changelog">Journal des versions</a><a href="#merci">Remerciements</a></p></div></section>
+
+<div class="panel" id="pitch"><h2>Le projet</h2>
+<p>Projet communautaire, inspiré d'un MMO de la Seconde Guerre mondiale disparu, reconstruit sur Arma Reforger avec les mods WW2 de la communauté.</p>
+<div class="cols">
+<div><h3>La guerre persistante</h3><p>Le front ne se remet jamais à zéro : les villes, usines et ressources changent de main au fil des batailles, jusqu'à la victoire d'un camp.</p></div>
+<div><h3>Les généraux</h3><p>Sur le site, les généraux lèvent des équipes d'assaut, choisissent leurs véhicules et les envoient de ville en ville sur la carte.</p></div>
+<div><h3>Les batailles</h3><p>Quand deux équipes se rencontrent, un serveur Arma Reforger démarre avec exactement les troupes, véhicules et tickets engagés. Le résultat revient sur la carte.</p></div>
+<div><h3>Les soldats</h3><p>Votre soldat garde grade, crédits, rubans, armes débloquées et équipements d'une bataille à l'autre. Les bots complètent les rangs.</p></div>
+</div>
+<div class="cols" style="margin-top:10px">
+<figure class="shot"><img src="/assets/about/warmap.png" alt="Carte de guerre" loading="lazy"><figcaption>La carte de guerre et les équipes d'assaut</figcaption></figure>
+<figure class="shot"><img src="/assets/about/spawn-ui.png" alt="Écran de déploiement" loading="lazy"><figcaption>Déploiement tactique en jeu</figcaption></figure>
+<figure class="shot"><img src="/assets/about/live.png" alt="Vue en direct" loading="lazy"><figcaption>Une bataille suivie en direct sur le site</figcaption></figure>
+<figure class="shot"><img src="/assets/about/weapon-card.png" alt="Fiche d'arme" loading="lazy"><figcaption>Arsenal et fiches d'armes</figcaption></figure>
+<figure class="shot"><img src="/assets/about/battles.png" alt="Batailles" loading="lazy"><figcaption>Batailles en cours et terminées</figcaption></figure>
+<figure class="shot"><img src="/assets/about/link-mobile.png" alt="Liaison du compte" loading="lazy"><figcaption>Liaison du compte par code ou QR (console comprise)</figcaption></figure>
+</div>
+<div class="igrid" style="margin-top:12px">
+<div class="icard"><div class="ipic"><img src="/assets/items/GER_TIGER1.webp" alt=""></div></div>
+<div class="icard"><div class="ipic"><img src="/assets/items/US_SHERMAN_M4A2.webp" alt=""></div></div>
+<div class="icard"><div class="ipic"><img src="/assets/items/GER_KAR98K.webp" alt=""></div></div>
+<div class="icard"><div class="ipic"><img src="/assets/items/US_M1_GARAND.webp" alt=""></div></div>
+</div></div>
+
+<div class="panel" id="etat"><h2>Où en est le projet</h2>
+<p class="muted"><span class="st done">Terminé</span> en service · <span class="st test">En test</span> jouable, en réglage · <span class="st planned">Prévu</span> à venir</p>
+<div class="scroll"><table class="stab"><tbody id="status"></tbody></table></div></div>
+
+<div class="panel" id="changelog"><h2>Journal des versions</h2>
+<div class="row tabs"><button id="byv" class="on">Par version</button><button id="byf">Par fonctionnalité</button></div>
+<div id="cl"></div></div>
+
+<div class="panel" id="merci"><h2>Remerciements</h2>
+<p>Arma &amp; Heroes n'existe que grâce au travail des moddeurs de la communauté. Tout le mérite du contenu (armes, uniformes, véhicules, avions) leur revient.</p>
+<p><b>Bohemia Interactive</b>, pour Arma Reforger, le moteur Enfusion et le Workshop. — <a href="https://reforger.armaplatform.com/workshop/EAD65CE1E596E39C" target="_blank" rel="noopener">Arma &amp; Heroes - Core</a> sur le Workshop.</p>
+<div id="credits"></div>
+<p>Code source du site et de l'orchestrateur (licence MIT) : <a href="https://github.com/benjibossk/arma-and-heroes" target="_blank" rel="noopener">github.com/benjibossk/arma-and-heroes</a></p>
+<p class="muted">Projet de fan non officiel, sans lien avec Bohemia Interactive ni avec un quelconque éditeur de jeu.</p></div>
+</main>
+<script src="/common.js"></script><script>
+initPage('about.html');
+const LBL = { done: 'Terminé', test: 'En test', planned: 'Prévu' };
+const W = id => `https://reforger.armaplatform.com/workshop/${id}`;
+fetch('/data/changelog.json').then(r => r.json()).then(d => {
+  status.innerHTML = d.status.map(s => `<tr><td><span class="st ${s.status}">${LBL[s.status]}</span></td><td><b>${esc(s.name)}</b><br><span class="muted">${esc(s.text)}</span></td></tr>`).join('');
+  const byVersion = () => d.versions.map(v => `<div class="ver"><h3>Version ${esc(v.version)} <span class="tag">${esc(v.state)}</span>${v.date ? `<span class="muted">${esc(v.date)}</span>` : ''}</h3><ul>${v.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>`).join('');
+  const byFeature = () => d.status.map(s => {
+    const k = s.name.toLowerCase().split(/[ /(]/).filter(w => w.length > 4).slice(0, 2);
+    const hits = d.versions.flatMap(v => v.items.filter(i => k.some(w => i.toLowerCase().includes(w.slice(0, 6)))).map(i => `<li><span class="tag">${esc(v.version)}</span> ${esc(i)}</li>`));
+    return hits.length ? `<div class="ver"><h3>${esc(s.name)} <span class="st ${s.status}">${LBL[s.status]}</span></h3><ul>${hits.join('')}</ul></div>` : '';
+  }).join('');
+  const show = f => { cl.innerHTML = f ? byFeature() : byVersion(); byv.classList.toggle('on', !f); byf.classList.toggle('on', f); };
+  byv.onclick = () => show(false); byf.onclick = () => show(true); show(false);
+  credits.innerHTML = '<div class="scroll"><table><tbody>' + d.credits.map(c => `<tr><td><b>${esc(c.name)}</b>${c.author ? `<br><span class="muted">par ${esc(c.author)}</span>` : ''}</td><td>${c.ids.map(id => `<a href="${W(id)}" target="_blank" rel="noopener">${id}</a>`).join(' ')}</td></tr>`).join('') + '</tbody></table></div>';
+});
+</script></body></html>

@@ -1,0 +1,72 @@
+{
+  "_doc": "Contenu public de /about. status: done | test | planned. Ajouter une version en tête de 'versions'.",
+  "status": [
+    {"name": "Carte de guerre web", "status": "done", "text": "Carte stratégique persistante : villes, routes, capitales, usines, ressources et journal du front."},
+    {"name": "Généraux et équipes d'assaut", "status": "done", "text": "Les généraux lèvent des équipes (infanterie, mécanisée, blindée…), les déplacent et les ravitaillent."},
+    {"name": "Batailles dans Arma Reforger", "status": "done", "text": "Deux équipes qui se rencontrent déclenchent une bataille : un serveur dédié est lancé avec les troupes, véhicules et tickets engagés. Le résultat revient sur la carte."},
+    {"name": "Assaut / Capture & Hold", "status": "done", "text": "Secteurs à prendre et tenir, tickets issus des équipes d'assaut, HUD de bataille."},
+    {"name": "Disposition des villes", "status": "done", "text": "Lieux de bataille sur Arland (Arleville, Beauregard, base militaire, aérodrome) avec secteurs et zones de déploiement dédiés."},
+    {"name": "IA (bots)", "status": "done", "text": "Les bots complètent les deux camps, capturent les secteurs ; leur niveau et leur tenue s'adaptent aux joueurs présents."},
+    {"name": "IA en véhicules", "status": "test", "text": "Les bots conduisent les blindés, roulent sur les routes et débarquent avant les secteurs."},
+    {"name": "Véhicules WW2", "status": "done", "text": "Jeeps, camions, half-tracks, Sherman, Panzer IV, Tiger I, issus des équipes d'assaut."},
+    {"name": "Spawn mobile", "status": "test", "text": "Déploiement directement dans un siège libre des half-tracks, camions et chars de son équipe (1.2.1)."},
+    {"name": "Parachutistes / C-47", "status": "test", "text": "Un C-47 piloté par l'IA tourne au-dessus de la zone ; les paras embarquent, sautent et ouvrent leur parachute."},
+    {"name": "Avions pilotables", "status": "planned", "text": "Stuka, Ju 88 et C-47 sont au catalogue, pas encore dans les pools de véhicules."},
+    {"name": "Ravitaillement de terrain", "status": "done", "text": "Caisses antichar gratuites, caisses de munitions et de soins, caisse chargeable sur un véhicule, vélos et voitures civiles."},
+    {"name": "Médical", "status": "done", "text": "Pansements pour tous, trousse d'infirmier, inconscience et réanimation par un infirmier."},
+    {"name": "Soldats persistants", "status": "done", "text": "Grade, crédits, expérience et rubans conservés d'une bataille à l'autre."},
+    {"name": "Équipements et déblocages", "status": "done", "text": "Arsenal, loadouts par soldat et déblocages achetés sur le site, appliqués en jeu."},
+    {"name": "Fiches d'armes", "status": "done", "text": "Fiche détaillée par arme : dégâts, cadence, modes de tir, rendus en jeu."},
+    {"name": "Liaison Discord", "status": "done", "text": "Lier son compte de jeu à Discord par code unique ou QR code (fonctionne sur console)."},
+    {"name": "Vue en direct", "status": "done", "text": "Suivi de la bataille en cours sur le site : positions, véhicules, secteurs, toutes les 5 s."},
+    {"name": "Écran de déploiement tactique", "status": "done", "text": "Choix du point d'apparition sur carte, secteurs avancés et points mobiles."}
+  ],
+  "versions": [
+    {"version": "1.2.1", "state": "en cours", "date": "", "items": [
+      "Spawn mobile repensé : on apparaît directement dans un siège libre du half-track, camion ou char de son équipe. Un véhicule est perdu comme point de spawn si un ennemi y monte.",
+      "Infanterie mécanisée : un half-track actif par équipe ; équipes blindées : chaque char est un point de spawn (3 max).",
+      "Nouvelles armes à l'arsenal : Panzerfaust 60, Thompson M1928A1, Garand M1D à lunette, BAR M1918A2.",
+      "Nouvelles classes US (infirmier, mitrailleur, antichar, génie, équipage) avec de vrais uniformes WW2.",
+      "Beauregard : le spawn défenseur n'est plus dans l'eau du port.",
+      "Avions au catalogue : Ju 87 Stuka, Ju 88, C-47 (pas encore jouables en bataille)."
+    ]},
+    {"version": "1.2.0", "state": "publiée", "date": "2026-11-25", "items": [
+      "Spawn mobile sur half-tracks et camions arrêtés, affiché « MOBILE » dans le menu de déploiement.",
+      "Largage de parachutistes : un C-47 survole la bataille, les paras embarquent, sautent quand ils veulent et ouvrent leur parachute à la main.",
+      "Écran de déploiement tactique avec points de spawn avancés.",
+      "Temps de réapparition configurables (base, secteur avancé, mobile)."
+    ]},
+    {"version": "1.1.0", "state": "publiée", "date": "", "items": [
+      "Les bots conduisent : les transports déposent l'infanterie avant le secteur, les chars appuient depuis la lisière.",
+      "Plusieurs véhicules par camp, qui réapparaissent tant que le pool de l'équipe n'est pas épuisé.",
+      "Vraies batailles en ville sur Arland : Arleville, Beauregard, base militaire, aérodrome.",
+      "Médical : pansements pour tous, trousse d'infirmier, réanimation, saignement.",
+      "Ravitaillement : caisses antichar gratuites, munitions et soins près des spawns, caisse chargeable sur un véhicule.",
+      "Vélos et voitures civiles gratuits près des spawns ; plus de stockage de véhicules en bataille."
+    ]},
+    {"version": "1.0.1", "state": "publiée", "date": "", "items": [
+      "Résultats de bataille plus fiables : l'envoi au site est réessayé en cas de lenteur."
+    ]},
+    {"version": "1.0.0", "state": "publiée", "date": "", "items": [
+      "Première version : carte de guerre, équipes d'assaut, batailles lancées automatiquement.",
+      "Soldats persistants, arsenal et loadouts depuis le site.",
+      "Bots dont le niveau s'adapte aux joueurs.",
+      "Liaison du compte de jeu par code ou QR code.",
+      "Vue en direct des batailles et HUD en jeu."
+    ]}
+  ],
+  "credits": [
+    {"name": "Finest Hour (Core, GER/US Uniforms, Gear, Units, Vehicles)", "author": "Équipe Finest Hour", "ids": ["69392E57A68724BD","693931B9076BE89D","693931E2091E57D1","693B24A2038949EA","693931291AD52242","6939316200A674C4","693B23F6421096C4","693AE5B800A316FE"]},
+    {"name": "Chungus (Core, Bolt Guns, SMGs, Rifles, LMGs, WW2 Launchers)", "author": "Chungus", "ids": ["66D6340C1D565C98","61BD6595183FCEBD","60E6F54E174C53C5","62A711001B8FDEEA","61344BDC155A5A28","65E86BF91D510331"]},
+    {"name": "WW2 Tank Core, M4A2 Sherman, Tiger H1, SDKFZ 251, M3A1 HalfTrack, Operation Overlord US Vehicles", "author": "Cole_reforger", "ids": ["696372CF8EB6C647","672EFC7887D6AEA7","68E42575A16D4FD1","65C7179DA0B82317","65BD1CC2A0110122","65AD797399E3CF39"]},
+    {"name": "RMS (Panzer IV, Sturmtiger, Op Ostfront German Arms, WarBirds II, Fixed-Wing Flight Core)", "author": "RMS", "ids": ["692C3806D8C77463","69253078E438B1A6","6936196CC94034A0","69E3578A86951C05","6AAA520FE626344E"]},
+    {"name": "AeroplaneHavens C47 Dakota, Aviation-Toolkit, USAAF Bomber Attire", "author": "AeroplaneHavens", "ids": ["66A2A0B8531C9D2A","69B307004DF5C417","64F8C1AB4CFD207A"]},
+    {"name": "Parachute Framework", "author": "", "ids": ["65930CB4CD0237B2"]},
+    {"name": "WW2_Bicycle, Modest VehicleCore", "author": "Modest23", "ids": ["62B4A8E40D31F94B","6A7D4E7B69969355"]},
+    {"name": "WCS_Armaments", "author": "WCS", "ids": ["629B2BA37EFFD577"]},
+    {"name": "Operation FUBAR Launchers", "author": "Operation FUBAR", "ids": ["6714E842BCD5D889"]},
+    {"name": "CIE Tracked Core, CIE_Thermal", "author": "CIE", "ids": ["68CD35053063C6D5","68F8A813D7EF1E30"]},
+    {"name": "Northcom German Voice", "author": "Northcom", "ids": ["66CC0D8D7EF6A8FF"]},
+    {"name": "No Weapon Drop Unconscious", "author": "", "ids": ["60612C225328522E"]}
+  ]
+}
