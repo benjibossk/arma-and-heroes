@@ -118,4 +118,11 @@ The server subtracts `losses.manpower` and `losses.vehicles` from the team (`app
 - When every access point is defender-owned the battle ends: defender wins, `reason: "PUSHED_OFF"`. Log: `[F44] ACCESS`.
 - The web does not send `lines` / `accessPoints` yet (layouts with several lines belong to the maps lane).
 
+### P3 Spawn rules — battle JSON `spawnRules` (optional) — `F44_SpawnRules.c`
+`{ "vehicleLockSec": 60, "maxMinesPerSide": 20, "suicidePenaltySec": 30, "joinPenaltySec": 60 }` (defaults shown, 0 disables each rule)
+- Vehicle lock: a destroyed pool vehicle blocks the next spawn of the same key for its team during `vehicleLockSec`. Log `[F44] VEHLOCK`.
+- Mine cap: arming a mine (vanilla activate-mine action) beyond the per-faction cap removes that faction's oldest armed mine. Log `[F44] MINECAP`.
+- Suicide: a self-kill adds `suicidePenaltySec` to the maintenance equipment timer; BattleResult players gain `"suicides": n`. Log `[F44] SUICIDE`.
+- Join penalty: leaving a running battle and reconnecting (same identity) blocks deploy for `joinPenaltySec` (hint).
+
 

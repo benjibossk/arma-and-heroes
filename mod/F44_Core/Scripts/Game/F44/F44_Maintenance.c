@@ -144,6 +144,16 @@ class F44_Maintenance
 	}
 
 	//------------------------------------------------------------------------------------------------
+	//! penalty (suicide...) added to the equipment timer
+	static void AddEquipSec(int pid, float sec)
+	{
+		if (!s_Cfg.m_bEnabled || sec <= 0)
+			return;
+		F44_MaintState s = State(pid);
+		s.m_fEquip = Math.Min(s_Cfg.m_fMaxSec, s.m_fEquip + sec);
+	}
+
+	//------------------------------------------------------------------------------------------------
 	static void Tick(float dt)
 	{
 		foreach (int pid, F44_MaintState s : s_mState)

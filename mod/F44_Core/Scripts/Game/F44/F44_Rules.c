@@ -6,6 +6,7 @@
 //  - P2-G combat badges: F44_Badges.c
 //  - P3 squads (orders, spawn on leader): F44_Squads.c
 //  - P3 access points, multi-line layouts, pushed off the map: F44_AccessPoints.c
+//  - P3 vehicle spawn lock, mine cap, suicide / join penalties: F44_SpawnRules.c
 
 //------------------------------------------------------------------------------------------------
 class F44_VictimKills
@@ -31,6 +32,8 @@ class F44_Rules
 		F44_Squads.s_Cfg = new F44_SquadConfig();
 		F44_Squads.s_Cfg.Read(root);
 		F44_AccessPoints.Read(root);
+		F44_SpawnRules.s_Cfg = new F44_SpawnRulesConfig();
+		F44_SpawnRules.s_Cfg.Read(root);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -41,13 +44,16 @@ class F44_Rules
 		F44_Maintenance.Reset();
 		F44_Badges.Reset();
 		F44_Squads.Reset();
+		F44_SpawnRules.Reset();
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! deploy gate (PreparePlayerEntity_S, class and team already validated). false = refused, player notified.
 	static bool CanDeploy(int pid, string classKey, string teamId, int points)
 	{
-		string why = F44_AccessPoints.CheckDeploy(teamId);
+		string why = F44_SpawnRules.CheckDeploy(pid);
+		if (why.IsEmpty())
+			why = F44_AccessPoints.CheckDeploy(teamId);
 		if (why.IsEmpty())
 			why = F44_Maintenance.CheckDeploy(pid, classKey, points);
 		if (!why.IsEmpty())
@@ -73,6 +79,7 @@ class F44_Rules
 	static void OnPlayerKilled(int victimId, string victimTeam, int killerId)
 	{
 		F44_Maintenance.OnKilled(victimId);
+		F44_SpawnRules.OnPlayerKilled(victimId, killerId);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -92,9 +99,22 @@ class F44_Rules
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static void OnVehicleDestroyed(IEntity veh, string key)
+	static void OnVehicleDestroyed(IEntity veh, string key, string teamId)
 	{
+		F44_SpawnRules.OnVehicleDestroyed(teamId, key);
 		F44_Maintenance.OnVehicleDestroyed(veh, F44_Catalog.Get().GetVehicleCost(key));
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool CanSpawnVehicle(string teamId, string key)
+	{
+		return F44_SpawnRules.CanSpawnVehicle(teamId, key);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void OnPlayerLeft(int pid)
+	{
+		F44_SpawnRules.OnPlayerLeft(pid);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -111,7 +131,7 @@ class F44_Rules
 	//! fragment appended to each BattleResult player object
 	static string PlayerJson(int pid)
 	{
-		return F44_Maintenance.PlayerJson(pid) + F44_Squads.PlayerJson(pid);
+		return F44_Maintenance.PlayerJson(pid) + F44_Squads.PlayerJson(pid) + F44_SpawnRules.PlayerJson(pid);
 	}
 
 	//------------------------------------------------------------------------------------------------

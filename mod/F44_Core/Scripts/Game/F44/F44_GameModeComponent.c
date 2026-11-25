@@ -679,7 +679,11 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	{
 		super.OnPlayerDisconnected(playerId, cause, timeout);
 		if (IsServer())
+		{
 			m_Link.OnPlayerDisconnected(playerId);
+			if (m_bRunning && !m_bEnded)
+				F44_Rules.OnPlayerLeft(playerId);	// join penalty (F44_SpawnRules.c)
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -1032,7 +1036,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			DamageManagerComponent dmg = DamageManagerComponent.Cast(tv.m_Entity.FindComponent(DamageManagerComponent));
 			if (dmg && dmg.GetState() == EDamageState.DESTROYED)
 			{
-				F44_Rules.OnVehicleDestroyed(tv.m_Entity, tv.m_sKey);
+				F44_Rules.OnVehicleDestroyed(tv.m_Entity, tv.m_sKey, tv.m_sTeamId);
 				F44_TeamLosses l;
 				if (m_mLosses.Find(tv.m_sTeamId, l))
 				{
@@ -1084,6 +1088,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 			{
 				if (e.m_iRemaining <= 0 || !sp.AcceptsKey(e.m_sKey))
 					continue;
+				if (!F44_Rules.CanSpawnVehicle(e.m_sTeamId, e.m_sKey))
+					continue;	// temporary lock after a loss (F44_SpawnRules.c)
 				string teamType = TeamTypeOf(e.m_sTeamId);
 				if (!m_MobileSpawns.CanSpawnForTeam(e.m_sTeamId, teamType, e.m_sKey))
 					continue;	// max active vehicles of the team (mobileSpawn.maxActive*)

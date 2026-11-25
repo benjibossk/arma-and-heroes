@@ -51,6 +51,7 @@ Battle results are now more reliable: the result POST to the website is retried 
 - Combat badges: wear one badge per soldier (chosen in the barracks, unlocked by ribbons, bronze/silver/gold): First Aid (extra dressings), Combat Medic (faster treatment), Heavy Set (less damage taken).
 - Squads: your vanilla group is your squad. The leader's order (attack/defend a sector) is shown to members, and members deploy next to their leader when he is safe.
 - Access points and multi-line maps: attack lines are captured independently; if defenders retake an access point, the teams attacking from it can no longer deploy, and losing every access point ends the battle (pushed off the map).
+- A lost vehicle cannot respawn for its team for a minute; armed mines are capped per side (oldest removed); suicides add maintenance time; leaving and rejoining a battle delays your next deploy.
 
 
 ## Changelog 1.2.1 (draft)
