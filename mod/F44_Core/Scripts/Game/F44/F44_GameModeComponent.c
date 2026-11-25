@@ -121,6 +121,7 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	protected ref F44_CityLayout m_Layout;
+	protected ref F44_SectorSpawns m_SectorSpawns = new F44_SectorSpawns();
 	protected ref array<vector> m_aSlotAnchorsAtt = {};
 	protected ref array<vector> m_aSlotAnchorsDef = {};
 	protected int m_iSlotTries;
@@ -907,6 +908,8 @@ class F44_GameModeComponent : SCR_BaseGameModeComponent
 		F44_SectorManager.Simulate(m_fTickInterval, m_Config.GetMode(), m_aSectorOwners, m_aSectorProgress, m_mPlayerSide, capturers, botsAtt, botsDef);
 		foreach (int pid : capturers)
 			GetStats(pid).m_iCaptures++;
+		F44_Catalog spCat = F44_Catalog.Get();
+		m_SectorSpawns.Tick(m_fTickInterval, m_aSectorOwners, m_aSectorProgress, spCat.GetFactionKey(m_sAttacker), spCat.GetFactionKey(m_sDefender));
 
 		UpdateVehicles();
 		m_FieldSupply.Tick(m_fTickInterval);

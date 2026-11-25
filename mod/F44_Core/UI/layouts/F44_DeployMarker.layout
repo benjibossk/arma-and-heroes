@@ -1,0 +1,55 @@
+FrameWidgetClass {
+ Name "F44_Mk"
+ {
+ImageWidgetClass "{F44D0E0000000047}" {
+ Name "Ring"
+ Color 0.06 0.065 0.06 0.9
+ Slot FrameWidgetSlot "{F44D0E0000000048}" {
+  Anchor 0 0 0 0
+  PositionX -2
+  PositionY -2
+  SizeX 36
+  SizeY 36
+ }
+}
+ImageWidgetClass "{F44D0E0000000049}" {
+ Name "Dia"
+ Color 0.6 0.6 0.56 1
+ Slot FrameWidgetSlot "{F44D0E000000004A}" {
+  Anchor 0 0 0 0
+  PositionX 3
+  PositionY 3
+  SizeX 26
+  SizeY 26
+ }
+}
+TextWidgetClass "{F44D0E000000004B}" {
+ Name "Lbl"
+ Text "A"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 16
+ Slot FrameWidgetSlot "{F44D0E000000004C}" {
+  Anchor 0 0 0 0
+  PositionX 9
+  PositionY 4
+  SizeX 20
+  SizeY 22
+ }
+}
+TextWidgetClass "{F44D0E000000004D}" {
+ Name "Sub"
+ Text ""
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 12
+ Slot FrameWidgetSlot "{F44D0E000000004E}" {
+  Anchor 0 0 0 0
+  PositionX -40
+  PositionY 34
+  SizeX 112
+  SizeY 16
+ }
+}
+ }
+}

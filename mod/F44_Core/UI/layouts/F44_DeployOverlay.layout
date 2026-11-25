@@ -1,0 +1,441 @@
+FrameWidgetClass {
+ Name "F44_DeployRoot"
+ {
+ImageWidgetClass "{F44D0E0000000001}" {
+ Name "F44_Fog0"
+ Color 0.06 0.065 0.06 0.7
+ Slot FrameWidgetSlot "{F44D0E0000000002}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 10
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000003}" {
+ Name "F44_Fog1"
+ Color 0.06 0.065 0.06 0.7
+ Slot FrameWidgetSlot "{F44D0E0000000004}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 10
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000005}" {
+ Name "F44_Fog2"
+ Color 0.06 0.065 0.06 0.7
+ Slot FrameWidgetSlot "{F44D0E0000000006}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 10
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000007}" {
+ Name "F44_Fog3"
+ Color 0.06 0.065 0.06 0.7
+ Slot FrameWidgetSlot "{F44D0E0000000008}" {
+  Anchor 0 0 0 0
+  PositionX 0
+  PositionY 0
+  SizeX 10
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000009}" {
+ Name "F44_DTopBg"
+ Color 0.118 0.122 0.125 0.92
+ Slot FrameWidgetSlot "{F44D0E000000000A}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -470
+  PositionY 0
+  SizeX 940
+  SizeY 78
+ }
+}
+ImageWidgetClass "{F44D0E000000000B}" {
+ Name "F44_DTopLine"
+ Color 0.941 0.659 0.188 1
+ Slot FrameWidgetSlot "{F44D0E000000000C}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -470
+  PositionY 76
+  SizeX 940
+  SizeY 2
+ }
+}
+TextWidgetClass "{F44D0E000000000D}" {
+ Name "F44_DAttName"
+ Text "ALLIES"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 16
+ Slot FrameWidgetSlot "{F44D0E000000000E}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -456
+  PositionY 6
+  SizeX 330
+  SizeY 20
+ }
+}
+TextWidgetClass "{F44D0E000000000F}" {
+ Name "F44_DAttTickets"
+ Text "0"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 26
+ Slot FrameWidgetSlot "{F44D0E0000000010}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -120
+  PositionY 4
+  SizeX 90
+  SizeY 30
+ }
+}
+ImageWidgetClass "{F44D0E0000000011}" {
+ Name "F44_DAttBarBg"
+ Color 0.2 0.2 0.2 1
+ Slot FrameWidgetSlot "{F44D0E0000000012}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -456
+  PositionY 32
+  SizeX 330
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000013}" {
+ Name "F44_DAttBar"
+ Color 0.231 0.435 0.714 1
+ Slot FrameWidgetSlot "{F44D0E0000000014}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -456
+  PositionY 32
+  SizeX 330
+  SizeY 10
+ }
+}
+TextWidgetClass "{F44D0E0000000015}" {
+ Name "F44_DAttSectors"
+ Text ""
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44D0E0000000016}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -456
+  PositionY 48
+  SizeX 330
+  SizeY 20
+ }
+}
+TextWidgetClass "{F44D0E0000000017}" {
+ Name "F44_DTimer"
+ Text "00:00"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 22
+ Slot FrameWidgetSlot "{F44D0E0000000018}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -34
+  PositionY 6
+  SizeX 70
+  SizeY 28
+ }
+}
+TextWidgetClass "{F44D0E0000000019}" {
+ Name "F44_DPhase"
+ Text "DEPLOY"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 12
+ Slot FrameWidgetSlot "{F44D0E000000001A}" {
+  Anchor 0.5 0 0.5 0
+  PositionX -34
+  PositionY 40
+  SizeX 70
+  SizeY 16
+ }
+}
+TextWidgetClass "{F44D0E000000001B}" {
+ Name "F44_DDefName"
+ Text "AXIS"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 16
+ Slot FrameWidgetSlot "{F44D0E000000001C}" {
+  Anchor 0.5 0 0.5 0
+  PositionX 126
+  PositionY 6
+  SizeX 330
+  SizeY 20
+ }
+}
+TextWidgetClass "{F44D0E000000001D}" {
+ Name "F44_DDefTickets"
+ Text "0"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 26
+ Slot FrameWidgetSlot "{F44D0E000000001E}" {
+  Anchor 0.5 0 0.5 0
+  PositionX 40
+  PositionY 4
+  SizeX 90
+  SizeY 30
+ }
+}
+ImageWidgetClass "{F44D0E000000001F}" {
+ Name "F44_DDefBarBg"
+ Color 0.2 0.2 0.2 1
+ Slot FrameWidgetSlot "{F44D0E0000000020}" {
+  Anchor 0.5 0 0.5 0
+  PositionX 126
+  PositionY 32
+  SizeX 330
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000021}" {
+ Name "F44_DDefBar"
+ Color 0.702 0.188 0.169 1
+ Slot FrameWidgetSlot "{F44D0E0000000022}" {
+  Anchor 0.5 0 0.5 0
+  PositionX 126
+  PositionY 32
+  SizeX 330
+  SizeY 10
+ }
+}
+TextWidgetClass "{F44D0E0000000023}" {
+ Name "F44_DDefSectors"
+ Text ""
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 14
+ Slot FrameWidgetSlot "{F44D0E0000000024}" {
+  Anchor 0.5 0 0.5 0
+  PositionX 126
+  PositionY 48
+  SizeX 330
+  SizeY 20
+ }
+}
+ImageWidgetClass "{F44D0E0000000025}" {
+ Name "F44_SoldBg"
+ Color 0.118 0.122 0.125 0.92
+ Slot FrameWidgetSlot "{F44D0E0000000026}" {
+  Anchor 0 1 0 1
+  PositionX 24
+  PositionY -372
+  SizeX 360
+  SizeY 150
+ }
+}
+ImageWidgetClass "{F44D0E0000000027}" {
+ Name "F44_SoldEdge"
+ Color 0.36 0.38 0.25 1
+ Slot FrameWidgetSlot "{F44D0E0000000028}" {
+  Anchor 0 1 0 1
+  PositionX 24
+  PositionY -372
+  SizeX 4
+  SizeY 150
+ }
+}
+TextWidgetClass "{F44D0E0000000029}" {
+ Name "F44_SoldTitle"
+ Text "SOLDIER"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 13
+ Slot FrameWidgetSlot "{F44D0E000000002A}" {
+  Anchor 0 1 0 1
+  PositionX 40
+  PositionY -364
+  SizeX 200
+  SizeY 16
+ }
+}
+TextWidgetClass "{F44D0E000000002B}" {
+ Name "F44_SoldClass"
+ Text "RIFLEMAN"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 24
+ Slot FrameWidgetSlot "{F44D0E000000002C}" {
+  Anchor 0 1 0 1
+  PositionX 40
+  PositionY -346
+  SizeX 330
+  SizeY 30
+ }
+}
+TextWidgetClass "{F44D0E000000002D}" {
+ Name "F44_SoldKit"
+ Text "PRIMARY -  SECONDARY -  GADGET -"
+ Color 0.6 0.6 0.56 1
+ ExactFontSize 1
+ FontSize 13
+ Slot FrameWidgetSlot "{F44D0E000000002E}" {
+  Anchor 0 1 0 1
+  PositionX 40
+  PositionY -312
+  SizeX 330
+  SizeY 40
+ }
+}
+TextWidgetClass "{F44D0E000000002F}" {
+ Name "F44_SoldHint"
+ Text "CHANGE SOLDIER: LOADOUT LIST (LEFT PANEL)"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 12
+ Slot FrameWidgetSlot "{F44D0E0000000030}" {
+  Anchor 0 1 0 1
+  PositionX 40
+  PositionY -252
+  SizeX 330
+  SizeY 16
+ }
+}
+ImageWidgetClass "{F44D0E0000000031}" {
+ Name "F44_TeamBg"
+ Color 0.118 0.122 0.125 0.92
+ Slot FrameWidgetSlot "{F44D0E0000000032}" {
+  Anchor 1 1 1 1
+  PositionX -384
+  PositionY -372
+  SizeX 360
+  SizeY 150
+ }
+}
+ImageWidgetClass "{F44D0E0000000033}" {
+ Name "F44_TeamEdge"
+ Color 0.36 0.38 0.25 1
+ Slot FrameWidgetSlot "{F44D0E0000000034}" {
+  Anchor 1 1 1 1
+  PositionX -28
+  PositionY -372
+  SizeX 4
+  SizeY 150
+ }
+}
+TextWidgetClass "{F44D0E0000000035}" {
+ Name "F44_TeamTitle"
+ Text "ASSAULT TEAM"
+ Color 0.941 0.659 0.188 1
+ ExactFontSize 1
+ FontSize 13
+ Slot FrameWidgetSlot "{F44D0E0000000036}" {
+  Anchor 1 1 1 1
+  PositionX -368
+  PositionY -364
+  SizeX 300
+  SizeY 16
+ }
+}
+TextWidgetClass "{F44D0E0000000037}" {
+ Name "F44_TeamName"
+ Text "NO TEAM"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 24
+ Slot FrameWidgetSlot "{F44D0E0000000038}" {
+  Anchor 1 1 1 1
+  PositionX -368
+  PositionY -346
+  SizeX 330
+  SizeY 30
+ }
+}
+TextWidgetClass "{F44D0E0000000039}" {
+ Name "F44_TeamType"
+ Text "INFANTRY"
+ Color 0.6 0.6 0.56 1
+ ExactFontSize 1
+ FontSize 13
+ Slot FrameWidgetSlot "{F44D0E000000003A}" {
+  Anchor 1 1 1 1
+  PositionX -368
+  PositionY -312
+  SizeX 330
+  SizeY 40
+ }
+}
+ImageWidgetClass "{F44D0E000000003B}" {
+ Name "F44_DepBg"
+ Color 0.118 0.122 0.125 0.92
+ Slot FrameWidgetSlot "{F44D0E000000003C}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -230
+  PositionY -214
+  SizeX 460
+  SizeY 86
+ }
+}
+ImageWidgetClass "{F44D0E000000003D}" {
+ Name "F44_DepEdge"
+ Color 0.941 0.659 0.188 1
+ Slot FrameWidgetSlot "{F44D0E000000003E}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -230
+  PositionY -214
+  SizeX 460
+  SizeY 2
+ }
+}
+TextWidgetClass "{F44D0E000000003F}" {
+ Name "F44_DepTitle"
+ Text "SELECT A SPAWN POINT"
+ Color 0.91 0.902 0.882 1
+ ExactFontSize 1
+ FontSize 20
+ Slot FrameWidgetSlot "{F44D0E0000000040}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -216
+  PositionY -206
+  SizeX 432
+  SizeY 26
+ }
+}
+TextWidgetClass "{F44D0E0000000041}" {
+ Name "F44_DepInfo"
+ Text ""
+ Color 0.6 0.6 0.56 1
+ ExactFontSize 1
+ FontSize 13
+ Slot FrameWidgetSlot "{F44D0E0000000042}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -216
+  PositionY -178
+  SizeX 432
+  SizeY 18
+ }
+}
+ImageWidgetClass "{F44D0E0000000043}" {
+ Name "F44_DepBarBg"
+ Color 0.2 0.2 0.2 1
+ Slot FrameWidgetSlot "{F44D0E0000000044}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -216
+  PositionY -152
+  SizeX 432
+  SizeY 10
+ }
+}
+ImageWidgetClass "{F44D0E0000000045}" {
+ Name "F44_DepBar"
+ Color 0.941 0.659 0.188 1
+ Slot FrameWidgetSlot "{F44D0E0000000046}" {
+  Anchor 0.5 1 0.5 1
+  PositionX -216
+  PositionY -152
+  SizeX 432
+  SizeY 10
+ }
+}
+ }
+}
