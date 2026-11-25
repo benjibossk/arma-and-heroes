@@ -55,6 +55,7 @@ function render() {
     return card.replace(/<\/div><\/div>$/, `<div class="muted" style="font-size:12px">${esc(cond)} · ${esc(i.rankName)}</div>${st}</div></div>`)
       .replace('class="icard ', `class="icard ${i.state === 'locked' ? 'locked' : ''} ${i.state === 'owned' ? 'owned' : ''} `);
   }).join('') || '<p class="muted">Nothing in this tree for this faction.</p>';
+  bindWeaponCards(document.getElementById('list'), D.items);
 }
 function earn() {
   const x = D.earn.xp, c = D.earn.credits, a = D.earn.antiFarm;

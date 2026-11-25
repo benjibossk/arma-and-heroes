@@ -1,0 +1,4658 @@
+{
+ "_meta": {
+  "generated_by": "tools/weapon-stats/extract.py",
+  "sources": "FH CoreMod/GERGear/USGear data.pak (.et/.conf) + vanilla Reforger base prefabs",
+  "model": "v(x)=v0*exp(-AirDrag/Mass*x); dmg(x)=DamageValue*(v/v0)^2 (estimation, sans armure)",
+  "units": {
+   "rpm": "coups/min",
+   "muzzleVelocity": "m/s",
+   "weight": "kg",
+   "bulletMass": "kg",
+   "zeroing": "m",
+   "reloadTime": "s",
+   "damageCurve.m": "m"
+  },
+  "null": "valeur absente des fichiers du mod (non inventee)"
+ },
+ "weapons": {
+  "US_M1_GARAND": {
+   "label": "M1 Garand",
+   "category": "rifle",
+   "prefab": "{6FF6BC1AA4BC98BE}Prefabs/Weapons/Rifles/M1_Garand/Rifle_M1.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{582AFEEBE91494B5}Prefabs/Weapons/Magazines/M1_Garand/Clip_762x63_M1_8rnd_Ball_M2.et",
+   "magazineSize": 8,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 4.3,
+   "zeroing": {
+    "min": 91,
+    "max": 732,
+    "steps": [
+     91,
+     182,
+     274,
+     366,
+     457,
+     548,
+     640,
+     732
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_garand/rifle_m1.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_garand/rifle_m1_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/longrangerifle_base.et",
+    "weight": "prefabs/weapons/rifles/m1_garand/rifle_m1_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1_garand/rifle_m1_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1_garand/clip_762x63_m1_8rnd_ball_m2.et",
+     "prefabs/weapons/magazines/m1_garand/clip_762x63_m1_8rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1_garand/clip_762x63_m1_8rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M1_CARBINE": {
+   "label": "M1 Carbine",
+   "category": "rifle",
+   "prefab": "{0C95F90EAD15FC6B}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1_Carbine.et",
+   "fireModes": [
+    {
+     "mode": "single",
+     "rpm": 750.0,
+     "burst": null
+    }
+   ],
+   "rpm": 750.0,
+   "magazine": "{497BEFA61452A6B5}Prefabs/Weapons/Magazines/M1_Carbine/Magazine_762x33_M1_Carbine_15rnd_Ball_M1.et",
+   "magazineSize": 15,
+   "caliber": "7.62x33mm",
+   "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
+   "muzzleVelocity": 607.0,
+   "damage": 22000.0,
+   "bulletMass": 0.002,
+   "airDrag": 4e-06,
+   "penetrationDepth": 3.6,
+   "weight": 2.4,
+   "zeroing": {
+    "min": 90,
+    "max": 90,
+    "steps": [
+     90
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 607.0,
+     "dmg": 22000.0
+    },
+    {
+     "m": 50,
+     "v": 549.2,
+     "dmg": 18012.1
+    },
+    {
+     "m": 100,
+     "v": 497.0,
+     "dmg": 14747.0
+    },
+    {
+     "m": 150,
+     "v": 449.7,
+     "dmg": 12073.9
+    },
+    {
+     "m": 200,
+     "v": 406.9,
+     "dmg": 9885.2
+    },
+    {
+     "m": 250,
+     "v": 368.2,
+     "dmg": 8093.3
+    },
+    {
+     "m": 300,
+     "v": 333.1,
+     "dmg": 6626.3
+    },
+    {
+     "m": 350,
+     "v": 301.4,
+     "dmg": 5425.1
+    },
+    {
+     "m": 400,
+     "v": 272.7,
+     "dmg": 4441.7
+    },
+    {
+     "m": 450,
+     "v": 246.8,
+     "dmg": 3636.6
+    },
+    {
+     "m": 500,
+     "v": 223.3,
+     "dmg": 2977.4
+    },
+    {
+     "m": 550,
+     "v": 202.1,
+     "dmg": 2437.7
+    },
+    {
+     "m": 600,
+     "v": 182.8,
+     "dmg": 1995.8
+    },
+    {
+     "m": 650,
+     "v": 165.4,
+     "dmg": 1634.0
+    },
+    {
+     "m": 700,
+     "v": 149.7,
+     "dmg": 1337.8
+    },
+    {
+     "m": 750,
+     "v": 135.4,
+     "dmg": 1095.3
+    },
+    {
+     "m": 800,
+     "v": 122.6,
+     "dmg": 896.8
+    },
+    {
+     "m": 850,
+     "v": 110.9,
+     "dmg": 734.2
+    },
+    {
+     "m": 900,
+     "v": 100.3,
+     "dmg": 601.1
+    },
+    {
+     "m": 950,
+     "v": 90.8,
+     "dmg": 492.2
+    },
+    {
+     "m": 1000,
+     "v": 82.1,
+     "dmg": 402.9
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "weight": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_ball_m1.et",
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x33.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_763x33/ammo_762x33_ball_m1.et"
+    ]
+   },
+   "warnings": [
+    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+   ]
+  },
+  "US_THOMPSON": {
+   "label": "M1A1 Thompson",
+   "category": "smg",
+   "prefab": "{E59A4E6BBDE7CFBD}Prefabs/Weapons/Machineguns/M1A1/Submachinegun_M1A1.et",
+   "fireModes": [
+    {
+     "mode": "auto",
+     "rpm": 650.0,
+     "burst": null
+    }
+   ],
+   "rpm": 650.0,
+   "magazine": "{645FF3031157C71E}Prefabs/Weapons/Magazines/M1A1_Thompson/Magazine_1143x23_M1A1_30rnd_Ball_M1.et",
+   "magazineSize": 30,
+   "caliber": "11.43x23mm",
+   "ammo": "{0FFF86184FAA4374}Prefabs/Weapons/Ammo/Ammo_1143x23_Ball_M1.et",
+   "muzzleVelocity": 253.0,
+   "damage": 300.0,
+   "bulletMass": 0.0036,
+   "airDrag": 1.15e-05,
+   "penetrationDepth": 5.0,
+   "weight": 4.5,
+   "zeroing": {
+    "min": 91,
+    "max": 228,
+    "steps": [
+     91,
+     228
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 253.0,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 215.7,
+     "dmg": 218.0
+    },
+    {
+     "m": 100,
+     "v": 183.8,
+     "dmg": 158.4
+    },
+    {
+     "m": 150,
+     "v": 156.7,
+     "dmg": 115.1
+    },
+    {
+     "m": 200,
+     "v": 133.6,
+     "dmg": 83.6
+    },
+    {
+     "m": 250,
+     "v": 113.8,
+     "dmg": 60.7
+    },
+    {
+     "m": 300,
+     "v": 97.0,
+     "dmg": 44.1
+    },
+    {
+     "m": 350,
+     "v": 82.7,
+     "dmg": 32.1
+    },
+    {
+     "m": 400,
+     "v": 70.5,
+     "dmg": 23.3
+    },
+    {
+     "m": 450,
+     "v": 60.1,
+     "dmg": 16.9
+    },
+    {
+     "m": 500,
+     "v": 51.2,
+     "dmg": 12.3
+    },
+    {
+     "m": 550,
+     "v": 43.7,
+     "dmg": 8.9
+    },
+    {
+     "m": 600,
+     "v": 37.2,
+     "dmg": 6.5
+    },
+    {
+     "m": 650,
+     "v": 31.7,
+     "dmg": 4.7
+    },
+    {
+     "m": 700,
+     "v": 27.0,
+     "dmg": 3.4
+    },
+    {
+     "m": 750,
+     "v": 23.0,
+     "dmg": 2.5
+    },
+    {
+     "m": 800,
+     "v": 19.6,
+     "dmg": 1.8
+    },
+    {
+     "m": 850,
+     "v": 16.7,
+     "dmg": 1.3
+    },
+    {
+     "m": 900,
+     "v": 14.3,
+     "dmg": 1.0
+    },
+    {
+     "m": 950,
+     "v": 12.2,
+     "dmg": 0.7
+    },
+    {
+     "m": 1000,
+     "v": 10.4,
+     "dmg": 0.5
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1a1/submachinegun_m1a1.et",
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1a1/submachinegun_m1a1_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/m1a1/submachinegun_m1a1_base.et",
+    "weight": "prefabs/weapons/machineguns/m1a1/submachinegun_m1a1_base.et",
+    "zeroing": "prefabs/weapons/machineguns/m1a1/submachinegun_m1a1_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1a1_thompson/magazine_1143x23_m1a1_30rnd_ball_m1.et",
+     "prefabs/weapons/magazines/m1a1_thompson/magazine_1143x23_m1a1_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1a1_thompson/magazine_1143x23_m1a1_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_1143x23.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_1143x23/ammo_1143x23_ball_m1.et"
+    ]
+   }
+  },
+  "US_M3_GREASE": {
+   "label": "M3 Grease Gun",
+   "category": "smg",
+   "prefab": "{E14DFCA44B4ADB90}Prefabs/Weapons/Machineguns/M3A1/Submachinegun_M3A1.et",
+   "fireModes": [
+    {
+     "mode": "auto",
+     "rpm": 425.0,
+     "burst": null
+    }
+   ],
+   "rpm": 425.0,
+   "magazine": "{30572471CB07D84B}Prefabs/Weapons/Magazines/M3A1_GreaseGun/Magazine_1143x23_M3A1_30rnd_Ball_M1.et",
+   "magazineSize": 30,
+   "caliber": "11.43x23mm",
+   "ammo": "{0FFF86184FAA4374}Prefabs/Weapons/Ammo/Ammo_1143x23_Ball_M1.et",
+   "muzzleVelocity": 253.0,
+   "damage": 300.0,
+   "bulletMass": 0.0036,
+   "airDrag": 1.15e-05,
+   "penetrationDepth": 5.0,
+   "weight": 3.7,
+   "zeroing": {
+    "min": 91,
+    "max": 91,
+    "steps": [
+     91
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 253.0,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 215.7,
+     "dmg": 218.0
+    },
+    {
+     "m": 100,
+     "v": 183.8,
+     "dmg": 158.4
+    },
+    {
+     "m": 150,
+     "v": 156.7,
+     "dmg": 115.1
+    },
+    {
+     "m": 200,
+     "v": 133.6,
+     "dmg": 83.6
+    },
+    {
+     "m": 250,
+     "v": 113.8,
+     "dmg": 60.7
+    },
+    {
+     "m": 300,
+     "v": 97.0,
+     "dmg": 44.1
+    },
+    {
+     "m": 350,
+     "v": 82.7,
+     "dmg": 32.1
+    },
+    {
+     "m": 400,
+     "v": 70.5,
+     "dmg": 23.3
+    },
+    {
+     "m": 450,
+     "v": 60.1,
+     "dmg": 16.9
+    },
+    {
+     "m": 500,
+     "v": 51.2,
+     "dmg": 12.3
+    },
+    {
+     "m": 550,
+     "v": 43.7,
+     "dmg": 8.9
+    },
+    {
+     "m": 600,
+     "v": 37.2,
+     "dmg": 6.5
+    },
+    {
+     "m": 650,
+     "v": 31.7,
+     "dmg": 4.7
+    },
+    {
+     "m": 700,
+     "v": 27.0,
+     "dmg": 3.4
+    },
+    {
+     "m": 750,
+     "v": 23.0,
+     "dmg": 2.5
+    },
+    {
+     "m": 800,
+     "v": 19.6,
+     "dmg": 1.8
+    },
+    {
+     "m": 850,
+     "v": 16.7,
+     "dmg": 1.3
+    },
+    {
+     "m": 900,
+     "v": 14.3,
+     "dmg": 1.0
+    },
+    {
+     "m": 950,
+     "v": 12.2,
+     "dmg": 0.7
+    },
+    {
+     "m": 1000,
+     "v": 10.4,
+     "dmg": 0.5
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/machineguns/m3a1/submachinegun_m3a1.et",
+     "FinestHour-USGear:prefabs/weapons/machineguns/m3a1/submachinegun_m3a1_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/m3a1/submachinegun_m3a1_base.et",
+    "weight": "prefabs/weapons/machineguns/m3a1/submachinegun_m3a1_base.et",
+    "zeroing": "prefabs/weapons/machineguns/m3a1/submachinegun_m3a1_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m3a1_greasegun/magazine_1143x23_m3a1_30rnd_ball_m1.et",
+     "prefabs/weapons/magazines/m3a1_greasegun/magazine_1143x23_m3a1_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_1143x23.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_1143x23/ammo_1143x23_ball_m1.et"
+    ]
+   }
+  },
+  "US_BAR": {
+   "label": "M1918 BAR",
+   "category": "mg",
+   "prefab": "{C2596CA8BD1C2F08}Prefabs/Weapons/Machineguns/M1918_BAR/Machinegun_M1918.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": 300.0,
+     "burst": null
+    }
+   ],
+   "rpm": 300.0,
+   "magazine": "{1363AE4797C0E29F}Prefabs/Weapons/Magazines/M1918_BAR/Magazine_762x63_M1918_20rnd_4Ball_1Tracer.et",
+   "magazineSize": 20,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 8.8,
+   "zeroing": {
+    "min": 91,
+    "max": 1372,
+    "steps": [
+     91,
+     182,
+     274,
+     366,
+     457,
+     548,
+     640,
+     732,
+     822,
+     914,
+     1005,
+     1097,
+     1188,
+     1280,
+     1372
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1918_bar/machinegun_m1918.et",
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1918_bar/machinegun_m1918_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/m1918_bar/machinegun_m1918_base.et",
+    "weight": "prefabs/weapons/machineguns/m1918_bar/machinegun_m1918_base.et",
+    "zeroing": "prefabs/weapons/machineguns/m1918_bar/machinegun_m1918_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1918_bar/magazine_762x63_m1918_20rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/m1918_bar/magazine_762x63_m1918_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1918_bar/magazine_762x63_m1918_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M1903A4": {
+   "label": "M1903A4 Springfield (scoped)",
+   "category": "sniper",
+   "prefab": "{4191E250FDEC2FBF}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A4.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{DF1C0230C4ADAE12}Prefabs/Weapons/Magazines/M1903A3/Clip_762x63_M1903_5rnd_Base.et",
+   "magazineSize": 5,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 4.0,
+   "zeroing": {
+    "min": 91,
+    "max": 732,
+    "steps": [
+     91,
+     182,
+     274,
+     366,
+     457,
+     548,
+     640,
+     732
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1903a3/rifle_m1903a4.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "weight": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1903a3/clip_762x63_m1903_5rnd_base.et",
+     "prefabs/weapons/magazines/magazine_762x51_m14_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M1911": {
+   "label": "M1911 pistol",
+   "category": "pistol",
+   "prefab": "{22E222918CBDA02C}Prefabs/Weapons/Handguns/M1911/Handgun_M1911A1.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{6D3E850E2033B7C7}Prefabs/Weapons/Magazines/M1911/Magazine_1143x23_M1911_7rnd_Base.et",
+   "magazineSize": 7,
+   "caliber": "11.43x23mm",
+   "ammo": "{0FFF86184FAA4374}Prefabs/Weapons/Ammo/Ammo_1143x23_Ball_M1.et",
+   "muzzleVelocity": 253.0,
+   "damage": 300.0,
+   "bulletMass": 0.0036,
+   "airDrag": 1.15e-05,
+   "penetrationDepth": 5.0,
+   "weight": 1.13,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 253.0,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 215.7,
+     "dmg": 218.0
+    },
+    {
+     "m": 100,
+     "v": 183.8,
+     "dmg": 158.4
+    },
+    {
+     "m": 150,
+     "v": 156.7,
+     "dmg": 115.1
+    },
+    {
+     "m": 200,
+     "v": 133.6,
+     "dmg": 83.6
+    },
+    {
+     "m": 250,
+     "v": 113.8,
+     "dmg": 60.7
+    },
+    {
+     "m": 300,
+     "v": 97.0,
+     "dmg": 44.1
+    },
+    {
+     "m": 350,
+     "v": 82.7,
+     "dmg": 32.1
+    },
+    {
+     "m": 400,
+     "v": 70.5,
+     "dmg": 23.3
+    },
+    {
+     "m": 450,
+     "v": 60.1,
+     "dmg": 16.9
+    },
+    {
+     "m": 500,
+     "v": 51.2,
+     "dmg": 12.3
+    },
+    {
+     "m": 550,
+     "v": 43.7,
+     "dmg": 8.9
+    },
+    {
+     "m": 600,
+     "v": 37.2,
+     "dmg": 6.5
+    },
+    {
+     "m": 650,
+     "v": 31.7,
+     "dmg": 4.7
+    },
+    {
+     "m": 700,
+     "v": 27.0,
+     "dmg": 3.4
+    },
+    {
+     "m": 750,
+     "v": 23.0,
+     "dmg": 2.5
+    },
+    {
+     "m": 800,
+     "v": 19.6,
+     "dmg": 1.8
+    },
+    {
+     "m": 850,
+     "v": 16.7,
+     "dmg": 1.3
+    },
+    {
+     "m": 900,
+     "v": 14.3,
+     "dmg": 1.0
+    },
+    {
+     "m": 950,
+     "v": 12.2,
+     "dmg": 0.7
+    },
+    {
+     "m": 1000,
+     "v": 10.4,
+     "dmg": 0.5
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/handguns/m1911/handgun_m1911a1.et",
+     "FinestHour-USGear:prefabs/weapons/handguns/m1911/handgun_m1911a1_base.et",
+     "Reforger:prefabs/weapons/core/handgun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/handgun_base.et",
+    "weight": "prefabs/weapons/handguns/m1911/handgun_m1911a1_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1911/magazine_1143x23_m1911_7rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_1143x23.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_1143x23/ammo_1143x23_ball_m1.et"
+    ]
+   }
+  },
+  "US_BAZOOKA": {
+   "label": "M1A1 Bazooka",
+   "category": "at",
+   "prefab": "{FBBB0FC51FC85173}Prefabs/Weapons/Launchers/M1A1/Launcher_M1A1_Bazooka.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 5.9,
+   "zeroing": {
+    "min": 91,
+    "max": 274,
+    "steps": [
+     91,
+     182,
+     274
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/launchers/m1a1/launcher_m1a1_bazooka.et",
+     "FinestHour-USGear:prefabs/weapons/launchers/m1a1/launcher_m1a1_bazooka_base.et",
+     "Reforger:prefabs/weapons/core/launcher_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/launcher_base.et",
+    "weight": "prefabs/weapons/launchers/m1a1/launcher_m1a1_bazooka_base.et",
+    "zeroing": "prefabs/weapons/launchers/m1a1/launcher_m1a1_bazooka_base.et"
+   }
+  },
+  "US_MK2_GRENADE": {
+   "label": "Mk 2 grenade",
+   "category": "grenade",
+   "prefab": "{9404B8186F1501E7}Prefabs/Weapons/Grenades/Mk2/Grenade_Mk2_Olive.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.39,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/grenades/mk2/grenade_mk2_olive.et",
+     "FinestHour-USGear:prefabs/weapons/grenades/mk2/grenade_mk2_base.et",
+     "Reforger:prefabs/weapons/core/fraggrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/mk2/grenade_mk2_base.et"
+   }
+  },
+  "US_SMOKE": {
+   "label": "M15 smoke grenade",
+   "category": "smoke",
+   "prefab": "{317E432F7873B898}Prefabs/Weapons/Grenades/M16/Smoke_M16_White.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.54,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/grenades/m16/smoke_m16_white.et",
+     "FinestHour-USGear:prefabs/weapons/grenades/m16/smoke_m16_base.et",
+     "Reforger:prefabs/weapons/core/smokegrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/m16/smoke_m16_base.et"
+   }
+  },
+  "US_TNT": {
+   "label": "TNT charge",
+   "category": "explosive",
+   "prefab": "{4D36B96919838361}Prefabs/Weapons/Explosives/DemoBlock_TNT/DemoBlock_USA_TNT_OnePound.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.453,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/explosives/demoblock_tnt/demoblock_usa_tnt_onepound.et",
+     "FinestHour-USGear:prefabs/weapons/explosives/demoblock_tnt/demoblock_usa_tnt_base.et",
+     "Reforger:prefabs/weapons/core/demoblock_base.et",
+     "Reforger:prefabs/weapons/core/explosivecharge_base.et",
+     "Reforger:prefabs/weapons/core/explosives_base.et"
+    ],
+    "weight": "prefabs/weapons/explosives/demoblock_tnt/demoblock_usa_tnt_onepound.et"
+   }
+  },
+  "GER_KAR98K": {
+   "label": "Kar98k",
+   "category": "rifle",
+   "prefab": "{3B460BBAF682C13D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{1DF592D5042B72CD}Prefabs/Weapons/Magazines/Kar98k/Clip_792x57_Kar98k_5rnd_Internal_Base.et",
+   "magazineSize": 5,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 3.8,
+   "zeroing": {
+    "min": 100,
+    "max": 1200,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "weight": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "zeroing": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/kar98k/clip_792x57_kar98k_5rnd_internal_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_G43": {
+   "label": "Gewehr 43",
+   "category": "rifle",
+   "prefab": "{D0B2A68A3BD9085E}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43.et",
+   "fireModes": [
+    {
+     "mode": "single",
+     "rpm": 450.0,
+     "burst": null
+    }
+   ],
+   "rpm": 450.0,
+   "magazine": "{1946CD4A12B3FC3B}Prefabs/Weapons/Magazines/Gewehr43/Magazine_792x57_Gewehr43_10rnd_Ball_sP.et",
+   "magazineSize": 10,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 2.7,
+   "zeroing": {
+    "min": 100,
+    "max": 1200,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/gewehr43/rifle_gewehr43.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "weight": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "zeroing": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_ball_sp.et",
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_MP40": {
+   "label": "MP40",
+   "category": "smg",
+   "prefab": "{6D18C148A668A0AB}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP40.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{20E4A0615C0ABC16}Prefabs/Weapons/Magazines/MP38/Magazine_9x19_MP38_32rnd.et",
+   "magazineSize": 32,
+   "caliber": "9x18mm",
+   "ammo": "{FDBA4064AA9D60C3}Prefabs/Weapons/Ammo/Ammo_9x19_Ball_08.et",
+   "muzzleVelocity": 317.3,
+   "damage": 300.0,
+   "bulletMass": 0.00804,
+   "airDrag": 1.25e-05,
+   "penetrationDepth": 20.0,
+   "weight": 3.97,
+   "zeroing": {
+    "min": 100,
+    "max": 200,
+    "steps": [
+     100,
+     200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 317.3,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 293.6,
+     "dmg": 256.8
+    },
+    {
+     "m": 100,
+     "v": 271.6,
+     "dmg": 219.8
+    },
+    {
+     "m": 150,
+     "v": 251.3,
+     "dmg": 188.2
+    },
+    {
+     "m": 200,
+     "v": 232.5,
+     "dmg": 161.1
+    },
+    {
+     "m": 250,
+     "v": 215.1,
+     "dmg": 137.9
+    },
+    {
+     "m": 300,
+     "v": 199.0,
+     "dmg": 118.0
+    },
+    {
+     "m": 350,
+     "v": 184.1,
+     "dmg": 101.0
+    },
+    {
+     "m": 400,
+     "v": 170.4,
+     "dmg": 86.5
+    },
+    {
+     "m": 450,
+     "v": 157.6,
+     "dmg": 74.0
+    },
+    {
+     "m": 500,
+     "v": 145.8,
+     "dmg": 63.4
+    },
+    {
+     "m": 550,
+     "v": 134.9,
+     "dmg": 54.2
+    },
+    {
+     "m": 600,
+     "v": 124.8,
+     "dmg": 46.4
+    },
+    {
+     "m": 650,
+     "v": 115.5,
+     "dmg": 39.8
+    },
+    {
+     "m": 700,
+     "v": 106.9,
+     "dmg": 34.0
+    },
+    {
+     "m": 750,
+     "v": 98.9,
+     "dmg": 29.1
+    },
+    {
+     "m": 800,
+     "v": 91.5,
+     "dmg": 24.9
+    },
+    {
+     "m": 850,
+     "v": 84.6,
+     "dmg": 21.3
+    },
+    {
+     "m": 900,
+     "v": 78.3,
+     "dmg": 18.3
+    },
+    {
+     "m": 950,
+     "v": 72.4,
+     "dmg": 15.6
+    },
+    {
+     "m": 1000,
+     "v": 67.0,
+     "dmg": 13.4
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mp38/submachinegun_mp40.et",
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "weight": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "zeroing": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/mp38/magazine_9x19_mp38_32rnd.et",
+     "prefabs/weapons/magazines/mp38/magazine_9x19_mp38_32rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_9x19_ww2.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_9x19/ammo_9x19_ball_08.et"
+    ],
+    "muzzleCoef": 0.835
+   }
+  },
+  "GER_MG42": {
+   "label": "MG42",
+   "category": "mg",
+   "prefab": "{885A147293847F5C}Prefabs/Weapons/Machineguns/MG42/MG_MG42.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 1200.0,
+     "burst": null
+    }
+   ],
+   "rpm": 1200.0,
+   "magazine": "{6D4D4C91CDC5D021}Prefabs/Weapons/Magazines/MG34/Belt_792x57_MG34_50rnd_4Ball_1Tracer.et",
+   "magazineSize": 100,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 11.6,
+   "zeroing": {
+    "min": 100,
+    "max": 1700,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200,
+     1300,
+     1400,
+     1500,
+     1600,
+     1700
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mg42/mg_mg42.et",
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mg42/mg_mg42_base.et",
+     "Reforger:prefabs/weapons/core/machinegun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/mg42/mg_mg42_base.et",
+    "weight": "prefabs/weapons/machineguns/mg42/mg_mg42_base.et",
+    "zeroing": "prefabs/weapons/machineguns/mg42/mg_mg42_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_KAR98K_SCOPE": {
+   "label": "Kar98k (scoped)",
+   "category": "sniper",
+   "prefab": "{EB136040466EF11D}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Sniper.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{1DF592D5042B72CD}Prefabs/Weapons/Magazines/Kar98k/Clip_792x57_Kar98k_5rnd_Internal_Base.et",
+   "magazineSize": 5,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 3.8,
+   "zeroing": {
+    "min": 100,
+    "max": 1200,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k_sniper.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "weight": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "zeroing": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/kar98k/clip_792x57_kar98k_5rnd_internal_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_P38": {
+   "label": "Walther P38",
+   "category": "pistol",
+   "prefab": "{97C3AA4555300B75}Prefabs/Weapons/Handguns/P38/Handgun_P38.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{98B2277F51D41062}Prefabs/Weapons/Magazines/P38/Magazine_9x19_P38_8rnd_Ball_sE.et",
+   "magazineSize": 8,
+   "caliber": "9x19mm",
+   "ammo": "{FDBA4064AA9D60C3}Prefabs/Weapons/Ammo/Ammo_9x19_Ball_08.et",
+   "muzzleVelocity": 380.0,
+   "damage": 300.0,
+   "bulletMass": 0.00804,
+   "airDrag": 1.25e-05,
+   "penetrationDepth": 20.0,
+   "weight": 0.794,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 380.0,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 351.6,
+     "dmg": 256.8
+    },
+    {
+     "m": 100,
+     "v": 325.3,
+     "dmg": 219.8
+    },
+    {
+     "m": 150,
+     "v": 301.0,
+     "dmg": 188.2
+    },
+    {
+     "m": 200,
+     "v": 278.4,
+     "dmg": 161.1
+    },
+    {
+     "m": 250,
+     "v": 257.6,
+     "dmg": 137.9
+    },
+    {
+     "m": 300,
+     "v": 238.4,
+     "dmg": 118.0
+    },
+    {
+     "m": 350,
+     "v": 220.5,
+     "dmg": 101.0
+    },
+    {
+     "m": 400,
+     "v": 204.0,
+     "dmg": 86.5
+    },
+    {
+     "m": 450,
+     "v": 188.8,
+     "dmg": 74.0
+    },
+    {
+     "m": 500,
+     "v": 174.7,
+     "dmg": 63.4
+    },
+    {
+     "m": 550,
+     "v": 161.6,
+     "dmg": 54.2
+    },
+    {
+     "m": 600,
+     "v": 149.5,
+     "dmg": 46.4
+    },
+    {
+     "m": 650,
+     "v": 138.3,
+     "dmg": 39.8
+    },
+    {
+     "m": 700,
+     "v": 128.0,
+     "dmg": 34.0
+    },
+    {
+     "m": 750,
+     "v": 118.4,
+     "dmg": 29.1
+    },
+    {
+     "m": 800,
+     "v": 109.6,
+     "dmg": 24.9
+    },
+    {
+     "m": 850,
+     "v": 101.4,
+     "dmg": 21.3
+    },
+    {
+     "m": 900,
+     "v": 93.8,
+     "dmg": 18.3
+    },
+    {
+     "m": 950,
+     "v": 86.8,
+     "dmg": 15.6
+    },
+    {
+     "m": 1000,
+     "v": 80.3,
+     "dmg": 13.4
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/handguns/p38/handgun_p38.et",
+     "FinestHour-GERGear:prefabs/weapons/handguns/p38/handgun_p38_base.et",
+     "Reforger:prefabs/weapons/core/handgun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/handgun_base.et",
+    "weight": "prefabs/weapons/handguns/p38/handgun_p38_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/p38/magazine_9x19_p38_8rnd_ball_se.et",
+     "prefabs/weapons/magazines/p38/magazine_9x19_p38_8rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/p38/magazine_9x19_p38_8rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_9x19_ww2.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_9x19/ammo_9x19_ball_08.et"
+    ]
+   }
+  },
+  "GER_PANZERFAUST": {
+   "label": "Panzerfaust 100",
+   "category": "at",
+   "prefab": "{15F0473A1454A801}Prefabs/Weapons/Launchers/Panzerfaust/Launcher_Panzerfaust60.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 1.36,
+   "zeroing": {
+    "min": 30,
+    "max": 80,
+    "steps": [
+     30,
+     60,
+     80
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60.et",
+     "FinestHour-GERGear:prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60_base.et",
+     "Reforger:prefabs/weapons/core/launcher_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/launcher_base.et",
+    "weight": "prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60_base.et",
+    "zeroing": "prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60_base.et"
+   }
+  },
+  "GER_PANZERSCHRECK": {
+   "label": "Panzerschreck RPzB 54",
+   "category": "at",
+   "prefab": "{28B66C43B847AE14}Prefabs/Weapons/Launchers/RPzB_54/Launcher_RPzB54_Green.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 11.0,
+   "zeroing": {
+    "min": 150,
+    "max": 150,
+    "steps": [
+     150
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/launchers/rpzb_54/launcher_rpzb54_green.et",
+     "FinestHour-GERGear:prefabs/weapons/launchers/rpzb_54/launcher_rpzb54_base.et",
+     "Reforger:prefabs/weapons/core/launcher_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/launcher_base.et",
+    "weight": "prefabs/weapons/launchers/rpzb_54/launcher_rpzb54_base.et",
+    "zeroing": "prefabs/weapons/launchers/rpzb_54/launcher_rpzb54_base.et"
+   }
+  },
+  "GER_M24_GRENADE": {
+   "label": "Stielhandgranate 24",
+   "category": "grenade",
+   "prefab": "{C13716F9532136B8}Prefabs/Weapons/Grenades/M24_Stielhandgranate/Grenade_M24.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.5,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/grenades/m24_stielhandgranate/grenade_m24.et",
+     "FinestHour-GERGear:prefabs/weapons/grenades/m24_stielhandgranate/grenade_m24_base.et",
+     "Reforger:prefabs/weapons/core/fraggrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/m24_stielhandgranate/grenade_m24_base.et"
+   }
+  },
+  "GER_SMOKE": {
+   "label": "NbHgr 39 smoke grenade",
+   "category": "smoke",
+   "prefab": "{25FEB029453493DA}Prefabs/Weapons/Grenades/M39_Nebelhandgranate/Smoke_M39.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.5,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/grenades/m39_nebelhandgranate/smoke_m39.et",
+     "FinestHour-GERGear:prefabs/weapons/grenades/m39_nebelhandgranate/smoke_m39_base.et",
+     "Reforger:prefabs/weapons/core/smokegrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/m39_nebelhandgranate/smoke_m39_base.et"
+   }
+  },
+  "GER_MINES": {
+   "label": "Teller mine",
+   "category": "explosive",
+   "prefab": "{9049080FDB51254F}Prefabs/Weapons/Explosives/Mine_Tellermine42/Mine_Tellermine42AT.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 9.1,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/explosives/mine_tellermine42/mine_tellermine42at.et",
+     "FinestHour-GERGear:prefabs/weapons/explosives/mine_tellermine42/mine_tellermine42at_base.et",
+     "Reforger:prefabs/weapons/core/mine_base.et",
+     "Reforger:prefabs/weapons/core/explosives_base.et"
+    ],
+    "weight": "prefabs/weapons/explosives/mine_tellermine42/mine_tellermine42at_base.et"
+   }
+  },
+  "US_M1903A3": {
+   "label": "M1903A3 Springfield",
+   "category": "rifle",
+   "prefab": "{7CA5C7688880A688}Prefabs/Weapons/Rifles/M1903A3/Rifle_M1903A3.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{DF1C0230C4ADAE12}Prefabs/Weapons/Magazines/M1903A3/Clip_762x63_M1903_5rnd_Base.et",
+   "magazineSize": 5,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 4.0,
+   "zeroing": {
+    "min": 91,
+    "max": 732,
+    "steps": [
+     91,
+     182,
+     274,
+     366,
+     457,
+     548,
+     640,
+     732
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1903a3/rifle_m1903a3.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "weight": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1903a3/rifle_m1903a3_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1903a3/clip_762x63_m1903_5rnd_base.et",
+     "prefabs/weapons/magazines/magazine_762x51_m14_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M1A1_CARBINE": {
+   "label": "M1A1 Carbine (crosse pliante)",
+   "category": "rifle",
+   "prefab": "{8D7E8742E9F08061}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M1A1_Carbine.et",
+   "fireModes": [
+    {
+     "mode": "single",
+     "rpm": 750.0,
+     "burst": null
+    }
+   ],
+   "rpm": 750.0,
+   "magazine": "{A6137A34F2749A63}Prefabs/Weapons/Magazines/M1_Carbine/Magazine_762x33_M1_Carbine_15rnd_Base.et",
+   "magazineSize": 15,
+   "caliber": "7.62x33mm",
+   "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
+   "muzzleVelocity": 607.0,
+   "damage": 22000.0,
+   "bulletMass": 0.002,
+   "airDrag": 4e-06,
+   "penetrationDepth": 3.6,
+   "weight": 2.4,
+   "zeroing": {
+    "min": 90,
+    "max": 90,
+    "steps": [
+     90
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 607.0,
+     "dmg": 22000.0
+    },
+    {
+     "m": 50,
+     "v": 549.2,
+     "dmg": 18012.1
+    },
+    {
+     "m": 100,
+     "v": 497.0,
+     "dmg": 14747.0
+    },
+    {
+     "m": 150,
+     "v": 449.7,
+     "dmg": 12073.9
+    },
+    {
+     "m": 200,
+     "v": 406.9,
+     "dmg": 9885.2
+    },
+    {
+     "m": 250,
+     "v": 368.2,
+     "dmg": 8093.3
+    },
+    {
+     "m": 300,
+     "v": 333.1,
+     "dmg": 6626.3
+    },
+    {
+     "m": 350,
+     "v": 301.4,
+     "dmg": 5425.1
+    },
+    {
+     "m": 400,
+     "v": 272.7,
+     "dmg": 4441.7
+    },
+    {
+     "m": 450,
+     "v": 246.8,
+     "dmg": 3636.6
+    },
+    {
+     "m": 500,
+     "v": 223.3,
+     "dmg": 2977.4
+    },
+    {
+     "m": 550,
+     "v": 202.1,
+     "dmg": 2437.7
+    },
+    {
+     "m": 600,
+     "v": 182.8,
+     "dmg": 1995.8
+    },
+    {
+     "m": 650,
+     "v": 165.4,
+     "dmg": 1634.0
+    },
+    {
+     "m": 700,
+     "v": 149.7,
+     "dmg": 1337.8
+    },
+    {
+     "m": 750,
+     "v": 135.4,
+     "dmg": 1095.3
+    },
+    {
+     "m": 800,
+     "v": 122.6,
+     "dmg": 896.8
+    },
+    {
+     "m": 850,
+     "v": 110.9,
+     "dmg": 734.2
+    },
+    {
+     "m": 900,
+     "v": 100.3,
+     "dmg": 601.1
+    },
+    {
+     "m": 950,
+     "v": 90.8,
+     "dmg": 492.2
+    },
+    {
+     "m": 1000,
+     "v": 82.1,
+     "dmg": 402.9
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1a1_carbine.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1a1_carbine_base.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "weight": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x33.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_763x33/ammo_762x33_ball_m1.et"
+    ]
+   },
+   "warnings": [
+    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+   ]
+  },
+  "US_M2_CARBINE": {
+   "label": "M2 Carbine (select-fire)",
+   "category": "rifle",
+   "prefab": "{F34FA45A2DE16C2D}Prefabs/Weapons/Rifles/M1_Carbine/Rifle_M2_Carbine.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 725.0,
+     "burst": null
+    }
+   ],
+   "rpm": 725.0,
+   "magazine": "{497BEFA61452A6B5}Prefabs/Weapons/Magazines/M1_Carbine/Magazine_762x33_M1_Carbine_15rnd_Ball_M1.et",
+   "magazineSize": 15,
+   "caliber": "7.62x33mm",
+   "ammo": "{C3738AACEF43D5C3}Prefabs/Weapons/Ammo/Ammo_762x33_Ball_M1.et",
+   "muzzleVelocity": 607.0,
+   "damage": 22000.0,
+   "bulletMass": 0.002,
+   "airDrag": 4e-06,
+   "penetrationDepth": 3.6,
+   "weight": 2.4,
+   "zeroing": {
+    "min": 90,
+    "max": 90,
+    "steps": [
+     90
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 607.0,
+     "dmg": 22000.0
+    },
+    {
+     "m": 50,
+     "v": 549.2,
+     "dmg": 18012.1
+    },
+    {
+     "m": 100,
+     "v": 497.0,
+     "dmg": 14747.0
+    },
+    {
+     "m": 150,
+     "v": 449.7,
+     "dmg": 12073.9
+    },
+    {
+     "m": 200,
+     "v": 406.9,
+     "dmg": 9885.2
+    },
+    {
+     "m": 250,
+     "v": 368.2,
+     "dmg": 8093.3
+    },
+    {
+     "m": 300,
+     "v": 333.1,
+     "dmg": 6626.3
+    },
+    {
+     "m": 350,
+     "v": 301.4,
+     "dmg": 5425.1
+    },
+    {
+     "m": 400,
+     "v": 272.7,
+     "dmg": 4441.7
+    },
+    {
+     "m": 450,
+     "v": 246.8,
+     "dmg": 3636.6
+    },
+    {
+     "m": 500,
+     "v": 223.3,
+     "dmg": 2977.4
+    },
+    {
+     "m": 550,
+     "v": 202.1,
+     "dmg": 2437.7
+    },
+    {
+     "m": 600,
+     "v": 182.8,
+     "dmg": 1995.8
+    },
+    {
+     "m": 650,
+     "v": 165.4,
+     "dmg": 1634.0
+    },
+    {
+     "m": 700,
+     "v": 149.7,
+     "dmg": 1337.8
+    },
+    {
+     "m": 750,
+     "v": 135.4,
+     "dmg": 1095.3
+    },
+    {
+     "m": 800,
+     "v": 122.6,
+     "dmg": 896.8
+    },
+    {
+     "m": 850,
+     "v": 110.9,
+     "dmg": 734.2
+    },
+    {
+     "m": 900,
+     "v": 100.3,
+     "dmg": 601.1
+    },
+    {
+     "m": 950,
+     "v": 90.8,
+     "dmg": 492.2
+    },
+    {
+     "m": 1000,
+     "v": 82.1,
+     "dmg": 402.9
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m2_carbine.et",
+     "FinestHour-USGear:prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/m1_carbine/rifle_m2_carbine.et",
+    "weight": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "zeroing": "prefabs/weapons/rifles/m1_carbine/rifle_m1_carbine_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_ball_m1.et",
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1_carbine/magazine_762x33_m1_carbine_15rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x33.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_763x33/ammo_762x33_ball_m1.et"
+    ]
+   },
+   "warnings": [
+    "DamageValue 22000 tel quel dans le mod (valeur aberrante, a verifier)"
+   ]
+  },
+  "US_M1919A4": {
+   "label": "M1919A4 Browning",
+   "category": "mg",
+   "prefab": "{AB3A3ADC8CE3F848}Prefabs/Weapons/MachineGuns/M1919/MG_M1919A4.et",
+   "fireModes": [
+    {
+     "mode": "auto",
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{F942891ECB56703F}Prefabs/Weapons/Magazines/M1919/Belt_762x63_M1919_100rnd_4Ball_1Tracer.et",
+   "magazineSize": 100,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 14.0,
+   "zeroing": {
+    "min": 91,
+    "max": 2194,
+    "steps": [
+     91,
+     182,
+     366,
+     548,
+     731,
+     914,
+     1097,
+     1280,
+     1463,
+     1645,
+     1828,
+     2011,
+     2194
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-CoreMod:prefabs/weapons/machineguns/m1919/mg_m1919a4.et",
+     "FinestHour-CoreMod:prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+     "Reforger:prefabs/weapons/core/machinegun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+    "weight": "prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+    "zeroing": "prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M1919A6": {
+   "label": "M1919A6 Browning",
+   "category": "mg",
+   "prefab": "{DE2075CB6E5CAE3A}Prefabs/Weapons/Machineguns/M1919/MG_M1919A6.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{F942891ECB56703F}Prefabs/Weapons/Magazines/M1919/Belt_762x63_M1919_100rnd_4Ball_1Tracer.et",
+   "magazineSize": 100,
+   "caliber": "7.62x63mm",
+   "ammo": "{6EC569A61DB94FE4}Prefabs/Weapons/Ammo/Ammo_762x63_Ball_M2.et",
+   "muzzleVelocity": 855.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 7.0,
+   "weight": 14.75,
+   "zeroing": {
+    "min": 91,
+    "max": 2194,
+    "steps": [
+     91,
+     182,
+     366,
+     548,
+     731,
+     914,
+     1097,
+     1280,
+     1463,
+     1645,
+     1828,
+     2011,
+     2194
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 855.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 819.7,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 785.9,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 753.5,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 722.4,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 692.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 664.0,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 636.6,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 610.4,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 585.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 561.0,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 537.9,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 515.7,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 494.4,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 474.0,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 454.5,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 435.7,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 417.7,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 400.5,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 384.0,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 368.1,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1919/mg_m1919a6.et",
+     "FinestHour-USGear:prefabs/weapons/machineguns/m1919/mg_m1919a4_dismounted_base.et",
+     "FinestHour-CoreMod:prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+     "Reforger:prefabs/weapons/core/machinegun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/m1919/mg_m1919a4_dismounted_base.et",
+    "weight": "prefabs/weapons/machineguns/m1919/mg_m1919a6.et",
+    "zeroing": "prefabs/weapons/machineguns/m1919/mg_m1919a4_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/m1919/belt_762x63_m1919_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_762x63.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_762x63/ammo_762x63_ball_m2.et"
+    ]
+   }
+  },
+  "US_M7AT_GRENADE": {
+   "label": "Grenade AT M7",
+   "category": "grenade",
+   "prefab": "{F832D80F885FD79A}Prefabs/Weapons/Grenades/M7AT/Grenade_M7AT.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 2.2,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/grenades/m7at/grenade_m7at.et",
+     "FinestHour-USGear:prefabs/weapons/grenades/m7at/grenade_m7at_base.et",
+     "Reforger:prefabs/weapons/core/smokegrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/m7at/grenade_m7at_base.et"
+   }
+  },
+  "US_GAMMON": {
+   "label": "Gammon No.82 (600 g)",
+   "category": "grenade",
+   "prefab": "{3BB958D8E5152FED}Prefabs/Weapons/Grenades/No82/Grenade_No82_600g.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 1.2,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/grenades/no82/grenade_no82_600g.et",
+     "FinestHour-CoreMod:prefabs/weapons/grenades/no82/grenade_no82_base.et",
+     "Reforger:prefabs/weapons/core/smokegrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/no82/grenade_no82_600g.et"
+   }
+  },
+  "GER_STG44": {
+   "label": "StG 44",
+   "category": "rifle",
+   "prefab": "{D9340572C7EF6CB7}Prefabs/Weapons/Rifles/STG44/Rifle_STG44.et",
+   "fireModes": [
+    {
+     "mode": "auto",
+     "rpm": 540.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": 540.0,
+     "burst": null
+    }
+   ],
+   "rpm": 540.0,
+   "magazine": "{483FB766D038C15B}Prefabs/Weapons/Magazines/STG44/Magazine_792x33_STG44_30rnd_Ball_SmE.et",
+   "magazineSize": 30,
+   "caliber": "7.92x33mm",
+   "ammo": "{0F153CA6BA8DBAC5}Prefabs/Weapons/Ammo/Ammo_792x33_Ball_SmE.et",
+   "muzzleVelocity": 685.0,
+   "damage": 76.0,
+   "bulletMass": 0.00325,
+   "airDrag": 4e-06,
+   "penetrationDepth": 3.2,
+   "weight": 3.07,
+   "zeroing": {
+    "min": 100,
+    "max": 800,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 685.0,
+     "dmg": 76.0
+    },
+    {
+     "m": 50,
+     "v": 644.1,
+     "dmg": 67.2
+    },
+    {
+     "m": 100,
+     "v": 605.7,
+     "dmg": 59.4
+    },
+    {
+     "m": 150,
+     "v": 569.5,
+     "dmg": 52.5
+    },
+    {
+     "m": 200,
+     "v": 535.5,
+     "dmg": 46.5
+    },
+    {
+     "m": 250,
+     "v": 503.6,
+     "dmg": 41.1
+    },
+    {
+     "m": 300,
+     "v": 473.5,
+     "dmg": 36.3
+    },
+    {
+     "m": 350,
+     "v": 445.3,
+     "dmg": 32.1
+    },
+    {
+     "m": 400,
+     "v": 418.7,
+     "dmg": 28.4
+    },
+    {
+     "m": 450,
+     "v": 393.7,
+     "dmg": 25.1
+    },
+    {
+     "m": 500,
+     "v": 370.2,
+     "dmg": 22.2
+    },
+    {
+     "m": 550,
+     "v": 348.1,
+     "dmg": 19.6
+    },
+    {
+     "m": 600,
+     "v": 327.3,
+     "dmg": 17.4
+    },
+    {
+     "m": 650,
+     "v": 307.8,
+     "dmg": 15.3
+    },
+    {
+     "m": 700,
+     "v": 289.4,
+     "dmg": 13.6
+    },
+    {
+     "m": 750,
+     "v": 272.1,
+     "dmg": 12.0
+    },
+    {
+     "m": 800,
+     "v": 255.9,
+     "dmg": 10.6
+    },
+    {
+     "m": 850,
+     "v": 240.6,
+     "dmg": 9.4
+    },
+    {
+     "m": 900,
+     "v": 226.3,
+     "dmg": 8.3
+    },
+    {
+     "m": 950,
+     "v": 212.8,
+     "dmg": 7.3
+    },
+    {
+     "m": 1000,
+     "v": 200.1,
+     "dmg": 6.5
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/stg44/rifle_stg44.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/stg44/rifle_stg44_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/stg44/rifle_stg44_base.et",
+    "weight": "prefabs/weapons/rifles/stg44/rifle_stg44_base.et",
+    "zeroing": "prefabs/weapons/rifles/stg44/rifle_stg44_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/stg44/magazine_792x33_stg44_30rnd_ball_sme.et",
+     "prefabs/weapons/magazines/stg44/magazine_792x33_stg44_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/stg44/magazine_792x33_stg44_30rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x33.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x33/ammo_792x33_ball_sme.et"
+    ]
+   }
+  },
+  "GER_G43_SCOPE": {
+   "label": "Gewehr 43 ZF4",
+   "category": "sniper",
+   "prefab": "{75DDC146073EFD22}Prefabs/Weapons/Rifles/Gewehr43/Rifle_Gewehr43_Optic.et",
+   "fireModes": [
+    {
+     "mode": "single",
+     "rpm": 450.0,
+     "burst": null
+    }
+   ],
+   "rpm": 450.0,
+   "magazine": "{1946CD4A12B3FC3B}Prefabs/Weapons/Magazines/Gewehr43/Magazine_792x57_Gewehr43_10rnd_Ball_sP.et",
+   "magazineSize": 10,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 2.7,
+   "zeroing": {
+    "min": 100,
+    "max": 1200,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/gewehr43/rifle_gewehr43_optic.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/gewehr43/rifle_gewehr43.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "weight": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "zeroing": "prefabs/weapons/rifles/gewehr43/rifle_gewehr43_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_ball_sp.et",
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/gewehr43/magazine_792x57_gewehr43_10rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_FG42": {
+   "label": "FG 42",
+   "category": "rifle",
+   "prefab": "{F6BD5104680D2991}Prefabs/Weapons/Machineguns/FG42G/Machinegun_FG42G.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": 750.0,
+     "burst": null
+    },
+    {
+     "mode": null,
+     "rpm": 750.0,
+     "burst": null
+    }
+   ],
+   "rpm": 750.0,
+   "magazine": "{270EDEE298986B47}Prefabs/Weapons/Magazines/FG42/Magazine_792x57_FG42_20rnd_4Ball_1Tracer.et",
+   "magazineSize": 20,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 5.05,
+   "zeroing": {
+    "min": 100,
+    "max": 1700,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200,
+     1300,
+     1400,
+     1500,
+     1600,
+     1700
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/machineguns/fg42g/machinegun_fg42g.et",
+     "FinestHour-GERGear:prefabs/weapons/machineguns/fg42g/machinegun_fg42g_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/fg42g/machinegun_fg42g_base.et",
+    "weight": "prefabs/weapons/machineguns/fg42g/machinegun_fg42g_base.et",
+    "zeroing": "prefabs/weapons/machineguns/fg42g/machinegun_fg42g_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/fg42/magazine_792x57_fg42_20rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/fg42/magazine_792x57_fg42_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/fg42/magazine_792x57_fg42_20rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_MP38": {
+   "label": "MP 38",
+   "category": "smg",
+   "prefab": "{C81F18A853BE165A}Prefabs/Weapons/Machineguns/MP38/Submachinegun_MP38.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{20E4A0615C0ABC16}Prefabs/Weapons/Magazines/MP38/Magazine_9x19_MP38_32rnd.et",
+   "magazineSize": 32,
+   "caliber": "9x18mm",
+   "ammo": "{FDBA4064AA9D60C3}Prefabs/Weapons/Ammo/Ammo_9x19_Ball_08.et",
+   "muzzleVelocity": 317.3,
+   "damage": 300.0,
+   "bulletMass": 0.00804,
+   "airDrag": 1.25e-05,
+   "penetrationDepth": 20.0,
+   "weight": 3.97,
+   "zeroing": {
+    "min": 100,
+    "max": 200,
+    "steps": [
+     100,
+     200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 317.3,
+     "dmg": 300.0
+    },
+    {
+     "m": 50,
+     "v": 293.6,
+     "dmg": 256.8
+    },
+    {
+     "m": 100,
+     "v": 271.6,
+     "dmg": 219.8
+    },
+    {
+     "m": 150,
+     "v": 251.3,
+     "dmg": 188.2
+    },
+    {
+     "m": 200,
+     "v": 232.5,
+     "dmg": 161.1
+    },
+    {
+     "m": 250,
+     "v": 215.1,
+     "dmg": 137.9
+    },
+    {
+     "m": 300,
+     "v": 199.0,
+     "dmg": 118.0
+    },
+    {
+     "m": 350,
+     "v": 184.1,
+     "dmg": 101.0
+    },
+    {
+     "m": 400,
+     "v": 170.4,
+     "dmg": 86.5
+    },
+    {
+     "m": 450,
+     "v": 157.6,
+     "dmg": 74.0
+    },
+    {
+     "m": 500,
+     "v": 145.8,
+     "dmg": 63.4
+    },
+    {
+     "m": 550,
+     "v": 134.9,
+     "dmg": 54.2
+    },
+    {
+     "m": 600,
+     "v": 124.8,
+     "dmg": 46.4
+    },
+    {
+     "m": 650,
+     "v": 115.5,
+     "dmg": 39.8
+    },
+    {
+     "m": 700,
+     "v": 106.9,
+     "dmg": 34.0
+    },
+    {
+     "m": 750,
+     "v": 98.9,
+     "dmg": 29.1
+    },
+    {
+     "m": 800,
+     "v": 91.5,
+     "dmg": 24.9
+    },
+    {
+     "m": 850,
+     "v": 84.6,
+     "dmg": 21.3
+    },
+    {
+     "m": 900,
+     "v": 78.3,
+     "dmg": 18.3
+    },
+    {
+     "m": 950,
+     "v": 72.4,
+     "dmg": 15.6
+    },
+    {
+     "m": 1000,
+     "v": 67.0,
+     "dmg": 13.4
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mp38/submachinegun_mp38.et",
+     "FinestHour-GERGear:prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "weight": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "zeroing": "prefabs/weapons/machineguns/mp38/submachinegun_mp38_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/mp38/magazine_9x19_mp38_32rnd.et",
+     "prefabs/weapons/magazines/mp38/magazine_9x19_mp38_32rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_9x19_ww2.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_9x19/ammo_9x19_ball_08.et"
+    ],
+    "muzzleCoef": 0.835
+   }
+  },
+  "GER_MG34": {
+   "label": "MG 34",
+   "category": "mg",
+   "prefab": "{5D838074E66C006C}Prefabs/Weapons/MachineGuns/MG34/MG_MG34.et",
+   "fireModes": [
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    },
+    {
+     "mode": "auto",
+     "rpm": 900.0,
+     "burst": null
+    }
+   ],
+   "rpm": 900.0,
+   "magazine": "{6D4D4C91CDC5D021}Prefabs/Weapons/Magazines/MG34/Belt_792x57_MG34_50rnd_4Ball_1Tracer.et",
+   "magazineSize": 100,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 12.1,
+   "zeroing": {
+    "min": 200,
+    "max": 2000,
+    "steps": [
+     200,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200,
+     1300,
+     1400,
+     1500,
+     1600,
+     1700,
+     1800,
+     1900,
+     2000
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-CoreMod:prefabs/weapons/machineguns/mg34/mg_mg34.et",
+     "FinestHour-CoreMod:prefabs/weapons/machineguns/mg34/mg_mg34_base.et",
+     "Reforger:prefabs/weapons/core/machinegun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/machineguns/mg34/mg_mg34.et",
+    "weight": "prefabs/weapons/machineguns/mg34/mg_mg34_base.et",
+    "zeroing": "prefabs/weapons/machineguns/mg34/mg_mg34_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_4ball_1tracer.et",
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et",
+     "prefabs/weapons/magazines/mg34/belt_792x57_mg34_100rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_KAR98K_GL": {
+   "label": "Kar98k Schiessbecher (lance-grenade)",
+   "category": "rifle",
+   "prefab": "{AEE8B1A7356E943E}Prefabs/Weapons/Rifles/Kar98K/Rifle_Kar98K_Scheissbecher.et",
+   "fireModes": [
+    {
+     "mode": null,
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": "{1DF592D5042B72CD}Prefabs/Weapons/Magazines/Kar98k/Clip_792x57_Kar98k_5rnd_Internal_Base.et",
+   "magazineSize": 5,
+   "caliber": "7.92x57mm",
+   "ammo": "{44800E8C24D9C706}Prefabs/Weapons/Ammo/Ammo_792x57_Ball_sSP.et",
+   "muzzleVelocity": 760.0,
+   "damage": 142.0,
+   "bulletMass": 0.00985,
+   "airDrag": 8.3e-06,
+   "penetrationDepth": 6.0,
+   "weight": 3.8,
+   "zeroing": {
+    "min": 100,
+    "max": 1200,
+    "steps": [
+     100,
+     200,
+     300,
+     400,
+     500,
+     600,
+     700,
+     800,
+     900,
+     1000,
+     1100,
+     1200
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": [
+    {
+     "m": 0,
+     "v": 760.0,
+     "dmg": 142.0
+    },
+    {
+     "m": 50,
+     "v": 728.6,
+     "dmg": 130.5
+    },
+    {
+     "m": 100,
+     "v": 698.6,
+     "dmg": 120.0
+    },
+    {
+     "m": 150,
+     "v": 669.8,
+     "dmg": 110.3
+    },
+    {
+     "m": 200,
+     "v": 642.1,
+     "dmg": 101.4
+    },
+    {
+     "m": 250,
+     "v": 615.6,
+     "dmg": 93.2
+    },
+    {
+     "m": 300,
+     "v": 590.2,
+     "dmg": 85.6
+    },
+    {
+     "m": 350,
+     "v": 565.9,
+     "dmg": 78.7
+    },
+    {
+     "m": 400,
+     "v": 542.5,
+     "dmg": 72.4
+    },
+    {
+     "m": 450,
+     "v": 520.2,
+     "dmg": 66.5
+    },
+    {
+     "m": 500,
+     "v": 498.7,
+     "dmg": 61.1
+    },
+    {
+     "m": 550,
+     "v": 478.1,
+     "dmg": 56.2
+    },
+    {
+     "m": 600,
+     "v": 458.4,
+     "dmg": 51.7
+    },
+    {
+     "m": 650,
+     "v": 439.5,
+     "dmg": 47.5
+    },
+    {
+     "m": 700,
+     "v": 421.4,
+     "dmg": 43.6
+    },
+    {
+     "m": 750,
+     "v": 404.0,
+     "dmg": 40.1
+    },
+    {
+     "m": 800,
+     "v": 387.3,
+     "dmg": 36.9
+    },
+    {
+     "m": 850,
+     "v": 371.3,
+     "dmg": 33.9
+    },
+    {
+     "m": 900,
+     "v": 356.0,
+     "dmg": 31.2
+    },
+    {
+     "m": 950,
+     "v": 341.3,
+     "dmg": 28.6
+    },
+    {
+     "m": 1000,
+     "v": 327.2,
+     "dmg": 26.3
+    }
+   ],
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k_scheissbecher.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k.et",
+     "FinestHour-GERGear:prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+     "Reforger:prefabs/weapons/core/longrangerifle_base.et",
+     "Reforger:prefabs/weapons/core/rifle_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "weight": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "zeroing": "prefabs/weapons/rifles/kar98k/rifle_kar98k_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/kar98k/clip_792x57_kar98k_5rnd_internal_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammoconfigs/ammo_792x57.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/ammo_792x57/ammo_792x57_ball_ssp.et"
+    ]
+   }
+  },
+  "GER_LP34": {
+   "label": "Leuchtpistole 34",
+   "category": "pistol",
+   "prefab": "{72B77F14D2073B5D}Prefabs/Weapons/Handguns/LP34/Handgun_Leichtpistole34.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{FD54F687AA76C580}Prefabs/Weapons/Magazines/ANM8/Magazine_26mm_LP34_1rnd_White.et",
+   "magazineSize": 1,
+   "caliber": "26mm",
+   "ammo": "{6519614C7B983741}Prefabs/Weapons/Ammo/Ammo_Flare_26mm_FLeuchtPatr_White.et",
+   "muzzleVelocity": 77.0,
+   "damage": 95.0,
+   "bulletMass": 0.1,
+   "airDrag": null,
+   "penetrationDepth": 10.0,
+   "weight": 0.73,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/handguns/lp34/handgun_leichtpistole34.et",
+     "FinestHour-GERGear:prefabs/weapons/handguns/lp34/handgun_leichtpistole34_base.et",
+     "Reforger:prefabs/weapons/core/handgun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/handgun_base.et",
+    "weight": "prefabs/weapons/handguns/lp34/handgun_leichtpistole34_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/lp34/magazine_26mm_lp34_1rnd_white.et",
+     "prefabs/weapons/magazines/lp34/magazine_26mm_lp34_1rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammo_26mm_lp34.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/flares/ammo_flare_26mm_fleuchtpatr_white.et",
+     "prefabs/weapons/core/ammo_grenadelauncher_base.et",
+     "prefabs/weapons/ammo/flares/ammo_flare_26mm_fleuchtpatr_base.et"
+    ]
+   }
+  },
+  "GER_PANZERFAUST100": {
+   "label": "Panzerfaust 100",
+   "category": "at",
+   "prefab": "{EADCBEFD2705B515}Prefabs/Weapons/Launchers/Panzerfaust/Launcher_Panzerfaust100.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": null,
+     "burst": null
+    }
+   ],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 1.36,
+   "zeroing": {
+    "min": 100,
+    "max": 110,
+    "steps": [
+     100,
+     110
+    ]
+   },
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust100.et",
+     "FinestHour-GERGear:prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60_base.et",
+     "Reforger:prefabs/weapons/core/launcher_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/launcher_base.et",
+    "weight": "prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust60_base.et",
+    "zeroing": "prefabs/weapons/launchers/panzerfaust/launcher_panzerfaust100.et"
+   }
+  },
+  "GER_M39_GRENADE": {
+   "label": "Eihandgranate 39",
+   "category": "grenade",
+   "prefab": "{BE26CD5EB5FF1374}Prefabs/Weapons/Grenades/M39_Eihandgranate/Grenade_M39.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 0.2,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/grenades/m39_eihandgranate/grenade_m39.et",
+     "FinestHour-GERGear:prefabs/weapons/grenades/m39_eihandgranate/grenade_m39_base.et",
+     "Reforger:prefabs/weapons/core/fraggrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/m39_eihandgranate/grenade_m39_base.et"
+   }
+  },
+  "GER_GEBALLTE": {
+   "label": "Geballte Ladung",
+   "category": "explosive",
+   "prefab": "{886DA8E3CFF0C54F}Prefabs/Weapons/Grenades/GeballteLadung/Grenade_GeballteLadung.et",
+   "fireModes": [],
+   "rpm": null,
+   "magazine": null,
+   "magazineSize": null,
+   "caliber": null,
+   "ammo": null,
+   "muzzleVelocity": null,
+   "damage": null,
+   "bulletMass": null,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 3.3,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-GERGear:prefabs/weapons/grenades/geballteladung/grenade_geballteladung.et",
+     "FinestHour-GERGear:prefabs/weapons/grenades/geballteladung/grenade_geballteladung_base.et",
+     "Reforger:prefabs/weapons/core/fraggrenade_base.et",
+     "Reforger:prefabs/weapons/core/grenade_base.et",
+     "Reforger:prefabs/weapons/core/throw_base.et"
+    ],
+    "weight": "prefabs/weapons/grenades/geballteladung/grenade_geballteladung_base.et"
+   }
+  },
+  "US_FLAREGUN": {
+   "label": "Pistolet lance-fusees AN-M8",
+   "category": "pistol",
+   "prefab": "{DBD5C4E1C81D8363}Prefabs/Weapons/Handguns/ANM8/Handgun_ANM8.et",
+   "fireModes": [
+    {
+     "mode": "safe",
+     "rpm": 0.0,
+     "burst": null
+    },
+    {
+     "mode": "single",
+     "rpm": 500.0,
+     "burst": null
+    }
+   ],
+   "rpm": 500.0,
+   "magazine": "{F2E386D9ACC4ADF1}Prefabs/Weapons/Magazines/ANM8/Magazine_37mm_ANM8_1rnd_White.et",
+   "magazineSize": 1,
+   "caliber": "37mm",
+   "ammo": "{DFE51543FA022204}Prefabs/Weapons/Ammo/Flares/Ammo_Flare_37mm_M10_White.et",
+   "muzzleVelocity": 40.0,
+   "damage": 50.0,
+   "bulletMass": 0.01,
+   "airDrag": null,
+   "penetrationDepth": null,
+   "weight": 1.13,
+   "zeroing": null,
+   "reloadTime": null,
+   "damageCurve": null,
+   "source": {
+    "prefab": [
+     "FinestHour-USGear:prefabs/weapons/handguns/anm8/handgun_anm8.et",
+     "FinestHour-USGear:prefabs/weapons/handguns/anm8/handgun_anm8_base.et",
+     "Reforger:prefabs/weapons/core/handgun_base.et",
+     "Reforger:prefabs/weapons/core/weapon_base.et"
+    ],
+    "fireModes": "prefabs/weapons/core/handgun_base.et",
+    "weight": "prefabs/weapons/handguns/anm8/handgun_anm8_base.et",
+    "magazine": [
+     "prefabs/weapons/magazines/anm8/magazine_37mm_anm8_1rnd_white.et",
+     "prefabs/weapons/magazines/anm8/magazine_37mm_anm8_1rnd_base.et",
+     "prefabs/weapons/core/magazine_base.et"
+    ],
+    "ammoConfig": "configs/weapons/ammo/ammo_37mm_anm8.conf",
+    "ammo": [
+     "prefabs/weapons/ammo/flares/ammo_flare_37mm_m10_white.et",
+     "prefabs/weapons/core/ammo_bullet_base.et"
+    ]
+   }
+  }
+ }
+}

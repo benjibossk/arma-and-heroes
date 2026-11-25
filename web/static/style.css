@@ -104,3 +104,23 @@ details summary{cursor:pointer}
 .vchip.US .ico { color: #7FA8E0; } .vchip.GER .ico { color: #E58C80; }
 .vchip .vthumb { display: none; position: absolute; left: 0; bottom: 120%; width: 180px; background: #2E3031; border: 1px solid #555; border-radius: 4px; z-index: 20; }
 .vchip:hover .vthumb, .vchip:focus .vthumb { display: block; }
+/* weapon detail card */
+.icard.wclick{cursor:pointer}.icard.wclick:hover{border-color:var(--amber)}
+.wdlg{position:fixed;inset:0;background:rgba(10,10,10,.72);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:40px 16px}
+.wcard{position:relative;width:min(620px,100%);background:#262827;border:1px solid var(--line);border-top:3px solid var(--amber);padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.wx{position:absolute;top:8px;right:8px;width:auto;margin:0;padding:2px 9px;background:transparent;border:1px solid var(--line);color:var(--text)}
+.whead{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.wimg{flex:0 0 260px;max-width:100%;height:130px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#3b3e38 0,#262827 70%)}
+.wimg img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.6))}.wimg.photo img{object-fit:cover}
+.wcat{font-family:Oswald,sans-serif;text-transform:uppercase;color:#9aa27a;font-size:13px;letter-spacing:.06em}
+.wcard h2{font-family:Oswald,sans-serif;text-transform:uppercase;margin:2px 0 6px;font-size:26px;color:var(--text)}
+.wtags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}.wtags span{background:#3a3d33;border:1px solid #5d6247;padding:1px 7px;font-size:12px;text-transform:uppercase}
+.wtags span:first-child{background:var(--amber);color:var(--on-amber);border-color:var(--amber);font-weight:700}
+.wbars{margin:14px 0 8px}.wstat{display:grid;grid-template-columns:120px 1fr 110px;gap:4px 10px;align-items:center;font-size:13px;margin:5px 0}
+.wstat span{text-transform:uppercase;color:var(--muted);font-family:Oswald,sans-serif;font-size:12px}.wstat b{text-align:right;font-weight:600}.wstat em{color:#9fb0c8;font-style:normal}
+.wbs{display:flex;flex-direction:column;gap:2px}.wbar{height:8px;background:#1c1d1d;border:1px solid #44473f}.wbar i{display:block;height:100%;background:var(--amber)}.wbar.b i{background:#8fa6c4}
+.wleg{font-size:12px;color:var(--muted)}.wleg i{display:inline-block;width:12px;height:4px;margin:0 4px 2px 8px;background:var(--amber)}.wleg i.b{background:#8fa6c4}
+.wchart{width:100%;height:auto;background:#1f2120;border:1px solid #3e413a}.wchart text{fill:#9a9a92;font-size:10px;font-family:'Roboto Condensed',sans-serif}
+.wchart .gl{stroke:#34372f;stroke-width:1}.wchart polyline{fill:none;stroke-width:2.5}.wchart .ca{stroke:var(--amber)}.wchart .cb{stroke:#8fa6c4;stroke-dasharray:6 3}
+.wnc{font-size:12px;margin:4px 0}.wcmp{margin-top:10px;font-size:13px}.wcmp select{width:auto;display:inline-block;margin-left:6px}
+@media(max-width:560px){.wstat{grid-template-columns:90px 1fr 80px}.wimg{flex-basis:100%}}

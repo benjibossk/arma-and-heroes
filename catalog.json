@@ -1046,9 +1046,9 @@
         "INF",
         "REC"
       ],
-      "price": 500,
+      "price": 600,
       "weight": 4,
-      "rankRequired": null,
+      "rankRequired": "Corporal",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1063,9 +1063,9 @@
       "classes": [
         "PARA"
       ],
-      "price": 600,
+      "price": 450,
       "weight": 3,
-      "rankRequired": null,
+      "rankRequired": "Corporal",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1081,9 +1081,9 @@
         "INF",
         "PARA"
       ],
-      "price": 900,
+      "price": 1800,
       "weight": 3,
-      "rankRequired": "Corporal",
+      "rankRequired": "Technical Sergeant",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1098,9 +1098,9 @@
       "classes": [
         "INF"
       ],
-      "price": 1800,
+      "price": 3200,
       "weight": 7,
-      "rankRequired": "Sergeant",
+      "rankRequired": "Warrant Officer",
       "ribbon": {
         "category": "rifle",
         "kills": 50
@@ -1116,9 +1116,9 @@
         "INF",
         "PARA"
       ],
-      "price": 1700,
+      "price": 3000,
       "weight": 7,
-      "rankRequired": "Sergeant",
+      "rankRequired": "Sergeant Major",
       "ribbon": {
         "category": "rifle",
         "kills": 50
@@ -1134,9 +1134,9 @@
         "INF",
         "PARA"
       ],
-      "price": 150,
+      "price": 250,
       "weight": 1,
-      "rankRequired": null,
+      "rankRequired": "Corporal",
       "ribbon": null
     },
     "US_GAMMON": {
@@ -1148,9 +1148,9 @@
       "classes": [
         "PARA"
       ],
-      "price": 200,
+      "price": 400,
       "weight": 1,
-      "rankRequired": null,
+      "rankRequired": "Technical Sergeant",
       "ribbon": null
     },
     "GER_STG44": {
@@ -1160,11 +1160,12 @@
       "slot": "primary",
       "category": "rifle",
       "classes": [
-        "INF"
+        "INF",
+        "PARA"
       ],
-      "price": 1200,
+      "price": 4200,
       "weight": 4,
-      "rankRequired": "Corporal",
+      "rankRequired": "First Lieutenant",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1179,9 +1180,9 @@
       "classes": [
         "REC"
       ],
-      "price": 1300,
+      "price": 2600,
       "weight": 4,
-      "rankRequired": "Sergeant",
+      "rankRequired": "First Sergeant",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1196,9 +1197,9 @@
       "classes": [
         "PARA"
       ],
-      "price": 1500,
+      "price": 4800,
       "weight": 5,
-      "rankRequired": "Sergeant",
+      "rankRequired": "Captain",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1212,11 +1213,12 @@
       "category": "smg",
       "classes": [
         "INF",
-        "PARA"
+        "PARA",
+        "CREW"
       ],
-      "price": 600,
+      "price": 900,
       "weight": 4,
-      "rankRequired": null,
+      "rankRequired": "Sergeant",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1232,9 +1234,9 @@
         "INF",
         "PARA"
       ],
-      "price": 1600,
+      "price": 2000,
       "weight": 6,
-      "rankRequired": "Sergeant",
+      "rankRequired": "Technical Sergeant",
       "ribbon": {
         "category": "rifle",
         "kills": 50
@@ -1249,9 +1251,9 @@
       "classes": [
         "INF"
       ],
-      "price": 900,
+      "price": 2200,
       "weight": 5,
-      "rankRequired": "Corporal",
+      "rankRequired": "Master Sergeant",
       "ribbon": {
         "category": "rifle",
         "kills": 25
@@ -1268,9 +1270,9 @@
         "PARA",
         "REC"
       ],
-      "price": 100,
+      "price": 150,
       "weight": 1,
-      "rankRequired": null,
+      "rankRequired": "Private First Class",
       "ribbon": null
     },
     "GER_PANZERFAUST100": {
@@ -1282,9 +1284,9 @@
       "classes": [
         "INF"
       ],
-      "price": 700,
+      "price": 1200,
       "weight": 4,
-      "rankRequired": "Corporal",
+      "rankRequired": "Staff Sergeant",
       "ribbon": null
     },
     "GER_M39_GRENADE": {
@@ -1312,9 +1314,9 @@
       "classes": [
         "INF"
       ],
-      "price": 300,
+      "price": 1500,
       "weight": 2,
-      "rankRequired": "Corporal",
+      "rankRequired": "First Sergeant",
       "ribbon": null
     },
     "US_FLAREGUN": {
@@ -1328,9 +1330,9 @@
         "PARA",
         "REC"
       ],
-      "price": 100,
+      "price": 150,
       "weight": 1,
-      "rankRequired": null,
+      "rankRequired": "Private First Class",
       "ribbon": null
     }
   },

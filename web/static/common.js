@@ -38,7 +38,7 @@ const itemImgsReady = fetch('/assets/items/manifest.json').then(r => r.json()).t
 const itemSrc = k => '/assets/items/' + (ITEMIMG[k]?.img || '_sil_rifle.svg');
 const itemPic = (k, cls = '') => `<div class="ipic ${ITEMIMG[k]?.kind === 'photo' ? 'photo' : ''} ${cls}"><img src="${itemSrc(k)}" alt="" loading="lazy"></div>`;
 function itemCard(i, action = '') {
-  return `<div class="icard ${i.locked ? 'locked' : ''} ${i.owned ? 'owned' : ''}">${itemPic(i.key)}
+  return `<div class="icard ${i.locked ? 'locked' : ''} ${i.owned ? 'owned' : ''}" data-k="${esc(i.key)}">${itemPic(i.key)}
   <div class="ibody"><div class="iname">${catBadge(i.key)}${esc(i.label)}</div><div class="imeta">${esc(i.slot)} · ${esc(i.category || '')} · ${i.weight} pt</div>
   <div class="ifoot"><span class="iprice">${i.price ? i.price + ' cr.' : 'Free'}</span>${action}</div>
   ${i.locked ? `<div class="ilock">🔒 ${esc(i.locked)}</div>` : ''}</div></div>`;
@@ -84,4 +84,64 @@ function svgIcon(parent, file, cx, cy, size, attrs = {}) {
   p.setAttribute('transform', `translate(${cx - size / 2} ${cy - size / 2}) scale(${s})`);
   for (const k in attrs) p.setAttribute(k, attrs[k]);
   parent.appendChild(p); return p;
+}
+
+// ---------- weapon detail card (stats extracted from the mods: /api/v1/weapons/stats) ----------
+let WSTATS = null;
+const weaponStats = () => WSTATS || (WSTATS = fetch('/api/v1/weapons/stats').then(r => r.json()).then(j => j.weapons || {}).catch(() => ({})));
+const WBARS = [ // label, value fn, max, unit
+  ['Rate of fire', w => w.rpm, 1200, 'rpm'],
+  ['Reload', w => w.reloadTime, 10, 's'],
+  ['Magazine', w => w.magazineSize, 100, 'rds'],
+  ['Muzzle velocity', w => w.muzzleVelocity, 900, 'm/s'],
+  ['Weight', w => w.weight, 15, 'kg'],
+];
+function wBars(a, b) {
+  return WBARS.map(([l, f, mx, u]) => {
+    const row = (w, cls) => { const v = w && f(w); return `<div class="wbar ${cls}"><i style="width:${v ? Math.min(100, v / mx * 100) : 0}%"></i></div>`; };
+    const va = f(a), vb = b ? f(b) : undefined;
+    return `<div class="wstat"><span>${l}</span><div class="wbs">${row(a, 'a')}${b ? row(b, 'b') : ''}</div><b>${va ?? '—'}${va != null ? ' ' + u : ''}${b ? ` <em>/ ${vb ?? '—'}</em>` : ''}</b></div>`;
+  }).join('');
+}
+function wChart(a, b) {
+  const cs = [a, b].filter(w => w && w.damageCurve);
+  if (!cs.length) return '<p class="muted wnc">No ballistic data for this item (explosive / launcher or not defined in the mod).</p>';
+  const W = 520, H = 210, L = 44, B = 26, T = 10, R = 10;
+  const ymax = Math.max(...cs.map(w => w.damageCurve[0].dmg)) * 1.08 || 1;
+  const X = m => L + m / 1000 * (W - L - R), Y = d => T + (1 - d / ymax) * (H - T - B);
+  let g = '';
+  for (let m = 0; m <= 1000; m += 200) g += `<line x1="${X(m)}" y1="${T}" x2="${X(m)}" y2="${H - B}" class="gl"/><text x="${X(m)}" y="${H - 8}" text-anchor="middle">${m} m</text>`;
+  for (let k = 0; k <= 4; k++) { const d = ymax / 1.08 * k / 4; g += `<line x1="${L}" y1="${Y(d)}" x2="${W - R}" y2="${Y(d)}" class="gl"/><text x="${L - 5}" y="${Y(d) + 4}" text-anchor="end">${Math.round(d)}</text>`; }
+  const path = (w, cls) => `<polyline class="${cls}" points="${w.damageCurve.map(p => X(p.m).toFixed(1) + ',' + Y(p.dmg).toFixed(1)).join(' ')}"/>`;
+  return `<svg class="wchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Damage versus range">${g}
+    ${a.damageCurve ? path(a, 'ca') : ''}${b && b.damageCurve ? path(b, 'cb') : ''}</svg>
+    <div class="muted wnc">Damage per hit vs range (energy model from mod drag/mass, armour ignored)${cs.some(w => w.warnings) ? ' — ⚠ ' + esc(cs.find(w => w.warnings).warnings[0]) : ''}</div>`;
+}
+// i: item as returned by /unlocks or /store (key, label, category, price, rank, rankName, classes, tree)
+async function openWeapon(i, list = []) {
+  const S = await weaponStats(), a = S[i.key];
+  let box = document.getElementById('wdlg');
+  if (!box) { box = document.createElement('div'); box.id = 'wdlg'; box.className = 'wdlg'; document.body.appendChild(box); box.onclick = e => { if (e.target === box) box.remove(); }; }
+  const others = list.filter(o => o.key !== i.key && S[o.key] && S[o.key].damageCurve);
+  const draw = cmpKey => {
+    const b = cmpKey ? S[cmpKey] : null, bi = list.find(o => o.key === cmpKey);
+    const modes = a && a.fireModes && a.fireModes.length ? a.fireModes.map(m => m.mode).filter(Boolean).join(' / ') : '—';
+    box.innerHTML = `<div class="wcard"><button class="wx" onclick="document.getElementById('wdlg').remove()">✕</button>
+     <div class="whead"><div class="wimg ${ITEMIMG[i.key]?.kind === 'photo' ? 'photo' : ''}"><img src="${itemSrc(i.key)}" alt=""></div>
+      <div><div class="wcat">${esc(i.category || '')}${a && a.caliber ? ' · ' + esc(a.caliber) : ''}</div><h2>${esc(i.label)}</h2>
+       <div class="wtags"><span>${i.price ? nfmt(i.price) + ' cr' : 'Free'}</span><span>${i.rank ? 'Rank ' + i.rank + (i.rankName ? ' · ' + esc(i.rankName) : '') : esc(i.rankRequired || 'No rank required')}</span>
+       ${(i.classes || []).map(c => `<span>${esc(c)}</span>`).join('')}${i.tree ? `<span>${esc(i.tree)}</span>` : ''}</div>
+       <div class="muted" style="font-size:13px">Fire modes: ${esc(modes)}${a && a.zeroing ? ` · Sights ${a.zeroing.min}–${a.zeroing.max} m` : ''}${a && a.damage ? ` · Damage ${a.damage}` : ''}</div></div></div>
+     ${a ? `<div class="wbars">${b ? `<div class="wleg"><i class="a"></i>${esc(i.label)} <i class="b"></i>${esc(bi?.label || cmpKey)}</div>` : ''}${wBars(a, b)}</div>${wChart(a, b)}` : '<p class="muted">No stats extracted for this item.</p>'}
+     ${others.length && a && a.damageCurve ? `<div class="wcmp">Compare with <select onchange="this.closest('.wdlg')._draw(this.value)"><option value="">—</option>${others.map(o => `<option value="${o.key}" ${o.key === cmpKey ? 'selected' : ''}>${esc(o.label)}</option>`).join('')}</select></div>` : ''}</div>`;
+  };
+  box._draw = draw; draw('');
+}
+const nfmt = n => Number(n).toLocaleString('en-US').replace(/,/g, ' ');
+// make every .icard of a container open the weapon card (items = list the cards came from)
+function bindWeaponCards(root, items) {
+  root.querySelectorAll('.icard[data-k]').forEach(el => {
+    el.classList.add('wclick');
+    el.onclick = e => { if (e.target.closest('button,select,a')) return; const i = items.find(x => x.key === el.dataset.k); if (i) openWeapon(i, items.filter(x => x.slot !== 'license')); };
+  });
 }

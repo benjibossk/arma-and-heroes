@@ -45,6 +45,7 @@ async function show() {
   st.innerHTML = buyable.length ? '<div class="igrid">' + buyable.map(i => itemCard(i, `<button onclick="buy('${i.key}')" ${cur.credits < i.price ? 'disabled' : ''}>Buy</button>`)).join('') + '</div>' : '<p class="muted">Nothing new to buy.</p>';
   const locked = store.filter(i => !i.owned && i.locked).sort((a, b) => a.price - b.price);
   nx.innerHTML = locked.length ? '<div class="igrid">' + locked.map(i => itemCard(i)).join('') + '</div>' : '<p class="muted">Everything is unlocked.</p>';
+  bindWeaponCards(st, store); bindWeaponCards(nx, store);
 }
 function slotPic(e) { document.getElementById(e.id + '_pic').innerHTML = e.value ? itemPic(e.value) : '<div class="ipic"></div>'; }
 function cur_lo() { return { primary: lp.value, secondary: ls.value, outfit: lo_.value, equipment: [le0, le1, le2, le3].map(e => e.value).filter(Boolean) }; }
